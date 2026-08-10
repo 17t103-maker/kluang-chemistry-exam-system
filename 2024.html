@@ -1322,10 +1322,11 @@ function appendMessage(text, sender) {
 
 // 5. 通过我们的安全后端代理调用 Gemini AI
 // 5. 通过安全后端代理进行流式获取 Gemini AI 回答
+// 5. 通过安全后端代理进行流式获取 Gemini AI 回答
 async function fetchAIResponse(userQuery) {
     const msgContainer = document.getElementById('chatMessages');
     
-    // 先创建一个空的 AI 回答气泡
+    // 创建 AI 回答气泡
     const msgDiv = document.createElement('div');
     msgDiv.className = 'chat-msg ai';
     msgDiv.innerHTML = "<i>AI 导师正在思考...</i>";
@@ -1363,7 +1364,7 @@ async function fetchAIResponse(userQuery) {
             if (done) break;
             const chunk = decoder.decode(value, { stream: true });
             
-            // 解析 SSE (Server-Sent Events) 数据流
+            // 解析 SSE 数据流
             const lines = chunk.split('\n');
             for (const line of lines) {
                 if (line.startsWith('data: ')) {
@@ -1377,13 +1378,12 @@ async function fetchAIResponse(userQuery) {
                             msgContainer.scrollTop = msgContainer.scrollHeight;
                         }
                     } catch (e) {
-                        // 忽略解析不完整的片段
+                        // 忽略片段解析
                     }
                 }
             }
         }
 
-        // 接收完毕后触发数学公式渲染
         if (window.MathJax && MathJax.typesetPromise) {
             MathJax.typesetPromise([msgDiv]);
         }
