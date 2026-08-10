@@ -1323,13 +1323,14 @@ function appendMessage(text, sender) {
 // 5. 通过我们的安全后端代理调用 Gemini AI
 // 5. 通过安全后端代理进行流式获取 Gemini AI 回答
 // 5. 通过安全后端代理进行流式获取 Gemini AI 回答
+// 5. 通过安全后端代理获取 Gemini AI 回答（普通JSON响应模式）
 async function fetchAIResponse(userQuery) {
     const msgContainer = document.getElementById('chatMessages');
     
     // 创建 AI 回答气泡
     const msgDiv = document.createElement('div');
     msgDiv.className = 'chat-msg ai';
-    msgDiv.innerHTML = "<i>AI 导师正在思考...</i>";
+    msgDiv.innerHTML = "<i>AI 导师正在查阅课本中...</i>";
     msgContainer.appendChild(msgDiv);
     msgContainer.scrollTop = msgContainer.scrollHeight;
 
@@ -1352,46 +1353,29 @@ async function fetchAIResponse(userQuery) {
             body: JSON.stringify({ prompt: fullPrompt })
         });
 
-        if (!response.ok) throw new Error('网络请求失败');
+        const data = await response.json();
 
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let accumulatedText = "";
-        msgDiv.innerHTML = ""; // 清空思考提示
-
-        while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            const chunk = decoder.decode(value, { stream: true });
-            
-            // 解析 SSE 数据流
-            const lines = chunk.split('\n');
-            for (const line of lines) {
-                if (line.startsWith('data: ')) {
-                    try {
-                        const json = JSON.parse(line.substring(6));
-                        const textPart = json.candidates?.[0]?.content?.parts?.[0]?.text;
-                        if (textPart) {
-                            accumulatedText += textPart;
-                            let formatted = accumulatedText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
-                            msgDiv.innerHTML = formatted;
-                            msgContainer.scrollTop = msgContainer.scrollHeight;
-                        }
-                    } catch (e) {
-                        // 忽略片段解析
-                    }
-                }
-            }
-        }
-
-        if (window.MathJax && MathJax.typesetPromise) {
-            MathJax.typesetPromise([msgDiv]);
+        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
+            let aiText = data.candidates[0].content.parts[0].text;
+            aiText = aiText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+            aiText = aiText.replace(/\n/g, '<br>');
+            msgDiv.innerHTML = aiText;
+        } else if (data.error) {
+            console.error("API Error:", data.error);
+            msgDiv.innerHTML = `请求错误：${data.error.message || JSON.stringify(data.error)}`;
+        } else {
+            msgDiv.innerHTML = "不好意思，老师刚才走神了，能请你再问一次吗？";
         }
 
     } catch (error) {
         console.error("Fetch Error:", error);
         msgDiv.innerHTML = "网络连接失败，请检查网络。";
     }
+
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([msgDiv]);
+    }
+    msgContainer.scrollTop = msgContainer.scrollHeight;
 }
 </script>
 
