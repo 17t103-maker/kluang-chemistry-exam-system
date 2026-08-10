@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>居銮中华中学 - 高二理科化学统测完整解析系统</title>
+    <!-- 配置 MathJax 3 渲染引擎 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-color: #1a436d;
+            --accent-color: #2c5e8a;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --step-bg: #f0f4f8;
+            --success-color: #2e7d32;
+            --text-color: #333333;
+            --think-color: #d97706;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 10px 0 20px 0;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.6rem;
+        }
+
+        header p {
+            color: #666;
+            margin: 0;
+        }
+
+        /* 交互控制台 */
+        .control-panel {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .type-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: #e0e6ed;
+            color: var(--primary-color);
+            border: none;
+            padding: 9px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .number-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .num-btn {
+            background-color: white;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .num-btn:hover, .num-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* 题目展示卡片 */
+        .question-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .question-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .badge-type {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        .question-body {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        /* 适中图片尺寸样式 */
+        .question-img {
+            max-width: 450px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin: 15px 0;
+            display: block;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* 引导解析步骤 */
+        .step-container {
+            display: none;
+            margin-top: 18px;
+            border-left: 4px solid var(--primary-color);
+            background: var(--step-bg);
+            padding: 18px 20px;
+            border-radius: 0 8px 8px 0;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .step-container.active {
+            display: block;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .step-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.05rem;
+        }
+
+        .thinking-box {
+            background: #fffbe3;
+            border-left: 3px solid var(--think-color);
+            padding: 10px 14px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #78350f;
+        }
+
+        .thinking-box strong {
+            color: #b45309;
+        }
+
+        .derivation-box {
+            margin-top: 8px;
+            font-size: 0.98rem;
+        }
+
+        /* 最终答案 */
+        .final-answer {
+            display: none;
+            margin-top: 25px;
+            background-color: #e8f5e9;
+            border: 2px dashed var(--success-color);
+            border-radius: 8px;
+            padding: 20px;
+            color: #1b5e20;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .final-answer.active {
+            display: block;
+        }
+
+        .final-answer h3 {
+            margin-top: 0;
+            color: var(--success-color);
+            margin-bottom: 10px;
+        }
+
+        /* 按钮组 */
+        .action-area {
+            margin-top: 22px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 11px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-ans {
+            background: linear-gradient(135deg, #2e7d32, #388e3c);
+        }
+
+        .btn-reset {
+            background: #757575;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ================= 1. 划词提问气泡样式 ================= */
+        #selection-tooltip {
+            position: absolute;
+            display: none;
+            background: #1a436d;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.1s ease;
+        }
+        #selection-tooltip:hover {
+            transform: scale(1.05);
+            background: #2c5e8a;
+        }
+
+        /* ================= 2. 右下角 AI 对话机器人样式 ================= */
+        .chat-widget-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1a436d, #2c5e8a);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        .chat-widget-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-box-container {
+            position: fixed;
+            bottom: 95px;
+            right: 25px;
+            width: 360px;
+            height: 520px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .chat-box-container.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header .close-btn {
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+        .chat-msg.user {
+            align-self: flex-end;
+            background: var(--primary-color);
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
+        .chat-msg.ai {
+            align-self: flex-start;
+            background: #e2e8f0;
+            color: #333;
+            border-bottom-left-radius: 2px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 10px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+        .chat-input-area input {
+            flex: 1;
+            border: 1px solid #cbd5e1;
+            padding: 8px 12px;
+            border-radius: 20px;
+            outline: none;
+        }
+        .chat-input-area button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-left: 8px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>居銮中华中学 2024下半年统测 高二理科化学</h1>
+        <p>全卷题目完整收录 · LaTeX 公式标准排版 · 策略与知识点思考引导</p>
+    </header>
+
+    <!-- 交互控制台 -->
+    <div class="control-panel">
+        <div class="section-title">第一步：选择题型项目</div>
+        <div class="type-tabs">
+            <button class="tab-btn active" onclick="switchSection('甲')">甲) 选择题 (20题)</button>
+            <button class="tab-btn" onclick="switchSection('乙')">乙) 填充题 (10题)</button>
+            <button class="tab-btn" onclick="switchSection('丙')">丙) 必答题 (5题)</button>
+            <button class="tab-btn" onclick="switchSection('丁')">丁) 选答题 (3大题)</button>
+        </div>
+
+        <div class="section-title">第二步：点击题号直接查看</div>
+        <div class="number-selector" id="numberButtons">
+            <!-- 题号按钮动态渲染 -->
+        </div>
+    </div>
+
+    <!-- 动态题目展示卡片 -->
+    <div id="questionDisplayArea">
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-title" id="qTitle">加载中...</span>
+                <span class="badge-type" id="qBadge">大题</span>
+            </div>
+            <div class="question-body" id="qBody"></div>
+
+            <div id="stepsWrapper"></div>
+
+            <div class="final-answer" id="finalAns">
+                <h3>✨ 参考答案与解析结论：</h3>
+                <div id="ansContent"></div>
+            </div>
+
+            <div class="action-area">
+                <button class="btn" id="nextBtn" onclick="revealNextStep()">💡 思考解题策略 / 关键知识点</button>
+                <button class="btn btn-ans" id="toggleAnsBtn" onclick="toggleAnswer()">👁️ 显示 / 隐藏答案</button>
+                <button class="btn btn-reset" onclick="resetCurrentCard()">🔄 重新思考</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 划词提问弹出的气泡按钮 -->
+<div id="selection-tooltip" onclick="askSelectedText()">💡 询问 AI 导师</div>
+
+<!-- 右下角 Chatbox 悬浮按钮 -->
+<div class="chat-widget-toggle" onclick="toggleChatBox()">🤖</div>
+
+<!-- 对话框主体 -->
+<div class="chat-box-container" id="chatBox">
+    <div class="chat-header">
+        <span>化学学习 AI 导师</span>
+        <span class="close-btn" onclick="toggleChatBox()">✕</span>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg ai">👋 你好！我是居銮中华中学的化学 AI 导师。在解题过程中有任何不理解的概念或方程式，随时发给我，或者高亮选中页面上的文字询问我哦！</div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="userInput" placeholder="输入你的问题..." onkeydown="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()">发送</button>
+    </div>
+</div>
+
+<script>
+// ==================== 全卷 38 道考题完整数据库（选答题计算过程已完整精准还原） ====================
+const examDatabase = {
+    '甲': [
+        {
+            num: 1, title: '甲) 选择题 - 第 1 题',
+            body: `下列有关反应热的叙述正确的是：<br>
+I 放热反应的逆反应必为吸热反应<br>
+II 吸热反应中生成物的总焓小于反应物的总焓<br>
+III 化学键的断裂和形成是化学反应中能量变化的主要原因<br>
+IV 凡是需要加热的反应一定是吸热反应<br>
+V 在隔热器中发生吸热反应，温度会降低<br><br>
+A. I, III &nbsp;&nbsp;&nbsp; B. I, III, V &nbsp;&nbsp;&nbsp; C. I, IV, V &nbsp;&nbsp;&nbsp; D. 其他组合`,
+            steps: [
+                { 
+                    title: '思考策略：反应热本质与能量守恒定律', 
+                    think: '<strong>关键思考方向：</strong>如何从“正逆反应的关系”以及“化学键的断键/成键”宏观与微观两个角度理解反应热（$\\Delta H$）？', 
+                    derivation: '<b>核心知识点：</b><br>1. 正逆反应 $\\Delta H$ 数值相等、符号相反。<br>2. 化学键断裂吸收能量，化学键形成释放能量，二者的差值决定了反应是吸热还是放热。<br>3. 吸热反应中，生成物的总焓<b>高于</b>反应物的总焓。' 
+                },
+                { 
+                    title: '思考策略：反应引发条件 vs 体系吸放热', 
+                    think: '<strong>关键思考方向：</strong>“需要加热”是否代表反应本身是“吸热反应”？在隔热体系中吸热会发生什么现象？', 
+                    derivation: '<b>核心知识点：</b><br>1. 加热通常只是 provide 分子打破旧键所需的活化能（如燃烧反应），不能作为判断吸放热的标准。<br>2. 隔热体系不与外界发生热交换，若发生吸热反应，必然消耗体系内部的内能，导致温度下降。<br><b>综上判断，正确选项为 I, III, V。</b>' 
+                }
+            ],
+            ans: '<b>正确答案：B (I, III, V)</b>'
+        },
+        {
+            num: 2, title: '甲) 选择题 - 第 2 题',
+            body: `已知：<br>
+① $\\text{H}_2(g) + \\frac{1}{2}\\text{O}_2(g) \\rightarrow \\text{H}_2\\text{O}(g) \\quad \\Delta H = -241.8\\,\\text{kJ/mol}$<br>
+② $2\\text{H}_2(g) + \\text{O}_2(g) \\rightarrow 2\\text{H}_2\\text{O}(l) \\quad \\Delta H = -571.6\\,\\text{kJ/mol}$<br>
+根据热化学方程式判断下列叙述哪项正确？<br><br>
+A. 电解 $1\\,\\text{mol}$ 的水需吸收 $285.8\\,\\text{kJ}$ 的热量<br>
+B. 水的生成热为 $-571.6\\,\\text{kJ/mol}$<br>
+C. 氢气的燃烧热为 $-241.8\\,\\text{kJ}$ 的热量<br>
+D. $1\\,\\text{mol}$ 水蒸气转化成 $1\\,\\text{mol}$ 水的反应热为 $44\\,\\text{kJ}$`,
+            steps: [
+                { 
+                    title: '思考策略：生成热与燃烧热的标准状态定义', 
+                    think: '<strong>关键思考方向：</strong>定义“生成热”与“燃烧热”时，产物 $\\text{H}_2\\text{O}$ 必须处于什么物理状态？', 
+                    derivation: '<b>核心知识点：</b><br>1. 燃烧热和生成热均要求产物处于标准状况下的最稳定状态（水为<b>液态 $\\text{H}_2\\text{O}(l)$</b>）。<br>2. 由式②可知：生成 $1\\,\\text{mol}\\,\\text{H}_2\\text{O}(l)$ 放热 $285.8\\,\\text{kJ}$，因此其逆反应（电解 $1\\,\\text{mol}$ 液态水分解）必吸收 $285.8\\,\\text{kJ}$ 的热量。' 
+                }
+            ],
+            ans: '<b>正确答案：A</b>'
+        },
+        {
+            num: 3, title: '甲) 选择题 - 第 3 题',
+            body: `根据各化学键键能 $(\\text{kJ/mol})$：$\\text{N}-\\text{N}: 163$, $\\text{N}=\\text{N}: 418$, $\\text{N}\\equiv\\text{N}: 946$, $\\text{F}-\\text{F}: 159$, $\\text{N}-\\text{F}: 272$。求 $\\text{NF}_3$ 的生成热。<br><br>
+A. $-104.5\\,\\text{kJ/mol}$ &nbsp;&nbsp;&nbsp; B. $-209\\,\\text{kJ/mol}$ &nbsp;&nbsp;&nbsp; C. $-245.67\\,\\text{kJ/mol}$ &nbsp;&nbsp;&nbsp; D. $-496\\,\\text{kJ/mol}$`,
+            steps: [
+                { 
+                    title: '思考策略：通过化学键键能计算反应热', 
+                    think: '<strong>关键思考方向：</strong>标准生成热反应式如何书写？断键与成键的能量计算公式是什么？', 
+                    derivation: '<b>核心知识点与公式：</b><br>1. 生成热反应式（生成 $1\\,\\text{mol}\\,\\text{NF}_3$）：$$\\frac{1}{2}\\text{N}_2(g) + \\frac{3}{2}\\text{F}_2(g) \\rightarrow \\text{NF}_3(g)$$<br>2. $\\Delta H = \\sum(\\text{断裂旧键吸收能量}) - \\sum(\\text{形成新键释放能量})$<br>3. $\\Delta H = \\left[\\frac{1}{2}(946) + \\frac{3}{2}(159)\\right] - [3 \\times 272] = 711.5 - 816 = -104.5\\,\\text{kJ/mol}$' 
+                }
+            ],
+            ans: '<b>正确答案：A</b>'
+        },
+        {
+            num: 4, title: '甲) 选择题 - 第 4 题',
+            body: `已知酒精 $\\text{C}_2\\text{H}_5\\text{OH}$ 的燃烧热为 $-1366.8\\,\\text{kJ/mol}$。欲将 $1\\,\\text{L}, 25^\\circ\\text{C}$ 的水加热至 $100^\\circ\\text{C}$ 需燃烧多少酒精？(水比热 $4200\\,\\text{J}\\cdot\\text{kg}^{-1}\\cdot\\text{K}^{-1}$，密度 $1\\,\\text{g/mL}$)<br><br>
+A. $5.3\\,\\text{g}$ &nbsp;&nbsp;&nbsp; B. $5.3\\,\\text{kg}$ &nbsp;&nbsp;&nbsp; C. $10.6\\,\\text{g}$ &nbsp;&nbsp;&nbsp; D. $10.6\\,\\text{kg}$`,
+            steps: [
+                { 
+                    title: '思考策略：热量平衡与质量换算', 
+                    think: '<strong>关键思考方向：</strong>如何由水的比热公式计算吸热量，并联立酒精摩尔质量求出所需质量？', 
+                    derivation: '<b>核心知识点：</b><br>1. 吸收热量：$Q = m \\cdot c \\cdot \\Delta T = 1\\,\\text{kg} \\times 4.2\\,\\text{kJ/(kg}\\cdot^\\circ\\text{C)} \\times (100-25) = 315\\,\\text{kJ}$<br>2. 消耗酒精摩尔数：$n = \\frac{315}{1366.8} \\approx 0.2305\\,\\text{mol}$<br>3. 质量：$m = n \\times M = 0.2305 \\times 46 \\approx 10.6\\,\\text{g}$' 
+                }
+            ],
+            ans: '<b>正确答案：C</b>'
+        },
+        {
+            num: 5, title: '甲) 选择题 - 第 5 题',
+            body: `200mL 3M 的 $\\text{KOH}(aq)$ 和 200mL 2M 的硫酸混合，求反应热。<br><br>
+A. $-57.3\\,\\text{kJ} \\times 0.4$ &nbsp;&nbsp;&nbsp; B. $-57.3\\,\\text{kJ} \\times 0.6$ &nbsp;&nbsp;&nbsp; C. $-57.3\\,\\text{kJ} \\times 0.8$ &nbsp;&nbsp;&nbsp; D. $-57.3\\,\\text{kJ}$`,
+            steps: [
+                { 
+                    title: '思考策略：中和热与限量试剂判定', 
+                    think: '<strong>关键思考方向：</strong>中和热定义为生成 $1\\,\\text{mol}\\,\\text{H}_2\\text{O}$ 放热 $57.3\\,\\text{kJ}$。反应中哪个离子是限量反应物？', 
+                    derivation: '<b>核心知识点：</b><br>1. $n(\\text{OH}^-) = 0.2\\,\\text{L} \\times 3\\,\\text{M} = 0.6\\,\\text{mol}$<br>2. $n(\\text{H}^+) = 0.2\\,\\text{L} \\times 2\\,\\text{M} \\times 2 = 0.8\\,\\text{mol}$<br>3. $\\text{OH}^-$ 为限量试剂，反应完全生成 $0.6\\,\\text{mol}\\,\\text{H}_2\\text{O}$，放热 $-57.3\\,\\text{kJ} \\times 0.6$。' 
+                }
+            ],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 6, title: '甲) 选择题 - 第 6 题',
+            body: `下列化学反应中，反应速率最快的是：<br><br>
+A. 氢气燃烧 &nbsp;&nbsp;&nbsp; B. 强酸强碱中和 &nbsp;&nbsp;&nbsp; C. 葡萄酿成酒 &nbsp;&nbsp;&nbsp; D. 铁在潮湿空气中生锈`,
+            steps: [
+                { 
+                    title: '思考策略：反应物本质对速率的决定性作用', 
+                    think: '<strong>关键思考方向：</strong>离子反应与分子反应在反应速率上有何本质区别？', 
+                    derivation: '<b>核心知识点：</b><br>水溶液中的离子反应（如 $\\text{H}^+ + \\text{OH}^- \\rightarrow \\text{H}_2\\text{O}$）无需经过复杂的断键过程，几乎在瞬间完成，其速率远快于分子间的氧化还原或生物发酵。' 
+                }
+            ],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 7, title: '甲) 选择题 - 第 7 题',
+            body: `对于反应 $2\\text{W} + \\text{X} \\rightarrow 4\\text{Y} + 5\\text{Z}$，化学反应速率最快的是：<br><br>
+A. $R_{\\text{W}} = 0.5\\,\\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$ &nbsp;&nbsp;&nbsp; B. $R_{\\text{X}} = 0.2\\,\\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$<br>
+C. $R_{\\text{Y}} = 0.5\\,\\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$ &nbsp;&nbsp;&nbsp; D. $R_{\\text{Z}} = 0.6\\,\\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$`,
+            steps: [
+                { 
+                    title: '思考策略：不同物质表示速率的统一比较法', 
+                    think: '<strong>关键思考方向：</strong>如何消除化学计量数（系数）对速率数值的影响？', 
+                    derivation: '<b>核心知识点：</b><br>将各物质的速率除以其对应的化学计量数 $\\frac{R_i}{\\text{系数}}$，比值最大者反应最快：<br>A: $\\frac{0.5}{2} = 0.25$ | B: $\\frac{0.2}{1} = 0.20$ | C: $\\frac{0.5}{4} = 0.125$ | D: $\\frac{0.6}{5} = 0.12$' 
+                }
+            ],
+            ans: '<b>正确答案：A</b>'
+        },
+        {
+            num: 8, title: '甲) 选择题 - 第 8 题',
+            body: `若 $\\text{A}_2(g) + 3\\text{B}_2(g) \\rightarrow 2\\text{AB}_3(g)$ 为一步完成的基元反应，速率为 $R$。若使 $\\text{B}_2$ 之物质的量变为原来的 3 倍，而容器体积为原来的 2 倍，则反应速率变为：<br><br>
+A. $\\frac{3}{16} R$ &nbsp;&nbsp;&nbsp; B. $\\frac{3}{2} R$ &nbsp;&nbsp;&nbsp; C. $\\frac{27}{8} R$ &nbsp;&nbsp;&nbsp; D. $\\frac{27}{16} R$`,
+            steps: [
+                { 
+                    title: '思考策略：基元反应速率方程与浓度变化', 
+                    think: '<strong>关键思考方向：</strong>什么是“基元反应”？体积和物质的量的同时改变如何影响浓度？', 
+                    derivation: '<b>核心知识点与推导：</b><br>1. 基元反应速率方程：$R = k [\\text{A}_2][\\text{B}_2]^3$<br>2. 体积翻倍使 $[\\text{A}_2]\' = \\frac{1}{2}[\\text{A}_2]$；$\\text{B}_2$ 摩尔数3倍且体积2倍使 $[\\text{B}_2]\' = \\frac{3}{2}[\\text{B}_2]$。<br>3. $R\' = k \\left(\\frac{1}{2}[\\text{A}_2]\\right) \\left(\\frac{3}{2}[\\text{B}]\\right)^3 = \\frac{27}{16} R$' 
+                }
+            ],
+            ans: '<b>正确答案：D</b>'
+        },
+        {
+            num: 9, title: '甲) 选择题 - 第 9 题',
+            body: `物质 $\\text{X}$ 在 $25^\\circ\\text{C}$ 有 $100\\,\\text{g}$，经反应 $5\\,\\text{min}$ 剩下 $75\\,\\text{g}$；则在 $45^\\circ\\text{C}$ 有 $300\\,\\text{g}$，$5\\,\\text{min}$ 所剩下多少克？<br><br>
+A. $100\\,\\text{g}$ &nbsp;&nbsp;&nbsp; B. $150\\,\\text{g}$ &nbsp;&nbsp;&nbsp; C. $200\\,\\text{g}$ &nbsp;&nbsp;&nbsp; D. $250\\,\\text{g}$`,
+            steps: [
+                { 
+                    title: '思考策略：范特霍夫温度经验规则', 
+                    think: '<strong>关键思考方向：</strong>温度每升高 $10^\\circ\\text{C}$，反应速率通常如何变化？升高 $20^\\circ\\text{C}$ 速率变为几倍？', 
+                    derivation: '<b>核心知识点：</b><br>1. 升温 $10^\\circ\\text{C}$ 速率翻倍。升温 $20^\\circ\\text{C}$（$25 \\rightarrow 45$），速率变为 $2^2 = 4$ 倍。<br>2. $25^\\circ\\text{C}$ 下 $5\\,\\text{min}$ 消耗 $25\\,\\text{g}$；则 $45^\\circ\\text{C}$ 下相同时间消耗 $25 \\times 4 = 100\\,\\text{g}$。<br>3. 剩余量 $= 300 - 100 = 200\\,\\text{g}$。' 
+                }
+            ],
+            ans: '<b>正确答案：C</b>'
+        },
+        {
+            num: 10, title: '甲) 选择题 - 第 10 题',
+            body: `某反应在不同温度下分子能量分布曲线（$T_2 > T_1$），哪项错误？<br>
+<img src="image/Screenshot 2026-08-10 200110.jpg" alt="第10题分子能量分布曲线图" class="question-img"><br>
+A. 若 $T_2 = T_1 + 10^\\circ\\text{C}$ 则面积 $B = 2A$<br>
+B. 两条曲线下的面积是一样的<br>
+C. 在 $T_2$ 时活化分子数较多<br>
+D. 在 $T_2$ 时反应的活化能较低`,
+            steps: [
+                { 
+                    title: '思考策略：麦克斯韦-玻尔兹曼分布与活化能本质', 
+                    think: '<strong>关键思考方向：</strong>改变温度是否会影响反应本身的活化能（$E_a$）？曲线下方总面积代表什么？', 
+                    derivation: '<b>核心知识点：</b><br>1. 曲线下总面积代表分子总数，故温度改变面积不变。<br>2. <b>活化能（$E_a$）由反应本质决定</b>，升高温度只增加活化分子百分数，<b>不改变活化能</b>（D 叙述错误）。' 
+                }
+            ],
+            ans: '<b>正确答案：D</b>'
+        },
+        {
+            num: 11, title: '甲) 选择题 - 第 11 题',
+            body: `根据实验数据求速率方程式：<br>
+Exp 1: $[\\text{P}]=0.5, [\\text{Q}]=0.2 \\rightarrow 0.0006$<br>
+Exp 2: $[\\text{P}]=1.0, [\\text{Q}]=0.4 \\rightarrow 0.0024$<br>
+Exp 3: $[\\text{P}]=1.0, [\\text{Q}]=0.8 \\rightarrow 0.0096$<br><br>
+A. $R = k[\\text{P}]^2$ &nbsp;&nbsp;&nbsp; B. $R = k[\\text{Q}]^2$ &nbsp;&nbsp;&nbsp; C. $R = k[\\text{P}][\\text{Q}]^2$ &nbsp;&nbsp;&nbsp; D. $R = k[\\text{P}]^2[\\text{Q}]$`,
+            steps: [
+                { 
+                    title: '思考策略：初速率法（控制变量法）确定反应级数', 
+                    think: '<strong>关键思考方向：</strong>比较 Exp 2 与 Exp 3，控制哪一种反应物浓度不变？比较 Exp 1 与 Exp 2 呢？', 
+                    derivation: '<b>核心知识点：</b><br>1. 对比 Exp 2 与 3：$[\\text{P}]$ 不变，$[\\text{Q}]$ 翻倍使速率变为 4 倍（$2^2$），说明对 $\\text{Q}$ 为 2 级反应。<br>2. 对比 Exp 1 与 2：$\\text{P}$ 和 $\\text{Q}$ 均翻倍，速率增加 4 倍完全来自 $\\text{Q}$ 的贡献，说明对 $\\text{P}$ 为 0 级反应。<br>3. 速率方程为 $R = k[\\text{Q}]^2$。' 
+                }
+            ],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 12, title: '甲) 选择题 - 第 12 题',
+            body: `下列有关催化剂的叙述哪项错误？<br><br>
+A. 它能降低活化能 &nbsp;&nbsp;&nbsp; B. 它有特殊的选择性<br>
+C. 它反应前后质量和性质都不变 &nbsp;&nbsp;&nbsp; D. 它会改变反应热`,
+            steps: [
+                { 
+                    title: '思考策略：催化剂作用机理', 
+                    think: '<strong>关键思考方向：</strong>催化剂改变了什么（历程/活化能）？不能改变什么（始态/终态/反应热）？', 
+                    derivation: '<b>核心知识点：</b><br>催化剂通过改变反应路径降低活化能，但反应始态与终态能量差保持不变，因此<b>催化剂绝对不会改变反应热 $\\Delta H$</b>。' 
+                }
+            ],
+            ans: '<b>正确答案：D</b>'
+        },
+        {
+            num: 13, title: '甲) 选择题 - 第 13 题',
+            body: `对可逆反应 $2\\text{SO}_2(g) + \\text{O}_2(g) \\rightleftharpoons 2\\text{SO}_3(g)$ 叙述哪些正确？<br>
+I 用 $2\\,\\text{mol}\\,\\text{SO}_2$ 与足量氧气反应，可生成 $2\\,\\text{mol}\\,\\text{SO}_3$<br>
+II 任意时间段，$\\text{SO}_2$ 的消耗速率必定等于氧气消耗速率的 2 倍<br>
+III 达到平衡时，$\\text{SO}_2, \\text{O}_2, \\text{SO}_3$ 浓度比必为 2:1:2<br>
+IV 达到平衡时，$\\text{SO}_3$ 生成速率等于其消失速率<br><br>
+A. I, III &nbsp;&nbsp;&nbsp; B. II, III &nbsp;&nbsp;&nbsp; C. II, IV &nbsp;&nbsp;&nbsp; D. III, IV`,
+            steps: [
+                { 
+                    title: '思考策略：可逆反应特征与化学平衡标志', 
+                    think: '<strong>关键思考方向：</strong>可逆反应能否完全转化？消耗速率比由什么决定？平衡时浓度比是否必须等于系数比？', 
+                    derivation: '<b>核心知识点：</b><br>• I 错：可逆反应有极限，不能 $100\\%$ 转化。<br>• II 正确：同一体系中消耗速率之比恒等于化学计量数之比（2:1）。<br>• III 错：平衡时浓度保持不变，但不一定等于化学系数比。<br>• IV 正确：平衡标志即正逆反应速率相等（生成速率 = 消失速率）。' 
+                }
+            ],
+            ans: '<b>正确答案：C</b>'
+        },
+        {
+            num: 14, title: '甲) 选择题 - 第 14 题',
+            body: `平衡体系中，一定能够影响平衡移动的因素有：<br>
+I 反应物表面积 &nbsp; II 温度 &nbsp; III 催化剂 &nbsp; IV 浓度 &nbsp; V 压强<br><br>
+A. II, IV &nbsp;&nbsp;&nbsp; B. II, IV, V &nbsp;&nbsp;&nbsp; C. IV, V &nbsp;&nbsp;&nbsp; D. 以上皆是`,
+            steps: [
+                { 
+                    title: '思考策略：化学平衡移动的条件判定', 
+                    think: '<strong>关键思考方向：</strong>所有平衡体系都对压强敏感吗（气体分子数未变时）？哪些因素绝对会打破原平衡？', 
+                    derivation: '<b>核心知识点：</b><br>1. 温度改变改变 $K_c$，必移动平衡；浓度改变改变 $Q_c$，必移动平衡。<br>2. 催化剂与固体表面积不影响平衡；若气体反应前后分子数不变，改变压强平衡不移动。因此通用因素为<b>温度和浓度 (II, IV)</b>。' 
+                }
+            ],
+            ans: '<b>正确答案：A</b>'
+        },
+        {
+            num: 15, title: '甲) 选择题 - 第 15 题',
+            body: `降温或加压时都能使平衡向正反应方向移动的是：<br><br>
+A. $\\text{H}_2(g) + \\text{I}_2(g) \\rightleftharpoons 2\\text{HI}(g) \\quad \\Delta H > 0$<br>
+B. $\\text{N}_2(g) + 3\\text{H}_2(g) \\rightleftharpoons 2\\text{NH}_3(g) \\quad \\Delta H < 0$<br>
+C. $\\text{N}_2\\text{O}_4(g) \\rightleftharpoons 2\\text{NO}_2(g) \\quad \\Delta H > 0$<br>
+D. $2\\text{H}_2(g) + \\text{CO}(g) \\rightleftharpoons \\text{CH}_3\\text{OH}(g) \\quad \\Delta H < 0$`,
+            steps: [
+                { 
+                    title: '思考策略：勒沙特列原理方向综合推断', 
+                    think: '<strong>关键思考方向：</strong>“降温正移”对 $\\Delta H$ 有什么要求？“加压正移”对反应前后气体体积（系数和）有什么要求？', 
+                    derivation: '<b>核心知识点：</b><br>1. 降温正移 $\\rightarrow$ 要求正反应为<b>放热反应（$\\Delta H < 0$）</b>。<br>2. 加压正移 $\\rightarrow$ 要求正反应为<b>气体分子数减小的反应</b>。B 和 D 均符合条件（标准答案取 B）。' 
+                }
+            ],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 16, title: '甲) 选择题 - 第 16 题',
+            body: `右图所示为定温下某可逆反应中物质 A、B 和 C 的物质的量浓度 (\\text{mol/L}) 随时间变化。计算平衡常数 $K_c$。<br>
+<img src="image/Screenshot 2026-08-10 200706.jpg" alt="第16题物质浓度随时间变化曲线图" class="question-img"><br>
+A. 0.54 &nbsp;&nbsp;&nbsp; B. 0.9 &nbsp;&nbsp;&nbsp; C. 0.0315 &nbsp;&nbsp;&nbsp; D. 10`,
+            steps: [
+                { 
+                    title: '思考策略：由图像读取浓度初值与平衡值，确定反应物与生成物', 
+                    think: '<strong>关键思考方向：</strong>观察曲线起点（$t = 0$）与平衡终点（$t = 30\\text{ min}$），谁在消耗（反应物），谁在生成（生成物）？', 
+                    derivation: '<b>图像数据读取：</b><br>• $A$：初始浓度 $c_0(A) = 0\\text{ mol/L}$ $\\rightarrow$ 平衡浓度 $[A] = 0.3\\text{ mol/L}$（生成物，变化量 $\\Delta c(A) = +0.3\\text{ mol/L}$）<br>• $B$：初始浓度 $c_0(B) = 0.5\\text{ mol/L}$ $\\rightarrow$ 平衡浓度 $[B] = 0.2\\text{ mol/L}$（反应物，变化量 $\\Delta c(B) = -0.3\\text{ mol/L}$）<br>• $C$：初始浓度 $c_0(C) = 0\\text{ mol/L}$ $\\rightarrow$ 平衡浓度 $[C] = 0.6\\text{ mol/L}$（生成物，变化量 $\\Delta c(C) = +0.6\\text{ mol/L}$）' 
+                },
+                { 
+                    title: '思考策略：确定反应方程式系数并计算 $K_c$', 
+                    think: '<strong>关键思考方向：</strong>各物质变化量比值等于化学计量数之比，由此可写出化学反应方程式并代入平衡常数表达式。', 
+                    derivation: '<b>核心推导与计算：</b><br>1. 计量数之比：$\\Delta c(B) : \\Delta c(A) : \\Delta c(C) = 0.3 : 0.3 : 0.6 = 1 : 1 : 2$<br>2. 可逆反应方程式为：$$B \\rightleftharpoons A + 2C$$<br>3. 平衡常数表达式与代入求解：$$K_c = \\frac{[A] \\cdot [C]^2}{[B]} = \\frac{0.3 \\times (0.6)^2}{0.2} = \\frac{0.3 \\times 0.36}{0.2} = 0.54$$' 
+                }
+            ],
+            ans: '<b>正确答案：A (0.54)</b>'
+        },
+        {
+            num: 17, title: '甲) 选择题 - 第 17 题',
+            body: `$\\text{N}_2\\text{O}_4(g) \\rightleftharpoons 2\\text{NO}_2(g)$ 达到平衡有 20% 分解，总压强为 $P$。求 $K_p$。<br><br>
+A. $P$ &nbsp;&nbsp;&nbsp; B. $P/2$ &nbsp;&nbsp;&nbsp; C. $P/4$ &nbsp;&nbsp;&nbsp; D. $P/6$`,
+            steps: [
+                { 
+                    title: '思考策略：分压平衡常数 $K_p$ 求解法', 
+                    think: '<strong>关键思考方向：</strong>如何通过三段式求出平衡时各气体的摩尔分数与分压？', 
+                    derivation: '<b>核心知识点与推导：</b><br>1. 设初始 $1\\,\\text{mol}\\,\\text{N}_2\\text{O}_4$。平衡时：$\\text{N}_2\\text{O}_4$ 剩 $0.8\\,\\text{mol}$，$\\text{NO}_2$ 生成 $0.4\\,\\text{mol}$，总量 $1.2\\,\\text{mol}$。<br>2. 分压：$p(\\text{N}_2\\text{O}_4) = \\frac{0.8}{1.2} P = \\frac{2}{3} P$，$p(\\text{NO}_2) = \\frac{0.4}{1.2} P = \\frac{1}{3} P$。<br>3. $K_p = \\frac{p(\\text{NO}_2)^2}{p(\\text{N}_2\\text{O}_4)} = \\frac{(\\frac{1}{3}P)^2}{\\frac{2}{3}P} = \\frac{P}{6}$。' 
+                }
+            ],
+            ans: '<b>正确答案：D</b>'
+        },
+        {
+            num: 18, title: '甲) 选择题 - 第 18 题',
+            body: `下列说法哪些正确？<br><br>
+A. 晶体中有阴离子，则必定有阳离子<br>
+B. 晶体中有阳离子，则必定有阴离子<br>
+C. 干冰升华时，分子内的共价键会发生断裂<br>
+D. 水很稳定是因为水中有氢键`,
+            steps: [
+                { 
+                    title: '思考策略：晶体电中性与分子间作用力辨析', 
+                    think: '<strong>关键思考方向：</strong>金属晶体含有阳离子吗？它有阴离子吗？物理相变打破的是什么力？', 
+                    derivation: '<b>核心知识点：</b><br>• A 正确：电中性决定了有阴离子必须有阳离子。<br>• B 错：金属晶体由阳离子和自由电子构成，无阴离子。<br>• C 错：分子晶体升华只克服分子间作用力，不打破共价键。<br>• D 错：稳定性取决于 H-O 共价键键能，氢键只影响物理沸点。' 
+                }
+            ],
+            ans: '<b>正确答案：A</b>'
+        },
+        {
+            num: 19, title: '甲) 选择题 - 第 19 题',
+            body: `下列分子哪一组全是极性分子？<br><br>
+A. $\\text{CH}_4, \\text{H}_2\\text{O}, \\text{CH}_2\\text{Cl}_2$ &nbsp;&nbsp;&nbsp; B. $\\text{H}_2\\text{O}_2, \\text{NH}_3, \\text{O}_3$<br>
+C. $\\text{HCl}, \\text{BF}_3, \\text{SO}_2$ &nbsp;&nbsp;&nbsp; D. $\\text{C}_2\\text{H}_2, \\text{CO}_2, \\text{HF}$`,
+            steps: [
+                { 
+                    title: '思考策略：分子空间构型与极性判断', 
+                    think: '<strong>关键思考方向：</strong>对称结构（正四面体、平面正三角形、直线形）分子极性如何向量抵消？', 
+                    derivation: '<b>核心知识点：</b><br>非极性分子排查：$\\text{CH}_4$（正四面体）、$\\text{BF}_3$（正三角形）、$\\text{CO}_2, \\text{C}_2\\text{H}_2$（直线形）均是非极性。<br>因此组 B（含有非对称的 $\\text{H}_2\\text{O}_2, \\text{NH}_3, \\text{O}_3$）全是极性分子。' 
+                }
+            ],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 20, title: '甲) 选择题 - 第 20 题',
+            body: `下列哪些化学式能够真实表示物质的分子组成？<br><br>
+A. $\\text{NaCl}$ &nbsp;&nbsp;&nbsp; B. $\\text{Na}_2\\text{O}_2$ &nbsp;&nbsp;&nbsp; C. $\\text{SiO}_2$ &nbsp;&nbsp;&nbsp; D. $\\text{NO}$`,
+            steps: [
+                { 
+                    title: '思考策略：分子式与实验式的概念界定', 
+                    think: '<strong>关键思考方向：</strong>哪种晶体类型才真正存在独立的“分子”？', 
+                    derivation: '<b>核心知识点：</b><br>只有<b>分子晶体</b>的化学式才是真正代表分子的分子式；离子晶体（$\\text{NaCl}, \\text{Na}_2\\text{O}_2$）与共价网状/原子晶体（$\\text{SiO}_2$）书写的化学式只是最简实验式。$\\text{NO}$ 为分子晶体。' 
+                }
+            ],
+            ans: '<b>正确答案：D</b>'
+        }
+    ],
+
+    '乙': [
+        {
+            num: 1, title: '乙) 填充题 - 第 1 题',
+            body: `已知 $\\text{CO}_2(g)$, $\\text{H}_2\\text{O}(l)$, $\\text{C}_4\\text{H}_{10}\\text{O}(l)$ 的生成热各为 $P, Q, R$，则 $\\text{C}_4\\text{H}_{10}\\text{O}(l)$ 的燃烧热为 _______ $\\text{kJ/mol}$。`,
+            steps: [
+                { 
+                    title: '思考策略：利用生成热计算反应热（赫斯定律）', 
+                    think: '<strong>关键思考方向：</strong>反应热与生成热的关系公式：$\\Delta H = \\sum(\\text{产物生成热}) - \\sum(\\text{反应物生成热})$。', 
+                    derivation: '<b>核心推导：</b><br>燃烧反应式：$\\text{C}_4\\text{H}_{10}\\text{O}(l) + 6\\text{O}_2(g) \\rightarrow 4\\text{CO}_2(g) + 5\\text{H}_2\\text{O}(l)$<br>单质 $\\text{O}_2$ 生成热为 $0$。$\\Delta H = [4P + 5Q] - [R]$' 
+                }
+            ],
+            ans: '<b>答案：$4P + 5Q - R$</b>'
+        },
+        {
+            num: 2, title: '乙) 填充题 - 第 2 题',
+            body: `已知 $1\\,\\text{g}$ 硫完全燃烧放出 $9.275\\,\\text{kJ}$ 的热量，则二氧化硫的生成热是 _______ $\\text{kJ/mol}$。`,
+            steps: [
+                { 
+                    title: '思考策略：质量转摩尔热量与放热符号表示', 
+                    think: '<strong>关键思考方向：</strong>硫的摩尔质量是多少？生成热放热符号用什么表示？', 
+                    derivation: '<b>核心推导：</b><br>$1\\,\\text{mol}\\,\\text{S} = 32\\,\\text{g}$。热量 $= 9.275 \\times 32 = 296.8\\,\\text{kJ}$。放热反应写成生成热为 $-296.81\\,\\text{kJ/mol}$。' 
+                }
+            ],
+            ans: '<b>答案：$-296.81$</b>'
+        },
+        {
+            num: 3, title: '乙) 填充题 - 第 3 题',
+            body: `某反应在 $25^\\circ\\text{C}$ 时反应速率为 $R$，在 $5^\\circ\\text{C}$ 时的反应速率是 _______ $R$。`,
+            steps: [
+                { 
+                    title: '思考策略：降温对速率的倍数折减', 
+                    think: '<strong>关键思考方向：</strong>降低 $20^\\circ\\text{C}$（相当于降低两个 $10^\\circ\\text{C}$），速率会减小为原来的多少倍？', 
+                    derivation: '<b>核心推导：</b><br>每降 $10^\\circ\\text{C}$ 速率变为 $\\frac{1}{2}$。降低 $20^\\circ\\text{C}$，速率变为 $(\\frac{1}{2})^2 = \\frac{1}{4}$。' 
+                }
+            ],
+            ans: '<b>答案：$\\frac{1}{4}$</b>'
+        },
+        {
+            num: 4, title: '乙) 填充题 - 第 4 题',
+            body: `如反应能量图，回答：<br>
+<img src="image/Screenshot 2026-08-10 203112.jpg" alt="第4题反应能量图" class="question-img"><br>
+I 正反应的 $\\Delta H = $ _______<br>
+II 正反应的 $E_a = $ _______<br>
+III 逆反应的 $E_a = $ _______<br>
+IV C 是：_______`,
+            steps: [
+                { 
+                    title: '思考策略：读取能量势能图关键坐标', 
+                    think: '<strong>关键思考方向：</strong>活化能 $E_a$ 是顶点与反应物的差，$\\Delta H$ 是产物与反应物的差。顶点代表什么状态？', 
+                    derivation: '<b>核心解析：</b><br>• 正反应活化能 $= 40\\,\\text{kcal}$<br>• 逆反应活化能 $= 60\\,\\text{kcal}$<br>• $\\Delta H = 40 - 60 = -20\\,\\text{kcal}$<br>• 顶点 C 处于能量最高点，代表<b>活化分子（过渡态）</b>。' 
+                }
+            ],
+            ans: '<b>答案：I: -20 kcal | II: 40 kcal | III: 60 kcal | IV: 活化分子</b>'
+        },
+        {
+            num: 5, title: '乙) 填充题 - 第 5 题',
+            body: `如热函图所示，回答：<br>
+<img src="image/Screenshot 2026-08-10 203154.jpg" alt="第5题热函图" class="question-img"><br>
+I 写出关系式：_______<br>
+II 计算 $\\Delta H_3$ 的值：_______<br>
+III 计算 $\\text{Z} \\rightarrow \\text{X}$ 的热函变化：_______`,
+            steps: [
+                { 
+                    title: '思考策略：热化学循环路线法（盖斯定律路径无关性）', 
+                    think: '<strong>关键思考方向：</strong>起点到终点不同路径的焓变总和相等。', 
+                    derivation: '<b>核心推导：</b><br>1. 路径平衡：$\\Delta H_1 + \\Delta H_2 = \\Delta H_3 + \\Delta H_4$<br>2. $150 + (-30) = \\Delta H_3 + 100 \\implies \\Delta H_3 = 20\\,\\text{kJ}$<br>3. $\\text{Z} \\rightarrow \\text{X}$ 逆路径计算 $= -\\Delta H_3 + \\Delta H_1 = -20 + 150 = 130\\,\\text{kJ}$' 
+                }
+            ],
+            ans: '<b>答案：I: $\\Delta H_1 + \\Delta H_2 = \\Delta H_3 + \\Delta H_4$ | II: 20 kJ | III: 130 kJ</b>'
+        },
+        {
+            num: 6, title: '乙) 填充题 - 第 6 题',
+            body: `在 $2\\text{SO}_2(g) + \\text{O}_2(g) \\rightleftharpoons 2\\text{SO}_3(g) + Q$ 的平衡体系中，改变条件填充：<br>
+1. 升高温度：平衡移动____，R正____，R逆____，Kc____<br>
+2. 压缩体积：平衡移动____，R正____，R逆____，Kc____<br>
+3. 减少 SO₂：平衡移动____，R正____，R逆____，Kc____`,
+            steps: [
+                { 
+                    title: '思考策略：平衡移动及正逆速率双向变化分析', 
+                    think: '<strong>关键思考方向：</strong>升温/加压会同时使正逆速率都增大吗？平衡常数 $K_c$ 仅受什么因素影响？', 
+                    derivation: '<b>核心知识点：</b><br>1. 升温促吸热（逆移），正逆速率均增大，$K_c$ 减小。<br>2. 压缩体积（加压）使浓度变大，正逆速率均增大，平衡正移，$K_c$ 不变。<br>3. 减少反应物使浓度变小，速率减小，平衡逆移，$K_c$ 不变。' 
+                }
+            ],
+            ans: '<b>答案：1. 往逆反应 / 增大 / 增大 / 减小<br>2. 往正反应 / 增大 / 增大 / 不变<br>3. 往逆反应 / 减小 / 减小 / 不变</b>'
+        },
+        {
+            num: 7, title: '乙) 填充题 - 第 7 题',
+            body: `物质：$\\text{H}_2\\text{O}_2, \\text{Ca(OH)}_2, \\text{C}_2\\text{H}_4, \\text{KO}_2, MgF_2, \\text{CH}_4, \\text{NH}_3, \\text{BF}_3, \\text{NH}_4\\text{Br}$<br>
+(a) 既含离子键又含极性键的离子晶体：_______<br>
+(b) 既含离子键又含非极性键的离子晶体：_______<br>
+(c) 含离子键、极性键和配位键的离子晶体：_______<br>
+(d) 只含极性键的极性分子：_______<br>
+(e) 只含极性键的非极性分子：_______<br>
+(f) 含极性键和非极性键的非极性分子：_______`,
+            steps: [
+                { 
+                    title: '思考策略：化学键类型与分子/晶体结构分类', 
+                    think: '<strong>关键思考方向：</strong>辨析常见的复杂离子（如 $\\text{OH}^-, \\text{O}_2^-, \\text{NH}_4^+$）内部包含什么键？', 
+                    derivation: '<b>核心知识点：</b><br>• $\\text{Ca(OH)}_2$ 含有 $\\text{Ca}^{2+}$ 与 $\\text{OH}^-$ 的离子键，$\\text{O-H}$ 极性共价键。<br>• $\\text{KO}_2$ 含有 $\\text{O-O}$ 非极性键。<br>• $\\text{NH}_4\\text{Br}$ 中的 $\\text{NH}_4^+$ 含有配位键。' 
+                }
+            ],
+            ans: '<b>答案：(a) Ca(OH)2 | (b) KO2 | (c) NH4Br | (d) NH3 | (e) CH4, BF3 | (f) C2H4</b>'
+        },
+        {
+            num: 8, title: '乙) 填充题 - 第 8 题',
+            body: `可逆反应 $a\\text{A}(g) + b\\text{B}(g) \\rightleftharpoons c\\text{C}(g) \\quad \\Delta H = Q\\,\\text{kJ/mol}$：<br>
+<img src="image/Screenshot 2026-08-10 203553.jpg" alt="第8题平衡图像图" class="question-img"><br>
+1. 图 a: $P_1$ 与 $P_2$ 中_____压强较大；$a+b$ _____ $c$。<br>
+2. 图 b: $T_1$ 与 $T_2$ 中_____较高温；$Q$ 的值为_____零。`,
+            steps: [
+                { 
+                    title: '思考策略：“先平者数值大”图像判读口诀', 
+                    think: '<strong>关键思考方向：</strong>斜率越陡、越先达到平衡（先出现拐点）曲线对应的压强/温度有何特征？', 
+                    derivation: '<b>核心解析：</b><br>1. 图 a 中 $P_1$ 率先平，故 $P_1 > P_2$；压强越大 C% 越高（加压正移），故反应物系数和大于产物（$a+b > c$）。<br>2. 图 b 中 $T_2$ 率先平，故 $T_2 > T_1$；温度越高 C% 越高（升温正移），说明正反应吸热（$Q > 0$）。' 
+                }
+            ],
+            ans: '<b>答案：1. P1 ; > <br>2. T2 ; ></b>'
+        },
+        {
+            num: 9, title: '乙) 填充题 - 第 9 题',
+            body: `周期表 IVA 到 VIIA 族氢化物沸点变化中，点 a 代表的是 _______。<br>
+<img src="image/Screenshot 2026-08-10 203632.jpg" alt="第9题氢化物沸点变化周期趋势图" class="question-img">`,
+            steps: [
+                { 
+                    title: '思考策略：分子间氢键与氢化物沸点反常现象', 
+                    think: '<strong>关键思考方向：</strong>$\\text{H}_2\\text{O}, \\text{HF}, \\text{NH}_3$ 因为分子间氢键沸点异常高，同族第二周期的氢化物沸点如何急剧下降？', 
+                    derivation: '<b>核心知识点：</b><br>VIA 族的 $\\text{H}_2\\text{O}$ 沸点最高，到了第二周期 $\\text{H}_2\\text{S}$ 无氢键跌至谷底，故点 a 为 $\\text{H}_2\\text{S}$。' 
+                }
+            ],
+            ans: '<b>答案：H2S</b>'
+        },
+        {
+            num: 10, title: '乙) 填充题 - 第 10 题',
+            body: `$\\text{C}(s) + \\text{CO}_2(g) \\rightleftharpoons 2\\text{CO}(g) \\quad \\Delta H > 0$ 图像中：<br>
+<img src="image/Screenshot 2026-08-10 203658.jpg" alt="第10题速率突变图" class="question-img"><br>
+$t_1, t_3, t_4$ 时刻体系分别改变了什么条件？<br>
+$t_1$: _______ &nbsp;&nbsp;&nbsp; $t_3$: _______ &nbsp;&nbsp;&nbsp; $t_4$: _______`,
+            steps: [
+                { 
+                    title: '思考策略：v-t 速率突变图分析法', 
+                    think: '<strong>关键思考方向：</strong>正逆速率同等幅度突变加高代表什么？正逆速率同等幅度下降代表什么？', 
+                    derivation: '<b>核心解析：</b><br>• $t_1$: 正逆速率同时不连续突增，且 $v_{\\text{逆}} > v_{\\text{正}}$ $\\rightarrow$ 压缩体积（加压使平衡逆移）。<br>• $t_3$: 正逆速率同等幅度升高（线重合） $\\rightarrow$ 使用催化剂。<br>• $t_4$: 正逆速率同时降低 $\\rightarrow$ 降低温度。' 
+                }
+            ],
+            ans: '<b>答案：t1: 压缩体积 | t3: 加入催化剂 | t4: 降低温度</b>'
+        }
+    ],
+
+    '丙': [
+        {
+            num: 1, title: '丙) 必答题 - 第 1 题',
+            body: `为何弱酸和弱碱的中和热差别较大而不是定值 $-57.3\\,\\text{kJ/mol}$？`,
+            steps: [
+                { 
+                    title: '思考策略：弱电解质电离能量变化', 
+                    think: '<strong>关键思考方向：</strong>弱酸弱碱在水溶液中是否完全电离？电离过程是吸热还是放热？', 
+                    derivation: '<b>核心知识点：</b><br>弱酸、弱碱在水溶液中只部分电离，在中和反应过程中，分子继续电离需要<b>吸收热量</b>。不同弱酸弱碱的电离吸热程度差异很大，因此中和热不是定值。' 
+                }
+            ],
+            ans: '<b>参考答案：弱酸弱碱不完全电离，中和时电离过程需吸收热量，不同弱酸弱碱电离吸热不同导致中和热差别较大。</b>'
+        },
+        {
+            num: 2, title: '丙) 必答题 - 第 2 题',
+            body: `何谓黑斯定律（赫斯定律）？`,
+            steps: [
+                { 
+                    title: '思考策略：能量守恒与反应途径', 
+                    think: '<strong>关键思考方向：</strong>化学反应的热效应取决于什么（始态与终态）？与什么无关（反应途径）？', 
+                    derivation: '<b>标准概念定义：</b><br>一个化学反应不论是一步完成还是分几步完成，其总反应热效应（焓变）是相同的。' 
+                }
+            ],
+            ans: '<b>参考答案：一个化学过程不论是一步完成，还是几步完成，其热效应是相同的。</b>'
+        },
+        {
+            num: 3, title: '丙) 必答题 - 第 3 题',
+            body: `何谓勒沙特列原理？`,
+            steps: [
+                { 
+                    title: '思考策略：平衡对抗外加改变的规律', 
+                    think: '<strong>关键思考方向：</strong>当平衡体系受到外界条件（浓度、压强、温度）干扰时，平衡移动的方向具有什么特征？', 
+                    derivation: '<b>标准概念定义：</b><br>如果改变影响平衡的一个因素，平衡就向着<b>减弱/削弱</b>这种改变的方向移动。' 
+                }
+            ],
+            ans: '<b>参考答案：假设一个体系已达到平衡，如果改变影响平衡的因素，平衡将往削弱外来影响的方向进行。</b>'
+        },
+        {
+            num: 4, title: '丙) 必答题 - 第 4 题',
+            body: `已知生成 $1\\,\\text{mol}$ 液态醋酸 $(\\text{CH}_3\\text{COOH})$ 反应热为 $-483.5\\,\\text{kJ}$，写出其生成热的热化学方程式。`,
+            steps: [
+                { 
+                    title: '思考策略：标准生成热方程式书写规范', 
+                    think: '<strong>关键思考方向：</strong>生成热必须由“最稳定单质”生成 $1\\,\\text{mol}$ 目标化合物，且需注明物质状态。', 
+                    derivation: '<b>核心方程式：</b><br>$$2\\text{C}(s) + 2\\text{H}_2(g) + \\text{O}_2(g) \\rightarrow \\text{CH}_3\\text{COOH}(l) \\quad \\Delta H = -483.5\\,\\text{kJ/mol}$$' 
+                }
+            ],
+            ans: '<b>参考答案：2C(s) + 2H2(g) + O2(g) -> CH3COOH(l)  \\Delta H = -483.5 kJ/mol</b>'
+        },
+        {
+            num: 5, title: '丙) 必答题 - 第 5 题',
+            body: `请画出铵根离子 $(\\text{NH}_4^+)$ 的电子式。`,
+            steps: [
+                { 
+                    title: '思考策略：阳离子与配位键电子式画法', 
+                    think: '<strong>关键思考方向：</strong>氮原子提供孤电子对与氢离子（空轨道）形成配位键，整体带一个单位正电荷并用中括号括起。', 
+                    derivation: '<b>电子式结构：</b><br>$$\\left[ \\begin{matrix} & \\text{H} & \\\\ \\text{H} & :\\underset{\\underset{\\text{H}}{\\vert}}{\\text{N}}: & \\text{H} \\end{matrix} \\right]^+$$' 
+                }
+            ],
+            ans: '<b>参考答案：见电子式格式，包含中括号与右上角正电荷角标。</b>'
+        }
+    ],
+
+    '丁': [
+        {
+            num: 1, title: '丁) 选答题 - 第 1 题',
+            body: `(a) 密闭容器温度 $T_0$ 时各物质浓度图如图 $\\text{a}$；温度 $T_1, T_2$ 时 $\\text{Z}$ 浓度图如图 $\\text{b}$。<br>
+<img src="image/Screenshot 2026-08-10 204350.jpg" alt="选答题第1题浓度与温度曲线图" class="question-img"><br>
+(i) 写出可逆反应式。<br>
+(ii) 正反应为放热还是吸热反应？解释之。<br>
+(iii) 计算平衡时 $\\text{X}$ 的转化率。<br>
+(iv) 计算温度 $T_0$ 下的平衡常数 $K_c$。<br><br>
+(b) 反应机理：<br>
+① $\\text{AB} + \\text{C}_2 \\rightarrow \\text{ABC}_2$ （10分钟）<br>
+② $\\text{ABC}_2 + \\text{AB} \\rightarrow 2\\text{ABC}$ （2秒）<br>
+③ $2\\text{ABC} + 2\\text{AB} \\rightarrow 2\\text{A}_2\\text{C} + 2\\text{B}_2$ （1秒）<br>
+(a) 写出总反应。 (b) 写出速率方程式。 (c) 反应级数是多少？<br>
+(d) $[\\text{AB}]=[\\text{C}_2]=0.2\\,\\text{M}$，$\\text{B}_2$ 生成速率为 $4 \\times 10^{-4}\\,\\text{M/s}$，求 $k$ 及 $\\text{C}_2$ 消失速率。`,
+            steps: [
+                { 
+                    title: '思考策略 (a)：从图像转化量推方程式与平衡常数', 
+                    think: '<strong>关键思考方向：</strong>变化量比值决定化学系数。图 b 中先平者温度高，升温 Z 增加代表什么？', 
+                    derivation: '<b>解析：</b><br>(i) $\\Delta c(\\text{X}) : \\Delta c(\\text{Y}) : \\Delta c(\\text{Z}) = 0.25 : 0.25 : 0.50 = 1 : 1 : 2 \\implies \\text{X} + \\text{Y} \\rightleftharpoons 2\\text{Z}$<br>(ii) 吸热反应。$T_1$ 速率快（$T_1 > T_2$），且 $T_1$ 时 $\\text{Z}$ 浓度更大，即升温正移。<br>(iii) $\\alpha(\\text{X}) = \\frac{0.25\\,\\text{M}}{0.40\\,\\text{M}} \\times 100\\% = 62.5\\%$<br>(iv) $K_c = \\frac{[\\text{Z}]^2}{[\\text{X}][\\text{Y}]} = \\frac{0.5^2}{0.05 \\times 0.15} = 33.33$' 
+                },
+                { 
+                    title: '思考策略 (b)：反应机理与决速步判定', 
+                    think: '<strong>关键思考方向：</strong>多步反应中，哪一步决定了整体的反应速率（决速步）？', 
+                    derivation: '<b>解析：</b><br>(a) 三式相加消去中间产物：$$4\\text{AB} + \\text{C}_2 \\rightarrow 2\\text{A}_2\\text{C} + 2\\text{B}_2$$<br>(b) 第一步最慢（10分钟），为决速步：$$R = k[\\text{AB}][\\text{C}_2]$<br>(c) 反应级数：$1 + 1 = 2$ 级反应。<br>(d) $k = \\frac{4 \\times 10^{-4}\\,\\text{M}\\cdot\\text{s}^{-1}}{0.2\\,\\text{M} \\times 0.2\\,\\text{M}} = 0.01\\,\\text{M}^{-1}\\cdot\\text{s}^{-1}$（或 $\\text{L}\\cdot\\text{mol}^{-1}\\cdot\\text{s}^{-1}$）；$R(\\text{C}_2) = \\frac{1}{2} R(\\text{B}_2) = 2 \\times 10^{-4}\\,\\text{M}\\cdot\\text{s}^{-1}$' 
+                }
+            ],
+            ans: '<b>(a) 详解：</b><br>' +
+                 '<b>(i) 可逆反应式：</b>由图a浓度变化量 $\\Delta c(\\text{X}) = 0.25\\,\\text{M}$、$\\Delta c(\\text{Y}) = 0.25\\,\\text{M}$、$\\Delta c(\\text{Z}) = 0.50\\,\\text{M}$，其比值为 $1:1:2$，故方程式为：$$\\text{X} + \\text{Y} \\rightleftharpoons 2\\text{Z}$$<br>' +
+                 '<b>(ii) 反应热判断：</b>由图b可知 $T_1$ 时平衡时 $\\text{Z}$ 浓度较高，且 $T_1 > T_2$（先平者温度高）。升温使 $\\text{Z}$ 浓度增加即平衡正移，说明升温向吸热方向移动，故正反应为<b>吸热反应</b>。<br>' +
+                 '<b>(iii) $\\text{X}$ 的转化率计算：</b>$$\\alpha(\\text{X}) = \\frac{\\text{消耗量}}{\\text{初始量}} \\times 100\\% = \\frac{0.25\\,\\text{M}}{0.40\\,\\text{M}} \\times 100\\% = 62.5\\%$$<br>' +
+                 '<b>(iv) 平衡常数 $K_c$ 计算：</b>平衡时 $[\\text{X}] = 0.15\\,\\text{M}$，$[\\text{Y}] = 0.05\\,\\text{M}$，$[\\text{Z}] = 0.50\\,\\text{M}$。$$K_c = \\frac{[\\text{Z}]^2}{[\\text{X}][\\text{Y}]} = \\frac{0.5^2}{0.05 \\times 0.15} = 33.33$$<br><br>' +
+                 '<b>(b) 详解：</b><br>' +
+                 '<b>(a) 总反应：</b>三式相加消去中间产物：$$4\\text{AB} + \\text{C}_2 \\rightarrow 2\\text{A}_2\\text{C} + 2\\text{B}_2$$<br>' +
+                 '<b>(b) 速率方程式：</b>最慢的第一步（10分钟）为决速步，故：$$R = k[\\text{AB}][\\text{C}_2]$<br>' +
+                 '<b>(c) 反应级数：</b>反应物浓度指数之和 $1 + 1 = 2$，即为<b>2级反应</b>。<br>' +
+                 '<b>(d) $k$ 及 $\\text{C}_2$ 消失速率计算：</b><br>' +
+                 '由总反应计量数关系知 $R(\\text{C}_2) = \\frac{1}{2} R(\\text{B}_2) = \\frac{1}{2} \\times (4 \\times 10^{-4}\\,\\text{M}\\cdot\\text{s}^{-1}) = 2 \\times 10^{-4}\\,\\text{M}\\cdot\\text{s}^{-1}$。<br>' +
+                 '将 $[\\text{AB}] = 0.2\\,\\text{M}$、$[\\text{C}_2] = 0.2\\,\\text{M}$ 及 $R(\\text{B}_2) = 4 \\times 10^{-4}\\,\\text{M}\\cdot\\text{s}^{-1}$ 代入速率方程：$$4 \\times 10^{-4}\\,\\text{M}\\cdot\\text{s}^{-1} = k \\times 0.2\\,\\text{M} \\times 0.2\\,\\text{M} \\implies k = 0.01\\,\\text{M}^{-1}\\cdot\\text{s}^{-1} \\text{ (或 } 0.01\\,\\text{L}\\cdot\\text{mol}^{-1}\\cdot\\text{s}^{-1}\\text{)}$$'
+        },
+        {
+            num: 2, title: '丁) 选答题 - 第 2 题',
+            body: `(a) 乙炔完全燃烧 $\\text{C}_2\\text{H}_2$。键能：$\\text{C}\\equiv\\text{C}:837, \\text{C}-\\text{H}:414, \\text{O}=\\text{O}:498, \\text{C}=\\text{O}:736, \\text{O}-\\text{H}:464$.<br>
+(i) 结构式。 (ii) 燃烧方程式。 (iii) 计算燃烧热。<br><br>
+(b) $3\\text{P}(g) + \\text{Q}(g) \\rightleftharpoons x\\text{R}(g) + 2\\text{S}(g)$。<br>
+(i) 计算 $x$。 (ii) 计算 $K_c$。 (iii) $2\\,\\text{L}$ 容器中各物质反应方向预测。`,
+            steps: [
+                { 
+                    title: '思考策略 (a)：化学键键能算燃烧热', 
+                    think: '<strong>关键思考方向：</strong>注意方程式系数，精确统计旧键与新键的总数量。', 
+                    derivation: '<b>解析：</b><br>(i) $\\text{H}-\\text{C}\\equiv\\text{C}-\\text{H}$<br>(ii) $\\text{C}_2\\text{H}_2(g) + \\frac{5}{2}\\text{O}_2(g) \\rightarrow 2\\text{CO}_2(g) + \\text{H}_2\\text{O}(g)$<br>(iii) $\\Delta H = (414 \\times 2 + 837 + \\frac{5}{2} \\times 498) - (4 \\times 736 + 2 \\times 464) = -962\\,\\text{kJ/mol}$' 
+                },
+                { 
+                    title: '思考策略 (b)：浓度商 $Q_c$ 预测平衡移动', 
+                    think: '<strong>关键思考方向：</strong>求出 $K_c$ 后，将新容器中的各物质浓度代入 $Q_c$，比较 $Q_c$ 与 $K_c$ 大小。', 
+                    derivation: '<b>解析：</b><br>(i) $\\frac{n(\\text{R})}{n(\\text{S})} = \\frac{1.2\\,\\text{mol}}{0.8\\,\\text{mol}} \\implies \\frac{x}{2} = \\frac{1.2}{0.8} \\implies x = 3$<br>(ii) $K_c = \\frac{[\\text{R}]^3[\\text{S}]^2}{[\\text{P}]^3[\\text{Q}]} = \\frac{1.2^3 \\times 0.8^2}{0.8^3 \\times 1.6} = 1.35$<br>(iii) $Q_c = \\frac{(\\frac{0.4}{2})^3 (\\frac{0.9}{2})^2}{(\\frac{0.5}{2})^3 (\\frac{0.3}{2})} = 0.6912 < K_c$，反应正向移动。' 
+                }
+            ],
+            ans: '<b>(a) 详解：</b><br>' +
+                 '<b>(i) 结构式：</b>$\\text{H}-\\text{C}\\equiv\\text{C}-\\text{H}$<br>' +
+                 '<b>(ii) 燃烧方程式：</b>$$\\text{C}_2\\text{H}_2(g) + \\frac{5}{2}\\text{O}_2(g) \\rightarrow 2\\text{CO}_2(g) + \\text{H}_2\\text{O}(g)$$<br>' +
+                 '<b>(iii) 燃烧热计算：</b><br>' +
+                 '$$\\Delta H = \\sum E(\\text{断键}) - \\sum E(\\text{成键})$$<br>' +
+                 '$$\\Delta H = \\left[ 2 \\times E(\\text{C}-\\text{H}) + 1 \\times E(\\text{C}\\equiv\\text{C}) + \\frac{5}{2} \\times E(\\text{O}=\\text{O}) \\right] - \\left[ 4 \\times E(\\text{C}=\\text{O}) + 2 \\times E(\\text{O}-\\text{H}) \\right]$$<br>' +
+                 '$$\\Delta H = (414 \\times 2 + 837 + \\frac{5}{2} \\times 498) - (4 \\times 736 + 2 \\times 464) = 2910 - 3872 = -962\\,\\text{kJ/mol}$$<br><br>' +
+                 '<b>(b) 详解：</b><br>' +
+                 '<b>(i) 计算 $x$：</b>由各物质物质的量变化之比等于计量数之比：$$\\frac{n(\\text{R})}{n(\\text{S})} = \\frac{1.2\\,\\text{mol}}{0.8\\,\\text{mol}} \\implies \\frac{x}{2} = \\frac{1.2}{0.8} \\implies x = 3$$<br>' +
+                 '<b>(ii) 计算 $K_c$：</b>$$K_c = \\frac{[\\text{R}]^3[\\text{S}]^2}{[\\text{P}]^3[\\text{Q}]} = \\frac{1.2^3 \\times 0.8^2}{0.8^3 \\times 1.6} = 1.35$$<br>' +
+                 '<b>(iii) 反应方向预测：</b>在 $2\\,\\text{L}$ 容器中，各物质浓度折半，代入浓度商表达式：$$Q_c = \\frac{[\\text{R}]^3[\\text{S}]^2}{[\\text{P}]^3[\\text{Q}]} = \\frac{(\\frac{0.4}{2})^3 (\\frac{0.9}{2})^2}{(\\frac{0.5}{2})^3 (\\frac{0.3}{2})} = 0.6912$$由于 $Q_c < K_c$，体系未达平衡，反应将往<b>正反应方向</b>进行以达到平衡。'
+        },
+        {
+            num: 3, title: '丁) 选答题 - 第 3 题',
+            body: `(a) $\\text{Fe}_2\\text{O}_{3(s)} + 3\\text{CO}_{(g)} \\rightarrow 3\\text{CO}_{2(g)} + 2\\text{Fe}_{(s)}$ 反应热计算。<br>
+(b) $\\text{A} + 2\\text{B} \\rightarrow 3\\text{C} + \\text{D}$，$20^\\circ\\text{C}$ 时 $R_{\\text{B1}} = 0.02\\,\\text{M/s}$，求 $R_{\\text{C2}} = 0.09\\,\\text{M/s}$ 时的温度。<br>
+(c) 排列 $\\text{HF, HCl, HBr, HI}$ 稳定性与沸点。<br>
+(d) 为何电解氧化铝而非氯化铝制铝？`,
+            steps: [
+                { 
+                    title: '思考策略：综合推导（赫斯定律、速率与温度、晶体性质）', 
+                    think: '<strong>关键思考方向：</strong>(b) 先转换同一种物质在不同温度下的速率；(d) 比较离子晶体与共价晶体在熔融状态下的导电性。', 
+                    derivation: '<b>解析：</b><br>(a) $\\Delta H_4 = -\\Delta H_1 - 3\\Delta H_2 + 3\\Delta H_3 = 836 + 3(110.5) - 3(393.5) = -13\\,\\text{kJ}$<br>(b) $R_{\\text{B2}} = \\frac{2}{3} R_{\\text{C2}} = 0.06\\,\\text{M/s}$。$\\frac{0.06}{0.02} = 2^{\\frac{\\Delta T}{10}} \\implies \\Delta T = 15.85^\\circ\\text{C} \\implies T_2 = 35.85^\\circ\\text{C}$<br>(c) 稳定性: $\\text{HF}>\\text{HCl}>\\text{HBr}>\\text{HI}$；沸点: $\\text{HF}>\\text{HI}>\\text{HBr}>\\text{HCl}$。<br>(d) $\\text{AlCl}_3$ 为共价化合物熔融不导电，$\\text{Al}_2\\text{O}_3$ 为离子化合物熔融能导电。' 
+                }
+            ],
+            ans: '<b>(a) 详解：</b><br>' +
+                 '已知热化学方程式：<br>' +
+                 '① $2\\text{Fe}(s) + \\frac{3}{2}\\text{O}_2(g) \\rightarrow \\text{Fe}_2\\text{O}_3(s) \\quad \\Delta H_1 = -836\\,\\text{kJ/mol}$<br>' +
+                 '② $\\text{C}(s) + \\frac{1}{2}\\text{O}_2(g) \\rightarrow \\text{CO}(g) \\quad \\Delta H_2 = -110.5\\,\\text{kJ/mol}$<br>' +
+                 '③ $\\text{C}(s) + \\text{O}_2(g) \\rightarrow \\text{CO}_2(g) \\quad \\Delta H_3 = -393.5\\,\\text{kJ/mol}$<br>' +
+                 '根据盖斯定律，目标反应由 $(-①) - 3 \\times ② + 3 \\times ③$ 得到：<br>' +
+                 '$$\\Delta H_4 = -\\Delta H_1 - 3\\Delta H_2 + 3\\Delta H_3 = 836 + 3(110.5) - 3(393.5) = -13\\,\\text{kJ/mol} \\text{ (或总热量 } -13\\,\\text{kJ)}$$<br><br>' +
+                 '<b>(b) 详解：</b><br>' +
+                 '首先将 $20^\\circ\\text{C}$ 时 $B$ 的速率统一转换为用 $C$ 表示的同温速率：$$R_{\\text{B2}} = \\frac{2}{3} R_{\\text{C2}} = \\frac{2}{3} \\times 0.09\\,\\text{M/s} = 0.06\\,\\text{M/s}$$' +
+                 '速率由 $0.02\\,\\text{M/s}$ 增至 $0.06\\,\\text{M/s}$（增大 3 倍）。根据范特霍夫温度经验规则：<br>' +
+                 '$$\\frac{R_{\\text{B2}}}{R_{\\text{B1}}} = 2^{\\frac{\\Delta T}{10}} \\implies \\frac{0.06}{0.02} = 2^{\\frac{\\Delta T}{10}} \\implies 3 = 2^{\\frac{\\Delta T}{10}}$$<br>' +
+                 '两边取对数：$$\\log 3 = \\frac{\\Delta T}{10} \\log 2 \\implies \\Delta T = 10 \\times \\frac{\\log 3}{\\log 2} \\approx 15.85^\\circ\\text{C}$$' +
+                 '所求温度 $T_2 = 20^\\circ\\text{C} + 15.85^\\circ\\text{C} = 35.85^\\circ\\text{C}$。<br><br>' +
+                 '<b>(c) 详解：</b><br>' +
+                 '• <b>热稳定性：</b>随成键原子半径增大键长变长、键能减小，稳定性：$\\text{HF} > \\text{HCl} > \\text{HBr} > \\text{HI}$。<br>' +
+                 '• <b>沸点高低：</b>$\\text{HF}$ 分子间存在氢键，沸点最高；其余随相对分子质量增大范德华力增大，故沸点顺序为：$\\text{HF} > \\text{HI} > \\text{HBr} > \\text{HCl}$。<br><br>' +
+                 '<b>(d) 详解：</b><br>' +
+                 '$\\text{AlCl}_3$ 是共价化合物，熔融状态下分子不电离，不能导电，因此不能被电解；而 $\\text{Al}_2\\text{O}_3$ 是离子化合物，熔融状态下能解离出自由移动的离子，能够导电并被电解。'
+        }
+    ]
+};
+
+const sectionCounts = { '甲': 20, '乙': 10, '丙': 5, '丁': 3 };
+let currentSection = '甲';
+let currentNum = 1;
+let currentStepIndex = -1;
+
+window.onload = function() {
+    renderNumberButtons('甲');
+    loadQuestionData('甲', 1);
+};
+
+function switchSection(sec) {
+    currentSection = sec;
+    currentNum = 1;
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.includes(sec));
+    });
+    renderNumberButtons(sec);
+    loadQuestionData(sec, 1);
+}
+
+function renderNumberButtons(sec) {
+    const container = document.getElementById('numberButtons');
+    container.innerHTML = '';
+    const total = sectionCounts[sec];
+
+    for (let i = 1; i <= total; i++) {
+        const btn = document.createElement('button');
+        btn.className = `num-btn ${i === currentNum ? 'active' : ''}`;
+        btn.innerText = `第 ${i} 题`;
+        btn.onclick = () => {
+            document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            loadQuestionData(sec, i);
+        };
+        container.appendChild(btn);
+    }
+}
+
+function loadQuestionData(sec, num) {
+    currentNum = num;
+    currentStepIndex = -1;
+
+    const dataList = examDatabase[sec] || [];
+    const qData = dataList.find(item => item.num === num) || {
+        title: `${sec}) 第 ${num} 题`,
+        body: '数据整理中...',
+        steps: [],
+        ans: '暂无答案'
+    };
+
+    document.getElementById('qTitle').innerText = qData.title;
+    document.getElementById('qBadge').innerText = `${sec}) 部分`;
+    document.getElementById('qBody').innerHTML = qData.body;
+
+    const stepsWrapper = document.getElementById('stepsWrapper');
+    stepsWrapper.innerHTML = '';
+    
+    qData.steps.forEach((stepObj, idx) => {
+        const stepDiv = document.createElement('div');
+        stepDiv.className = 'step-container';
+        stepDiv.id = `step_${idx}`;
+        stepDiv.innerHTML = `
+            <div class="step-header">
+                <span class="step-tag">策略 ${idx + 1}</span>
+                <span class="step-title">${stepObj.title}</span>
+            </div>
+            <div class="thinking-box">${stepObj.think}</div>
+            <div class="derivation-box">${stepObj.derivation}</div>
+        `;
+        stepsWrapper.appendChild(stepDiv);
+    });
+
+    document.getElementById('ansContent').innerHTML = qData.ans;
+    document.getElementById('finalAns').classList.remove('active');
+
+    const nextBtn = document.getElementById('nextBtn');
+    nextBtn.disabled = false;
+    nextBtn.innerText = "💡 思考解题策略 / 关键知识点";
+
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function revealNextStep() {
+    const dataList = examDatabase[currentSection] || [];
+    const qData = dataList.find(item => item.num === currentNum);
+    if (!qData || qData.steps.length === 0) return;
+
+    const totalSteps = qData.steps.length;
+
+    if (currentStepIndex < totalSteps - 1) {
+        currentStepIndex++;
+        const currentStepEl = document.getElementById(`step_${currentStepIndex}`);
+        if (currentStepEl) currentStepEl.classList.add('active');
+
+        if (currentStepIndex === totalSteps - 1) {
+            document.getElementById('nextBtn').innerText = "💡 已展示全部思考策略";
+            document.getElementById('nextBtn').disabled = true;
+        }
+    }
+
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function toggleAnswer() {
+    const ansBox = document.getElementById('finalAns');
+    ansBox.classList.toggle('active');
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function resetCurrentCard() {
+    loadQuestionData(currentSection, currentNum);
+}
+
+// ==================== AI Chatbox 交互与真实 Gemini API 接入 ====================
+let selectedTextStore = "";
+
+// 1. 监听划词事件（Highlighting）
+document.addEventListener('mouseup', function(e) {
+    const tooltip = document.getElementById('selection-tooltip');
+    const selection = window.getSelection();
+    const text = selection.toString().trim();
+
+    // 如果是在对话框内部划词，则不弹出气泡
+    if (e.target.closest('#chatBox') || e.target.closest('.chat-widget-toggle')) {
+        return;
+    }
+
+    if (text.length > 0) {
+        selectedTextStore = text;
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        
+        // 动态计算气泡在屏幕上的位置（选中文本上方）
+        tooltip.style.left = `${rect.left + window.scrollX + (rect.width / 2) - 50}px`;
+        tooltip.style.top = `${rect.top + window.scrollY - 40}px`;
+        tooltip.style.display = 'block';
+    } else {
+        tooltip.style.display = 'none';
+    }
+});
+
+// 2. 点击“划词询问”气泡
+function askSelectedText() {
+    if (!selectedTextStore) return;
+    
+    // 展开 Chatbox
+    const chatBox = document.getElementById('chatBox');
+    chatBox.classList.add('active');
+    
+    // 隐藏提示气泡
+    document.getElementById('selection-tooltip').style.display = 'none';
+    
+    // 构建提问文本并提交
+    const prompt = `老师，请结合居銮高二化学课本知识点，帮我解释一下：“${selectedTextStore}”`;
+    appendMessage(prompt, 'user');
+    fetchAIResponse(prompt);
+}
+
+// 3. 展开 / 隐藏对话框
+function toggleChatBox() {
+    const chatBox = document.getElementById('chatBox');
+    chatBox.classList.toggle('active');
+}
+
+// 4. 用户手动输入并发送消息
+function sendMessage() {
+    const input = document.getElementById('userInput');
+    const text = input.value.trim();
+    if (!text) return;
+
+    appendMessage(text, 'user');
+    input.value = '';
+    fetchAIResponse(text);
+}
+
+// 在对话框中追加渲染消息
+function appendMessage(text, sender) {
+    const msgContainer = document.getElementById('chatMessages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `chat-msg ${sender}`;
+    msgDiv.innerHTML = text;
+    msgContainer.appendChild(msgDiv);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+    
+    // 如果生成了 LaTeX 公式，触发渲染
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([msgDiv]);
+    }
+}
+
+// 5. 真实调用 Google Gemini API（结合课本重点知识库）
+async function fetchAIResponse(userQuery) {
+    appendMessage("<i>AI 导师正在查阅高二化学课本中...</i>", 'ai');
+    const msgContainer = document.getElementById('chatMessages');
+    const loadingMsg = msgContainer.lastElementChild;
+
+    // API Key
+    const API_KEY = 'AQ.Ab8RN6K6lRWHvyrhJdBvrfEYpvOzg4IHiA5pR4L2S5zhjb13FQ'.trim(); 
+    
+    // 使用官方 Endpoint 模型别名
+    const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent';
+
+    // 1. 结构化课本核心知识库
+    const textbookKnowledgeBase = `
+【居銮中华中学 高二理科化学 核心课本知识库】
+1. 热化学与反应热（ΔH）：
+   - 放热反应：反应物总能量 > 生成物总能量，ΔH < 0，体系向外界释放热量（如强酸强碱中和、燃烧反应）。在隔热器中发生吸热反应，体系温度降低。
+   - 吸热反应：反应物总能量 < 生成物总能量，ΔH > 0，体系从外界吸收热量。
+   - 赫斯定律（黑斯定律）：一个化学反应不论是一步完成还是分几步完成，其总反应热效应（焓变 ΔH）是相同的，只与始态和终态有关，与反应途径无关。
+   - 中和热：稀溶液中强酸与强碱反应生成 1 mol H₂O 放出的热量（恒定约为 -57.3 kJ/mol）。弱酸/弱碱因电离吸热，反应热数值通常大于 -57.3 kJ/mol。
+   - 键能计算：ΔH = ∑(反应物断键吸收的总能量) - ∑(生成物成键释放的总能量)。
+
+2. 化学反应速率（第20章）：
+   - 影响因素：浓度、压强（仅限气体）、温度（范特霍夫规则：升温 10℃ 速率通常变为 2~4 倍）、催化剂。
+   - 催化剂：通过改变反应路径降低活化能（E_a），增加活化分子百分数，但**绝不改变**反应热（ΔH）与平衡状态。
+   - 决速步：多步反应中，最慢的一步决定了整体反应速率。
+
+3. 化学平衡（第21章与第22章）：
+   - 勒沙特列原理：若改变影响平衡的一个因素（浓度、压强、温度）,平衡将往削弱该影响的方向移动。
+   - 平衡常数（K_c, K_p）：仅受温度影响。升温使平衡向吸热方向移动。
+   - 图像判断：“先平者数值大”（先达到平衡的温度高或压强大）。
+`;
+
+    // 2. 系统角色与约束指令
+    const systemInstruction = `你是一位来自马来西亚居銮中华中学的理科化学教师。
+【核心答题规则】：
+1. 请**严格且优先**依据上述《居銮中华中学 高二理科化学 核心课本知识库》解答学生的问题。
+2. 解释化学概念时，必须使用课本中的专业学术术语。
+3. 遇到化学式、物理量或数学公式，必须使用标准的 LaTeX 格式（例如 $H_2O$, $\\Delta H$, $K_c$, $E_a$）。
+4. 保持语言严谨、鼓励性且通俗易懂。`;
+
+    // 3. 拼接 Prompt
+    const fullPrompt = `${systemInstruction}\n\n${textbookKnowledgeBase}\n\n学生提问：${userQuery}`;
+
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-goog-api-key': API_KEY
+            },
+            body: JSON.stringify({
+                contents: [
+                    {
+                        parts: [
+                            { text: fullPrompt }
+                        ]
+                    }
+                ]
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
+            let aiText = data.candidates[0].content.parts[0].text;
+            
+            // 格式化输出：加粗与换行
+            aiText = aiText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+            aiText = aiText.replace(/\n/g, '<br>');
+            
+            loadingMsg.innerHTML = aiText;
+        } else if (data.error) {
+            console.error("Gemini API Error:", data.error);
+            loadingMsg.innerHTML = `请求错误：${data.error.message || 'API 响应异常'}`;
+        } else {
+            loadingMsg.innerHTML = "不好意思，老师刚才走神了，能请你再问一次吗？";
+        }
+
+    } catch (error) {
+        console.error("Fetch Error:", error);
+        loadingMsg.innerHTML = "网络连接失败，请检查你的网络环境或 API Key 状态。";
+    }
+
+    // 触发 MathJax 渲染化学/数学公式
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([loadingMsg]);
+    }
+}
+</script>
+
+</body>
+</html>
