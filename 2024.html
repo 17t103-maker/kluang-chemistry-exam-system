@@ -1087,7 +1087,7 @@ $t_1$: _______ &nbsp;&nbsp;&nbsp; $t_3$: _______ &nbsp;&nbsp;&nbsp; $t_4$: _____
                  '<b>(b) 详解：</b><br>' +
                  '<b>(i) 计算 $x$：</b>由各物质物质的量变化之比等于计量数之比：$$\\frac{n(\\text{R})}{n(\\text{S})} = \\frac{1.2\\,\\text{mol}}{0.8\\,\\text{mol}} \\implies \\frac{x}{2} = \\frac{1.2}{0.8} \\implies x = 3$$<br>' +
                  '<b>(ii) 计算 $K_c$：</b>$$K_c = \\frac{[\\text{R}]^3[\\text{S}]^2}{[\\text{P}]^3[\\text{Q}]} = \\frac{1.2^3 \\times 0.8^2}{0.8^3 \\times 1.6} = 1.35$$<br>' +
-                 '<b>(iii) 反应方向预测：</b>在 $2\\,\\text{L}$ 容器中，各物质浓度折半，代入浓度商表达式：$$Q_c = \\frac{[\\text{R}]^3[\\text{S}]^2}{[\\text{P}]^3[\\text{Q}]} = \\frac{(\\frac{0.4}{2})^3 (\\frac{0.9}{2})^2}{(\\frac{0.5}{2})^3 (\\frac{0.3}{2})} = 0.6912$$由于 $Q_c < K_c$，体系未达平衡，反应将往<b>正反应方向</b>进行以达到平衡。'
+                 '<b>(iii) 反应方向预测：</b>在 $2\\,\\text{L}$ 容器中，各物质浓度折半，代入浓度商表达式：$$Q_c = \\frac{[\\text{R}]^3[\\text{S}]^2}{[\\text{P}]^3[\\text{Q}]} = \\frac{(\\text{0.4/2})^3 (\\text{0.9/2})^2}{(\\text{0.5/2})^3 (\\text{0.3/2})} = 0.6912$$由于 $Q_c < K_c$，体系未达平衡，反应将往<b>正反应方向</b>进行以达到平衡。'
         },
         {
             num: 3, title: '丁) 选答题 - 第 3 题',
@@ -1272,7 +1272,116 @@ document.addEventListener('mouseup', function(e) {
 });
 
 // 2. 点击“划词询问”气泡
-// ... (后续 chatbox 逻辑)
+function askSelectedText() {
+    if (!selectedTextStore) return;
+    
+    // 展开 Chatbox
+    const chatBox = document.getElementById('chatBox');
+    chatBox.classList.add('active');
+    
+    // 隐藏提示气泡
+    document.getElementById('selection-tooltip').style.display = 'none';
+    
+    // 构建提问文本并提交
+    const prompt = `老师，请结合居銮高二化学课本知识点，帮我解释一下：“${selectedTextStore}”`;
+    appendMessage(prompt, 'user');
+    fetchAIResponse(prompt);
+}
+
+// 3. 展开 / 隐藏对话框
+function toggleChatBox() {
+    const chatBox = document.getElementById('chatBox');
+    chatBox.classList.toggle('active');
+}
+
+// 4. 用户手动输入并发送消息
+function sendMessage() {
+    const input = document.getElementById('userInput');
+    const text = input.value.trim();
+    if (!text) return;
+
+    appendMessage(text, 'user');
+    input.value = '';
+    fetchAIResponse(text);
+}
+
+// 在对话框中追加渲染消息
+function appendMessage(text, sender) {
+    const msgContainer = document.getElementById('chatMessages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `chat-msg ${sender}`;
+    msgDiv.innerHTML = text;
+    msgContainer.appendChild(msgDiv);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+    
+    // 如果生成了 LaTeX 公式，触发渲染
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([msgDiv]);
+    }
+}
+
+// 5. 通过我们的安全后端代理调用 Gemini AI
+async function fetchAIResponse(userQuery) {
+    appendMessage("<i>AI 导师正在查阅高二化学课本中...</i>", 'ai');
+    const msgContainer = document.getElementById('chatMessages');
+    const loadingMsg = msgContainer.lastElementChild;
+
+    // 这是您刚刚部署好的 Vercel 后端网址
+    const PROXY_URL = 'https://gemini-proxy-nine-kappa.vercel.app/api/chat';
+
+    // 1. 结构化课本核心知识库
+    const textbookKnowledgeBase = `
+【居銮中华中学 高二理科化学 核心课本知识库】
+1. 热化学与反应热（ΔH）：
+   - 放热反应：反应物总能量 > 生成物总能量，ΔH < 0，体系向外界释放热量。
+   - 吸热反应：反应物总能量 < 生成物总能量，ΔH > 0，体系从外界吸收热量。
+   - 赫斯定律：一个化学反应不论是一步完成还是分几步完成，其总反应热效应（焓变 ΔH）是相同的。
+   - 中和热：稀溶液中强酸与强碱反应生成 1 mol H₂O 放出的热量（恒定约为 -57.3 kJ/mol）。
+
+2. 化学反应速率：
+   - 影响因素：浓度、压强、温度、催化剂。
+   - 催化剂：通过改变反应路径降低活化能（E_a），绝不改变反应热（ΔH）。
+
+3. 化学平衡：
+   - 勒沙特列原理：改变影响平衡的一个因素，平衡将往削弱该影响的方向移动。
+   - 平衡常数（K_c, K_p）：仅受温度影响。
+`;
+
+    const systemInstruction = `你是一位来自马来西亚居銮中华中学的理科化学教师。请结合上述知识库回答学生问题，专业术语准确，公式使用 LaTeX 格式。`;
+    const fullPrompt = `${systemInstruction}\n\n${textbookKnowledgeBase}\n\n学生提问：${userQuery}`;
+
+    try {
+        const response = await fetch(PROXY_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ prompt: fullPrompt })
+        });
+
+        const data = await response.json();
+
+        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
+            let aiText = data.candidates[0].content.parts[0].text;
+            aiText = aiText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+            aiText = aiText.replace(/\n/g, '<br>');
+            loadingMsg.innerHTML = aiText;
+        } else if (data.error) {
+            console.error("API Error:", data.error);
+            loadingMsg.innerHTML = `请求错误：${data.error.message || '后端响应异常'}`;
+        } else {
+            loadingMsg.innerHTML = "不好意思，老师刚才走神了，能请你再问一次吗？";
+        }
+
+    } catch (error) {
+        console.error("Fetch Error:", error);
+        loadingMsg.innerHTML = "网络连接失败，请检查网络。";
+    }
+
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([loadingMsg]);
+    }
+}
 </script>
 
 </body>
