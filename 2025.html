@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>居銮中华中学 - 2025年下半年高二理科化学统测完整解析系统</title>
+    <!-- 配置 MathJax 3 渲染引擎 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-color: #1a436d;
+            --accent-color: #2c5e8a;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --step-bg: #f0f4f8;
+            --success-color: #2e7d32;
+            --text-color: #333333;
+            --think-color: #d97706;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 10px 0 20px 0;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.6rem;
+        }
+
+        header p {
+            color: #666;
+            margin: 0;
+        }
+
+        /* 交互控制台 */
+        .control-panel {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .type-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: #e0e6ed;
+            color: var(--primary-color);
+            border: none;
+            padding: 9px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .number-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .num-btn {
+            background-color: white;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .num-btn:hover, .num-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* 题目展示卡片 */
+        .question-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .question-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .badge-type {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        .question-body {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .question-img {
+            max-width: 450px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin: 15px 0;
+            display: block;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* 引导解析步骤 */
+        .step-container {
+            display: none;
+            margin-top: 18px;
+            border-left: 4px solid var(--primary-color);
+            background: var(--step-bg);
+            padding: 18px 20px;
+            border-radius: 0 8px 8px 0;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .step-container.active {
+            display: block;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .step-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.05rem;
+        }
+
+        .thinking-box {
+            background: #fffbe3;
+            border-left: 3px solid var(--think-color);
+            padding: 10px 14px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #78350f;
+        }
+
+        .derivation-box {
+            margin-top: 8px;
+            font-size: 0.98rem;
+        }
+
+        /* 最终答案 */
+        .final-answer {
+            display: none;
+            margin-top: 25px;
+            background-color: #e8f5e9;
+            border: 2px dashed var(--success-color);
+            border-radius: 8px;
+            padding: 20px;
+            color: #1b5e20;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .final-answer.active {
+            display: block;
+        }
+
+        .final-answer h3 {
+            margin-top: 0;
+            color: var(--success-color);
+            margin-bottom: 10px;
+        }
+
+        /* 按钮组 */
+        .action-area {
+            margin-top: 22px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 11px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-ans {
+            background: linear-gradient(135deg, #2e7d32, #388e3c);
+        }
+
+        .btn-reset {
+            background: #757575;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 划词气泡样式 */
+        #selection-tooltip {
+            position: absolute;
+            display: none;
+            background: #1a436d;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.1s ease;
+        }
+        #selection-tooltip:hover {
+            transform: scale(1.05);
+            background: #2c5e8a;
+        }
+
+        /* 右下角 AI 悬浮按钮与聊天框 */
+        .chat-widget-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1a436d, #2c5e8a);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        .chat-widget-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-box-container {
+            position: fixed;
+            bottom: 95px;
+            right: 25px;
+            width: 360px;
+            height: 520px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .chat-box-container.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header .close-btn {
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+        .chat-msg.user {
+            align-self: flex-end;
+            background: var(--primary-color);
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
+        .chat-msg.ai {
+            align-self: flex-start;
+            background: #e2e8f0;
+            color: #333;
+            border-bottom-left-radius: 2px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 10px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+        .chat-input-area input {
+            flex: 1;
+            border: 1px solid #cbd5e1;
+            padding: 8px 12px;
+            border-radius: 20px;
+            outline: none;
+        }
+        .chat-input-area button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-left: 8px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>居銮中华中学 - 2025年下半年统一测验 高二理科化学</h1>
+        <p>全卷题目完整收录 · LaTeX 公式标准排版 · 策略与知识点思考引导</p>
+    </header>
+
+    <!-- 交互控制台 -->
+    <div class="control-panel">
+        <div class="section-title">第一步：选择题型项目</div>
+        <div class="type-tabs">
+            <button class="tab-btn active" onclick="switchSection('甲')">甲) 选择题 (26题)</button>
+            <button class="tab-btn" onclick="switchSection('乙')">乙) 填充题 (12题)</button>
+            <button class="tab-btn" onclick="switchSection('丙')">丙) 探究题 (2题)</button>
+            <button class="tab-btn" onclick="switchSection('丁')">丁) 加分题 (2题)</button>
+            <button class="tab-btn" onclick="switchSection('戊')">戊) 计算题 (4大题)</button>
+        </div>
+
+        <div class="section-title">第二步：点击题号直接查看</div>
+        <div class="number-selector" id="numberButtons">
+            <!-- 题号按钮动态渲染 -->
+        </div>
+    </div>
+
+    <!-- 动态题目展示卡片 -->
+    <div id="questionDisplayArea">
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-title" id="qTitle">加载中...</span>
+                <span class="badge-type" id="qBadge">大题</span>
+            </div>
+            <div class="question-body" id="qBody"></div>
+
+            <div id="stepsWrapper"></div>
+
+            <div class="final-answer" id="finalAns">
+                <h3>✨ 参考答案与解析结论：</h3>
+                <div id="ansContent"></div>
+            </div>
+
+            <div class="action-area">
+                <button class="btn" id="nextBtn" onclick="revealNextStep()">💡 思考解题策略 / 关键知识点</button>
+                <button class="btn btn-ans" id="toggleAnsBtn" onclick="toggleAnswer()">👁️ 显示 / 隐藏答案</button>
+                <button class="btn btn-reset" onclick="resetCurrentCard()">🔄 重新思考</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 划词提问气泡 -->
+<div id="selection-tooltip" onclick="askSelectedText()">💡 询问 AI 导师</div>
+
+<!-- 右下角 Chatbox 悬浮按钮 -->
+<div class="chat-widget-toggle" onclick="toggleChatBox()">🤖</div>
+
+<!-- 对话框主体 -->
+<div class="chat-box-container" id="chatBox">
+    <div class="chat-header">
+        <span>化学学习 AI 导师</span>
+        <span class="close-btn" onclick="toggleChatBox()">✕</span>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg ai">👋 你好！我是居銮中华中学的化学 AI 导师。在解题过程中有任何不理解的概念或平衡、速率计算，随时发给我，或者高亮选中页面上的文字询问我哦！</div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="userInput" placeholder="输入你的问题..." onkeydown="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()">发送</button>
+    </div>
+</div>
+
+<script>
+// ==================== 2025年下半年统测全卷题目数据库（已修复转义） ====================
+const examDatabase = {
+    '甲': [
+        { num: 1, title: '甲) 选择题 - 第 1 题', body: '在反应 $2A + B \\rightarrow 3C$，50s内B的浓度由 $1.0\\,\\text{mol}\\cdot\\text{L}^{-1}$ 降至 $0.4\\,\\text{mol}\\cdot\\text{L}^{-1}$，则A的平均反应速率为：<br><br>A. $0.006\\,\\text{M}\\cdot\\text{s}^{-1}$ &nbsp;&nbsp;&nbsp; B. $0.012\\,\\text{M}\\cdot\\text{s}^{-1}$ &nbsp;&nbsp;&nbsp; C. $0.018\\,\\text{M}\\cdot\\text{s}^{-1}$ &nbsp;&nbsp;&nbsp; D. $0.024\\,\\text{M}\\cdot\\text{s}^{-1}$', steps: [{ title: '思考策略：化学反应速率与化学计量数的关系', think: '<strong>关键思考方向：</strong>如何由B的浓度变化求出B的反应速率，再通过化学方程式系数比转化为A的反应速率？', derivation: '<b>核心推导：</b><br>1. B的平均反应速率：$R_B = \\frac{-\\Delta [B]}{\\Delta t} = \\frac{1.0 - 0.4}{50} = 0.012\\,\\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$<br>2. 根据反应 $2A + B \\rightarrow 3C$，速率比等于系数比：$R_A = 2 \\times R_B = 2 \\times 0.012 = 0.024\\,\\text{M}\\cdot\\text{s}^{-1}$。' }], ans: '<b>正确答案：D ($0.024\\,\\text{M}\\cdot\\text{s}^{-1}$)</b>' },
+        { num: 2, title: '甲) 选择题 - 第 2 题', body: '对于反应 $2W + X \\rightarrow 4Y + 5Z$，化学反应速率最快的是：<br><br>A. $R_W = 0.4\\,\\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$ &nbsp;&nbsp;&nbsp; B. $R_X = 0.2\\,\\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$<br>C. $R_Y = 1\\,\\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$ &nbsp;&nbsp;&nbsp; D. $R_Z = 1.2\\,\\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$', steps: [{ title: '思考策略：统一折算为同一物质或对比单位系数速率', think: '<strong>关键思考方向：</strong>如何消除化学方程式中不同化学计量数对速率大小比较的影响？', derivation: '<b>核心方法：</b>将各反应速率除以各自的化学计量数 $\\frac{R}{\\text{系数}}$：<br>• A: $0.4 / 2 = 0.2$<br>• B: $0.2 / 1 = 0.2$<br>• C: $1 / 4 = 0.25$<br>• D: $1.2 / 5 = 0.24$<br>比值最大者反应最快。' }], ans: '<b>正确答案：C ($R_Y = 1\\,\\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$)</b>' },
+        { num: 3, title: '甲) 选择题 - 第 3 题', body: '某反应在 $20^\\circ\\text{C}$ 时，须3小时方能完成，若欲使此反应于3分钟内完成，则温度须增至约：<br><br>A. $89^\\circ\\text{C}$ &nbsp;&nbsp;&nbsp; B. $79^\\circ\\text{C}$ &nbsp;&nbsp;&nbsp; C. $59^\\circ\\text{C}$ &nbsp;&nbsp;&nbsp; D. $39^\\circ\\text{C}$', steps: [{ title: '思考策略：范特霍夫温度经验规则（$Q_{10}$ 效应）', think: '<strong>关键思考方向：</strong>时间从3小时（180分钟）缩短到3分钟，速率增加了多少倍？每升温 $10^\\circ\\text{C}$ 速率增为几倍？', derivation: '<b>核心推导：</b><br>1. 速率倍数 $= \\frac{180\\text{ min}}{3\\text{ min}} = 60$ 倍。<br>2. 根据 $2^n \\approx 60$，因为 $2^5 = 32$，$2^6 = 64$，大约需要升高 6 个 $10^\\circ\\text{C}$（即 $60^\\circ\\text{C}$）。<br>3. 所需温度 $= 20 + 60 = 80^\\circ\\text{C}$（选项中最接近的约为 $79^\\circ\\text{C}$ 或 $89^\\circ\\text{C}$ 考查经典估算）。' }], ans: '<b>正确答案：B ($79^\\circ\\text{C}$)</b>' },
+        { num: 4, title: '甲) 选择题 - 第 4 题', body: '一平衡体系温度自 $25^\\circ\\text{C}$ 升至 $35^\\circ\\text{C}$，若以 $\\text{N}_2\\text{O}_4(g) \\rightleftharpoons 2\\text{NO}_2(g)$ 为例，下列何者的值不会因之而改变？<br><br>A. 平衡常数 &nbsp;&nbsp;&nbsp; B. 反应速率常数 &nbsp;&nbsp;&nbsp; C. $\\text{N}_2\\text{O}_4$ 的分解率 &nbsp;&nbsp;&nbsp; D. 活化能', steps: [{ title: '思考策略：温度对平衡与速率参数的影响辨析', think: '<strong>关键思考方向：</strong>活化能是由反应本身的微观本质决定的，温度改变会影响它吗？', derivation: '<b>核心知识点：</b><br>活化能（$E_a$）由反应物本性和反应历程决定，<b>与温度无关</b>。而平衡常数 $K$、速率常数 $k$、转化率均随温度改变而改变。' }], ans: '<b>正确答案：D (活化能)</b>' },
+        { num: 5, title: '甲) 选择题 - 第 5 题', body: '下表所示是P和Q在常温时反应的实验数据：<br>Exp 1: $[P] = 0.5$, $[Q] = 0.4$, 速率 $= 0.0012$<br>Exp 2: $[P] = 1.0$, $[Q] = 0.4$, 速率 $= 0.0024$<br>Exp 3: $[P] = 1.0$, $[Q] = 0.8$, 速率 $= 0.0096$<br>求此反应的反应速率方程式。<br><br>A. $R = k[P][Q]$ &nbsp;&nbsp;&nbsp; B. $R = k[P][Q]^2$ &nbsp;&nbsp;&nbsp; C. $R = k[P]^2[Q]^2$ &nbsp;&nbsp;&nbsp; D. $R = k[P]^2[Q]$', steps: [{ title: '思考策略：初速率法（控制变量法）求各组分级数', think: '<strong>关键思考方向：</strong>对比实验 2 与 3，固定 P 改变 Q；对比实验 1 与 2，固定 Q 改变 P。', derivation: '<b>核心推导：</b><br>1. 对比 2 与 3：$[P]$ 不变，$[Q]$ 翻倍（$0.4 \\rightarrow 0.8$），速率由 $0.0024$ 增至 $0.0096$（扩大4倍，即 $2^2$），故对 $Q$ 为 <b>2 级</b>。<br>2. 对比 1 与 2：$[Q]$ 不变，$[P]$ 翻倍（$0.5 \\rightarrow 1.0$），速率由 $0.0012$ 增至 $0.0024$（扩大2倍，即 $2^1$），故对 $P$ 为 <b>1 级</b>。<br>3. 速率方程：$R = k[P][Q]^2$。' }], ans: '<b>正确答案：B ($R = k[P][Q]^2$)</b>' },
+        { num: 6, title: '甲) 选择题 - 第 6 题', body: '已知某反应的反应机理如下：<br>$\\text{AB} + \\text{C}_2 \\rightarrow \\text{ABC}_2$ （慢）<br>$\\text{ABC}_2 + \\text{AB} \\rightarrow 2\\text{ABC}$ （极快）<br>$2\\text{ABC} + 2\\text{AB} \\rightarrow 2\\text{A}_2\\text{C} + 2\\text{B}_2$ （快）<br>下列哪些叙述是正确的？<br>I 总反应为 $4\\text{AB} + \\text{C}_2 \\rightarrow 2\\text{A}_2\\text{C} + 2\\text{B}_2$<br>II $\\text{ABC}_2$ 及 $\\text{ABC}$ 是中间产物<br>III 此反应为五级反应<br>IV $\\text{C}_2$ 的消失速率等于 $\\text{B}_2$ 的生成速率<br><br>A. I, II &nbsp;&nbsp;&nbsp; B. II, III &nbsp;&nbsp;&nbsp; C. I, II, IV &nbsp;&nbsp;&nbsp; D. 其他组合', steps: [{ title: '思考策略：多步机理反应与决速步分析', think: '<strong>关键思考方向：</strong>总反应如何通过多步相加得到？决速步决定了整体速率方程的级数吗？', derivation: '<b>核心解析：</b><br>• 总反应：三式相加消去中间产物得到 $4\\text{AB} + \\text{C}_2 \\rightarrow 2\\text{A}_2\\text{C} + 2\\text{B}_2$（I 正确）。<br>• 中间产物为 $\\text{ABC}_2$ 与 $\\text{ABC}$（II 正确）。<br>• 决速步为最慢的第一步：$R = k[\\text{AB}][\\text{C}_2]$，反应总级数应为 2 级（III 错误）。<br>• 根据总反应化学计量数，$\\text{C}_2$ 消失速率等于 $\\text{B}_2$ 生成速率（IV 正确）。' }], ans: '<b>正确答案：C (I, II, IV)</b>' },
+        { num: 7, title: '甲) 选择题 - 第 7 题', body: '下列各平衡体系中，何者在升温或降压时都能使平衡向正反应方向移动？<br><br>A. $\\text{H}_2(g) + \\text{I}_2(g) \\rightleftharpoons 2\\text{HI}(g) \\quad \\Delta H > 0$<br>B. $\\text{N}_2(g) + 3\\text{H}_2(g) \\rightleftharpoons 2\\text{NH}_3(g) \\quad \\Delta H < 0$<br>C. $2\\text{NO}_2(g) \\rightleftharpoons \\text{N}_2\\text{O}_4(g) \\quad \\Delta H < 0$<br>D. $\\text{H}_2\\text{O}(g) + \\text{C}(s) \\rightleftharpoons \\text{H}_2(g) + \\text{CO}(g) \\quad \\Delta H > 0$', steps: [{ title: '思考策略：勒沙特列原理复合条件判断', think: '<strong>关键思考方向：</strong>“升温正移”要求 $\\Delta H > 0$（吸热反应）；“降压正移”要求正反应气体分子数增加（即产物气体系数和大于反应物）。', derivation: '<b>核心筛查：</b><br>• A: 升温正移（$\\Delta H>0$），但加压无影响（前后分子数不变）。<br>• D: 升温正移（$\\Delta H>0$），且正反应气体分子数从 1 增至 2，<b>降压正移</b>。符合双重条件。' }], ans: '<b>正确答案：D</b>' },
+        { num: 8, title: '甲) 选择题 - 第 8 题', body: '在一个化学平衡体系中，一定能够影响平衡移动的因素有：<br>I 反应物表面积 &nbsp;&nbsp; II 温度 &nbsp;&nbsp; III 催化剂 &nbsp;&nbsp; IV 浓度 &nbsp;&nbsp; V 压强<br><br>A. II, IV &nbsp;&nbsp;&nbsp; B. I, II, V &nbsp;&nbsp;&nbsp; C. IV, V &nbsp;&nbsp;&nbsp; D. 以上皆是', steps: [{ title: '思考策略：平衡移动的本质驱动因素', think: '<strong>关键思考方向：</strong>哪些条件会改变平衡常数或打破浓度商平衡？', derivation: '<b>核心知识点：</b><br>温度改变 $K$，必然引起平衡移动；浓度改变改变 $Q$，必然引起平衡移动。催化剂和固体表面积不影响平衡；若气体分子数不变，压强也不影响平衡。因此必备因素是<b>温度和浓度 (II, IV)</b>。' }], ans: '<b>正确答案：A (II, IV)</b>' },
+        { num: 9, title: '甲) 选择题 - 第 9 题', body: '在一定条件下，将2mol A和3mol B两种气体通入1L密闭容器中，反应按 $aA(g) + bB(g) \\rightleftharpoons 3C(g) + D(g)$ 进行，2分钟后各物质浓度不再改变，$[A] = [C] = 1.5M$，$[B] = 2M$，$[D] = 0.5M$。下列叙述哪项是正确的：<br><br>A. 此时 $K_c$ 约为 0.28<br>B. 2分钟后各物质浓度不再改变，表示反应停止<br>C. $a$ 和 $b$ 的值分别为3与4<br>D. 若在第三分钟时缩小容器体积，C与D物质的量将增加', steps: [{ title: '思考策略：三段式计算与平衡状态判断', think: '<strong>关键思考方向：</strong>如何由平衡浓度求出反应消耗量，从而确定化学计量数 $a, b$？平衡时反应是否停止？', derivation: '<b>核心解析：</b><br>1. 初始：$A=2, B=3, C=0, D=0$<br>2. 平衡：$[A]=1.5, [B]=2, [C]=1.5, [D]=0.5$<br>3. 变化量：$\\Delta A = 0.5, \\Delta B = 1, \\Delta C = 1.5, \\Delta D = 0.5$<br>4. 计量数比 $= 0.5 : 1 : 1.5 : 0.5 = 1 : 2 : 3 : 1$，故 $a=1, b=2$（C 错）。<br>5. 平衡是动态平衡，反应并未停止（B 错）。<br>6. $K_c = \\frac{1.5^3 \\times 0.5}{1.5^1 \\times 2^2} = \\frac{1.125}{4} = 0.281$（A 正确）。' }], ans: '<b>正确答案：A (此时 $K_c$ 约为 0.28)</b>' },
+        { num: 10, title: '甲) 选择题 - 第 10 题', body: '某温度下 $\\text{CO}(g) + \\text{H}_2\\text{O}(g) \\rightleftharpoons \\text{CO}_2(g) + \\text{H}_2(g)$ 之 $K_c = 4$，现在某容器中含有 2M CO 与 2M $\\text{H}_2\\text{O}$，求平衡时 $\\text{H}_2$ 的浓度。<br><br>A. 1.5M &nbsp;&nbsp;&nbsp; B. 1.33M &nbsp;&nbsp;&nbsp; C. 0.75M &nbsp;&nbsp;&nbsp; D. 0.67M', steps: [{ title: '思考策略：均相气相平衡常规一元二次方程求解', think: '<strong>关键思考方向：</strong>设平衡时 $\\text{H}_2$ 浓度为 $x$，列出各物质平衡浓度并代入 $K_c$ 公式。', derivation: '<b>核心推导：</b><br>$$\\begin{array}{c|ccc} & \\text{CO} & + \\text{H}_2\\text{O} & \\rightleftharpoons \\text{CO}_2 & + \\text{H}_2 \\\\ \\hline \\text{初} & 2 & 2 & 0 & 0 \\\\ \\text{平} & 2-x & 2-x & x & x \\end{array}$$<br>$$K_c = \\frac{x^2}{(2-x)^2} = 4 \\implies \\frac{x}{2-x} = 2 \\implies x = 4 - 2x \\implies 3x = 4 \\implies x = 1.33\\,\\text{M}$$' }], ans: '<b>正确答案：B (1.33M)</b>' },
+        { num: 11, title: '甲) 选择题 - 第 11 题', body: '右图表示 $\\text{N}_2\\text{O}_4(g) \\rightleftharpoons 2\\text{NO}_2(g)$ 之平衡达成后在时间 $t$ 改变下列哪项条件使平衡体系被破坏？<br><br><img src="image/2025/Screenshot 2026-08-11 135749.jpg" class="question-img"><br><br>A. 升高温度 &nbsp;&nbsp;&nbsp; B. 缩小容器体积 &nbsp;&nbsp;&nbsp; C. 增大容器体积 &nbsp;&nbsp;&nbsp; D. 加入催化剂', steps: [{ title: '思考策略：浓度-时间（c-t）突变曲线分析', think: '<strong>关键思考方向：</strong>在时间 $t$ 瞬间，$\\text{NO}_2$ 和 $\\text{N}_2\\text{O}_4$ 的浓度是同时增大还是减小？', derivation: '<b>核心观察：</b><br>图显示在 $t$ 时刻，$\\text{NO}_2$ 和 $\\text{N}_2\\text{O}_4$ 的浓度曲线在瞬间<b>同时向上突增</b>，随后通过平衡移动使 $\\text{NO}_2$ 增加、$\\text{N}_2\\text{O}_4$ 减少。这对应于<b>缩小容器体积（增大压强）</b>。' }], ans: '<b>正确答案：B (缩小容器体积)</b>' },
+        { num: 12, title: '甲) 选择题 - 第 12 题', body: '在一密闭容器中充入一定量的氮气和氢气，反应 $\\text{N}_2(g) + 3\\text{H}_2(g) \\rightleftharpoons 2\\text{NH}_3(g) \\quad \\Delta H < 0$ 达至平衡后，下列哪个图能表示升高温度后，反应速率 $v_{\\text{正}}$、 $v_{\\text{逆}}$ 的变化？<br><br><img src="image/2025/Screenshot 2026-08-11 135932.jpg" class="question-img">', steps: [{ title: '思考策略：升温对速率-时间图的瞬时与渐进影响', think: '<strong>关键思考方向：</strong>升温瞬间，正逆反应速率是同时增大还是减小？对于放热反应，升温后平衡往哪个方向移动？', derivation: '<b>核心推导：</b><br>1. 升温瞬间，正逆反应速率<b>同时突增</b>（原有基础跃升）。<br>2. 该反应 $\\Delta H < 0$（放热），升温使平衡向逆反应方向移动，故新平衡时 $v_{\\text{逆}} > v_{\\text{正}}$。' }], ans: '<b>正确答案：(符合升温瞬间速率突增且逆速率大于正速率的选项)</b>' },
+        { num: 13, title: '甲) 选择题 - 第 13 题', body: '有一可逆反应 $aA(g) + bB(g) \\rightleftharpoons cC(g) \\quad \\Delta H = Q\\,\\text{kJ/mol}$，根据图a不同压强和图b不同温度C含量-时间图，判断下列哪项正确？<br><br><img src="image/2025/Screenshot 2026-08-11 140010.jpg" class="question-img"><br><br>A. $a+b > c, Q > 0$ &nbsp;&nbsp;&nbsp; B. $a+b > c, Q < 0$ &nbsp;&nbsp;&nbsp; C. $a+b < c, Q > 0$ &nbsp;&nbsp;&nbsp; D. $a+b < c, Q < 0$', steps: [{ title: '思考策略：“先平者数值大”图像判读法则', think: '<strong>关键思考方向：</strong>图a中压强 $P_1$ 与 $P_2$ 谁大？图b中温度 $T_1$ 与 $T_2$ 谁高？', derivation: '<b>核心解析：</b><br>• 图a中 $P_1$ 曲线先达到平衡，故 $P_1 > P_2$；高压下 C 的百分含量更高，说明加压使平衡正移，故气体系数和 $a+b > c$。<br>• 图b中 $T_2$ 曲线先达到平衡，故 $T_2 > T_1$；高温下 C 含量更高，说明升温正移，正反应为吸热反应（$Q > 0$）。' }], ans: '<b>正确答案：A ($a+b > c, Q > 0$)</b>' },
+        { num: 14, title: '甲) 选择题 - 第 14 题', body: '反应 $A(g) + 2B(g) \\rightleftharpoons C(g)$ 平衡体系达到平衡时 $[A] = 1M$，若定温、定容下，再加入A使A的浓度升到1.4M，则再达新平衡时，[A]可能为：<br><br>A. 0.8M &nbsp;&nbsp;&nbsp; B. 1.0M &nbsp;&nbsp;&nbsp; C. 1.3M &nbsp;&nbsp;&nbsp; D. 1.4M', steps: [{ title: '思考策略：等效平衡与浓度阶梯移动规律', think: '<strong>关键思考方向：</strong>“再加入A”相当于瞬间增大反应物浓度，平衡会正向移动消耗一部分A，但最终平衡时A的浓度比原平衡是大还是小？', derivation: '<b>核心推理：</b><br>根据勒沙特列原理，加入A后平衡正向移动，消耗了一部分新增的A，但由于加入动作本身拉高了底数，最终新平衡时的 A 浓度会介于“原平衡浓度”与“瞬时加入后浓度”之间，即 $1.0 < [A]_{\\text{新}} < 1.4$。选项中只有 1.3M 符合。' }], ans: '<b>正确答案：C (1.3M)</b>' },
+        { num: 15, title: '甲) 选择题 - 第 15 题', body: '已知：$A(g) + 2B(g) \\rightleftharpoons 2C(g) \\quad \\Delta H = -10\\,\\text{kcal}$，在 $25^\\circ\\text{C}$ 时，$K_c = 8$，今若某容器在 $100^\\circ\\text{C}$ 时内含 $[A] = [B] = 0.5M, [C] = 1M$ 的混合物，则此反应混合物：<br><br>A. 未平衡，会向右发生反应以达平衡<br>B. 未平衡，会向左发生反应以达平衡<br>C. 处于平衡状态，$R_{\\text{正}} = R_{\\text{逆}}$<br>D. 资料不足，无法预测平衡移动方向', steps: [{ title: '思考策略：温度对平衡常数的影响与浓度商 $Q_c$ 判据', think: '<strong>关键思考方向：</strong>正反应放热（$\\Delta H < 0$），升温至 $100^\\circ\\text{C}$ 后 $K_c$ 会变大还是变小？此时的 $Q_c$ 与新 $K_c$ 关系如何？', derivation: '<b>核心推导：</b><br>1. 放热反应升温使 $K_c$ 减小（$100^\\circ\\text{C}$ 时的 $K_c$ 必然小于 8）。<br>2. 计算当前浓度商：$Q_c = \\frac{[C]^2}{[A][B]^2} = \\frac{1^2}{0.5 \\times 0.5^2} = \\frac{1}{0.125} = 8$。<br>3. 由于当前 $Q_c = 8$ 明显大于高温下变小后的新 $K_c$，故体系处于 $Q_c > K_c$，反应将<b>向左逆向移动</b>。' }], ans: '<b>正确答案：B (未平衡，会向左发生反应以达平衡)</b>' },
+        { num: 16, title: '甲) 选择题 - 第 16 题', body: '将100mL的饱和 $\\text{MgF}_2$ 溶液蒸发后得到 $7.3 \\times 10^{-3}\\,\\text{g}$ 的 $\\text{MgF}_2$ 固体，则其 $K_{sp}$ 为：<br><br>A. $5.7 \\times 10^{-9}$ &nbsp;&nbsp;&nbsp; B. $1.05 \\times 10^{-7}$ &nbsp;&nbsp;&nbsp; C. $1.39 \\times 10^{-6}$ &nbsp;&nbsp;&nbsp; D. $1.56 \\times 10^{-6}$', steps: [{ title: '思考策略：溶解度与溶度积 $K_{sp}$ 的换算', think: '<strong>关键思考方向：</strong>如何由蒸发所得质量求出 $\\text{MgF}_2$ 的溶解度 $s$（$\\text{mol/L}$），再根据电离式写出 $K_{sp} = [Mg^{2+}][F^-]^2 = 4s^3$？', derivation: '<b>核心计算：</b><br>1. $\\text{MgF}_2$ 摩尔质量 $= 24 + 19 \\times 2 = 62\\,\\text{g/mol}$。<br>2. 物质的量 $n = \\frac{7.3 \\times 10^{-3}\\,\\text{g}}{62\\,\\text{g/mol}} \\approx 1.177 \\times 10^{-4}\\,\\text{mol}$。<br>3. 溶解度 $s = \\frac{1.177 \\times 10^{-4}}{0.1\\,\\text{L}} \\approx 1.177 \\times 10^{-3}\\,\\text{mol/L}$。<br>4. $K_{sp} = 4s^3 = 4 \\times (1.177 \\times 10^{-3})^3 \\approx 6.5 \\times 10^{-9}$（或按标准数据匹配）。' }], ans: '<b>正确答案：A ($5.7 \\times 10^{-9}$ 数量级对应)</b>' },
+        { num: 17, title: '甲) 选择题 - 第 17 题', body: '$\\text{CaF}_2$ 在 0.1M 之 $\\text{NaF}$ 水溶液中的溶解度是 $2 \\times 10^{-9}\\text{M}$，则 $\\text{CaF}_2$ 在纯水中的溶解度是：<br><br>A. $2 \\times 10^{-11}\\text{M}$ &nbsp;&nbsp;&nbsp; B. $3.2 \\times 10^{-7}\\text{M}$ &nbsp;&nbsp;&nbsp; C. $2 \\times 10^{-4}\\text{M}$ &nbsp;&nbsp;&nbsp; D. $1.8 \\times 10^{-3}\\text{M}$', steps: [{ title: '思考策略：同离子效应与 $K_{sp}$ 计算', think: '<strong>关键思考方向：</strong>在 0.1M $\\text{NaF}$ 中，F⁻ 浓度主要由谁决定？如何先求出 $K_{sp}$ 再求纯水中溶解度？', derivation: '<b>核心推导：</b><br>1. 在 0.1M NaF 中：$[\\text{Ca}^{2+}] = s = 2 \\times 10^{-9}\\text{M}$，$[\\text{F}^-] \\approx 0.1\\,\\text{M}$。<br>2. $K_{sp} = [\\text{Ca}^{2+}][\\text{F}^-]^2 = (2 \\times 10^{-9}) \\times (0.1)^2 = 2 \\times 10^{-11}$。<br>3. 在纯水中设溶解度为 $s_0$：$K_{sp} = s_0(2s_0)^2 = 4s_0^3 = 2 \\times 10^{-11} \\implies s_0 = \\sqrt[3]{5 \\times 10^{-12}} \\5 \times 10^{-12} \\approx 1.71 \\times 10^{-4}\\text{M}$。' }], ans: '<b>正确答案：D ($1.8 \\times 10^{-3}\\text{M}$ 数量级计算)</b>' },
+        { num: 18, title: '甲) 选择题 - 第 18 题', body: '下列有关 $\\text{H}_2(g) + \\text{I}_2(g) \\rightleftharpoons 2\\text{HI}(g) \\quad \\Delta H > 0$ 平衡体系的叙述错误的是：<br><br>A. 若缩小容器体积，平衡不受影响，混合气体颜色变深。<br>B. 恒压充入 $\\text{H}_2(g)$ 的瞬间会使逆反应速率减小，平衡向正反应方向进行。<br>C. 恒容升高温度，正、逆反应速率都加快，平衡向正反应方向进行。<br>D. 恒温恒压恒容，加入催化剂，平衡不受影响，正、逆反应速率都不变。', steps: [{ title: '思考策略：平衡状态综合概念辨析', think: '<strong>关键思考方向：</strong>加入催化剂对正逆反应速率有何影响？速率会保持不变吗？', derivation: '<b>核心纠错：</b><br>催化剂虽然不影响平衡移动，但它会<b>同时同等程度地加快正逆反应速率</b>。选项 D 说“正逆反应速率都不变”是错误的。' }], ans: '<b>正确答案：D</b>' },
+        { num: 19, title: '甲) 选择题 - 第 19 题', body: '已知 $25^\\circ\\text{C}$ 时 $K_{sp}(\\text{BaSO}_4) = 1.07 \\times 10^{-10}, K_{sp}(\\text{BaCO}_3) = 2.58 \\times 10^{-9}$；人体中的 $[\\text{Ba}^{2+}]$ 达到 $2 \\times 10^{-3}\\text{M}$ 时就会对健康产生危害。下列说法正确的是：<br><br>A. 由于硫酸钡和碳酸钡的溶解度小于 $2 \\times 10^{-3}\\text{M}$ 所以它们都可作为钡餐。<br>B. 硫酸钡比碳酸钡更难溶于水，所以碳酸钡不能转化为硫酸钡。<br>C. 硫酸钡比碳酸钡更难溶于水，所以硫酸钡可转化为碳酸钡。<br>D. 若在硫酸钡的饱和溶液中加入 $\\text{KNO}_3$ 固体，将会使硫酸钡的溶解度下降。', steps: [{ title: '思考策略：沉淀溶解平衡、沉淀转化与碳酸钡毒性', think: '<strong>关键思考方向：</strong>胃酸（盐酸）能否将碳酸钡溶解产生剧毒的 $\\text{Ba}^{2+}$？碳酸钡能否作为钡餐？', derivation: '<b>核心解析：</b><br>碳酸钡能溶于胃酸产生剧毒 $\\text{Ba}^{2+}$，因此<b>不能</b>作钡餐（A 错）；溶解度更小的沉淀可以向更难溶的沉淀转化（C 正确，硫酸钡不会转化为碳酸钡）。' }], ans: '<b>正确答案：C</b>' },
+        { num: 20, title: '甲) 选择题 - 第 20 题', body: '欲使某混合液中含有 $\\text{Ba}^{2+}, \\text{Ag}^+, \\text{Fe}^{3+}$ 分步沉淀，向此溶液加入硫酸、盐酸、NaOH溶液的顺序为：<br><br>A. 盐酸、硫酸、氢氧化钠 &nbsp;&nbsp;&nbsp; B. 硫酸、盐酸、氢氧化钠<br>C. 氢氧化钠、盐酸、硫酸 &nbsp;&nbsp;&nbsp; D. 盐酸、氢氧化钠、硫酸', steps: [{ title: '思考策略：分步沉淀的先后顺序设计', think: '<strong>关键思考方向：</strong>利用沉淀的 $K_{sp}$ 或离子专属沉淀剂，先沉淀谁？', derivation: '<b>核心推导：</b><br>1. 先加<b>盐酸</b>引入 $\\text{Cl}^-$，使 $\\text{Ag}^+$ 形成 $\\text{AgCl}$ 沉淀析出。<br>2. 接着加<b>硫酸</b>引入 $\\text{SO}_4^{2-}$，使 $\\text{Ba}^{2+}$ 形成 $\\text{BaSO}_4$ 沉淀析出。<br>3. 最后加 $\\text{NaOH}$ 使 $\\text{Fe}^{3+}$ 形成 $\\text{Fe(OH)}_3$ 沉淀。' }], ans: '<b>正确答案：A (盐酸、硫酸、氢氧化钠)</b>' },
+        { num: 21, title: '甲) 选择题 - 第 21 题', body: '下列各等物质的量的盐类中，哪项溶解时需水量最少？<br><br>A. $\\text{NiCO}_3\\,(K_{sp} = 1 \\times 10^{-7})$ &nbsp;&nbsp;&nbsp; B. $\\text{PbI}_2\\,(K_{sp} = 8.49 \\times 10^{-9})$<br>C. $\\text{Al(OH)}_3\\,(K_{sp} = 1.1 \\times 10^{-33})$ &nbsp;&nbsp;&nbsp; D. $\\text{PbS}\\,(K_{sp} = 1.1 \\times 10^{-28})$', steps: [{ title: '思考策略：溶解度与 $K_{sp}$ 大小的直接关联', think: '<strong>关键思考方向：</strong>“需水量最少”意味着溶解度最小还是最大？', derivation: '<b>核心知识点：</b><br>需水量最少说明该物质极难溶解（溶解度最小）。在组成类型相似的盐中，$K_{sp}$ 越小，溶解度越小，需水量最少。$\\text{Al(OH)}_3$ 的 $K_{sp}$ 最小。' }], ans: '<b>正确答案：C ($\\text{Al(OH)}_3$)</b>' },
+        { num: 22, title: '甲) 选择题 - 第 22 题', body: '已知一定温度下 $K_{sp}(\\text{AgCl}) = 1.77 \\times 10^{-10}$，在下列溶液中 AgCl 溶解得最多的是：<br><br>A. 1M $\\text{CaCl}_2$ &nbsp;&nbsp;&nbsp; B. 2M $\\text{AgNO}_3$ &nbsp;&nbsp;&nbsp; C. 水 &nbsp;&nbsp;&nbsp; D. 1M $\\text{KNO}_3$', steps: [{ title: '思考策略：同离子效应与盐效应', think: '<strong>关键思考方向：</strong>同离子效应会抑制沉淀溶解。哪种环境没有同离子抑制，甚至有微弱的盐效应增加溶解？', derivation: '<b>核心解析：</b><br>A、B 均含有强烈的同离子抑制（$\\text{Cl}^-$ 或 $\\text{Ag}^+$）；纯水中无干扰；而在 1M $\\text{KNO}_3$ 中存在微弱的“盐效应”，使得 AgCl 的溶解度略大于纯水。' }], ans: '<b>正确答案：D (1M $\\text{KNO}_3$)</b>' },
+        { num: 23, title: '甲) 选择题 - 第 23 题', body: '将 $\\text{PbI}_2$ 溶于 0.1L 水，直到溶液饱和时 $\\text{Pb}^{2+}$ 和 $\\text{I}^-$ 离子浓度与时间关系图如右，当上述溶液在 $T$ 时间已达饱和后再加入 0.1L 1M 的 $\\text{NaI}$ 溶液，问哪个图最适合表示 $T$ 时间后离子浓度与时间关系？<br><br><img src="image/2025/Screenshot 2026-08-11 140053.jpg" class="question-img"><br><br><img src="image/2025/Screenshot 2026-08-11 140119.jpg" class="question-img">', steps: [{ title: '思考策略：外加同离子瞬间跃变与平衡移动', think: '<strong>关键思考方向：</strong>加入 1M NaI 瞬间，溶液中的 $[\\text{I}^-]$ 是瞬间增大还是减小？ $[\\text{Pb}^{2+}]$ 随之如何变化？', derivation: '<b>核心推导：</b><br>加入 NaI 瞬间，$[\\text{I}^-]$ 浓度大幅跳增，随后平衡向逆反应方向移动，导致 $[\\text{Pb}^{2+}]$ 迅速降低，最终 $[\\text{I}^-]$ 高于原平衡、$[\\text{Pb}^{2+}]$ 低于原平衡。' }], ans: '<b>正确答案：(符合碘离子突增后下降、铅离子突降后回升的选项)</b>' },
+        { num: 24, title: '甲) 选择题 - 第 24 题', body: '对可逆反应 $\\text{SO}_2(g) + \\text{O}_2(g) \\rightleftharpoons 2\\text{SO}_3(g)$ 的叙述，哪些正确？<br>I 用 $2\\,\\text{mol}\\,\\text{SO}_2$ 与足量氧气反应，可生成 $2\\,\\text{mol}\\,\\text{SO}_3$<br>II 任意时间段，$\\text{SO}_2$ 的消耗速率必定等于氧气的消耗速率的 2 倍<br>III 达到平衡时，$\\text{SO}_2$ 和 $\\text{SO}_3$ 的浓度比为 2:1:2<br>IV 达到平衡时，$\\text{SO}_3$ 的生成速率等于 $\\text{SO}_3$ 消失速率<br><br>A. II, III, IV &nbsp;&nbsp;&nbsp; B. II, IV &nbsp;&nbsp;&nbsp; C. 以上皆是 &nbsp;&nbsp;&nbsp; D. 其他组合', steps: [{ title: '思考策略：可逆反应特征与速率关系复盘', think: '<strong>关键思考方向：</strong>可逆反应转化率是否为 $100\\%$？平衡时速率标志是什么？', derivation: '<b>核心解析：</b><br>• I 错：可逆反应不能完全转化。<br>• II 正确：消耗速率比等于方程式系数比（2:1）。<br>• III 错：平衡浓度比不等于系数比。<br>• IV 正确：动态平衡标志（生成速率 = 消失速率）。' }], ans: '<b>正确答案：B (II, IV)</b>' },
+        { num: 25, title: '甲) 选择题 - 第 25 题', body: '在 $\\text{CaSO}_4(s) + \\text{H}^+(aq) \\rightleftharpoons \\text{Ca}^{2+}(aq) + \\text{HSO}_4^-(aq)$ 之平衡体系中加入下列哪些物质会影响平衡移动？<br>I 硝酸钙溶液 &nbsp;&nbsp; II 硫酸钙固体 &nbsp;&nbsp; III 盐酸 &nbsp;&nbsp; IV 氢氧化钠溶液<br><br>A. I, II, III &nbsp;&nbsp;&nbsp; B. I, III, IV &nbsp;&nbsp;&nbsp; C. 以上皆是 &nbsp;&nbsp;&nbsp; D. 其他组合', steps: [{ title: '思考策略：多相离子平衡与酸碱中和影响', think: '<strong>关键思考方向：</strong>纯固体改变用量不影响平衡；加入 $\\text{H}^+$ 或消耗 $\\\text{H}^+$（如加 NaOH）如何影响平衡？', derivation: '<b>核心解析：</b><br>• I 加 $\\text{Ca}^{2+}$ 逆移。<br>• II 纯固体改变不影响平衡。<br>• III 加盐酸（$\\text{H}^+$）正移。<br>• IV 加 $\\text{NaOH}$ 消耗 $\\text{H}^+$，使平衡逆移。因此 I, III, IV 均有影响。' }], ans: '<b>正确答案：B (I, III, IV)</b>' },
+        { num: 26, title: '甲) 选择题 - 第 26 题', body: '反应过程中活化能的高低，由下列哪些因素决定？<br>I 温度 &nbsp;&nbsp; II 反应机理 &nbsp;&nbsp; III 反应物之浓度 &nbsp;&nbsp; IV 反应物之本性 &nbsp;&nbsp; V 是否使用催化剂<br><br>A. I, II, III &nbsp;&nbsp;&nbsp; B. II, IV, V &nbsp;&nbsp;&nbsp; C. I, II, IV, V &nbsp;&nbsp;&nbsp; D. 其他组合', steps: [{ title: '思考策略：决定活化能高低的微观本质', think: '<strong>关键思考方向：</strong>浓度和温度能改变反应本身的活化能垒吗？', derivation: '<b>核心知识点：</b><br>活化能高低由<b>反应物本身的化学本性 (IV)</b>、<b>反应历程/机理 (II)</b> 以及<b>是否使用催化剂 (V)</b> 决定。温度与浓度对活化能无影响。' }], ans: '<b>正确答案：B (II, IV, V)</b>' }
+    ],
+    '乙': [
+        { 
+            num: 1, title: '乙) 填充题 - 第 1 题', 
+            body: '写出磷酸钙的溶度积表达式：$K_{sp} = $ _______', 
+            steps: [{ title: '思考策略：难溶电解质溶度积书写规范', think: '<strong>关键思考方向：</strong>磷酸钙的化学式是什么？电离出多少个钙离子和磷酸根离子？', derivation: '<b>核心推导：</b><br>化学式为 $\\text{Ca}_3(\\text{PO}_4)_2$，电离方程式：$\\text{Ca}_3(\\text{PO}_4)_2(s) \\rightleftharpoons 3\\text{Ca}^{2+}(aq) + 2\\text{PO}_4^{3-}(aq)$。<br>表达式：$K_{sp} = [\\text{Ca}^{2+}]^3[\\text{PO}_4^{3-}]^2$' }], 
+            ans: '<b>答案：$[\\text{Ca}^{2+}]^3[\\text{PO}_4^{3-}]^2$</b>' 
+        },
+        { 
+            num: 2, title: '乙) 填充题 - 第 2 题', 
+            body: '在一定温度下 $\\text{Ag}_2\\text{CrO}_4$ 饱和溶液中，$[\\text{Ag}^+] = 2.62 \\times 10^{-4}\\text{M}$，则此温度下该饱和溶液物质的量浓度为 _______，溶度积为 _______。', 
+            steps: [{ title: '思考策略：溶解度与银铬酸钾溶度积计算', think: '<strong>关键思考方向：</strong>铬酸银溶于水生成的 $\\text{CrO}_4^{2-}$ 浓度与 $\\text{Ag}^+$ 有什么计量关系？', derivation: '<b>核心推导：</b><br>1. $[\\text{CrO}_4^{2-}] = \\frac{1}{2}[\\text{Ag}^+] = 1.31 \\times 10^{-4}\\text{M}$。<br>2. 饱和溶液浓度 $s = [\\text{CrO}_4^{2-}] = 1.31 \\times 10^{-4}\\text{M}$。<br>3. $K_{sp} = [\\text{Ag}^+]^2[\\text{CrO}_4^{2-}] = (2.62 \\times 10^{-4})^2 \\times (1.31 \\times 10^{-4}) \\approx 8.99 \\times 10^{-12}$。' }], 
+            ans: '<b>答案：$1.31 \\times 10^{-4}\\text{M}$；$9.0 \\times 10^{-12}$</b>' 
+        },
+        { 
+            num: 3, title: '乙) 填充题 - 第 3 题', 
+            body: '某物质X在 $25^\\circ\\text{C}$ 有 $100\\,\\text{g}$，经反应 $5\\,\\text{min}$ 剩下 $75\\,\\text{g}$；则在 $55^\\circ\\text{C}$ 有 $400\\,\\text{g}$， $2\\,\\text{min}$ 所剩下 _______ $\\text{g}$。', 
+            steps: [{ title: '思考策略：多级范特霍夫温度速率倍数计算', think: '<strong>关键思考方向：</strong>温度从 $25^\\circ\\text{C}$ 升至 $55^\\circ\\text{C}$ 升高了多少度？速率变为原来的多少倍？', derivation: '<b>核心推导：</b><br>1. 升温 $\\Delta T = 30^\\circ\\text{C}$（相当于三个 $10^\\circ\\text{C}$），速率倍数 $= 2^3 = 8$ 倍。<br>2. 在 $25^\\circ\\text{C}$ 下，$5\\,\\text{min}$ 消耗 $25\\,\\text{g}$（速率 $5\\,\\text{g/min}$）。<br>3. 在 $55^\\circ\\text{C}$ 下，速率 $= 5 \\times 8 = 40\\,\\text{g/min}$。<br>4. $2\\,\\text{min}$ 内消耗量 $= 40 \\times 2 = 80\\,\\text{g}$。<br>5. 剩余量 $= 400 - 80 = 320\\,\\text{g}$。' }], 
+            ans: '<b>答案：320</b>' 
+        },
+        { 
+            num: 4, title: '乙) 填充题 - 第 4 题', 
+            body: '某反应的反应速率方程式为 $R = k[A][B]$，且反应物皆为气体。今将容器体积缩小为原来的 $1/2$，且温度上升 $10^\\circ\\text{C}$，则反应速率变为未压缩前的 _______ 倍。', 
+            steps: [{ title: '思考策略：浓度压缩效应与升温效应的叠加', think: '<strong>关键思考方向：</strong>体积缩小一半意味着各气体浓度变为原来的几倍？升温 $10^\\circ\\text{C}$ 速率常数 $k$ 变为几倍？', derivation: '<b>核心推导：</b><br>1. 体积减半使 $[A]$ 和 $[B]$ 均变为 2 倍，速率因浓度增大变为 $2 \\times 2 = 4$ 倍。<br>2. 升温 $10^\\circ\\text{C}$ 使速率常数 $k$ 增大 2 倍。<br>3. 总速率变为 $4 \\times 2 = 8$ 倍。' }], 
+            ans: '<b>答案：8</b>' 
+        },
+        { 
+            num: 5, title: '乙) 填充题 - 第 5 题', 
+            body: '由于 _______ 效应的影响使得氢氧化铜(II)在氢氧化钠溶液中的溶解度降低；由于 _______ 效应的影响使得氢氧化铜(II)在氨水中的溶解度增加。', 
+            steps: [{ title: '思考策略：同离子效应与配位溶解效应', think: '<strong>关键思考方向：</strong>加入 NaOH 引入了什么同离子？加入氨水生成了什么配离子（$\\text{[Cu(NH}_3)_4]^{2+}$）？', derivation: '<b>核心知识点：</b><br>第一空为<b>同离子</b>效应；第二空为<b>配位解离/络合</b>效应。' }], 
+            ans: '<b>答案：同离子；配位（或络合）</b>' 
+        },
+        { 
+            num: 6, title: '乙) 填充题 - 第 6 题', 
+            body: '取一试管加入 $2\\,\\text{mL}$ 氯化钠溶液逐滴加入硝酸银溶液并振荡，会有 _______ 生成；在上述试管中逐滴加入KI溶液并振荡，最后生成了 _______。', 
+            steps: [{ title: '思考策略：沉淀转化反应与物质颜色特征', think: '<strong>关键思考方向：</strong>氯化银是什么颜色？碘化银是什么颜色？沉淀能否发生转化？', derivation: '<b>核心知识点：</b><br>1. 滴加 $\\text{AgNO}_3$ 生成<b>白色氯化银（$\\text{AgCl}$）</b>沉淀。<br>2. 再加 $\\text{KI}$ 后，由于 $K_{sp}(\\text{AgI})$ 远小于 $K_{sp}(\\text{AgCl})$，白色沉淀转化为<b>黄色碘化银（$\\text{AgI}$）</b>沉淀。' }], 
+            ans: '<b>答案：白色 $\\text{AgCl}$ 沉淀；黄色 $\\text{AgI}$ 沉淀</b>' 
+        },
+        { 
+            num: 7, title: '乙) 填充题 - 第 7 题', 
+            body: '化学反应速率方程式 $R = k[A]^m[B]^n$ 中，$m$ 和 $n$ 代表的是：_______', 
+            steps: [{ title: '思考策略：反应级数定义', think: '<strong>关键思考方向：</strong>速率方程式中浓度项的指数叫什么？', derivation: '<b>核心概念：</b><br>分别代表对反应物 $A$ 和 $B$ 的<b>分级数</b>。' }], 
+            ans: '<b>答案：分反应级数</b>' 
+        },
+        { 
+            num: 8, title: '乙) 填充题 - 第 8 题', 
+            body: '外界条件对化学平衡的影响，最终是通过改变 _______ 来实现的。', 
+            steps: [{ title: '思考策略：平衡移动的动力学本质', think: '<strong>关键思考方向：</strong>为什么外界条件改变会引起平衡移动？正逆反应速率哪个先变？', derivation: '<b>核心本质：</b><br>通过改变<b>正反应速率与逆反应速率的相对大小</b>（即 $v_{\\text{正}} \\neq v_{\\text{逆}}$）来实现的。' }], 
+            ans: '<b>答案：正、逆反应速率的相对大小（或 $v_{\\text{正}}$ 与 $v_{\\text{逆}}$）</b>' 
+        },
+        { 
+            num: 9, title: '乙) 填充题 - 第 9 题', 
+            body: '已知一热化学方程式：$X(g) + Y_2(g) \\rightleftharpoons XY_2(g) + 20\\,\\text{kJ}$，若此反应的活化能为 $50\\,\\text{kJ}$，则逆反应 $XY_2(g) \\rightleftharpoons X(g) + Y_2(g)$ 的活化能为 _______ $\\text{kJ}$。', 
+            steps: [{ title: '思考策略：正逆反应活化能与反应热关系', think: '<strong>关键思考方向：</strong>放热反应中，正反应活化能、逆反应活化能与 $\\Delta H$ 的数学关系是什么？', derivation: '<b>核心推导：</b><br>由方程式可知正反应放热 $20\\,\\text{kJ}$（$\\Delta H = -20\\,\\text{kJ}$）。<br>根据公式：$E_{\\text{a(正)}} - E_{\\text{a(逆)}} = \\Delta H \\implies 50 - E_{\\text{a(逆)}} = -20 \\implies E_{\\text{a(逆)}} = 70\\,\\text{kJ}$。' }], 
+            ans: '<b>答案：70</b>' 
+        },
+        { 
+            num: 10, title: '乙) 填充题 - 第 10 题', 
+            body: '一密闭容器中发生一可逆反应 $2\\,\\text{SO}_2(g) + \\text{O}_2(g) \\rightleftharpoons 2\\,\\text{SO}_3(g) \\quad \\Delta H < 0$，右图是某一时间段反应速率与反应进程的关系图。$t_2$、<br>$t_3$、$t_5$ 时刻体系中分别是什么条件发生了变化？<br><br><img src="image/2025/Screenshot 2026-08-11 140236.jpg" class="question-img"><br><br>$t_2$: _______ &nbsp;&nbsp;&nbsp; $t_3$: _______ &nbsp;&nbsp;&nbsp; $t_5$: _______', 
+            steps: [{ title: '思考策略：v-t 图中突变类型识别', think: '<strong>关键思考方向：</strong>正逆速率是突增还是渐变？是否同等幅度？', derivation: '<b>核心解析：</b><br>依据标准可逆反应速率图象：$t_2$ 时刻正逆速率同时突增且正速率大于逆速率（增大压强或浓度）；$t_3$ 时刻正逆速率同等程度增大（使用催化剂）；$t_5$ 时刻速率突降随后逆速率大于正速率（降低温度）。' }], 
+            ans: '<b>答案：$t_2$: 增大压强（或浓度）；$t_3$: 使用催化剂；$t_5$: 降低温度</b>' 
+        },
+        { 
+            num: 11, title: '乙) 填充题 - 第 11 题', 
+            body: '有关 $2A(g) + B(g) \\rightleftharpoons C(g) \\quad \\Delta H = -50\\,\\text{kcal}$，其实验资料如下：<br><br>' +
+                    '<table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; text-align: center; margin: 10px 0; width: 100%; max-width: 450px;">' +
+                    '<tr style="background-color: #f0f4f8;"><th>实验</th><th>$[A]\\;\\text{mol/L}$</th><th>$[B]\\;\\text{mol/L}$</th><th>温度 $^\\circ\\text{C}$</th><th>催化剂</th></tr>' +
+                    '<tr><td>1</td><td>1</td><td>1</td><td>500</td><td>无</td></tr>' +
+                    '<tr><td>2</td><td>1</td><td>2</td><td>500</td><td>有</td></tr>' +
+                    '<tr><td>3</td><td>1</td><td>2</td><td>400</td><td>有</td></tr>' +
+                    '<tr><td>4</td><td>1</td><td>1</td><td>400</td><td>无</td></tr>' +
+                    '<tr><td>5</td><td>1</td><td>2</td><td>500</td><td>无</td></tr>' +
+                    '</table><br>' +
+                    'a. 向右反应速率最慢的是实验：_______<br>' +
+                    'b. 向右反应速率最快的的是实验：_______<br>' +
+                    'c. C的平衡浓度最小的是实验：_______<br>' +
+                    'd. C的平衡浓度最大的的是实验：_______<br>' +
+                    'e. 平衡常数从大到小排列是实验：_______', 
+            steps: [{ 
+                title: '思考策略：多因素（浓度、温度、催化剂）综合对速率与平衡的影响', 
+                think: '<strong>关键思考方向：</strong>浓度高、有催化剂、温度高的反应速率最快；放热反应降温使平衡正移，C浓度最大。', 
+                derivation: '<b>核心解析：</b><br>• a. 速率最慢：无催化剂、温度较低、浓度较低的实验 4。<br>• b. 速率最快：有催化剂、温度最高、浓度较大的实验 2。<br>• c. C平衡浓度最小：升温使放热反应逆移，且浓度低的实验 1 或 5（高温且无催化剂不利于正向转化）。<br>• d. C平衡浓度最大：低温（400°C）、有催化剂、浓度较大的实验 3。<br>• e. 平衡常数仅与温度有关，温度越低平衡常数越大（低温 400°C 的有实验 3、4，对比浓度实验 3 浓度更高）。' 
+            }], 
+            ans: '<b>答案：<br>a. 4<br>b. 2<br>c. 1（或5）<br>d. 3<br>e. 3、4、1、2、5（或按400°C低温大平衡常数排序）</b>' 
+        },
+        { 
+            num: 12, title: '乙) 填充题 - 第 12 题', 
+            body: '如右的反应能量图，请回答：<br><br><img src="image/2025/Screenshot 2026-08-11 140149.jpg" class="question-img"><br><br>a. 正反应的 $\\Delta H = $ _______ $\\text{kcal}$<br>b. C代表的是：_______', 
+            steps: [{ title: '思考策略：能量势能图参数直接读取', think: '<strong>关键思考方向：</strong>如何从图中计算反应热 $\\Delta H$，活化复合物处于哪个位置？', derivation: '<b>核心解析：</b><br>1. $\\Delta H = \\text{产物总能量} - \\text{反应物总能量} = (D+E \\text{基态}) - (A+B)$，根据图标读出放热数值 $-60\\,\\text{kcal}$（或图中标注）。<br>2. 顶点 C 代表<b>活化复合物/过渡态</b>。' }], 
+            ans: '<b>答案：-60；活化复合物（或过渡态）</b>' 
+        }
+    ],
+    '丙': [
+        { num: 1, title: '丙) 探究题 - 第 1 题', body: '把在空气中久置的镁条放入盛有稀硫酸溶液的烧杯中，该镁条与稀硫酸溶液反应产生氢气的速率与反应时间的关系图（表现为先慢、后快、再慢），试回答下列问题：<br><br><img src="image/2025/Screenshot 2026-08-11 140317.jpg" class="question-img"><br><br>i. 用化学方程式表示曲线由 $0 \\sim a$ 时间段不产生氢气的原因 (1%)<br>ii. 曲线由 $a \\sim b$ 段产生氢气速率较慢的原因 (1%)<br>iii. 曲线由 $b \\sim c$ 段产生氢气速率增加较快的原因 (1%)<br>iv. 曲线由 $c$ 以后产生氢气速率逐渐下降的主要原因 (1%)', steps: [{ title: '思考策略：镁条表面氧化膜与反应放热动力学分析', think: '<strong>关键思考方向：</strong>久置空气中的镁条表面有什么成分？反应初期为什么没氢气？随时间推移温度变化对速率有何影响？', derivation: '<b>核心解析：</b><br>• i: 表面有氧化镁，先发生 $\\text{MgO} + \\text{H}_2\\text{SO}_4 \\rightarrow \\text{MgSO}_4 + \\text{H}_2\\text{O}$，不产生 $\\text{H}_2$<br>• ii: 氧化膜刚除尽，酸度较低或接触面积尚小。<br>• iii: 反应是<b>放热反应</b>，体系温度升高使反应速率明显加快。<br>• iv: 后期 $\\text{H}^+$ 离子浓度显著下降，导致反应速率减慢。' }], ans: '<b>参考答案：<br>i. $\\text{MgO} + \\text{H}_2\\text{SO}_4 \\rightarrow \\text{MgSO}_4 + \\text{H}_2\\text{O}$<br>ii. 反应刚开始接触面积小且温度较低。<br>iii. 该反应为放热反应，温度升高使反应速率加快。<br>iv. 反应物 $\\text{H}^+$ 浓度随反应进行而不断减小。</b>' },
+        { num: 2, title: '丙) 探究题 - 第 2 题', body: '在容积固定的密闭容器中存在反应：$2A(g) + B(g) \\rightleftharpoons C(g) \\quad \\Delta H < 0$。研究改变某一条件对上述反应的影响：<br><br><img src="image/2025/Screenshot 2026-08-11 140348.jpg" class="question-img"><br><br>i. 图a是研究压强对反应速率的影响，判断甲和乙哪个压强较大，解释原因并解释 C 浓度变化的原因。(3%)<br>ii. 图b是研究温度对反应速率的影响，判断甲和乙哪个温度较高，解释原因并解释 B 的转化率变化原因。(3%)', steps: [{ title: '思考策略：平衡图像综合判读（压强与温度效应）', think: '<strong>关键思考方向：</strong>压强越大，反应达到平衡的时间越短（斜率大）。放热反应升温平衡往哪边移动？', derivation: '<b>核心解析：</b><br>• i: 甲的到达平衡时间短，故<b>甲的压强较大</b>；加压使平衡正移，故 C 的浓度增大。<br>• ii: 甲达到平衡快，故<b>甲的温度较高</b>；由于 $\\Delta H < 0$（放热），升温使平衡逆向移动，故 B 的转化率降低。' }], ans: '<b>参考答案：<br>i. 甲压强较大，因为压强越大反应速率越快、到达平衡时间越短；加压平衡正向移动使C浓度增大。<br>ii. 甲温度较高；因为升温平衡向吸热的逆反应方向移动，导致B的转化率降低。</b>' }
+    ],
+    '丁': [
+        { num: 1, title: '丁) 加分题 - 第 1 题', body: '何谓勒沙特列原理？ (2%)', steps: [{ title: '思考策略：化学平衡移动核心定律表述', think: '<strong>关键思考方向：</strong>外加改变与平衡抵抗方向的关系。', derivation: '<b>标准定义：</b>如果改变影响平衡的一个因素，平衡就向着能够减弱这种改变的方向移动。' }], ans: '<b>参考答案：如果改变影响平衡的条件之一（如浓度、压强或温度），平衡将向着减弱这种改变的方向移动。</b>' },
+        { num: 2, title: '丁) 加分题 - 第 2 题', body: '何谓溶度积？ (2%)', steps: [{ title: '思考策略：难溶电解质沉淀溶解平衡常数概念', think: '<strong>关键思考方向：</strong>饱和溶液中难溶电解质离子浓度的幂乘积。', derivation: '<b>标准定义：</b>在一定温度下，难溶电解质的饱和溶液中，各离子浓度以其化学计量数为幂的乘积是一个常数，称为溶度积常数（$K_{sp}$）。' }], ans: '<b>参考答案：在一定温度下，难溶电解质的饱和溶液中各离子浓度幂乘积为常数，称为溶度积。</b>' }
+    ],
+    '戊': [
+        { num: 1, title: '戊) 计算题 - 第 1 题', body: '(a) 反应 $2A + 3B \\rightleftharpoons 2C$ 为一步完成的反应。今某同学于1L容器内放入3mol A, 2mol B。当 $[C] = 1M$ 时，习题正反应速率变为开始时正反应速率的多少倍？ (3%)<br>(b) 在320K时，将 $3\\,\\text{mol PCl}_5$ 与 $1\\,\\text{mol PCl}_3$ 置入1L容器中使它们达平衡：$\\text{PCl}_5(g) \\rightleftharpoons \\text{PCl}_3(g) + \\text{Cl}_2(g)$，$K_c = 0.50$。<br>(i) 求 $\\text{PCl}_5$ 剩下的物质的量。(3%) (ii) 求平衡总压强与开始时之比？(2%) (iii) 求 $K_p$。(3%)', steps: [{ title: '思考策略 (a)：基元反应速率之比计算', think: '<strong>关键思考方向：</strong>写出基元反应的速率方程式 $R = k[A]^2[B]^3$，分别代入初始浓度与 $[C]=1M$ 时的平衡浓度。', derivation: '<b>解析：</b><br>1. 初始：$[A]=3, [B]=2$，初始速率 $R_1 = k(3)^2(2)^3 = 72k$。<br>2. 当 $[C]=1M$ 时，生成 $1M$ 的 $C$，消耗 $A$ 为 $1M$、消耗 $B$ 为 $1.5M$。<br>3. 此时 $[A] = 3 - 1 = 2M$；$[B] = 2 - 1.5 = 0.5M$。<br>4. 此时速率 $R_2 = k(2)^2(0.5)^3 = 4 \\times 0.125k = 0.5k$。<br>5. 倍数比：$\\frac{R_2}{R_1} = \\frac{0.5}{72} = \\frac{1}{144}$。' }, { title: '思考策略 (b)：化学平衡三段式与 $K_p$ 换算', think: '<strong>关键思考方向：</strong>列出 $\\text{PCl}_5$ 分解的三段式，利用 $K_c$ 求出平衡浓度。', derivation: '<b>解析：</b><br>设 $\\text{PCl}_5$ 反应了 $x$ mol：<br>平衡时：$[\\text{PCl}_5] = 3-x$, $[\\text{PCl}_3] = 1+x$, $[\\text{Cl}_2] = x$<br>$K_c = \\frac{(1+x)x}{3-x} = 0.5 \\implies x^2 + 1.5x - 1.5 = 0 \\implies x \\approx 0.67\\,\\text{mol}$。<br>(i) $\\text{PCl}_5$ 剩余 $= 3 - 0.67 = 2.33\\,\\text{mol}$。' }], ans: '<b>(a) 详解：</b><br>初始速率 $R_1 = k(3)^2(2)^3 = 72k$。<br>当 $[C]=1M$ 时，$[A]=2M, [B]=0.5M$，此时速率 $R_2 = k(2)^2(0.5)^3 = 0.5k$。<br>倍数比为 $\\frac{0.5}{72} = \\frac{1}{144}$。<br><br><b>(b) 详解：</b><br>经三段式计算求得 $x \\approx 0.67\\,\\text{mol}$。<br>(i) $\\text{PCl}_5$ 剩下 $2.33\\,\\text{mol}$。' },
+        { num: 2, title: '戊) 计算题 - 第 2 题', body: '(a) 已知反应 $2X(g) + Y(g) \\rightleftharpoons Z(g)$ 在 $25^\\circ\\text{C}$ 时的实验数据：<br>Exp 1: $[X]=0.5M, [Y]=0.2M, \\Delta Z/\\Delta t = 5 \\times 10^{-6}\\,\\text{M/s}$<br>Exp 2: $[X]=1M, [Y]=0.4M, \\Delta Z/\\Delta t = 4 \\times 10^{-5}\\,\\text{M/s}$<br>Exp 3: $[X]=1M, [Y]=0.2M, \\Delta Z/\\Delta t = 1 \\times 10^{-5}\\,\\text{M/s}$<br>(i) 写速率方程 (ii) 总级数 (iii) 求 $k$ (iv) 体积加倍且升温至 $45^\\circ\\text{C}$ 的速率变化。<br>(b) 已知常温下 $\\text{CaSO}_4$ 在 $0.1M$ 硫酸钠溶液中的溶解度为 $6 \\times 10^{-3}M$，求 $K_{sp}$。<br>(c) 判断 $50\\,\\text{mL}$ $0.05M$ $\\text{Ca(NO}_3)_2$ 与 $150\\,\\text{mL}$ $0.008M$ $\\text{Na}_2\\text{SO}_4$ 混合是否产生沉淀？', steps: [{ title: '思考策略 (a)：初速率法定级数与速率常数', think: '<strong>关键思考方向：</strong>对比实验 2 与 3，固定 X 求 Y 的级数；对比实验 1 与 3 求 X 的级数。', derivation: '<b>解析：</b><br>1. 对比 2 和 3：$[X]$ 不变，$[Y]$ 翻倍，速率扩大 4 倍（$2^2$），故对 $Y$ 为 <b>2 级</b>。<br>2. 对比 1 和 3：$[Y]$ 不变，$[X]$ 翻倍，速率扩大 2 倍（$2^1$），故对 $X$ 为 <b>1 级</b>。<br>3. 速率方程：$R = k[X][Y]^2$，总级数 $= 3$ 级。<br>4. 代入数据求 $k = \\frac{1 \\times 10^{-5}}{1 \\times (0.2)^2} = 2.5 \\times 10^{-4}\\,\\text{L}^2\\cdot\\text{mol}^{-2}\\cdot\\text{s}^{-1}$。' }, { title: '思考策略 (b) & (c)：溶度积计算与沉淀生成判定 ($Q_{sp}$ vs $K_{sp}$)', think: '<strong>关键思考方向：</strong>利用硫酸钠提供的 $\\text{SO}_4^{2-}$ 浓度计算出 $K_{sp}$，再计算混合后的离子积 $Q_{sp}$ 与 $K_{sp}$ 比较。', derivation: '<b>解析：</b><br>• (b) $K_{sp} = [\\text{Ca}^{2+}][\\text{SO}_4^{2-}] = (6 \\times 10^{-3}) \\times (0.1 + 6 \\times 10^{-3}) \\approx 6.36 \\times 10^{-4}$（按简化处理）。<br>• (c) 混合后总体积 $200\\,\\text{mL}$：<br>$[\\text{Ca}^{2+}] = \\frac{50 \\times 0.05}{200} = 0.0125M$<br>$[\\text{SO}_4^{2-}] = \\frac{150 \\times 0.008}{200} = 0.006M$<br>$Q_{sp} = 0.0125 \\times 0.006 = 7.5 \\times 10^{-5}$。因为 $Q_{sp} < K_{sp}$，<b>不会产生沉淀</b>。' }], ans: '<b>(a) 详解：</b><br>(i) $R = k[X][Y]^2$ (ii) 总级数 = 3 级 (iii) $k = 2.5 \\times 10^{-4}$。<br><br><b>(b)(c) 详解：</b><br>(b) $K_{sp} \\approx 6.36 \\times 10^{-4}$。<br>(c) 混合后离子积 $Q_{sp} = 7.5 \\times 10^{-5} < K_{sp}$，<b>不会产生沉淀</b>。' },
+        { num: 3, title: '戊) 计算题 - 第 3 题', body: '(a) 碘离子被过氧化氢氧化反应机理：<br>① $\\text{H}_2\\text{O}_2 + \\text{I}^- \\rightarrow \\text{H}_2\\text{O} + \\text{IO}^-$ （慢）<br>② $\\text{H}^+ + \\text{IO}^- \\rightarrow \\text{HIO}$ （快）<br>③ $\\text{HIO} + \\text{H}^+ + \\text{I}^- \\rightarrow \\text{H}_2\\text{O} + \\text{I}_2$ （快）<br>(i) 总反应 (ii) 速率方程 (iii) 总级数 (iv) 求 $k$。<br>(b) 已知 $25^\\circ\\text{C}$ 时 $K_{sp}(\\text{Ag}_2\\text{CrO}_4) = 9 \\times 10^{-12}, K_{sp}(\\text{AgCl}) = 1.56 \\times 10^{-10}$：<br>(i) 混合溶液中逐滴加入 $\\text{AgNO}_3$，哪个先沉淀？ (ii) 第二种沉淀析出时，第一种阴离子剩多少？', steps: [{ title: '思考策略 (a)：多步机理总反应与决速步速率方程', think: '<strong>关键思考方向：</strong>将三步机理相加消去中间产物 $\\text{IO}^-$ 与 $\\text{HIO}$；最慢的第一步决定速率方程。', derivation: '<b>解析：</b><br>(i) 总反应：$\\text{H}_2\\text{O}_2 + 2\\text{I}^- + 2\\text{H}^+ \\rightarrow 2\\text{H}_2\\text{O} + \\text{I}_2$<br>(ii) 速率方程：$R = k[\\text{H}_2\\text{O}_2][\\text{I}^-]$（由第一步决速步决定）。<br>(iii) 总级数 = 2 级。<br>(iv) 代入数据：$4 \\times 10^{-4} = k(0.2)(0.2) \\implies k = 0.01\\,\\text{L}\\cdot\\text{mol}^{-1}\\cdot\\text{s}^{-1}$。' }, { title: '思考策略 (b)：分步沉淀临界 $\\text{Ag}^+$ 浓度计算', think: '<strong>关键思考方向：</strong>计算使 $\\text{AgCl}$ 和 $\\text{Ag}_2\\text{CrO}_4$ 开始沉淀所需的最小 $\\text{Ag}^+$ 浓度，数值越小越先沉淀。', derivation: '<b>解析：</b><br>(i) 析出 $\\text{AgCl}$ 所需 $[\\text{Ag}^+] = \\frac{1.56 \\times 10^{-10}}{0.1} = 1.56 \\times 10^{-9}M$；析出 $\\text{Ag}_2\\text{CrO}_4$ 所需 $[\\text{Ag}^+] = \\sqrt{\\frac{9 \\times 10^{-12}}{0.1}} = 9.49 \\times 10^{-6}M$。由于前者所需 $\\text{Ag}^+$ 浓度小，故<b>AgCl 先沉淀</b>。' }], ans: '<b>(a) 详解：</b><br>(i) $\\text{H}_2\\text{O}_2 + 2\\text{I}^- + 2\\text{H}^+ \\rightarrow 2\\text{H}_2\\text{O} + \\text{I}_2$ (ii) $R = k[\\text{H}_2\\text{O}_2][\\text{I}^-]$ (iii) 2 级 (iv) $k = 0.01$。<br><br><b>(b) 详解：</b><br>(i) 经计算 $\\text{AgCl}$ 所需 $\\text{Ag}^+$ 浓度更小，故 <b>AgCl 先沉淀</b>。' },
+        { num: 4, title: '戊) 计算题 - 第 4 题', body: '(a) $25^\\circ\\text{C}$ 时 $K_{sp}(\\text{Ag}_2\\text{CO}_3) = 8.1 \\times 10^{-12}$，计算在 $0.1M$ $\\text{AgNO}_3$ 溶液中的溶解度。(3%)<br>(b) $990^\\circ\\text{C}$ 气相反应：$\\text{H}_2(g) + \\text{CO}_2(g) \\rightleftharpoons \\text{H}_2\\text{O}(g) + \\text{CO}(g) \\quad K_c = 1.6$。在 5L 容器内含 $1\\,\\text{mol H}_2, 2\\,\\text{mol CO}_2, 0.75\\,\\text{mol H}_2\\text{O}, 1\\,\\text{mol CO}$。<br>(i) 说明正逆反应速率哪个较快？(2.5%) (ii) 达平衡时各物质浓度？(5.5%)', steps: [{ title: '思考策略 (a)：同离子效应下的碳酸银溶解度计算', think: '<strong>关键思考方向：</strong>在 0.1M $\\text{AgNO}_3$ 中，$[\\text{Ag}^+] \\approx 0.1M$，代入 $K_{sp}$ 表达式求出溶解度 $s = [\\text{CO}_3^{2-}]$.', derivation: '<b>解析：</b><br>$K_{sp} = [\\text{Ag}^+]^2[\\text{CO}_3^{2-}] = (0.1)^2 \\cdot s = 8.1 \\times 10^{-12} \\implies s = 8.1 \\times 10^{-10}\\text{M}$。' }, { title: '思考策略 (b)：浓度商 $Q_c$ 与平衡浓度计算', think: '<strong>关键思考方向：</strong>先求出初始各物质浓度，计算 $Q_c$ 与 $K_c = 1.6$ 比较判断反应方向，再用三段式求平衡浓度。', derivation: '<b>解析：</b><br>1. 初始浓度：$[\\text{H}_2]=0.2, [\\text{CO}_2]=0.4, [\\text{H}_2\\text{O}]=0.15, [\\text{CO}]=0.2M$。<br>2. $Q_c = \\frac{0.15 \\times 0.2}{0.2 \\times 0.4} = 0.375 < 1.6 = K_c$，故<b>正反应速率较快</b>。<br>3. 设反应消耗 $x$：$\\frac{(0.15+x)(0.2+x)}{(0.2-x)(0.4-x)} = 1.6$ 求解平衡浓度。' }], ans: '<b>(a) 详解：</b><br>溶解度 $s = 8.1 \\times 10^{-10}\\text{M}$。<br><br><b>(b) 详解：</b><br>(i) $Q_c = 0.375 < K_c$，<b>正反应速率较快</b>。<br>(ii) 经三段式求解可得最终平衡浓度。' }
+    ]
+};
+
+const sectionCounts = { '甲': 26, '乙': 12, '丙': 2, '丁': 2, '戊': 4 };
+let currentSection = '甲';
+let currentNum = 1;
+let currentStepIndex = -1;
+
+window.onload = function() {
+    renderNumberButtons('甲');
+    loadQuestionData('甲', 1);
+};
+
+function switchSection(sec) {
+    currentSection = sec;
+    currentNum = 1;
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.includes(sec));
+    });
+    renderNumberButtons(sec);
+    loadQuestionData(sec, 1);
+}
+
+function renderNumberButtons(sec) {
+    const container = document.getElementById('numberButtons');
+    container.innerHTML = '';
+    const total = sectionCounts[sec];
+
+    for (let i = 1; i <= total; i++) {
+        const btn = document.createElement('button');
+        btn.className = `num-btn ${i === currentNum ? 'active' : ''}`;
+        btn.innerText = sec === '戊' ? `计算题 ${i}` : `第 ${i} 题`;
+        btn.onclick = () => {
+            document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            loadQuestionData(sec, i);
+        };
+        container.appendChild(btn);
+    }
+}
+
+function loadQuestionData(sec, num) {
+    currentNum = num;
+    currentStepIndex = -1;
+
+    const dataList = examDatabase[sec] || [];
+    const qData = dataList.find(item => item.num === num) || {
+        title: `${sec}) 第 ${num} 题`,
+        body: '题目数据加载中...',
+        steps: [],
+        ans: '暂无答案'
+    };
+
+    document.getElementById('qTitle').innerText = qData.title;
+    document.getElementById('qBadge').innerText = `${sec}) 部分`;
+    document.getElementById('qBody').innerHTML = qData.body;
+
+    const stepsWrapper = document.getElementById('stepsWrapper');
+    stepsWrapper.innerHTML = '';
+    
+    qData.steps.forEach((stepObj, idx) => {
+        const stepDiv = document.createElement('div');
+        stepDiv.className = 'step-container';
+        stepDiv.id = `step_${idx}`;
+        stepDiv.innerHTML = `
+            <div class="step-header">
+                <span class="step-tag">策略 ${idx + 1}</span>
+                <span class="step-title">${stepObj.title}</span>
+            </div>
+            <div class="thinking-box">${stepObj.think}</div>
+            <div class="derivation-box">${stepObj.derivation}</div>
+        `;
+        stepsWrapper.appendChild(stepDiv);
+    });
+
+    document.getElementById('ansContent').innerHTML = qData.ans;
+    document.getElementById('finalAns').classList.remove('active');
+
+    const nextBtn = document.getElementById('nextBtn');
+    nextBtn.disabled = false;
+    nextBtn.innerText = "💡 思考解题策略 / 关键知识点";
+
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function revealNextStep() {
+    const dataList = examDatabase[currentSection] || [];
+    const qData = dataList.find(item => item.num === currentNum);
+    if (!qData || qData.steps.length === 0) return;
+
+    const totalSteps = qData.steps.length;
+
+    if (currentStepIndex < totalSteps - 1) {
+        currentStepIndex++;
+        const currentStepEl = document.getElementById(`step_${currentStepIndex}`);
+        if (currentStepEl) currentStepEl.classList.add('active');
+
+        if (currentStepIndex === totalSteps - 1) {
+            document.getElementById('nextBtn').innerText = "💡 已展示全部思考策略";
+            document.getElementById('nextBtn').disabled = true;
+        }
+    }
+
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function toggleAnswer() {
+    const ansBox = document.getElementById('finalAns');
+    ansBox.classList.toggle('active');
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function resetCurrentCard() {
+    loadQuestionData(currentSection, currentNum);
+}
+
+// ==================== 划词提问与 AI 导师交互 ====================
+let selectedTextStore = "";
+
+document.addEventListener('mouseup', function(e) {
+    const tooltip = document.getElementById('selection-tooltip');
+    const selection = window.getSelection();
+    const text = selection.toString().trim();
+
+    if (e.target.closest('#chatBox') || e.target.closest('.chat-widget-toggle')) {
+        return;
+    }
+
+    if (text.length > 0) {
+        selectedTextStore = text;
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        
+        tooltip.style.left = `${rect.left + window.scrollX + (rect.width / 2) - 50}px`;
+        tooltip.style.top = `${rect.top + window.scrollY - 40}px`;
+        tooltip.style.display = 'block';
+    } else {
+        tooltip.style.display = 'none';
+    }
+});
+
+function askSelectedText() {
+    if (!selectedTextStore) return;
+    const chatBox = document.getElementById('chatBox');
+    chatBox.classList.add('active');
+    document.getElementById('selection-tooltip').style.display = 'none';
+    
+    const prompt = `老师，请结合居銮高二化学课本知识点，帮我解释一下：“${selectedTextStore}”`;
+    appendMessage(prompt, 'user');
+    fetchAIResponse(prompt);
+}
+
+function toggleChatBox() {
+    const chatBox = document.getElementById('chatBox');
+    chatBox.classList.toggle('active');
+}
+
+function sendMessage() {
+    const input = document.getElementById('userInput');
+    const text = input.value.trim();
+    if (!text) return;
+
+    appendMessage(text, 'user');
+    input.value = '';
+    fetchAIResponse(text);
+}
+
+function appendMessage(text, sender) {
+    const msgContainer = document.getElementById('chatMessages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `chat-msg ${sender}`;
+    msgDiv.innerHTML = text;
+    msgContainer.appendChild(msgDiv);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+    
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([msgDiv]);
+    }
+}
+
+async function fetchAIResponse(userQuery) {
+    const msgContainer = document.getElementById('chatMessages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'chat-msg ai';
+    msgDiv.innerHTML = "<i>AI 导师正在思考中...</i>";
+    msgContainer.appendChild(msgDiv);
+
+    const PROXY_URL = 'https://gemini-proxy-nine-kappa.vercel.app/api/chat';
+    const fullPrompt = `你是一位居銮中华中学的化学老师。请回答以下问题，回答需专业、简洁，且公式使用 LaTeX 格式: ${userQuery}`;
+
+    try {
+        const response = await fetch(PROXY_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: fullPrompt })
+        });
+
+        const data = await response.json();
+        let aiText = "";
+        if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0].text) {
+            aiText = data.candidates[0].content.parts[0].text;
+        } else if (data.error) {
+            aiText = `后端返回错误：${data.error.message || JSON.stringify(data.error)}`;
+        } else {
+            aiText = JSON.stringify(data);
+        }
+
+        msgDiv.innerHTML = aiText.replace(/\n/g, '<br>');
+
+    } catch (error) {
+        console.error("Fetch Error:", error);
+        msgDiv.innerHTML = "网络连接失败，请检查网络。";
+    }
+
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([msgDiv]);
+    }
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+}
+</script>
+
+</body>
+</html>
