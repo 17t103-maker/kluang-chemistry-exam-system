@@ -1326,25 +1326,15 @@ function appendMessage(text, sender) {
 // 5. 通过安全后端代理获取 Gemini AI 回答（普通JSON响应模式）
 async function fetchAIResponse(userQuery) {
     const msgContainer = document.getElementById('chatMessages');
-    
-    // 创建 AI 回答气泡
     const msgDiv = document.createElement('div');
     msgDiv.className = 'chat-msg ai';
-    msgDiv.innerHTML = "<i>AI 导师正在查阅课本中...</i>";
+    msgDiv.innerHTML = "<i>AI 导师正在思考中...</i>";
     msgContainer.appendChild(msgDiv);
-    msgContainer.scrollTop = msgContainer.scrollHeight;
 
     const PROXY_URL = 'https://gemini-proxy-nine-kappa.vercel.app/api/chat';
 
-    const textbookKnowledgeBase = `
-【居銮中华中学 高二理科化学 核心课本知识库】
-1. 热化学与反应热（ΔH）：放热反应 ΔH < 0，吸热反应 ΔH > 0。赫斯定律：总反应热与途径无关。中和热约为 -57.3 kJ/mol。
-2. 化学反应速率：影响因素包括浓度、压强、温度、催化剂。催化剂降活化能但不改反应热。
-3. 化学平衡：勒沙特列原理：平衡往削弱外来影响的方向移动。
-`;
-
-    const systemInstruction = `你是一位来自马来西亚居銮中华中学的理科化学教师。请结合上述知识库回答学生问题，专业术语准确，公式使用 LaTeX 格式。`;
-    const fullPrompt = `${systemInstruction}\n\n${textbookKnowledgeBase}\n\n学生提问：${userQuery}`;
+    // 简化 prompt，只发送必要指令，避免模型解析错误
+    const fullPrompt = `你是一位居銮中华中学的化学老师。请回答以下问题，回答需专业、简洁，且公式使用 LaTeX 格式: ${userQuery}`;
 
     try {
         const response = await fetch(PROXY_URL, {
@@ -1355,26 +1345,18 @@ async function fetchAIResponse(userQuery) {
 
         const data = await response.json();
 
-        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
+        // 兼容新的响应格式
+        if (data.candidates && data.candidates[0].content.parts[0].text) {
             let aiText = data.candidates[0].content.parts[0].text;
-            aiText = aiText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-            aiText = aiText.replace(/\n/g, '<br>');
-            msgDiv.innerHTML = aiText;
-        } else if (data.error) {
-            console.error("API Error:", data.error);
-            msgDiv.innerHTML = `请求错误：${data.error.message || JSON.stringify(data.error)}`;
+            msgDiv.innerHTML = aiText.replace(/\n/g, '<br>');
         } else {
-            msgDiv.innerHTML = "不好意思，老师刚才走神了，能请你再问一次吗？";
+            msgDiv.innerHTML = "老师刚刚没听清楚，请再问一次？";
         }
-
     } catch (error) {
-        console.error("Fetch Error:", error);
-        msgDiv.innerHTML = "网络连接失败，请检查网络。";
+        msgDiv.innerHTML = "网络连接失败，请确认 API 设置。";
     }
 
-    if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise([msgDiv]);
-    }
+    if (window.MathJax) MathJax.typesetPromise([msgDiv]);
     msgContainer.scrollTop = msgContainer.scrollHeight;
 }
 </script>
