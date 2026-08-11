@@ -1332,8 +1332,6 @@ async function fetchAIResponse(userQuery) {
     msgContainer.appendChild(msgDiv);
 
     const PROXY_URL = 'https://gemini-proxy-nine-kappa.vercel.app/api/chat';
-
-    // 简化 prompt，只发送必要指令，避免模型解析错误
     const fullPrompt = `你是一位居銮中华中学的化学老师。请回答以下问题，回答需专业、简洁，且公式使用 LaTeX 格式: ${userQuery}`;
 
     try {
@@ -1344,19 +1342,30 @@ async function fetchAIResponse(userQuery) {
         });
 
         const data = await response.json();
+        
+        // 关键：把后端返回的完整数据打印在控制台，方便我们看清结构
+        console.log("Gemini 原始返回数据：", data);
 
-        // 兼容新的响应格式
-        if (data.candidates && data.candidates[0].content.parts[0].text) {
-            let aiText = data.candidates[0].content.parts[0].text;
-            msgDiv.innerHTML = aiText.replace(/\n/g, '<br>');
+        // 兼容所有可能的谷歌返回路径
+        let aiText = "";
+        if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0].text) {
+            aiText = data.candidates[0].content.parts[0].text;
+        } else if (data.error) {
+            aiText = `后端返回错误：${data.error.message || JSON.stringify(data.error)}`;
         } else {
-            msgDiv.innerHTML = "老师刚刚没听清楚，请再问一次？";
+            aiText = JSON.stringify(data); // 如果结构不同，直接把整段 JSON 显示出来
         }
+
+        msgDiv.innerHTML = aiText.replace(/\n/g, '<br>');
+
     } catch (error) {
-        msgDiv.innerHTML = "网络连接失败，请确认 API 设置。";
+        console.error("Fetch Error:", error);
+        msgDiv.innerHTML = "网络连接失败，请检查网络。";
     }
 
-    if (window.MathJax) MathJax.typesetPromise([msgDiv]);
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([msgDiv]);
+    }
     msgContainer.scrollTop = msgContainer.scrollHeight;
 }
 </script>
