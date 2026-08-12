@@ -43,22 +43,66 @@
             margin: 0 auto;
         }
 
+        /* 跨平台快捷导航栏 */
+        .site-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            background-color: var(--card-bg);
+            padding: 12px 20px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding: 6px 14px;
+            border-radius: 15px;
+            transition: all 0.2s;
+            background-color: #f0f4f8;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
         header {
             text-align: center;
             padding: 10px 0 20px 0;
         }
 
+        .header-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 5px;
+        }
+
+        .school-logo-small {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
         header h1 {
             color: var(--primary-color);
-            margin-bottom: 5px;
+            margin: 0;
             font-size: 1.6rem;
         }
 
         header p {
             color: #666;
-            margin: 0;
+            margin: 5px 0 0 0;
         }
 
+        /* 交互控制台 */
         .control-panel {
             background-color: var(--card-bg);
             padding: 20px;
@@ -105,8 +149,6 @@
             padding: 12px;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
-            max-height: 220px;
-            overflow-y: auto;
         }
 
         .num-btn {
@@ -126,6 +168,35 @@
             border-color: var(--accent-color);
         }
 
+        /* 全卷查看功能按钮组 */
+        .global-tools {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #cbd5e1;
+            flex-wrap: wrap;
+        }
+
+        .tool-btn {
+            background-color: #f1f5f9;
+            color: var(--primary-color);
+            border: 1px solid #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 18px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+        }
+
+        .tool-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* 题目展示卡片 */
         .question-card {
             background-color: var(--card-bg);
             border-radius: 12px;
@@ -157,23 +228,24 @@
             font-size: 0.85rem;
         }
 
-        .question-img {
-            max-width: 480px;
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            border: 1px solid #cbd5e1;
-            margin: 15px 0;
-            display: block;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-
         .question-body {
             font-size: 1.05rem;
             margin-bottom: 20px;
             line-height: 1.8;
         }
 
+        .question-img {
+            max-width: 450px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin: 15px 0;
+            display: block;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* 引导解析步骤 */
         .step-container {
             display: none;
             margin-top: 18px;
@@ -220,11 +292,16 @@
             color: #78350f;
         }
 
+        .thinking-box strong {
+            color: #b45309;
+        }
+
         .derivation-box {
             margin-top: 8px;
             font-size: 0.98rem;
         }
 
+        /* 最终答案 */
         .final-answer {
             display: none;
             margin-top: 25px;
@@ -246,6 +323,7 @@
             margin-bottom: 10px;
         }
 
+        /* 按钮组 */
         .action-area {
             margin-top: 22px;
             display: flex;
@@ -284,136 +362,90 @@
             background: #757575;
         }
 
+        /* 全卷视图容器样式 */
+        .all-questions-view {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .all-questions-view.active {
+            display: block;
+        }
+
+        .list-q-item {
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+        }
+
+        .list-q-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .list-q-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .list-ans-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-top: 12px;
+            color: #166534;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        #selection-tooltip {
-            position: absolute;
-            display: none;
-            background: #1a436d;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        .chat-widget-toggle {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #1a436d, #2c5e8a);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 999;
-        }
-
-        .chat-box-container {
-            position: fixed;
-            bottom: 95px;
-            right: 25px;
-            width: 360px;
-            height: 520px;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-            display: none;
-            flex-direction: column;
-            z-index: 999;
-            border: 1px solid #e2e8f0;
-        }
-
-        .chat-box-container.active {
-            display: flex;
-        }
-
-        .chat-header {
-            background: var(--primary-color);
-            color: white;
-            padding: 12px 16px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            background: #f8fafc;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .chat-msg {
-            max-width: 85%;
-            padding: 10px 14px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .chat-msg.user {
-            align-self: flex-end;
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .chat-msg.ai {
-            align-self: flex-start;
-            background: #e2e8f0;
-            color: #333;
-        }
-
-        .chat-input-area {
-            display: flex;
-            padding: 10px;
-            background: white;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .chat-input-area input {
-            flex: 1;
-            border: 1px solid #cbd5e1;
-            padding: 8px 12px;
-            border-radius: 20px;
-            outline: none;
-        }
-
-        .chat-input-area button {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            margin-left: 8px;
-            border-radius: 20px;
-            cursor: pointer;
+        @media print {
+            .site-nav, .control-panel, .action-area, .global-tools {
+                display: none !important;
+            }
+            body {
+                background: white;
+                padding: 0;
+            }
+            .question-card, .all-questions-view {
+                box-shadow: none;
+                padding: 0;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <!-- 跨平台导航 -->
+    <nav class="site-nav">
+        <a href="index.html" class="nav-link">🏠 平台首页</a>
+        <a href="2024.html" class="nav-link">📅 2024统测</a>
+        <a href="2025.html" class="nav-link">📅 2025统测</a>
+        <a href="UEC.html" class="nav-link active">📖 统考真题</a>
+        <a href="test.html" class="nav-link">🧪 章节小测</a>
+        <a href="equilibrium_simulator.html" class="nav-link">⚖️ 平衡模拟器</a>
+        <a href="chemistry_notes_ch19_22.html" class="nav-link">📚 互动复习笔记</a>
+    </nav>
+
     <header>
-        <h1>高二理科化学历届统考真题完整解析系统</h1>
+        <div class="header-title-container">
+            <img src="image/校徽.jpg" alt="居銮中华中学校徽" class="school-logo-small">
+            <h1>高二理科化学历届统考真题完整解析系统</h1>
+        </div>
         <p>按章节编排 · 同一章节内依次包含选择题与作答题</p>
     </header>
 
+    <!-- 交互控制台 -->
     <div class="control-panel">
         <div class="section-title">第一步：选择化学章节</div>
         <div class="type-tabs">
@@ -425,8 +457,16 @@
 
         <div class="section-title">第二步：点击题号直接查看</div>
         <div class="number-selector" id="numberButtons"></div>
+
+        <!-- 列表列出与全卷清览扩展功能 -->
+        <div class="global-tools">
+            <button class="tool-btn" onclick="showAllQuestions(false)">📄 列出全卷题目（用于打印/清览）</button>
+            <button class="tool-btn" onclick="showAllQuestions(true)">📝 列出全卷题目与答案</button>
+            <button class="tool-btn" onclick="hideAllQuestions()">🔍 返回单题交互模式</button>
+        </div>
     </div>
 
+    <!-- 动态题目展示卡片（单题模式） -->
     <div id="questionDisplayArea">
         <div class="question-card">
             <div class="question-header">
@@ -449,27 +489,19 @@
             </div>
         </div>
     </div>
-</div>
 
-<div id="selection-tooltip" onclick="askSelectedText()">💡 询问 AI 导师</div>
-<div class="chat-widget-toggle" onclick="toggleChatBox()">🤖</div>
-
-<div class="chat-box-container" id="chatBox">
-    <div class="chat-header">
-        <span>化学学习 AI 导师</span>
-        <span style="cursor:pointer;" onclick="toggleChatBox()">✕</span>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-        <div class="chat-msg ai">👋 你好！我是高二化学 AI 导师。针对历届考题的任何概念或方程式，随时选中或发给我！</div>
-    </div>
-    <div class="chat-input-area">
-        <input type="text" id="userInput" placeholder="输入你的化学疑问..." onkeydown="if(event.key==='Enter') sendMessage()">
-        <button onclick="sendMessage()">发送</button>
+    <!-- 全卷清览列表视图容器（全卷模式） -->
+    <div class="all-questions-view" id="allQuestionsView">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:2px solid var(--primary-color); padding-bottom:10px;">
+            <h2 id="viewListTitle" style="margin:0; color:var(--primary-color);">全卷题目清览</h2>
+            <button class="tool-btn" onclick="window.print()">🖨️ 打印 / 另存为 PDF</button>
+        </div>
+        <div id="listContainer"></div>
     </div>
 </div>
 
 <script>
-// 安全构建数据库，修复字符串内变量语法问题
+// 按章节编排的试题数据库
 const chapterDatabase = {
     '第19章': [
         // 选择题部分
@@ -544,7 +576,7 @@ const chapterDatabase = {
             body: '$2.0\\text{ g}$ 的苯甲酸完全燃烧释放出的热，将 $3.5\\text{ kg}$ 的水的温度提升 $3.8^\\circ\\text{C}$。试计算苯甲酸的燃烧热。[$\\text{C}_6\\text{H}_5\\text{COOH}$ 摩尔质量 $= 122\\text{ g mol}^{-1}$]<br><br>' +
                   'A. $717.4\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; B. $3407.5\\text{ kJ mol}^{-1}$<br>' +
                   'C. $6814.9\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; D. $13629.8\\text{ kJ mol}^{-1}$',
-            steps: [{ title: '吸热与摩尔燃烧热换算', think: '$Q = m \\cdot c \\cdot \\Delta T$', derivation: '$Q = 3.5\\text{ kg} \\times 4.2\\text{ kJ kg}^{-1}\\text{K}^{-1} \\times 3.8\\text{ K} = 55.86\\text{ kJ}$<br>$n(\\text{苯甲酸}) = \\frac{2.0}{122} = 0.01639\\text{ mol}$<br>$\\text{燃烧热} = \\frac{55.86}{0.01639} \\approx 3407.5\\text{ kJ mol}^{-1}$' }],
+            steps: [{ title: '吸热与摩尔燃烧热换算', think: '$Q = m \\cdot c \\cdot \\Delta T$', derivation: '$Q = 3.5\\text{ kg} \\times 4.2\\text{ kJ kg}^{-1}\\text{K}^{-1} \\times 3.8\\text{ K} = 55.86\\text{ kJ}$<br>$n(\\text{苯甲酸}) = 2.0 / 122 = 0.01639\\text{ mol}$<br>$\\text{燃烧热} = 55.86 / 0.01639 \\approx 3407.5\\text{ kJ mol}^{-1}$' }],
             ans: '<b>正确答案：B</b>'
         },
         {
@@ -862,6 +894,7 @@ function switchChapter(chap) {
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.toggle('active', btn.innerText.includes(chap));
     });
+    hideAllQuestions();
     renderButtons(chap);
     loadCardData(chap, 1);
 }
@@ -878,6 +911,7 @@ function renderButtons(chap) {
         btn.onclick = () => {
             document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            hideAllQuestions();
             loadCardData(chap, item.num);
         };
         container.appendChild(btn);
@@ -957,64 +991,54 @@ function resetCurrentCard() {
     loadCardData(currentChapter, currentNum);
 }
 
-// AI Chatbot
-function toggleChatBox() {
-    document.getElementById('chatBox').classList.toggle('active');
-}
+/* 全卷查看功能实现 */
+function showAllQuestions(withAnswers) {
+    document.getElementById('questionDisplayArea').style.display = 'none';
+    const viewContainer = document.getElementById('allQuestionsView');
+    const listContainer = document.getElementById('listContainer');
+    
+    document.getElementById('viewListTitle').innerText = withAnswers ? "全卷真题与完整参考答案" : "全卷真题清览（试卷模式）";
+    listContainer.innerHTML = '';
 
-let selectedTextStore = "";
-document.addEventListener('mouseup', function(e) {
-    const tooltip = document.getElementById('selection-tooltip');
-    const selection = window.getSelection();
-    const text = selection.toString().trim();
-    if (e.target.closest('#chatBox') || e.target.closest('.chat-widget-toggle')) return;
+    ['第19章', '第20章', '第21章', '第22章'].forEach(chap => {
+        const chapHeader = document.createElement('h3');
+        chapHeader.style.color = 'var(--primary-color)';
+        chapHeader.style.borderBottom = '2px solid var(--primary-color)';
+        chapHeader.style.paddingBottom = '5px';
+        chapHeader.style.marginTop = '25px';
+        chapHeader.innerText = `${chap} 历届考题`;
+        listContainer.appendChild(chapHeader);
 
-    if (text.length > 0) {
-        selectedTextStore = text;
-        const range = selection.getRangeAt(0);
-        const rect = range.getBoundingClientRect();
-        tooltip.style.left = (rect.left + window.scrollX + (rect.width / 2) - 40) + 'px';
-        tooltip.style.top = (rect.top + window.scrollY - 40) + 'px';
-        tooltip.style.display = 'block';
-    } else {
-        tooltip.style.display = 'none';
+        const dataList = chapterDatabase[chap] || [];
+        dataList.forEach((q, idx) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'list-q-item';
+            
+            let htmlContent = `<div class="list-q-title">第 ${idx + 1} 题 (${q.type}) - ${q.section} ${q.year}</div>`;
+            htmlContent += `<div style="font-size:1.02rem; line-height:1.7;">${q.body}</div>`;
+
+            if (withAnswers) {
+                htmlContent += `<div class="list-ans-box">${q.ans}</div>`;
+            }
+
+            itemDiv.innerHTML = htmlContent;
+            listContainer.appendChild(itemDiv);
+        });
+    });
+
+    viewContainer.classList.add('active');
+
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
     }
-});
-
-function askSelectedText() {
-    if (!selectedTextStore) return;
-    toggleChatBox();
-    document.getElementById('selection-tooltip').style.display = 'none';
-    const prompt = '请帮我讲解高二化学概念：“' + selectedTextStore + '”';
-    appendMessage(prompt, 'user');
-    fetchAIResponse(prompt);
 }
 
-function sendMessage() {
-    const input = document.getElementById('userInput');
-    const text = input.value.trim();
-    if (!text) return;
-    appendMessage(text, 'user');
-    input.value = '';
-    fetchAIResponse(text);
-}
-
-function appendMessage(text, sender) {
-    const msgContainer = document.getElementById('chatMessages');
-    const msgDiv = document.createElement('div');
-    msgDiv.className = 'chat-msg ' + sender;
-    msgDiv.innerHTML = text;
-    msgContainer.appendChild(msgDiv);
-    msgContainer.scrollTop = msgContainer.scrollHeight;
-}
-
-async function fetchAIResponse(userQuery) {
-    appendMessage("<i>AI 导师思考中...</i>", 'ai');
-    setTimeout(() => {
-        const msgs = document.querySelectorAll('.chat-msg.ai');
-        const lastMsg = msgs[msgs.length - 1];
-        lastMsg.innerHTML = '关于知识点“<b>' + userQuery + '</b>”，建议结合课本对应章节的公式进行推导与理解。';
-    }, 1000);
+function hideAllQuestions() {
+    document.getElementById('allQuestionsView').classList.remove('active');
+    document.getElementById('questionDisplayArea').style.display = 'block';
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
 }
 </script>
 
