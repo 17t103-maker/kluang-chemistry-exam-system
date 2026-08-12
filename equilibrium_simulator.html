@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>化学平衡移动 探究模拟实验台</title>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --r-zheng: #e74c3c;
+            --r-ni: #008080;
+            --bg: #ebf0f5;
+            --card-bg: #ffffff;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Microsoft YaHei, Arial, sans-serif;
+            background-color: var(--bg);
+            color: #222;
+            margin: 0;
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin: 0 0 8px 0;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 20px;
+            font-size: 1.15em;
+            font-weight: 500;
+        }
+
+        .system-select {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .sys-btn {
+            padding: 10px 20px;
+            font-size: 1.05em;
+            font-weight: bold;
+            border: 2px solid var(--accent);
+            background: white;
+            color: var(--accent);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sys-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .equation-bar {
+            background: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
+            padding: 18px;
+            text-align: center;
+            font-size: 1.6em;
+            font-weight: bold;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            color: #1e293b;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 992px) {
+            .grid-layout { grid-template-columns: 1fr; }
+        }
+
+        .control-panel {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: var(--border-radius);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card-section {
+            background: #ffffff;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #eef2f6;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .section-header {
+            font-size: 1.15em;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .control-row { margin-bottom: 14px; }
+        .control-row:last-child { margin-bottom: 0; }
+
+        .label-val {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.05em;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .live-tag {
+            font-size: 0.9em;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: #e2e8f0;
+            color: #1e293b;
+            font-weight: bold;
+        }
+
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: #cbd5e1;
+            outline: none;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .btn-mini {
+            padding: 8px 12px;
+            font-size: 0.95em;
+            border-radius: 6px;
+            border: none;
+            background: #e2e8f0;
+            color: #334155;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: bold;
+        }
+
+        .btn-mini:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .playback-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-play {
+            flex: 1;
+            padding: 12px;
+            font-size: 1.05em;
+            font-weight: bold;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: white;
+        }
+
+        .btn-start { background: #27ae60; }
+        .btn-pause { background: #e67e22; }
+        .btn-step { background: #3498db; }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #ff5252, #d32f2f);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .visual-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .simulation-view {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .simulation-view { grid-template-columns: 1fr; }
+        }
+
+        .flask-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #microCanvas {
+            background: #fafafa;
+            border: 2px solid #64748b;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+        }
+
+        .particle-legend {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            font-size: 0.95em;
+            font-weight: bold;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dashboard {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .data-card {
+            background: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent);
+        }
+
+        .data-card .title {
+            font-size: 0.9em;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .data-card .val {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .status-box {
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        /* 新增：跷跷板图形容器 CSS */
+        .seesaw-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .seesaw-title {
+            font-size: 0.95em;
+            font-weight: bold;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        #seesawCanvas {
+            width: 100%;
+            max-width: 380px;
+            height: 90px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .explanation-box {
+            font-size: 1em;
+            line-height: 1.5;
+            background: #f1f5f9;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: #334155;
+            margin-top: 10px;
+            border-left: 5px solid #94a3b8;
+        }
+
+        .charts-container {
+            height: 300px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            padding: 14px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>化学平衡移动 探究模拟实验台</h1>
+    <div class="subtitle">高二化学 21.3节 影响化学平衡移动的因素</div>
+
+    <div class="system-select">
+        <button class="sys-btn active" id="btn-sys1" onclick="switchSystem(1)">体系 1: 2 NO₂ (g) ⇌ N₂O₄ (g)</button>
+        <button class="sys-btn" id="btn-sys2" onclick="switchSystem(2)">体系 2: A (g) + B (g) ⇌ C (g) + D (g)</button>
+    </div>
+
+    <div class="equation-bar" id="equation-display">
+        2 NO<sub>2</sub> (g) <span style="color: #e74c3c;">⇄</span> N<sub>2</sub>O<sub>4</sub> (g) &nbsp;&nbsp;&nbsp;&nbsp; ΔH = -57.2 kJ/mol
+    </div>
+
+    <div class="grid-layout">
+        <!-- 控制面板 -->
+        <div class="control-panel">
+            <div class="card-section">
+                <div class="section-header">⏱️ 模拟演化调速</div>
+                <div class="control-row">
+                    <div class="label-val">
+                        <span>反应推进速度</span>
+                        <span id="speed-val" style="color:#e67e22;">0.3x 极缓</span>
+                    </div>
+                    <div class="slider-group">
+                        <input type="range" id="slider-speed" min="0.05" max="1.0" step="0.05" value="0.3" oninput="updateSpeed(this.value)">
+                    </div>
+                </div>
+                <div class="playback-controls" style="margin-top: 12px;">
+                    <button class="btn-play btn-pause" id="btn-toggle" onclick="toggleSimulation()">⏸️ 暂停</button>
+                    <button class="btn-play btn-step" onclick="stepSimulation()">⏯️ 单步推演</button>
+                </div>
+            </div>
+
+            <!-- 浓度控制 -->
+            <div class="card-section" id="conc-controls"></div>
+
+            <div class="card-section">
+                <div class="section-header">🎈 容器体积 / 压强</div>
+                <div class="control-row">
+                    <div class="label-val">
+                        <span>相对体积 V</span>
+                        <span id="vol-slider-val">1.00 V₀</span>
+                    </div>
+                    <div class="slider-group">
+                        <input type="range" id="slider-vol" min="0.5" max="2.0" step="0.05" value="1.0" oninput="onSliderVolume(this.value)">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-section">
+                <div class="section-header">🌡️ 水浴温度 (影响平衡常数 Kc)</div>
+                <div class="control-row">
+                    <div class="label-val">
+                        <span>温度 T</span>
+                        <span id="temp-slider-val">298 K</span>
+                    </div>
+                    <div class="slider-group">
+                        <input type="range" id="slider-temp" min="250" max="400" step="5" value="298" oninput="onSliderTemperature(this.value)">
+                    </div>
+                    <div style="display: flex; gap: 8px; margin-top: 10px;">
+                        <button class="btn-mini" style="flex:1;" onclick="setQuickTemp(273)">🧊 冰水 (273K)</button>
+                        <button class="btn-mini" style="flex:1;" onclick="setQuickTemp(363)">🔥 热水 (363K)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-section">
+                <div class="section-header">💊 催化剂</div>
+                <button class="btn-mini" style="width: 100%; padding: 10px; background: #8e44ad; color: white;" onclick="addCatalyst()">
+                    加入正催化剂 (同等加速正逆反应)
+                </button>
+            </div>
+
+            <button class="btn-reset" onclick="resetExperiment()">🔄 重置模拟器状态</button>
+        </div>
+
+        <!-- 可视化展示区 -->
+        <div class="visual-panel">
+            <div class="simulation-view">
+                <div class="flask-box">
+                    <div style="font-weight: bold; font-size: 1.1em; color: #334155; margin-bottom: 8px;">微观粒子缓速飘动</div>
+                    <canvas id="microCanvas" width="280" height="280"></canvas>
+                    <div class="particle-legend" id="particle-legend"></div>
+                </div>
+
+                <div class="dashboard">
+                    <div>
+                        <div id="status-box" class="status-box">已达到化学平衡</div>
+                        
+                        <!-- 实时速率卡片 -->
+                        <div class="data-grid">
+                            <div class="data-card" style="border-left-color: #e74c3c;">
+                                <div class="title">正反应速率 R正</div>
+                                <div class="val" id="rate-fwd" style="color: #e74c3c;">1.00</div>
+                            </div>
+                            <div class="data-card" style="border-left-color: #008080;">
+                                <div class="title">逆反应速率 R逆</div>
+                                <div class="val" id="rate-rev" style="color: #008080;">1.00</div>
+                            </div>
+                        </div>
+
+                        <!-- 动态平衡常数 Kc 与 浓度商 Qc 对比 -->
+                        <div class="data-grid" style="margin-top: 8px;">
+                            <div class="data-card" style="border-left-color: #2563eb;">
+                                <div class="title">平衡常数 K<sub>c</sub></div>
+                                <div class="val" id="kc-display" style="color: #2563eb;">0.250</div>
+                            </div>
+                            <div class="data-card" style="border-left-color: #8e44ad;">
+                                <div class="title">反应任意态 浓度商 Q<sub>c</sub></div>
+                                <div class="val" id="qc-display" style="color: #8e44ad;">0.250</div>
+                            </div>
+                        </div>
+
+                        <!-- 勒沙特列 跷跷板可视化图形 -->
+                        <div class="seesaw-box">
+                            <div class="seesaw-title">⚖️ 勒沙特列平衡倾斜判定 (跷跷板模型)</div>
+                            <canvas id="seesawCanvas" width="380" height="90"></canvas>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="explanation-box" id="explanation">
+                            【探究引导】调节左侧调节滑块，观察平衡常数 Kc 与浓度商 Qc 的相对大小及跷跷板的倾斜过程。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-container">
+                <canvas id="rateChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSys = 1; 
+    let isRunning = true;
+    let simSpeed = 0.3;
+    let chart;
+    let particles = [];
+
+    // 平滑动画控制变量（用于跷跷板）
+    let currentSeesawAngle = 0; 
+
+    let state = {
+        cNO2: 2.00, cN2O4: 1.00,
+        cA: 2.00, cB: 2.00, cC: 1.00, cD: 1.00,
+        volume: 1.0, temperature: 298, catalyst: 1.0, isEquilibrium: true
+    };
+
+    let timeStep = 0;
+
+    // 计算平衡常数 Kc (吸热 / 放热响应)
+    function getKc(T) {
+        if (currentSys === 1) {
+            // 放热反应 ΔH < 0，升温 Kc 减小
+            return 0.25 * Math.exp(-2.0 * (1/T - 1/298) * 1000);
+        } else {
+            // 吸热反应 ΔH > 0，升温 Kc 增大
+            return 0.25 * Math.exp(1.5 * (1/T - 1/298) * 1000);
+        }
+    }
+
+    // 计算当前时刻的浓度商 Qc
+    function getQc() {
+        if (currentSys === 1) {
+            return state.cN2O4 / Math.pow(state.cNO2, 2);
+        } else {
+            return (state.cC * state.cD) / (state.cA * state.cB);
+        }
+    }
+
+    function updateSpeed(val) {
+        simSpeed = parseFloat(val);
+        document.getElementById('speed-val').innerText = simSpeed.toFixed(2) + "x " + (simSpeed < 0.4 ? "极缓" : "正常");
+    }
+
+    function switchSystem(sysId) {
+        currentSys = sysId;
+        document.getElementById('btn-sys1').classList.toggle('active', sysId === 1);
+        document.getElementById('btn-sys2').classList.toggle('active', sysId === 2);
+
+        const eqBar = document.getElementById('equation-display');
+        if (sysId === 1) {
+            eqBar.innerHTML = `2 NO<sub>2</sub> (g) <span style="color: #e74c3c;">⇄</span> N<sub>2</sub>O<sub>4</sub> (g) &nbsp;&nbsp;&nbsp;&nbsp; ΔH = -57.2 kJ/mol`;
+        } else {
+            eqBar.innerHTML = `A (g) + B (g) <span style="color: #e74c3c;">⇄</span> C (g) + D (g) &nbsp;&nbsp;&nbsp;&nbsp; ΔH > 0`;
+        }
+
+        renderConcentrationControls();
+        resetExperiment();
+    }
+
+    function renderConcentrationControls() {
+        const container = document.getElementById('conc-controls');
+        if (currentSys === 1) {
+            container.innerHTML = `
+                <div class="section-header">🧪 浓度调节与实时监测</div>
+                <div class="control-row">
+                    <div class="label-val">
+                        <span style="color:#d35400;">[NO₂] 反应物</span>
+                        <div><span class="live-tag">实时: <b id="no2-live">2.00</b> M</span></div>
+                    </div>
+                    <div class="slider-group">
+                        <input type="range" id="slider-no2" min="0.2" max="5.0" step="0.1" value="${state.cNO2}" oninput="updateConc('NO2', this.value)">
+                    </div>
+                </div>
+                <div class="control-row">
+                    <div class="label-val">
+                        <span style="color:#27ae60;">[N₂O₄] 生成物</span>
+                        <div><span class="live-tag">实时: <b id="n2o4-live">1.00</b> M</span></div>
+                    </div>
+                    <div class="slider-group">
+                        <input type="range" id="slider-n2o4" min="0.2" max="3.0" step="0.1" value="${state.cN2O4}" oninput="updateConc('N2O4', this.value)">
+                    </div>
+                </div>`;
+        } else {
+            container.innerHTML = `
+                <div class="section-header">🧪 浓度调节与实时监测</div>
+                <div class="control-row">
+                    <div class="label-val"><span style="color:#e74c3c;">[A] 反应物</span><span class="live-tag">实时: <b id="a-live">${state.cA.toFixed(2)}</b> M</span></div>
+                    <input type="range" id="slider-a" min="0.2" max="4.0" step="0.1" value="${state.cA}" oninput="updateConc('A', this.value)">
+                </div>
+                <div class="control-row">
+                    <div class="label-val"><span style="color:#3498db;">[B] 反应物</span><span class="live-tag">实时: <b id="b-live">${state.cB.toFixed(2)}</b> M</span></div>
+                    <input type="range" id="slider-b" min="0.2" max="4.0" step="0.1" value="${state.cB}" oninput="updateConc('B', this.value)">
+                </div>
+                <div class="control-row">
+                    <div class="label-val"><span style="color:#2ecc71;">[C] 生成物</span><span class="live-tag">实时: <b id="c-live">${state.cC.toFixed(2)}</b> M</span></div>
+                    <input type="range" id="slider-c" min="0.2" max="3.0" step="0.1" value="${state.cC}" oninput="updateConc('C', this.value)">
+                </div>
+                <div class="control-row">
+                    <div class="label-val"><span style="color:#9b59b6;">[D] 生成物</span><span class="live-tag">实时: <b id="d-live">${state.cD.toFixed(2)}</b> M</span></div>
+                    <input type="range" id="slider-d" min="0.2" max="3.0" step="0.1" value="${state.cD}" oninput="updateConc('D', this.value)">
+                </div>`;
+        }
+    }
+
+    function initChart() {
+        const ctx = document.getElementById('rateChart').getContext('2d');
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+                    { label: 'R正 (正反应速率)', borderColor: '#e74c3c', backgroundColor: '#e74c3c', borderWidth: 3, data: [], fill: false, tension: 0.1, pointRadius: 0 },
+                    { label: 'R逆 (逆反应速率)', borderColor: '#008080', backgroundColor: '#008080', borderWidth: 3, data: [], fill: false, tension: 0.1, pointRadius: 0 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                scales: {
+                    x: { title: { display: true, text: '时间 t', font: { size: 14, weight: 'bold' } }, grid: { display: false } },
+                    y: { title: { display: true, text: '反应速率 R', font: { size: 14, weight: 'bold' } }, beginAtZero: true, ticks: { font: { size: 12, weight: 'bold' } } }
+                },
+                plugins: {
+                    legend: { labels: { font: { size: 13, weight: 'bold' } } }
+                }
+            }
+        });
+    }
+
+    function stepSimulation() {
+        timeStep++;
+        const Kc = getKc(state.temperature);
+        let v_fwd = 0, v_rev = 0;
+        const dt = 0.015 * simSpeed;
+
+        if (currentSys === 1) {
+            const k_fwd = 0.5 * state.catalyst;
+            const k_rev = (k_fwd / Kc) * state.catalyst;
+            v_fwd = k_fwd * Math.pow(state.cNO2, 2);
+            v_rev = k_rev * state.cN2O4;
+
+            const delta = (v_fwd - v_rev) * dt;
+            if (Math.abs(v_fwd - v_rev) > 0.003) {
+                state.cNO2 -= 2 * delta;
+                state.cN2O4 += delta;
+                state.isEquilibrium = false;
+            } else { state.isEquilibrium = true; }
+
+            state.cNO2 = Math.max(0.05, state.cNO2);
+            state.cN2O4 = Math.max(0.05, state.cN2O4);
+        } else {
+            const k_fwd = 0.4 * state.catalyst;
+            const k_rev = (k_fwd / Kc) * state.catalyst;
+            v_fwd = k_fwd * state.cA * state.cB;
+            v_rev = k_rev * state.cC * state.cD;
+
+            const delta = (v_fwd - v_rev) * dt;
+            if (Math.abs(v_fwd - v_rev) > 0.003) {
+                state.cA -= delta; state.cB -= delta;
+                state.cC += delta; state.cD += delta;
+                state.isEquilibrium = false;
+            } else { state.isEquilibrium = true; }
+
+            state.cA = Math.max(0.05, state.cA); state.cB = Math.max(0.05, state.cB);
+            state.cC = Math.max(0.05, state.cC); state.cD = Math.max(0.05, state.cD);
+        }
+
+        const Qc = getQc();
+        renderUI(v_fwd, v_rev, Kc, Qc);
+        syncParticlesTarget();
+
+        if (timeStep % 2 === 0) {
+            if (chart.data.labels.length > 60) {
+                chart.data.labels.shift();
+                chart.data.datasets[0].data.shift();
+                chart.data.datasets[1].data.shift();
+            }
+            chart.data.labels.push('');
+            chart.data.datasets[0].data.push(v_fwd.toFixed(3));
+            chart.data.datasets[1].data.push(v_rev.toFixed(3));
+            chart.update();
+        }
+    }
+
+    function toggleSimulation() {
+        isRunning = !isRunning;
+        const btn = document.getElementById('btn-toggle');
+        if (isRunning) {
+            btn.innerText = "⏸️ 暂停";
+            btn.className = "btn-play btn-pause";
+        } else {
+            btn.innerText = "▶️ 启动模拟";
+            btn.className = "btn-play btn-start";
+        }
+    }
+
+    function updateConc(type, val) {
+        val = parseFloat(val);
+        if (currentSys === 1) {
+            if (type === 'NO2') state.cNO2 = val;
+            else state.cN2O4 = val;
+        } else {
+            if (type === 'A') state.cA = val;
+            if (type === 'B') state.cB = val;
+            if (type === 'C') state.cC = val;
+            if (type === 'D') state.cD = val;
+        }
+        document.getElementById('explanation').innerText = `【探究观察】直接改变物质浓度：平衡常数 Kc 不变，但改变了浓度商 Qc！`;
+        syncParticlesTarget();
+    }
+
+    function onSliderVolume(val) {
+        val = parseFloat(val);
+        const factor = val / state.volume;
+        state.volume = val;
+
+        if (currentSys === 1) {
+            state.cNO2 /= factor; state.cN2O4 /= factor;
+        } else {
+            state.cA /= factor; state.cB /= factor;
+            state.cC /= factor; state.cD /= factor;
+        }
+        document.getElementById('vol-slider-val').innerText = val.toFixed(2) + " V₀";
+        document.getElementById('explanation').innerText = currentSys === 1 ?
+            "【探究观察】改变体积导致气体整体浓度改变，Kc 保持不变，Qc 突变引起平衡移动。" :
+            "【探究观察】反应前后气体分子数相等，改变体积虽改变浓度，但 Qc 仍等于 Kc，平衡不发生移动。";
+    }
+
+    function onSliderTemperature(val) {
+        val = parseFloat(val);
+        state.temperature = val;
+        document.getElementById('temp-slider-val').innerText = Math.round(val) + " K";
+        document.getElementById('explanation').innerText = "【探究观察】改变温度直接改变了平衡常数 Kc！瞬间产生 Qc ≠ Kc，从而驱动平衡向吸热/放热方向移动。";
+    }
+
+    function setQuickTemp(val) {
+        document.getElementById('slider-temp').value = val;
+        onSliderTemperature(val);
+    }
+
+    function addCatalyst() {
+        state.catalyst = 2.2;
+        document.getElementById('explanation').innerText = "【探究观察】催化剂同等程度抬升正逆反应速率，Kc 与 Qc 均保持不变，平衡不移动。";
+    }
+
+    function renderUI(v_fwd, v_rev, Kc, Qc) {
+        if (currentSys === 1) {
+            const no2Live = document.getElementById('no2-live');
+            const n2o4Live = document.getElementById('n2o4-live');
+            if (no2Live) no2Live.innerText = state.cNO2.toFixed(2);
+            if (n2o4Live) n2o4Live.innerText = state.cN2O4.toFixed(2);
+            
+            const sNO2 = document.getElementById('slider-no2');
+            const sN2O4 = document.getElementById('slider-n2o4');
+            if (sNO2 && document.activeElement !== sNO2) sNO2.value = state.cNO2.toFixed(1);
+            if (sN2O4 && document.activeElement !== sN2O4) sN2O4.value = state.cN2O4.toFixed(1);
+        } else {
+            const aLive = document.getElementById('a-live');
+            const bLive = document.getElementById('b-live');
+            const cLive = document.getElementById('c-live');
+            const dLive = document.getElementById('d-live');
+            if (aLive) aLive.innerText = state.cA.toFixed(2);
+            if (bLive) bLive.innerText = state.cB.toFixed(2);
+            if (cLive) cLive.innerText = state.cC.toFixed(2);
+            if (dLive) dLive.innerText = state.cD.toFixed(2);
+
+            const sA = document.getElementById('slider-a');
+            const sB = document.getElementById('slider-b');
+            const sC = document.getElementById('slider-c');
+            const sD = document.getElementById('slider-d');
+            if (sA && document.activeElement !== sA) sA.value = state.cA.toFixed(1);
+            if (sB && document.activeElement !== sB) sB.value = state.cB.toFixed(1);
+            if (sC && document.activeElement !== sC) sC.value = state.cC.toFixed(1);
+            if (sD && document.activeElement !== sD) sD.value = state.cD.toFixed(1);
+        }
+
+        document.getElementById('rate-fwd').innerText = v_fwd.toFixed(2);
+        document.getElementById('rate-rev').innerText = v_rev.toFixed(2);
+        document.getElementById('kc-display').innerText = Kc.toFixed(3);
+        document.getElementById('qc-display').innerText = Qc.toFixed(3);
+
+        const statusEl = document.getElementById('status-box');
+        if (state.isEquilibrium) {
+            statusEl.innerText = "已达到化学平衡状态 (Qc = Kc)";
+            statusEl.style.background = "#dcfce7";
+            statusEl.style.color = "#15803d";
+        } else if (v_fwd > v_rev) {
+            statusEl.innerText = "平衡正向移动中... (Qc < Kc)";
+            statusEl.style.background = "#fef9c3";
+            statusEl.style.color = "#a16207";
+        } else {
+            statusEl.innerText = "平衡逆向移动中... (Qc > Kc)";
+            statusEl.style.background = "#fee2e2";
+            statusEl.style.color = "#b91c1c";
+        }
+
+        // 绘制勒沙特列跷跷板
+        drawSeesaw(v_fwd, v_rev);
+    }
+
+    // Canvas 绘制跷跷板
+    function drawSeesaw(v_fwd, v_rev) {
+        const canvas = document.getElementById('seesawCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+
+        ctx.clearRect(0, 0, width, height);
+
+        // 计算目标倾斜角：根据 R正 与 R逆 的相对强弱
+        // 正反应越强，左端下沉（角度负向）；逆反应越强，右端下沉（角度正向）
+        let diff = (v_rev - v_fwd) / (Math.max(v_fwd, v_rev) || 1);
+        let targetAngle = Math.max(-0.25, Math.min(0.25, diff * 0.25));
+
+        // 平滑过渡
+        currentSeesawAngle += (targetAngle - currentSeesawAngle) * 0.1;
+
+        const centerX = width / 2;
+        const centerY = height - 25;
+        const boardLength = 300;
+
+        // 1. 绘制基座 / 支点 (Pivot)
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY - 15);
+        ctx.lineTo(centerX - 15, centerY + 15);
+        ctx.lineTo(centerX + 15, centerY + 15);
+        ctx.closePath();
+        ctx.fillStyle = '#64748b';
+        ctx.fill();
+
+        ctx.font = 'bold 12px sans-serif';
+        ctx.fillStyle = '#334155';
+        ctx.textAlign = 'center';
+        ctx.fillText("平衡支点", centerX, centerY + 24);
+
+        // 2. 旋转画布绘制跷跷板横梁
+        ctx.save();
+        ctx.translate(centerX, centerY - 15);
+        ctx.rotate(currentSeesawAngle);
+
+        // 梁身
+        ctx.beginPath();
+        ctx.rect(-boardLength / 2, -6, boardLength, 12);
+        ctx.fillStyle = '#34495e';
+        ctx.fill();
+
+        // 左端盘：正反应倾向（反应物）
+        ctx.beginPath();
+        ctx.arc(-boardLength / 2 + 15, -12, 14, 0, Math.PI * 2);
+        ctx.fillStyle = '#e74c3c';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText("正", -boardLength / 2 + 15, -8);
+
+        // 右端盘：逆反应倾向（生成物）
+        ctx.beginPath();
+        ctx.arc(boardLength / 2 - 15, -12, 14, 0, Math.PI * 2);
+        ctx.fillStyle = '#008080';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText("逆", boardLength / 2 - 15, -8);
+
+        ctx.restore();
+    }
+
+    function initParticles() {
+        particles = [];
+        const legend = document.getElementById('particle-legend');
+
+        if (currentSys === 1) {
+            legend.innerHTML = `
+                <div class="legend-item"><span class="dot" style="background:#d35400;"></span>NO₂</div>
+                <div class="legend-item"><span class="dot" style="background:#27ae60;"></span>N₂O₄</div>`;
+        } else {
+            legend.innerHTML = `
+                <div class="legend-item"><span class="dot" style="background:#e74c3c;"></span>A</div>
+                <div class="legend-item"><span class="dot" style="background:#3498db;"></span>B</div>
+                <div class="legend-item"><span class="dot" style="background:#2ecc71;"></span>C</div>
+                <div class="legend-item"><span class="dot" style="background:#9b59b6;"></span>D</div>`;
+        }
+        syncParticlesTarget();
+    }
+
+    function syncParticlesTarget() {
+        let targets = {};
+        if (currentSys === 1) {
+            targets['NO2'] = Math.round(state.cNO2 * 5);
+            targets['N2O4'] = Math.round(state.cN2O4 * 3.5);
+        } else {
+            targets['A'] = Math.round(state.cA * 3.5);
+            targets['B'] = Math.round(state.cB * 3.5);
+            targets['C'] = Math.round(state.cC * 3.5);
+            targets['D'] = Math.round(state.cD * 3.5);
+        }
+
+        const config = {
+            'NO2': { color: '#d35400', r: 6 },
+            'N2O4': { color: '#27ae60', r: 9 },
+            'A': { color: '#e74c3c', r: 7 },
+            'B': { color: '#3498db', r: 7 },
+            'C': { color: '#2ecc71', r: 7 },
+            'D': { color: '#9b59b6', r: 7 }
+        };
+
+        for (let type in targets) {
+            let currentCount = particles.filter(p => p.type === type).length;
+            let targetCount = targets[type];
+
+            if (currentCount < targetCount) {
+                for (let i = 0; i < targetCount - currentCount; i++) {
+                    particles.push(createParticle(config[type].color, config[type].r, type));
+                }
+            } else if (currentCount > targetCount) {
+                for (let i = 0; i < currentCount - targetCount; i++) {
+                    let idx = particles.findIndex(p => p.type === type);
+                    if (idx !== -1) particles.splice(idx, 1);
+                }
+            }
+        }
+    }
+
+    function createParticle(color, radius, type) {
+        const canvas = document.getElementById('microCanvas');
+        const baseSpeed = 0.28; 
+        const angle = Math.random() * Math.PI * 2;
+        return {
+            x: Math.random() * (canvas.width - 40) + 20,
+            y: Math.random() * (canvas.height - 40) + 20,
+            vx: Math.cos(angle) * baseSpeed,
+            vy: Math.sin(angle) * baseSpeed,
+            color: color,
+            radius: radius,
+            type: type
+        };
+    }
+
+    function renderMicroLoop() {
+        const canvas = document.getElementById('microCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (currentSys === 1) {
+            const alpha = Math.min(0.8, state.cNO2 / 5.0);
+            ctx.fillStyle = `rgba(211, 84, 0, ${alpha * 0.45})`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x - p.radius < 0) { p.x = p.radius; p.vx *= -1; }
+            if (p.x + p.radius > canvas.width) { p.x = canvas.width - p.radius; p.vx *= -1; }
+            if (p.y - p.radius < 0) { p.y = p.radius; p.vy *= -1; }
+            if (p.y + p.radius > canvas.height) { p.y = canvas.height - p.radius; p.vy *= -1; }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+            ctx.strokeStyle = "rgba(0,0,0,0.2)";
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+        });
+
+        requestAnimationFrame(renderMicroLoop);
+    }
+
+    function mainSimLoop() {
+        if (isRunning) {
+            stepSimulation();
+        }
+        setTimeout(() => {
+            requestAnimationFrame(mainSimLoop);
+        }, 100);
+    }
+
+    function resetExperiment() {
+        state = {
+            cNO2: 2.00, cN2O4: 1.00,
+            cA: 2.00, cB: 2.00, cC: 1.00, cD: 1.00,
+            volume: 1.0, temperature: 298, catalyst: 1.0, isEquilibrium: true
+        };
+        document.getElementById('slider-vol').value = 1.0;
+        document.getElementById('slider-temp').value = 298;
+        document.getElementById('vol-slider-val').innerText = "1.00 V₀";
+        document.getElementById('temp-slider-val').innerText = "298 K";
+        document.getElementById('explanation').innerText = "系统已初始化恢复至基础平衡状态。";
+
+        renderConcentrationControls();
+        initParticles();
+        chart.data.labels = [];
+        chart.data.datasets[0].data = [];
+        chart.data.datasets[1].data = [];
+    }
+
+    window.onload = function() {
+        renderConcentrationControls();
+        initChart();
+        initParticles();
+        requestAnimationFrame(renderMicroLoop);
+        requestAnimationFrame(mainSimLoop);
+    };
+</script>
+</body>
+</html>
