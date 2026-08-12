@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>化学平衡移动 探究模拟实验台</title>
+    <title>居銮中华中学 - 化学平衡移动探究模拟实验台</title>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -38,18 +38,66 @@
             box-shadow: var(--box-shadow);
         }
 
-        h1 {
-            text-align: center;
+        /* 跨平台快捷导航栏 */
+        .site-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            background-color: var(--card-bg);
+            padding: 12px 20px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .nav-link {
             color: var(--primary);
-            margin: 0 0 8px 0;
-            font-size: 2em;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding: 6px 14px;
+            border-radius: 15px;
+            transition: all 0.2s;
+            background-color: #f0f4f8;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 5px;
+        }
+
+        .school-logo-small {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 1.8rem;
         }
 
         .subtitle {
             text-align: center;
             color: #64748b;
-            margin-bottom: 20px;
-            font-size: 1.15em;
+            margin-top: 5px;
+            font-size: 1.05em;
             font-weight: 500;
         }
 
@@ -367,8 +415,24 @@
 <body>
 
 <div class="container">
-    <h1>化学平衡移动 探究模拟实验台</h1>
-    <div class="subtitle">高二化学 21.3节 影响化学平衡移动的因素</div>
+    <!-- 跨平台快捷导航栏 -->
+    <nav class="site-nav">
+        <a href="index.html" class="nav-link">🏠 平台首页</a>
+        <a href="2024.html" class="nav-link">📅 2024统测</a>
+        <a href="2025.html" class="nav-link">📅 2025统测</a>
+        <a href="UEC.html" class="nav-link">📖 统考真题</a>
+        <a href="test.html" class="nav-link">🧪 章节小测</a>
+        <a href="equilibrium_simulator.html" class="nav-link active">⚖️ 平衡模拟器</a>
+        <a href="chemistry_notes_ch19_22.html" class="nav-link">📚 互动复习笔记</a>
+    </nav>
+
+    <header>
+        <div class="header-title-container">
+            <img src="image/校徽.jpg" alt="居銮中华中学校徽" class="school-logo-small">
+            <h1>居銮中华中学 - 化学平衡移动探究模拟实验台</h1>
+        </div>
+        <div class="subtitle">高二理科化学 21.3节 影响化学平衡移动的因素</div>
+    </header>
 
     <div class="system-select">
         <button class="sys-btn active" id="btn-sys1" onclick="switchSystem(1)">体系 1: 2 NO₂ ⇌ N₂O₄</button>
@@ -1033,7 +1097,6 @@
             const scale = 20;
             targets['Ba'] = Math.round(state.cBa * scale);
             targets['CrO4'] = Math.round(state.cCrO4 * scale);
-            // 修正：将沉淀量计算并生成 BaCrO4 固体沉淀粒子
             targets['BaCrO4'] = Math.round(state.precipBaCrO4 * 120);
         }
 
@@ -1048,7 +1111,7 @@
             'CrO4': { color: '#f1c40f', r: 6.5 },
             'H': { color: '#e74c3c', r: 4 },
             'Ba': { color: '#3498db', r: 7 },
-            'BaCrO4': { color: '#d35400', r: 8.5 } // 沉淀粒子特征色 (棕黄/深橙黄色固体)
+            'BaCrO4': { color: '#d35400', r: 8.5 }
         };
 
         for (let type in targets) {
@@ -1073,7 +1136,6 @@
         const baseSpeed = 0.28; 
         const angle = Math.random() * Math.PI * 2;
 
-        // 如果是 BaCrO4 沉淀，初始位置直接堆积在容器底部
         let px = Math.random() * (canvas.width - 30) + 15;
         let py = Math.random() * (canvas.height - 60) + 20;
         if (type === 'BaCrO4') {
@@ -1121,7 +1183,6 @@
 
         particles.forEach(p => {
             if (p.type === 'BaCrO4') {
-                // 沉淀粒子重力下降与底部限位
                 if (p.y < canvas.height - p.radius - 5) {
                     p.y += 0.8;
                 } else {
