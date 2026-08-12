@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高中化学高二中册全章节（19-22章）详尽复习笔记与探究实验室</title>
+    <title>居銮中华中学 - 高二理科化学中册全章节复习笔记与探究实验室</title>
     <style>
         :root {
             --primary-color: #1a365d;
@@ -38,6 +38,35 @@
             margin: 0 auto;
         }
 
+        /* 跨平台快捷导航栏 */
+        .site-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            background-color: var(--card-bg);
+            padding: 12px 20px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding: 6px 14px;
+            border-radius: 15px;
+            transition: all 0.2s;
+            background-color: #f0f4f8;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
         header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
@@ -48,15 +77,30 @@
             text-align: center;
         }
 
+        .header-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 5px;
+        }
+
+        .school-logo-small {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
         header h1 {
             font-size: 1.8em;
-            margin-bottom: 8px;
+            margin: 0;
             font-weight: 700;
         }
 
         header p {
             opacity: 0.95;
             font-size: 0.95em;
+            margin-top: 5px;
         }
 
         .top-action-bar {
@@ -175,7 +219,6 @@
             border: 1px solid var(--border-color);
         }
 
-        /* 1. 双栏响应式组合布局 */
         .flex-dual-col {
             display: flex;
             gap: 20px;
@@ -193,7 +236,6 @@
             flex: 1 1 350px;
         }
 
-        /* 2. 填空显隐交互【关键字刮刮乐】 */
         .fill-blank {
             color: transparent;
             background-color: #e2e8f0;
@@ -216,7 +258,6 @@
             border-bottom: 2px solid #3182ce;
         }
 
-        /* 3. 可折叠思维导图树状结构 */
         .mindmap-box {
             background: #f8fafc;
             border: 1px solid var(--border-color);
@@ -432,29 +473,6 @@
             font-weight: bold;
         }
 
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            font-size: 0.9em;
-        }
-
-        .data-table th, .data-table td {
-            border: 1px solid var(--border-color);
-            padding: 8px 12px;
-            text-align: center;
-        }
-
-        .data-table th {
-            background-color: #edf2f7;
-            color: var(--primary-color);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .tag {
             display: inline-block;
             padding: 2px 8px;
@@ -465,9 +483,13 @@
 
         .tag-calc { background-color: #faf5ff; color: #6b46c1; }
 
-        /* 讲义打印优化媒体查询：隐藏按钮与背景色，填空转为下划线打印 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @media print {
-            header, .nav-tabs, .top-action-bar, .sim-controls, .quiz-btn, .btn-action, .mm-toggle-btn {
+            header, .nav-tabs, .top-action-bar, .sim-controls, .quiz-btn, .btn-action, .mm-toggle-btn, .site-nav {
                 display: none !important;
             }
             body {
@@ -504,8 +526,22 @@
 <body>
 
 <div class="container">
+    <!-- 跨平台快捷导航栏 -->
+    <nav class="site-nav">
+        <a href="index.html" class="nav-link">🏠 平台首页</a>
+        <a href="2024.html" class="nav-link">📅 2024统测</a>
+        <a href="2025.html" class="nav-link">📅 2025统测</a>
+        <a href="UEC.html" class="nav-link">📖 统考真题</a>
+        <a href="test.html" class="nav-link">🧪 章节小测</a>
+        <a href="equilibrium_simulator.html" class="nav-link">⚖️ 平衡模拟器</a>
+        <a href="chemistry_notes_ch19_22.html" class="nav-link active">📚 互动复习笔记</a>
+    </nav>
+
     <header>
-        <h1>高二化学中册全章节详尽互动复习笔记</h1>
+        <div class="header-title-container">
+            <img src="image/校徽.jpg" alt="居銮中华中学校徽" class="school-logo-small">
+            <h1>居銮中华中学 - 高二理科化学复习笔记</h1>
+        </div>
         <p>完整覆盖第19章至第22章：微观机制、热力学与动力学推导、教材实验、详尽例题与探究模拟器</p>
     </header>
 
@@ -1454,12 +1490,10 @@
         document.getElementById('elecClass').innerText = cls;
         document.getElementById('elecNote').innerText = note;
 
-        // --- 重绘真闭合回路 ---
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // 1. 烧杯容器
-        ctx.strokeStyle = "#4a5568";
-        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#4a5568"; ctx.lineWidth = 3;
         ctx.strokeRect(50, 100, 160, 85);
 
         // 2. 填充溶液/样品
@@ -1475,10 +1509,10 @@
             ctx.fillRect(53, 120, 154, 62);
         }
 
-        // 3. 两个电极棒 (浸入液体内部)
+        // 3. 两个电极棒
         ctx.fillStyle = "#718096";
-        ctx.fillRect(80, 75, 12, 85);  // 左电极
-        ctx.fillRect(168, 75, 12, 85); // 右电极
+        ctx.fillRect(80, 75, 12, 85);
+        ctx.fillRect(168, 75, 12, 85);
         ctx.strokeStyle = "#2d3748"; ctx.lineWidth = 1;
         ctx.strokeRect(80, 75, 12, 85); ctx.strokeRect(168, 75, 12, 85);
 
@@ -1515,7 +1549,7 @@
             });
         }
 
-        // 6. 真实闭合导线线路
+        // 6. 导线线路
         ctx.strokeStyle = "#e53e3e"; ctx.lineWidth = 2.5;
         ctx.beginPath(); ctx.moveTo(86, 75); ctx.lineTo(86, 25); ctx.lineTo(108, 25); ctx.stroke();
 
