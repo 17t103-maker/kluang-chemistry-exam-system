@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高中化学高二中册全章节（19-22章）详尽复习笔记与探究实验室</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --accent-color: #d69e2e;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+            --success-color: #38a169;
+            --warning-color: #dd6b20;
+            --danger-color: #e53e3e;
+            --sim-bg: #edf2f7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        header p {
+            opacity: 0.95;
+            font-size: 0.95em;
+        }
+
+        .top-action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            background: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            flex: 1 1 auto;
+            padding: 12px 15px;
+            border: none;
+            background-color: var(--card-bg);
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 0.9em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .chapter-content {
+            display: none;
+        }
+
+        .chapter-content.active {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 6px;
+            margin-bottom: 18px;
+            font-size: 1.4em;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin: 22px 0 10px 0;
+            font-size: 1.15em;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 8px;
+        }
+
+        h4 {
+            color: var(--primary-color);
+            margin: 12px 0 6px 0;
+            font-size: 1.05em;
+        }
+
+        p, ul, ol {
+            margin-bottom: 12px;
+            font-size: 0.95em;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        .formula-box {
+            background-color: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 12px 16px;
+            margin: 15px 0;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 1em;
+            border-radius: 0 8px 8px 0;
+            overflow-x: auto;
+        }
+
+        .note-img {
+            display: block;
+            width: 90%;
+            max-width: 450px;
+            height: auto;
+            margin: 15px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        /* 1. 双栏响应式组合布局 */
+        .flex-dual-col {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .flex-dual-col .col-media {
+            flex: 1 1 350px;
+            text-align: center;
+        }
+
+        .flex-dual-col .col-panel {
+            flex: 1 1 350px;
+        }
+
+        /* 2. 填空显隐交互【关键字刮刮乐】 */
+        .fill-blank {
+            color: transparent;
+            background-color: #e2e8f0;
+            padding: 1px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid #cbd5e0;
+        }
+
+        .fill-blank:hover {
+            background-color: #cbd5e0;
+        }
+
+        .fill-blank.revealed {
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            font-weight: bold;
+            border-bottom: 2px solid #3182ce;
+        }
+
+        /* 3. 可折叠思维导图树状结构 */
+        .mindmap-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        .mm-tree ul {
+            list-style: none;
+            padding-left: 20px;
+            margin-top: 5px;
+            border-left: 2px dashed #cbd5e0;
+        }
+
+        .mm-tree li {
+            margin: 8px 0;
+            position: relative;
+        }
+
+        .mm-node {
+            font-weight: bold;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .mm-node:hover {
+            background: #edf2f7;
+        }
+
+        .mm-toggle-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mm-sub.hidden {
+            display: none;
+        }
+
+        .mm-leaf {
+            color: var(--text-color);
+            background: #fff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #edf2f7;
+            font-size: 0.9em;
+        }
+
+        .quiz-card {
+            background-color: #fffaf0;
+            border: 1px solid #feebc8;
+            padding: 18px;
+            border-radius: 10px;
+            margin: 18px 0;
+        }
+
+        .quiz-title {
+            font-weight: bold;
+            color: var(--warning-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.98em;
+        }
+
+        .quiz-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        .quiz-btn:hover {
+            background-color: #2c5282;
+        }
+
+        .answer-box {
+            display: none;
+            margin-top: 12px;
+            padding: 14px;
+            background-color: #f0fff4;
+            border-left: 4px solid var(--success-color);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.92em;
+        }
+
+        .answer-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .simulator-card {
+            background-color: #f8fafc;
+            border: 2px dashed var(--secondary-color);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+        }
+
+        .simulator-card h3 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .sim-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+            background: #edf2f7;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .sim-controls label {
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .sim-controls select, .sim-controls input[type="range"] {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9em;
+        }
+
+        .btn-action {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.88em;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: #2c5282;
+        }
+
+        .btn-action:disabled {
+            background-color: #cbd5e0;
+            cursor: not-allowed;
+        }
+
+        .sim-display {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .sim-canvas {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            max-width: 100%;
+        }
+
+        .sim-data-panel {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9em;
+        }
+
+        .step-badge {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #2d3748;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        .data-table th {
+            background-color: #edf2f7;
+            color: var(--primary-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .tag-calc { background-color: #faf5ff; color: #6b46c1; }
+
+        /* 讲义打印优化媒体查询：隐藏按钮与背景色，填空转为下划线打印 */
+        @media print {
+            header, .nav-tabs, .top-action-bar, .sim-controls, .quiz-btn, .btn-action, .mm-toggle-btn {
+                display: none !important;
+            }
+            body {
+                background-color: white !important;
+                color: black !important;
+                padding: 0;
+            }
+            .container {
+                max-width: 100% !important;
+            }
+            .card, .simulator-card, .quiz-card, .mindmap-box {
+                border: none !important;
+                box-shadow: none !important;
+                background: white !important;
+                padding: 5px 0 !important;
+                margin-bottom: 15px !important;
+            }
+            .chapter-content {
+                display: block !important;
+            }
+            .fill-blank {
+                color: transparent !important;
+                background-color: transparent !important;
+                border-bottom: 1px solid #000 !important;
+                border-radius: 0 !important;
+                padding: 0 15px !important;
+            }
+            .mm-sub.hidden {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>高二化学中册全章节详尽互动复习笔记</h1>
+        <p>完整覆盖第19章至第22章：微观机制、热力学与动力学推导、教材实验、详尽例题与探究模拟器</p>
+    </header>
+
+    <!-- 顶部操作栏 -->
+    <div class="top-action-bar">
+        <div>
+            <button class="btn-action" onclick="toggleAllBlanks()">👁️ 切换全页填空答案</button>
+        </div>
+        <div>
+            <button class="btn-action" style="background-color: var(--success-color);" onclick="window.print()">🖨️ 打印/导出纸质讲义</button>
+        </div>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('ch19', event)">第19章 化学反应和能量</button>
+        <button class="tab-btn" onclick="switchTab('ch20', event)">第20章 化学反应速率</button>
+        <button class="tab-btn" onclick="switchTab('ch21', event)">第21章 化学平衡的移动</button>
+        <button class="tab-btn" onclick="switchTab('ch22', event)">第22章 水溶液中的离子平衡</button>
+    </div>
+
+    <!-- 第19章 -->
+    <div id="ch19" class="chapter-content active">
+        <div class="card">
+            <h2>第19章 化学反应和能量</h2>
+            
+            <h3>19.1 化学反应中的热量变化</h3>
+            <p>化学反应在生成新物质的同时，总是伴随着能量的变化。能量变化通常表现为<span class="fill-blank" onclick="toggleInline(this)">热量的释放或吸收</span>，也可转化为电能、光能等。</p>
+            
+            <div class="flex-dual-col">
+                <div class="col-media">
+                    <img class="note-img" style="max-width:100%; margin:0;" src="image/homework/Screenshot 2026-08-12 150220.jpg" alt="图19-1 几种能量的转化与生活实例">
+                </div>
+                <div class="col-panel">
+                    <h4>1. 放热反应与吸热反应</h4>
+                    <ul>
+                        <li><b>放热反应：</b>凡是有热量放出的化学反应。如炭/氢气燃烧、酸碱中和、铝热反应。</li>
+                        <li><b>吸热反应：</b>凡是吸收热量的化学反应。如高温煅烧石灰石、Ba(OH)<sub>2</sub>·8H<sub>2</sub>O 与 NH<sub>4</sub>Cl 反应。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <img class="note-img" src="image/homework/Screenshot 2026-08-12 150337.jpg" alt="图19-2 氢氧化钡晶体与氯化铵晶体反应实验装置">
+
+            <h4>2. 微观本质与键能</h4>
+            <p>断开化学键需要<span class="fill-blank" onclick="toggleInline(this)">吸收能量</span>，形成化学键则会<span class="fill-blank" onclick="toggleInline(this)">放出能量</span>。</p>
+            <ul>
+                <li><b>键能 (Bond Energy)：</b>拆开 1 mol 气态物质中某种共价键所需要吸收的能量。键能越大，共价键越牢固，分子越稳定。</li>
+            </ul>
+
+            <img class="note-img" src="image/homework/Screenshot 2026-08-12 150408.jpg" alt="图19-4 氢气与氯气反应生成氯化氢过程中的能量变化">
+
+            <div class="formula-box">
+                <b>微观计算公式：</b><br>
+                反应热 ΔH = 反应物总键能（断键吸收总能量） - 生成物总键能（成键释放总能量）<br>
+                以 H<sub>2</sub>(g) + Cl<sub>2</sub>(g) → 2HCl(g) 为例：ΔH = (436.4 + 242.7) - (2 × 431.8) = -184.5 kJ/mol（放热反应）。
+            </div>
+
+            <h4>3. 宏观能量与能量守恒定律</h4>
+            <img class="note-img" src="image/homework/Screenshot 2026-08-12 150524.jpg" alt="图19-5 放热反应与吸热反应的能量高低对比图">
+
+            <h3>19.2 反应热、焓变与热化学方程式</h3>
+            <ul>
+                <li><b>反应热 (Heat of Reaction)：</b>在化学反应过程中，当反应物和生成物具有相同温度时释放或吸收的热量。</li>
+                <li><b>焓 (H) 与 焓变 (ΔH)：</b>在恒温、恒压条件下，体系仅做体积功时吸收或释放的热量称为焓变，单位为 <code>kJ/mol</code> 或 <code>kJ·mol⁻¹</code>。</li>
+            </ul>
+
+            <img class="note-img" src="image/homework/Screenshot 2026-08-12 150546.jpg" alt="图19-6 化学反应中的焓变坐标图">
+
+            <h3>19.3 反应热的种类与黑斯定律</h3>
+            <h4>1. 中和热 (Heat of Neutralization) 与测定</h4>
+            <p>在稀溶液中，强酸与强碱起中和反应生成 <b>1 mol H<sub>2</sub>O(l)</b> 产生的反应热约为 <b>-57.3 kJ/mol</b>。</p>
+
+            <!-- 🧪 探究实验 1：中和热测定模拟器 -->
+            <div class="simulator-card">
+                <h3>🧪 探究实验 1：简易量热器测定中和热分步操作模拟器</h3>
+                <p>探究强酸/弱酸与强碱反应释放热量的差异（假设混合溶液密度 <i>ρ</i> = 1.0 g/cm<sup>3</sup>，比热容 <i>c</i> = 4.18 J/(g·°C)）。</p>
+
+                <div class="sim-controls">
+                    <label>选择待测酸液：</label>
+                    <select id="neutAcidType" onchange="resetNeutSim()">
+                        <option value="hcl">50 mL 0.50 mol/L HCl (强酸)</option>
+                        <option value="ch3cooh">50 mL 0.50 mol/L CH3COOH (弱酸)</option>
+                        <option value="h2so4">50 mL 0.25 mol/L H2SO4 (二元强酸)</option>
+                    </select>
+                    <label>碱液（稍过量）：</label>
+                    <span style="font-weight:bold; color:var(--primary-color);">50 mL 0.55 mol/L NaOH</span>
+                </div>
+
+                <div class="sim-controls" style="background:#e2e8f0;">
+                    <button class="btn-action" id="btnStep1" onclick="neutStep1()">① 倒入酸液测 T₁</button>
+                    <button class="btn-action" id="btnStep2" onclick="neutStep2()" disabled>② 加入碱液</button>
+                    <button class="btn-action" id="btnStep3" onclick="neutStep3()" disabled>③ 搅拌并反应</button>
+                    <button class="btn-action" id="btnStep4" onclick="neutStep4()" disabled>④ 读取最高温度 T₂</button>
+                    <button class="btn-action" style="background-color:#e53e3e;" onclick="resetNeutSim()">↺ 重新实验</button>
+                </div>
+
+                <div class="sim-display">
+                    <canvas id="neutCanvas" class="sim-canvas" width="280" height="230"></canvas>
+                    <div class="sim-data-panel">
+                        <div class="step-badge" id="neutStepText">当前状态：待开始实验</div>
+                        <p><b>起始温度 T₁：</b> <span id="neutT1">--</span> °C</p>
+                        <p><b>最高温度 T₂：</b> <span id="neutT2">--</span> °C</p>
+                        <p><b>温度变化 ΔT：</b> <span id="neutDT">--</span> °C</p>
+                        <p><b>生成 H₂O 的物质的量：</b> <span id="neutMoles">0.025</span> mol</p>
+                        <p><b>溶液吸收热量 Q：</b> <span id="neutQ">--</span> J</p>
+                        <hr style="margin: 8px 0;">
+                        <p><b>实验测得中和热 ΔH：</b> <span id="neutDH" style="font-weight:bold; font-size:1.1em; color:var(--danger-color);">--</span></p>
+                        <p><small id="neutExplanation" style="color:#4a5568; font-weight:bold;"></small></p>
+                    </div>
+                </div>
+            </div>
+
+            <img class="note-img" src="image/homework/Screenshot 2026-08-12 150617.jpg" alt="图19-8 简易量热器示意图">
+
+            <h4>2. 黑斯定律 (Hess's Law)</h4>
+            <p>一个化学反应，不论是一步完成还是分几步完成，其总的热效应是完全相同的。<b>反应的焓变 ΔH 仅与起始状态和最终状态有关，与反应途径无关。</b></p>
+
+            <!-- 🎯 模拟器 2：黑斯定律推导答题模拟器 -->
+            <div class="simulator-card">
+                <h3>🎯 互动练习 2：黑斯定律方程式合成与 ΔH 计算模拟器</h3>
+                <p>已知以下两个热化学方程式，请选择系数组合合成目标方程：<b>C(s,石墨) + ½O<sub>2</sub>(g) → CO(g)  ΔH = ?</b></p>
+                <div style="background:white; padding:12px; border-radius:8px; margin:10px 0; font-family:monospace; font-size:0.9em;">
+                    <p>① C(s,石墨) + O<sub>2</sub>(g) → CO<sub>2</sub>(g) &nbsp;&nbsp;&nbsp;&nbsp; ΔH₁ = -393.5 kJ/mol</p>
+                    <p>② CO(g) + ½O<sub>2</sub>(g) → CO<sub>2</sub>(g) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ΔH₂ = -283.0 kJ/mol</p>
+                </div>
+                <div class="sim-controls">
+                    <label>方程①系数：</label>
+                    <select id="hessCoeff1">
+                        <option value="1">+1 (保持)</option>
+                        <option value="-1">-1 (颠倒)</option>
+                        <option value="2">+2</option>
+                    </select>
+                    <label>方程②系数：</label>
+                    <select id="hessCoeff2">
+                        <option value="1">+1 (保持)</option>
+                        <option value="-1">-1 (颠倒)</option>
+                        <option value="-2">-2</option>
+                    </select>
+                    <button class="btn-action" onclick="checkHessAnswer()">组合计算 ΔH</button>
+                </div>
+                <div id="hessResult" class="answer-box" style="display:block; background:#fff;">
+                    请选择组合系数并点击“组合计算”。
+                </div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-title"><span class="tag tag-calc">思考题 19f</span> 黑斯定律计算生成热</div>
+                <p>已知 CH<sub>4</sub>(g)、C(s,石墨)、H<sub>2</sub>(g) 的燃烧热分别为 -890.3 kJ/mol、-393.5 kJ/mol、-285.8 kJ/mol，求 C(s,石墨) + 2H<sub>2</sub>(g) → CH<sub>4</sub>(g) 的反应热 ΔH。</p>
+                <button class="quiz-btn" onclick="toggleAnswer('q19_2')">查看答案与解析</button>
+                <div id="q19_2" class="answer-box">
+                    <b>正确答案：ΔH = -74.8 kJ/mol</b><br>
+                    目标方程 = ②(C燃烧) + 2×③(H₂燃烧) - ①(CH₄燃烧)<br>
+                    ΔH = (-393.5) + 2×(-285.8) - (-890.3) = <b>-74.8 kJ/mol</b>。
+                </div>
+            </div>
+
+            <!-- 第19章 可折叠思维导图 -->
+            <div class="mindmap-box">
+                <h3 style="margin-top:0; border-left:none; padding-left:0; color:var(--primary-color);">🌳 第19章 核心知识思维导图</h3>
+                <div class="mm-tree">
+                    <ul>
+                        <li>
+                            <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>化学反应与能量</span>
+                            <ul class="mm-sub">
+                                <li>
+                                    <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>热量变化</span>
+                                    <ul class="mm-sub">
+                                        <li><span class="mm-leaf">放热反应 (ΔH < 0)：燃烧、中和、金属与酸</span></li>
+                                        <li><span class="mm-leaf">吸热反应 (ΔH > 0)：煅烧石灰石、Ba(OH)₂·8H₂O与NH₄Cl</span></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>微观与计算</span>
+                                    <ul class="mm-sub">
+                                        <li><span class="mm-leaf">键能：断键吸收 - 成键释放</span></li>
+                                        <li><span class="mm-leaf">热化学方程式书写规范</span></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>反应热种类与定律</span>
+                                    <ul class="mm-sub">
+                                        <li><span class="mm-leaf">生成热、燃烧热、中和热 (-57.3 kJ/mol)</span></li>
+                                        <li><span class="mm-leaf">黑斯定律：始终态决定，与途径无关</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第20章 -->
+    <div id="ch20" class="chapter-content">
+        <div class="card">
+            <h2>第20章 化学反应速率</h2>
+            
+            <h3>20.1 化学反应速率的表示方法与实验探究</h3>
+            <p><b>化学反应速率：</b>通常用单位时间内反应物浓度的减小或生成物浓度的增大来表示。</p>
+            
+            <!-- 🧪 探究实验 3：锥形瓶+气球膨胀+V-t曲线双画布模拟器 -->
+            <div class="simulator-card">
+                <h3>🧪 探究实验 3：Mg + 2HCl → MgCl<sub>2</sub> + H<sub>2</sub>↑ 气泡生成与气球膨胀速率模拟器</h3>
+                <p>观察锥形瓶内<b>气泡剧烈程度</b>、<b>顶部气球膨胀快慢</b>与右侧<b> <i>V</i>-<i>t</i> 速率曲线</b>的实时双向联动。</p>
+
+                <div class="sim-controls">
+                    <label>镁的状态：</label>
+                    <select id="mgForm">
+                        <option value="ribbon">镁条 (表面积小)</option>
+                        <option value="powder">镁粉 (表面积大/反应暴沸)</option>
+                    </select>
+                    <label>盐酸浓度：</label>
+                    <select id="hclConc">
+                        <option value="0.5">0.5 mol/L</option>
+                        <option value="1.0" selected>1.0 mol/L</option>
+                        <option value="2.0">2.0 mol/L</option>
+                    </select>
+                    <label>温度：</label>
+                    <select id="mgTemp">
+                        <option value="20">20 °C</option>
+                        <option value="40">40 °C</option>
+                    </select>
+                    <button class="btn-action" onclick="startMgSim()">▶ 开始反应绘制</button>
+                </div>
+
+                <div class="sim-display">
+                    <canvas id="mgFlaskCanvas" class="sim-canvas" width="180" height="230"></canvas>
+                    <canvas id="mgCanvas" class="sim-canvas" width="270" height="230"></canvas>
+                    <div class="sim-data-panel">
+                        <p><b>反应状态：</b> <span id="mgStatus" style="font-weight:bold; color:var(--secondary-color);">准备就绪</span></p>
+                        <p><b>当前时间 t：</b> <span id="mgTime">0.0</span> s</p>
+                        <p><b>瞬间反应速率 rate：</b> <span id="mgRate" style="color:var(--warning-color); font-weight:bold;">0.0</span> mL/s</p>
+                        <p><b>累计 H₂ 体积 V：</b> <span id="mgVol" style="color:var(--success-color); font-weight:bold;">0.0</span> mL</p>
+                        <hr style="margin:6px 0;">
+                        <p><small style="color:#4a5568;"><b>探究点：</b>观察反应初期气泡剧烈生成、气球迅速膨胀，与右侧曲线高斜率对应关系。</small></p>
+                    </div>
+                </div>
+            </div>
+
+            <img class="note-img" src="image/homework/Screenshot 2026-08-12 155542.jpg" alt="图20-3 排水收集气体测量速率装置">
+
+            <h3>20.2 影响化学反应速率的因素及微观理论</h3>
+            <h4>碰撞学说 (Collision Theory) 与活化能</h4>
+            <p><b>有效碰撞条件：</b>① 分子具有足够高能量（<span class="fill-blank" onclick="toggleInline(this)">活化分子</span>）；② 具有合适的碰撞取向。</p>
+
+            <!-- 🔬 模拟器 4：碰撞理论与活化能粒子模拟器 -->
+            <div class="simulator-card">
+                <h3>🔬 微观探究 4：碰撞理论与活化能粒子模拟器</h3>
+                <p>观察不同温度、浓度及催化剂作用下粒子碰撞与有效碰撞率的微观动态。</p>
+                <div class="sim-controls">
+                    <label>温度 T：</label>
+                    <input type="range" id="simTemp" min="200" max="600" value="300" oninput="updateCollParams()">
+                    <span id="dispTemp">300 K</span>
+                    
+                    <label>浓度 C：</label>
+                    <input type="range" id="simConc" min="10" max="40" value="20" oninput="updateCollParams()">
+                    <span id="dispConc">20 粒子</span>
+                    
+                    <label><input type="checkbox" id="simCat" onchange="updateCollParams()"> 加入催化剂 (降低 E_a)</label>
+                </div>
+                <div class="sim-display">
+                    <canvas id="collCanvas" class="sim-canvas" width="350" height="200"></canvas>
+                    <div class="sim-data-panel">
+                        <p><b>活化能阈值 E_a：</b> <span id="dispEa">高</span></p>
+                        <p><b>累计碰撞总次数：</b> <span id="totalColl">0</span></p>
+                        <p><b>有效碰撞次数：</b> <span id="effColl" style="color:var(--success-color); font-weight:bold;">0</span></p>
+                        <p><b>有效碰撞百分率：</b> <span id="collRatio">0.0%</span></p>
+                        <button class="quiz-btn" style="width:100%;" onclick="resetCollSim()">重置模拟器</button>
+                    </div>
+                </div>
+            </div>
+
+            <img class="note-img" src="image/homework/Screenshot 2026-08-12 155722.jpg" alt="图20-12 活化能能量势垒图">
+
+            <!-- 第20章 可折叠思维导图 -->
+            <div class="mindmap-box">
+                <h3 style="margin-top:0; border-left:none; padding-left:0; color:var(--primary-color);">🌳 第20章 核心知识思维导图</h3>
+                <div class="mm-tree">
+                    <ul>
+                        <li>
+                            <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>化学反应速率</span>
+                            <ul class="mm-sub">
+                                <li>
+                                    <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>表示方法</span>
+                                    <ul class="mm-sub">
+                                        <li><span class="mm-leaf">平均速率与瞬时速率</span></li>
+                                        <li><span class="mm-leaf">速率之比等于方程式化学计量数之比</span></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>微观理论</span>
+                                    <ul class="mm-sub">
+                                        <li><span class="mm-leaf">碰撞学说：有效碰撞、活化分子、活化能</span></li>
+                                        <li><span class="mm-leaf">质量作用定律与反应级数</span></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>影响因素</span>
+                                    <ul class="mm-sub">
+                                        <li><span class="mm-leaf">内因：反应物本性</span></li>
+                                        <li><span class="mm-leaf">外因：浓度、温度、表面积、催化剂</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第21章 -->
+    <div id="ch21" class="chapter-content">
+        <div class="card">
+            <h2>第21章 化学平衡的移动</h2>
+            
+            <h3>21.1 可逆反应与动态平衡</h3>
+            <p><b>化学平衡状态：</b>正反应速率等于逆反应速率 (R<sub>正</sub> = R<sub>逆</sub> > 0)，各组分浓度保持恒定。</p>
+
+            <h3>21.2 影响化学平衡移动的因素与勒沙特列原理</h3>
+            <p><b>勒沙特列原理：</b>如果改变影响平衡的一个因素（浓度、压强或温度），平衡将向着<b>削弱这种外来影响</b>的方向移动。</p>
+
+            <!-- ⚖️ 模拟器 5：勒沙特列原理综合移动模拟器 -->
+            <div class="simulator-card">
+                <h3>⚖️ 互动探究 5：勒沙特列原理综合移动模拟器 (2NO<sub>2</sub> ⇌ N<sub>2</sub>O<sub>4</sub>  ΔH < 0)</h3>
+                <p>改变温度、容器体积（压强）或浓度，观察平衡移动方向、颜色变幻与反应商 Q<sub>c</sub> 和 K<sub>c</sub> 的对比。</p>
+                <div class="sim-controls">
+                    <label>环境温度：</label>
+                    <select id="lcTemp" onchange="updateLCSim()">
+                        <option value="0">0 °C (冰水浴/降温)</option>
+                        <option value="25" selected>25 °C (室温)</option>
+                        <option value="100">100 °C (热水浴/升温)</option>
+                    </select>
+
+                    <label>注射器体积：</label>
+                    <select id="lcVol" onchange="updateLCSim()">
+                        <option value="0.5">压缩至 0.5V (增压)</option>
+                        <option value="1.0" selected>标准 1.0V</option>
+                        <option value="2.0">拉伸至 2.0V (减压)</option>
+                    </select>
+
+                    <button class="btn-action" onclick="addNO2()">注入 NO2 气体</button>
+                </div>
+                <div class="sim-display">
+                    <div id="lcFlask" style="width:120px; height:180px; border:3px solid #4a5568; border-radius:15px; display:flex; flex-direction:column; justify-content:center; align-items:center; background-color:rgba(180,83,9,0.4); transition:all 0.5s; font-weight:bold; text-align:center; padding:5px;">
+                        <span id="lcColorLabel">NO2/N2O4<br>混合气体</span>
+                    </div>
+                    <div class="sim-data-panel">
+                        <p><b>平衡常数 K_c：</b> <span id="lcKc">1.00</span></p>
+                        <p><b>当前反应商 Q_c：</b> <span id="lcQc">1.00</span></p>
+                        <p><b>平衡移动方向：</b> <span id="lcShift" style="font-weight:bold; color:var(--secondary-color);">处于平衡状态</span></p>
+                        <hr style="margin:8px 0;">
+                        <p><b>NO<sub>2</sub> 浓度 [NO₂]：</b> <span id="cNO2">1.00</span> mol/L</p>
+                        <p><b>N<sub>2</sub>O<sub>4</sub> 浓度 [N₂O₄]：</b> <span id="cN2O4">1.00</span> mol/L</p>
+                    </div>
+                </div>
+            </div>
+
+            <img class="note-img" src="image/homework/Screenshot 2026-08-12 160437.jpg" alt="图21-9 NO2 冰水与热水实验及颜色变化图">
+
+            <!-- 第21章 可折叠思维导图 -->
+            <div class="mindmap-box">
+                <h3 style="margin-top:0; border-left:none; padding-left:0; color:var(--primary-color);">🌳 第21章 核心知识思维导图</h3>
+                <div class="mm-tree">
+                    <ul>
+                        <li>
+                            <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>化学平衡的移动</span>
+                            <ul class="mm-sub">
+                                <li>
+                                    <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>可逆反应与平衡特征</span>
+                                    <ul class="mm-sub">
+                                        <li><span class="mm-leaf">动态平衡：逆、等、动、定、变</span></li>
+                                        <li><span class="mm-leaf">平衡常数 Kc：定量衡量反应进行的限度</span></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>外界条件对平衡的影响</span>
+                                    <ul class="mm-sub">
+                                        <li><span class="mm-leaf">浓度、压强、温度与勒沙特列原理应用</span></li>
+                                        <li><span class="mm-leaf">工业合成氨适宜条件分析</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第22章 -->
+    <div id="ch22" class="chapter-content">
+        <div class="card">
+            <h2>第22章 水溶液中的离子平衡</h2>
+            
+            <h3>22.1 电解质与难溶电解质的溶解平衡</h3>
+            <ul>
+                <li><b>电解质：</b>在水溶液中或熔融状态下能产生自由移动离子而导电的化合物。</li>
+                <li><b>非电解质：</b>在水溶液中和熔融状态下均不能导电的化合物。</li>
+            </ul>
+
+            <!-- 💡 模拟器 6：电解质与非电解质导电性测试模拟器 -->
+            <div class="simulator-card">
+                <h3>💡 探究实验 6：物质导电性与闭合电路测试模拟器</h3>
+                <p>选择不同状态的物质放入测试烧杯中，观察<b>真实闭合电路</b>中电源、导线、电极与灯泡发光现象。</p>
+                <div class="sim-controls">
+                    <label>测试物质：</label>
+                    <select id="elecSubstance" onchange="runElecSim()">
+                        <option value="nacl_s">NaCl (氯化钠固体)</option>
+                        <option value="nacl_aq" selected>NaCl 溶液 (食盐水)</option>
+                        <option value="naoh_aq">NaOH 溶液 (氢氧化钠溶液)</option>
+                        <option value="hcl_aq">HCl 溶液 (盐酸)</option>
+                        <option value="ch3cooh_aq">CH3COOH 稀溶液 (醋酸溶液)</option>
+                        <option value="ch3cooh_l">冰醋酸 (纯CH3COOH液体)</option>
+                        <option value="c2h5oh_l">无水乙醇 (纯酒精液体)</option>
+                        <option value="glucose_aq">葡萄糖水溶液</option>
+                        <option value="cu_s">铜丝 (单质金属)</option>
+                        <option value="graphite">石墨棒 (非金属单质)</option>
+                    </select>
+                </div>
+                <div class="sim-display">
+                    <canvas id="elecCanvas" class="sim-canvas" width="260" height="200"></canvas>
+                    <div class="sim-data-panel">
+                        <p><b>电路状态：</b> <span id="elecCircuit">闭合回路</span></p>
+                        <p><b>灯泡发光现象：</b> <span id="elecBulb" style="font-weight:bold;">--</span></p>
+                        <p><b>微观载流子：</b> <span id="elecCarrier">--</span></p>
+                        <hr style="margin:8px 0;">
+                        <p><b>物质分类归属：</b> <span id="elecClass" style="font-weight:bold; color:var(--secondary-color);">--</span></p>
+                        <p><small id="elecNote" style="color:#718096;"></small></p>
+                    </div>
+                </div>
+            </div>
+
+            <img class="note-img" src="image/homework/Screenshot 2026-08-12 160641.jpg" alt="图22-3 导电性对比装置图">
+
+            <h3>22.2 溶度积与溶解度的换算关系</h3>
+            <p>对于难溶电解质 A<sub>m</sub>B<sub>n</sub>(s) ⇌ m A<sup>n+</sup>(aq) + n B<sup>m-</sup>(aq)：</p>
+            <div class="formula-box">
+                <b>溶度积表达式：</b> K<sub>sp</sub> = [A<sup>n+</sup>]<sup>m</sup> · [B<sup>m-</sup>]<sup>n</sup><br>
+                <b>不同类型难溶物换算：</b> AB 型中 <span class="fill-blank" onclick="toggleInline(this)">s = √K_{sp}</span>；AB₂ 型中 <span class="fill-blank" onclick="toggleInline(this)">s = ∛(K_{sp} / 4)</span>。
+            </div>
+
+            <h3>22.3 溶度积规则与沉淀转化</h3>
+            <p><b>溶度积规则：</b>Q<sub>sp</sub> < K<sub>sp</sub> 沉淀溶解；Q<sub>sp</sub> > K<sub>sp</sub> 析出沉淀。</p>
+
+            <!-- 第22章 可折叠思维导图 -->
+            <div class="mindmap-box">
+                <h3 style="margin-top:0; border-left:none; padding-left:0; color:var(--primary-color);">🌳 第22章 核心知识思维导图</h3>
+                <div class="mm-tree">
+                    <ul>
+                        <li>
+                            <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>水溶液中的离子平衡</span>
+                            <ul class="mm-sub">
+                                <li>
+                                    <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>电解质与非电解质</span>
+                                    <ul class="mm-sub">
+                                        <li><span class="mm-leaf">导电条件与电离方程式书写</span></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="mm-node"><button class="mm-toggle-btn" onclick="toggleMMNode(this)">-</button>难溶电解质的溶解平衡</span>
+                                    <ul class="mm-sub">
+                                        <li><span class="mm-leaf">溶度积 Ksp 意义及相关计算</span></li>
+                                        <li><span class="mm-leaf">同离子效应与分步沉淀</span></li>
+                                        <li><span class="mm-leaf">沉淀转化及实际应用（如防龋齿、水垢处理）</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ---------------- 1. 填空关键字显隐交互逻辑 ----------------
+    function toggleInline(el) {
+        el.classList.toggle('revealed');
+    }
+
+    let allBlanksRevealed = false;
+    function toggleAllBlanks() {
+        allBlanksRevealed = !allBlanksRevealed;
+        const blanks = document.querySelectorAll('.fill-blank');
+        blanks.forEach(b => {
+            if(allBlanksRevealed) {
+                b.classList.add('revealed');
+            } else {
+                b.classList.remove('revealed');
+            }
+        });
+    }
+
+    // ---------------- 2. 可折叠思维导图折叠交互逻辑 ----------------
+    function toggleMMNode(btn) {
+        const parentLi = btn.closest('li');
+        const subList = parentLi.querySelector('.mm-sub');
+        if (subList) {
+            subList.classList.toggle('hidden');
+            if (subList.classList.contains('hidden')) {
+                btn.innerText = '+';
+            } else {
+                btn.innerText = '-';
+            }
+        }
+    }
+
+    // ---------------- 全局选项卡切换 ----------------
+    function switchTab(tabId, event) {
+        document.querySelectorAll('.chapter-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        if (event && event.currentTarget) event.currentTarget.classList.add('active');
+        
+        if(tabId === 'ch19') drawNeutCanvas();
+        if(tabId === 'ch20') { drawMgFlaskCanvas(0, 0, 'ribbon'); drawCollCanvas(); }
+        if(tabId === 'ch22') runElecSim();
+    }
+
+    function toggleAnswer(elementId) {
+        document.getElementById(elementId).classList.toggle('show');
+    }
+
+    // ---------------- 模拟器 1：分步中和热测定 ----------------
+    let neutState = { step: 0, t1: 25.0, t2: 25.0, liquidLevel: 0, stirrerY: 0, isStirring: false };
+
+    function resetNeutSim() {
+        neutState.step = 0; neutState.t1 = 25.0; neutState.t2 = 25.0;
+        neutState.liquidLevel = 0; neutState.isStirring = false;
+
+        document.getElementById('btnStep1').disabled = false;
+        document.getElementById('btnStep2').disabled = true;
+        document.getElementById('btnStep3').disabled = true;
+        document.getElementById('btnStep4').disabled = true;
+
+        document.getElementById('neutStepText').innerText = "当前状态：待开始实验";
+        document.getElementById('neutT1').innerText = "--";
+        document.getElementById('neutT2').innerText = "--";
+        document.getElementById('neutDT').innerText = "--";
+        document.getElementById('neutQ').innerText = "--";
+        document.getElementById('neutDH').innerText = "--";
+        document.getElementById('neutExplanation').innerText = "";
+
+        drawNeutCanvas();
+    }
+
+    function neutStep1() {
+        neutState.step = 1; neutState.liquidLevel = 0.5;
+        document.getElementById('neutStepText').innerText = "步骤①：酸液已倒入内筒，测得 T₁";
+        document.getElementById('neutT1').innerText = neutState.t1.toFixed(1);
+        document.getElementById('btnStep1').disabled = true;
+        document.getElementById('btnStep2').disabled = false;
+        drawNeutCanvas();
+    }
+
+    function neutStep2() {
+        neutState.step = 2; neutState.liquidLevel = 1.0;
+        document.getElementById('neutStepText').innerText = "步骤②：过量 NaOH 碱液已倒入混合";
+        document.getElementById('btnStep2').disabled = true;
+        document.getElementById('btnStep3').disabled = false;
+        drawNeutCanvas();
+    }
+
+    function neutStep3() {
+        neutState.step = 3; neutState.isStirring = true;
+        document.getElementById('neutStepText').innerText = "步骤③：用环形玻璃搅拌棒上下平稳搅拌...";
+
+        let stirCount = 0;
+        let interval = setInterval(() => {
+            neutState.stirrerY = Math.sin(stirCount * 0.5) * 15;
+            stirCount++;
+            drawNeutCanvas();
+
+            if(stirCount > 12) {
+                clearInterval(interval);
+                neutState.isStirring = false;
+                neutState.stirrerY = 0;
+                document.getElementById('neutStepText').innerText = "步骤③：充分搅拌完成，准备读数";
+                document.getElementById('btnStep3').disabled = true;
+                document.getElementById('btnStep4').disabled = false;
+                drawNeutCanvas();
+            }
+        }, 100);
+    }
+
+    function neutStep4() {
+        neutState.step = 4;
+        const acidType = document.getElementById('neutAcidType').value;
+        let deltaT = 3.4; let dhExp = -56.8;
+
+        if(acidType === 'ch3cooh') {
+            deltaT = 3.2; dhExp = -53.5;
+            document.getElementById('neutExplanation').innerText = "结论分析：醋酸是弱酸，电离过程需吸收热量，导致放出的总热量偏小（|ΔH| < 57.3 kJ/mol）。";
+        } else if(acidType === 'h2so4') {
+            deltaT = 3.42; dhExp = -57.2;
+            document.getElementById('neutExplanation').innerText = "结论分析：稀硫酸与强碱反应生成 0.025 mol H₂O，放出的中和热约为 -57.2 kJ/mol。";
+        } else {
+            document.getElementById('neutExplanation').innerText = "结论分析：强酸与强碱完全电离，反应生成的标准中和热接近 -57.3 kJ/mol。";
+        }
+
+        neutState.t2 = neutState.t1 + deltaT;
+        let q = 100.0 * 4.18 * deltaT;
+
+        document.getElementById('neutStepText').innerText = "步骤④：实验完成，已读取最高温度 T₂";
+        document.getElementById('neutT2').innerText = neutState.t2.toFixed(2);
+        document.getElementById('neutDT').innerText = deltaT.toFixed(2);
+        document.getElementById('neutQ').innerText = q.toFixed(1);
+        document.getElementById('neutDH').innerText = dhExp.toFixed(1) + " kJ/mol";
+        document.getElementById('btnStep4').disabled = true;
+
+        let currTemp = neutState.t1;
+        let timer = setInterval(() => {
+            currTemp += 0.2;
+            if(currTemp >= neutState.t2) { currTemp = neutState.t2; clearInterval(timer); }
+            neutState.t2 = currTemp;
+            drawNeutCanvas();
+        }, 50);
+    }
+
+    function drawNeutCanvas() {
+        const canvas = document.getElementById('neutCanvas');
+        if(!canvas) return;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#cbd5e0"; ctx.fillRect(50, 60, 180, 140);
+        ctx.strokeStyle = "#a0aec0"; ctx.lineWidth = 2; ctx.strokeRect(50, 60, 180, 140);
+
+        ctx.fillStyle = "#edf2f7"; ctx.fillRect(75, 80, 130, 110); ctx.strokeRect(75, 80, 130, 110);
+
+        if(neutState.liquidLevel > 0) {
+            let h = neutState.liquidLevel * 75;
+            ctx.fillStyle = neutState.step >= 2 ? "#bee3f8" : "#ebf8ff";
+            ctx.fillRect(78, 188 - h, 124, h);
+        }
+
+        let stirY = neutState.stirrerY;
+        ctx.strokeStyle = "#90cdf4"; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(110, 20 + stirY); ctx.lineTo(110, 160 + stirY);
+        ctx.arc(125, 160 + stirY, 15, Math.PI, 0, true); ctx.stroke();
+
+        ctx.fillStyle = "#e53e3e"; ctx.strokeStyle = "#718096"; ctx.lineWidth = 2;
+        ctx.strokeRect(155, 30, 10, 130);
+        ctx.beginPath(); ctx.arc(160, 165, 8, 0, Math.PI*2); ctx.fill();
+        let tempHeight = ((neutState.t2 - 20) / 15) * 110;
+        if(tempHeight < 10) tempHeight = 10;
+        ctx.fillRect(157, 165 - tempHeight, 6, tempHeight);
+
+        ctx.fillStyle = "#a0aec0"; ctx.fillRect(65, 75, 150, 8);
+    }
+
+    // ---------------- 模拟器 2：黑斯定律 ----------------
+    function checkHessAnswer() {
+        const c1 = parseInt(document.getElementById('hessCoeff1').value);
+        const c2 = parseInt(document.getElementById('hessCoeff2').value);
+        const resBox = document.getElementById('hessResult');
+
+        let dh = c1 * (-393.5) + c2 * (-283.0);
+
+        if(c1 === 1 && c2 === -1) {
+            resBox.innerHTML = `<b style="color:var(--success-color);">恭喜你，组合正确！</b><br>
+            合成过程：① - ② = C(s) + O₂(g) - [CO(g) + ½O₂(g)] → CO₂(g) - CO₂(g)<br>
+            化简得：C(s) + ½O₂(g) → CO(g)<br>
+            <b>计算结果：ΔH = (-393.5) - (-283.0) = ${dh.toFixed(1)} kJ/mol</b>`;
+        } else {
+            resBox.innerHTML = `<b style="color:var(--danger-color);">组合未达成目标方程。</b> 当前组合计算出的 ΔH = ${dh.toFixed(1)} kJ/mol。提示：尝试将方程②颠倒相减（即乘以 -1）。`;
+        }
+    }
+
+    // ---------------- 模拟器 3：Mg + HCl 真实双画布 ----------------
+    let mgAnimId = null;
+    let mgBubbles = [];
+
+    function startMgSim() {
+        if(mgAnimId) cancelAnimationFrame(mgAnimId);
+        const form = document.getElementById('mgForm').value;
+        const conc = parseFloat(document.getElementById('hclConc').value);
+        const temp = parseFloat(document.getElementById('mgTemp').value);
+        
+        const canvasChart = document.getElementById('mgCanvas');
+        const ctxChart = canvasChart.getContext('2d');
+        
+        let k = 0.05 * conc * (temp / 20.0);
+        if(form === 'powder') k *= 3.0;
+
+        let t = 0; let v = 0; const maxV = 98.8; const points = []; mgBubbles = [];
+        document.getElementById('mgStatus').innerText = "反应激烈进行中...";
+
+        function animate() {
+            t += 0.5;
+            let rate = k * (maxV - v);
+            v += rate;
+            if(v > maxV) v = maxV;
+
+            points.push({t: t, v: v});
+
+            document.getElementById('mgTime').innerText = t.toFixed(1);
+            document.getElementById('mgVol').innerText = v.toFixed(1);
+            document.getElementById('mgRate').innerText = rate.toFixed(2);
+
+            drawMgFlaskCanvas(v, rate, form);
+
+            ctxChart.clearRect(0, 0, canvasChart.width, canvasChart.height);
+            ctxChart.beginPath(); ctxChart.strokeStyle = "#4a5568"; ctxChart.lineWidth = 2;
+            ctxChart.moveTo(40, 20); ctxChart.lineTo(40, 190); ctxChart.lineTo(250, 190); ctxChart.stroke();
+
+            ctxChart.fillStyle = "#2d3748"; ctxChart.font = "12px sans-serif";
+            ctxChart.fillText("V(H₂)/mL", 8, 18); ctxChart.fillText("t/s", 235, 208);
+
+            ctxChart.beginPath(); ctxChart.strokeStyle = "#3182ce"; ctxChart.lineWidth = 3;
+            for(let i=0; i<points.length; i++){
+                let px = 40 + (points[i].t / 100.0) * 200;
+                let py = 190 - (points[i].v / 120.0) * 160;
+                if(i===0) ctxChart.moveTo(px, py); else ctxChart.lineTo(px, py);
+            }
+            ctxChart.stroke();
+
+            if(maxV - v > 0.1 && t < 100) {
+                mgAnimId = requestAnimationFrame(animate);
+            } else {
+                document.getElementById('mgStatus').innerText = "反应完全结束";
+                document.getElementById('mgRate').innerText = "0.00";
+                drawMgFlaskCanvas(maxV, 0, form);
+            }
+        }
+        animate();
+    }
+
+    function drawMgFlaskCanvas(v, rate, form) {
+        const canvas = document.getElementById('mgFlaskCanvas');
+        if(!canvas) return;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 锥形瓶
+        ctx.strokeStyle = "#4a5568"; ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(75, 80); ctx.lineTo(105, 80); ctx.lineTo(105, 110);
+        ctx.lineTo(150, 195); ctx.lineTo(30, 195); ctx.lineTo(75, 110); ctx.lineTo(75, 80);
+        ctx.stroke();
+
+        // 盐酸
+        ctx.fillStyle = "rgba(190, 227, 248, 0.7)";
+        ctx.beginPath(); ctx.moveTo(60, 140); ctx.lineTo(120, 140); ctx.lineTo(145, 192); ctx.lineTo(35, 192); ctx.closePath(); ctx.fill();
+
+        // 镁单质
+        if(form === 'ribbon') {
+            ctx.fillStyle = "#a0aec0"; ctx.fillRect(75, 186, 30, 6);
+            ctx.strokeStyle = "#4a5568"; ctx.lineWidth = 1; ctx.strokeRect(75, 186, 30, 6);
+        } else {
+            ctx.fillStyle = "#718096";
+            for(let i=0; i<25; i++) {
+                ctx.beginPath(); ctx.arc(45 + i*3.8, 190 + (i%3)*2, 1.8, 0, Math.PI*2); ctx.fill();
+            }
+        }
+
+        // 升腾气泡
+        if(rate > 0.05) {
+            let numNewBubbles = Math.ceil(rate * 2.5);
+            for(let i=0; i<numNewBubbles; i++) {
+                mgBubbles.push({ x: 50 + Math.random() * 80, y: 185, r: 1.5 + Math.random() * 2.5, vy: 1.5 + Math.random() * 2.0 });
+            }
+        }
+
+        ctx.fillStyle = "rgba(255, 255, 255, 0.85)"; ctx.strokeStyle = "#3182ce"; ctx.lineWidth = 1;
+        for(let i = mgBubbles.length - 1; i >= 0; i--) {
+            let b = mgBubbles[i]; b.y -= b.vy;
+            ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+            if(b.y < 140) mgBubbles.splice(i, 1);
+        }
+
+        // 膨胀气球
+        let balloonR = 8 + (v / 98.8) * 32;
+        ctx.fillStyle = "#ed8936";
+        ctx.beginPath(); ctx.arc(90, 80 - balloonR, balloonR, 0, Math.PI*2); ctx.fill();
+        ctx.strokeStyle = "#c05621"; ctx.lineWidth = 2; ctx.stroke();
+        ctx.fillStyle = "#c05621"; ctx.fillRect(86, 76, 8, 5);
+    }
+
+    // ---------------- 模拟器 4：碰撞理论 Canvas ----------------
+    let collParticles = []; let totalCollCount = 0; let effCollCount = 0;
+
+    function updateCollParams() {
+        const temp = document.getElementById('simTemp').value;
+        const conc = document.getElementById('simConc').value;
+        const cat = document.getElementById('simCat').checked;
+
+        document.getElementById('dispTemp').innerText = temp + " K";
+        document.getElementById('dispConc').innerText = conc + " 粒子";
+        document.getElementById('dispEa').innerText = cat ? "低 (加催化剂)" : "高 (无催化剂)";
+        initCollParticles();
+    }
+
+    function initCollParticles() {
+        const count = parseInt(document.getElementById('simConc').value);
+        collParticles = [];
+        for(let i=0; i<count; i++) {
+            collParticles.push({
+                x: Math.random() * 330 + 10, y: Math.random() * 180 + 10,
+                vx: (Math.random() - 0.5) * (document.getElementById('simTemp').value / 80),
+                vy: (Math.random() - 0.5) * (document.getElementById('simTemp').value / 80),
+                type: Math.random() > 0.5 ? 'A' : 'B'
+            });
+        }
+    }
+
+    function resetCollSim() { totalCollCount = 0; effCollCount = 0; updateCollParams(); }
+
+    function drawCollCanvas() {
+        const canvas = document.getElementById('collCanvas');
+        if(!canvas) return;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const eaThreshold = document.getElementById('simCat').checked ? 2.5 : 4.5;
+
+        for(let p of collParticles) {
+            p.x += p.vx; p.y += p.vy;
+            if(p.x < 5 || p.x > canvas.width - 5) p.vx *= -1;
+            if(p.y < 5 || p.y > canvas.height - 5) p.vy *= -1;
+
+            ctx.beginPath(); ctx.arc(p.x, p.y, 6, 0, Math.PI*2);
+            ctx.fillStyle = p.type === 'A' ? "#e53e3e" : (p.type === 'B' ? "#3182ce" : "#38a169"); ctx.fill();
+        }
+
+        for(let i=0; i<collParticles.length; i++) {
+            for(let j=i+1; j<collParticles.length; j++) {
+                let p1 = collParticles[i]; let p2 = collParticles[j];
+                let dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+                if(dist < 12 && p1.type !== p2.type && p1.type !== 'P' && p2.type !== 'P') {
+                    totalCollCount++;
+                    let speed = Math.hypot(p1.vx, p1.vy) + Math.hypot(p2.vx, p2.vy);
+                    if(speed > eaThreshold) { effCollCount++; p1.type = 'P'; p2.type = 'P'; }
+                }
+            }
+        }
+
+        document.getElementById('totalColl').innerText = totalCollCount;
+        document.getElementById('effColl').innerText = effCollCount;
+        document.getElementById('collRatio').innerText = totalCollCount > 0 ? ((effCollCount/totalCollCount)*100).toFixed(1) + "%" : "0.0%";
+
+        requestAnimationFrame(drawCollCanvas);
+    }
+
+    // ---------------- 模拟器 5：勒沙特列原理 ----------------
+    let lcState = { cNO2: 1.0, cN2O4: 1.0 };
+    function updateLCSim() {
+        const temp = parseFloat(document.getElementById('lcTemp').value);
+        const vol = parseFloat(document.getElementById('lcVol').value);
+
+        let Kc = 1.0;
+        if(temp === 0) Kc = 4.0;
+        if(temp === 100) Kc = 0.25;
+
+        let currentCNO2 = lcState.cNO2 / vol;
+        let currentCN2O4 = lcState.cN2O4 / vol;
+        let Qc = currentCN2O4 / (currentCNO2 * currentCNO2);
+
+        document.getElementById('lcKc').innerText = Kc.toFixed(2);
+        document.getElementById('lcQc').innerText = Qc.toFixed(2);
+        document.getElementById('cNO2').innerText = currentCNO2.toFixed(2);
+        document.getElementById('cN2O4').innerText = currentCN2O4.toFixed(2);
+
+        const flask = document.getElementById('lcFlask');
+        const shiftLabel = document.getElementById('lcShift');
+
+        if(Math.abs(Qc - Kc) < 0.1) {
+            shiftLabel.innerText = "处于平衡状态"; shiftLabel.style.color = "var(--secondary-color)";
+        } else if(Qc < Kc) {
+            shiftLabel.innerText = "正向移动 (NO2 减少，颜色变浅)"; shiftLabel.style.color = "var(--success-color)";
+        } else {
+            shiftLabel.innerText = "逆向移动 (NO2 增加，颜色加深)"; shiftLabel.style.color = "var(--danger-color)";
+        }
+
+        let alpha = currentCNO2 * 0.4;
+        if(alpha > 0.9) alpha = 0.9; if(alpha < 0.1) alpha = 0.1;
+        flask.style.backgroundColor = `rgba(180, 83, 9, ${alpha})`;
+    }
+
+    function addNO2() { lcState.cNO2 += 0.8; updateLCSim(); }
+
+    // ---------------- 模拟器 6：真实物理闭合电路绘制 ----------------
+    function runElecSim() {
+        const sub = document.getElementById('elecSubstance').value;
+        const canvas = document.getElementById('elecCanvas');
+        if(!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        let circuit = "闭合回路";
+        let bulb = "不发光";
+        let carrier = "无自由载流子";
+        let cls = "";
+        let note = "";
+        let isConductive = false;
+        let isWeak = false;
+
+        switch(sub) {
+            case 'nacl_s':
+                bulb = "不发光"; carrier = "无自由移动离子"; cls = "强电解质（固态不导电）";
+                note = "NaCl 是电解质，但固体中阴阳离子受离子键紧密束缚无法自由移动，故不导电。";
+                break;
+            case 'nacl_aq':
+                bulb = "明亮发光"; carrier = "自由移动 Na⁺ 与 Cl⁻"; cls = "强电解质溶液";
+                note = "NaCl 水溶液中完全电离产生高浓度自由移动离子，导电能力强。";
+                isConductive = true;
+                break;
+            case 'naoh_aq':
+                bulb = "明亮发光"; carrier = "自由移动 Na⁺ 与 OH⁻"; cls = "强电解质溶液";
+                note = "强碱在水溶液中完全电离，自由离子浓度高，强导电。";
+                isConductive = true;
+                break;
+            case 'hcl_aq':
+                bulb = "明亮发光"; carrier = "自由移动 H⁺ 与 Cl⁻"; cls = "强电解质溶液";
+                note = "强酸在水溶液中完全电离，自由离子浓度高，强导电。";
+                isConductive = true;
+                break;
+            case 'ch3cooh_aq':
+                bulb = "微弱发光"; carrier = "少量 H⁺ 与 CH₃COO⁻"; cls = "弱电解质溶液";
+                note = "醋酸是弱酸，在水溶液中仅部分电离，自由离子浓度较低，弱导电。";
+                isConductive = true; isWeak = true;
+                break;
+            case 'ch3cooh_l':
+                bulb = "不发光"; carrier = "纯 CH₃COOH 共价分子"; cls = "弱电解质 (纯液体不导电)";
+                note = "冰醋酸是纯净共价化合物，无水时不电离，没有自由移动的离子。";
+                break;
+            case 'c2h5oh_l':
+            case 'glucose_aq':
+                bulb = "不发光"; carrier = "中性分子"; cls = "非电解质";
+                note = "在水溶液和熔融状态下均不能电离产生离子的化合物，属于非电解质。";
+                break;
+            case 'cu_s':
+            case 'graphite':
+                bulb = "明亮发光"; carrier = "自由电子"; cls = "单质 (既非电解质也非非电解质)";
+                note = "金属/石墨依靠自由电子导电，单质不属于电解质或非电解质。";
+                isConductive = true;
+                break;
+        }
+
+        document.getElementById('elecCircuit').innerText = circuit;
+        document.getElementById('elecBulb').innerText = bulb;
+        document.getElementById('elecBulb').style.color = isConductive ? (isWeak ? "#d69e2e" : "#38a169") : "#e53e3e";
+        document.getElementById('elecCarrier').innerText = carrier;
+        document.getElementById('elecClass').innerText = cls;
+        document.getElementById('elecNote').innerText = note;
+
+        // --- 重绘真闭合回路 ---
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 1. 烧杯容器
+        ctx.strokeStyle = "#4a5568";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(50, 100, 160, 85);
+
+        // 2. 填充溶液/样品
+        if(sub === 'nacl_s') {
+            ctx.fillStyle = "#edf2f7"; ctx.fillRect(53, 140, 154, 42);
+            ctx.fillStyle = "#cbd5e0";
+            for(let i=0; i<30; i++) { ctx.fillRect(60 + (i*5)%140, 145 + (i*7)%35, 4, 4); }
+        } else if(sub === 'cu_s' || sub === 'graphite') {
+            ctx.fillStyle = sub === 'cu_s' ? "#dd6b20" : "#2d3748";
+            ctx.fillRect(53, 130, 154, 52);
+        } else {
+            ctx.fillStyle = "rgba(190, 227, 248, 0.65)";
+            ctx.fillRect(53, 120, 154, 62);
+        }
+
+        // 3. 两个电极棒 (浸入液体内部)
+        ctx.fillStyle = "#718096";
+        ctx.fillRect(80, 75, 12, 85);  // 左电极
+        ctx.fillRect(168, 75, 12, 85); // 右电极
+        ctx.strokeStyle = "#2d3748"; ctx.lineWidth = 1;
+        ctx.strokeRect(80, 75, 12, 85); ctx.strokeRect(168, 75, 12, 85);
+
+        // 4. 直流电源 (电池)
+        ctx.strokeStyle = "#1a202c"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(108, 15); ctx.lineTo(108, 35); ctx.stroke();
+        ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(118, 20); ctx.lineTo(118, 30); ctx.stroke();
+        ctx.fillStyle = "#e53e3e"; ctx.font = "bold 10px sans-serif"; ctx.fillText("+", 102, 12);
+        ctx.fillStyle = "#2b6cb0"; ctx.fillText("-", 122, 12);
+
+        // 5. 小灯泡
+        ctx.lineWidth = 1.5; ctx.strokeStyle = "#4a5568";
+        ctx.beginPath(); ctx.arc(174, 25, 12, 0, Math.PI*2);
+        let bulbFill = "#cbd5e0";
+        if(isConductive) { bulbFill = isWeak ? "#f6e05e" : "#ecc94b"; }
+        ctx.fillStyle = bulbFill; ctx.fill(); ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(169, 30); ctx.lineTo(172, 23); ctx.lineTo(174, 27); ctx.lineTo(176, 23); ctx.lineTo(179, 30);
+        ctx.strokeStyle = "#718096"; ctx.lineWidth = 1; ctx.stroke();
+
+        if(isConductive) {
+            ctx.strokeStyle = "#d69e2e"; ctx.lineWidth = 2;
+            let rayLen = isWeak ? 5 : 9;
+            let angles = [0, 45, 90, 135, 180, 225, 270, 315];
+            angles.forEach(deg => {
+                let rad = deg * Math.PI / 180;
+                let x1 = 174 + Math.cos(rad) * 14;
+                let y1 = 25 + Math.sin(rad) * 14;
+                let x2 = 174 + Math.cos(rad) * (14 + rayLen);
+                let y2 = 25 + Math.sin(rad) * (14 + rayLen);
+                ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+            });
+        }
+
+        // 6. 真实闭合导线线路
+        ctx.strokeStyle = "#e53e3e"; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(86, 75); ctx.lineTo(86, 25); ctx.lineTo(108, 25); ctx.stroke();
+
+        ctx.strokeStyle = "#2b6cb0";
+        ctx.beginPath(); ctx.moveTo(118, 25); ctx.lineTo(162, 25); ctx.stroke();
+
+        ctx.strokeStyle = "#e53e3e";
+        ctx.beginPath(); ctx.moveTo(174, 37); ctx.lineTo(174, 75); ctx.stroke();
+    }
+
+    // 页面载入初始化
+    window.onload = function() {
+        drawNeutCanvas();
+        drawMgFlaskCanvas(0, 0, 'ribbon');
+        initCollParticles();
+        drawCollCanvas();
+        updateLCSim();
+        runElecSim();
+    };
+</script>
+
+</body>
+</html>
