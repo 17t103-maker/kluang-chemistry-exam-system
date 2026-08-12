@@ -8,6 +8,8 @@
         :root {
             --primary-color: #1a436d;
             --accent-color: #2c5e8a;
+            --uec-color-1: #0284c7;
+            --uec-color-2: #0369a1;
             --quiz-color-1: #2e7d32;
             --quiz-color-2: #388e3c;
             --sim-color-1: #d35400;
@@ -41,10 +43,19 @@
             width: 90%;
         }
 
+        /* 校徽样式 */
+        .school-logo {
+            width: 90px;
+            height: auto;
+            margin-bottom: 15px;
+            object-fit: contain;
+        }
+
         h1 {
             color: var(--primary-color);
             font-size: 1.8rem;
             margin-bottom: 10px;
+            margin-top: 0;
         }
 
         p {
@@ -72,6 +83,11 @@
             box-shadow: 0 4px 15px rgba(26, 67, 109, 0.2);
         }
 
+        .uec-btn {
+            background: linear-gradient(135deg, var(--uec-color-1), var(--uec-color-2));
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.25);
+        }
+
         .quiz-btn {
             background: linear-gradient(135deg, var(--quiz-color-1), var(--quiz-color-2));
             box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
@@ -97,11 +113,15 @@
 <body>
 
 <div class="nav-container">
+    <!-- 加入校徽图片 -->
+    <img src="image/校徽.jpg" alt="居銮中华中学校徽" class="school-logo">
     <h1>居銮中华中学</h1>
     <p>高二理科化学统测解析与互动模拟系统</p>
     <div class="btn-group">
         <a href="2024.html" class="year-btn">📅 进入 2024 下半年统测解析</a>
         <a href="2025.html" class="year-btn">📅 进入 2025 下半年统测解析</a>
+        <!-- 新增 UEC.html 的导航按钮 -->
+        <a href="UEC.html" class="year-btn uec-btn">📖 进入 历届统考真题解析（第19~22.2章）</a>
         <a href="test.html" class="year-btn quiz-btn">🧪 进入 章节小测验完整解析（第19~22.2章）</a>
         <a href="equilibrium_simulator.html" class="year-btn sim-btn">⚖️ 进入 化学平衡移动探究模拟实验台</a>
         <a href="chemistry_notes_ch19_22.html" class="year-btn note-btn">📚 进入 高二化学中册全章节详尽互动复习笔记</a>
