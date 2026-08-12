@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高二理科化学历届统考真题完整解析系统 (第19章-第22.2章)</title>
+    <!-- 配置 MathJax 3 渲染引擎 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-color: #1a436d;
+            --accent-color: #2c5e8a;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --step-bg: #f0f4f8;
+            --success-color: #2e7d32;
+            --text-color: #333333;
+            --think-color: #d97706;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 10px 0 20px 0;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.6rem;
+        }
+
+        header p {
+            color: #666;
+            margin: 0;
+        }
+
+        .control-panel {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .type-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: #e0e6ed;
+            color: var(--primary-color);
+            border: none;
+            padding: 9px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .number-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            max-height: 220px;
+            overflow-y: auto;
+        }
+
+        .num-btn {
+            background-color: white;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .num-btn:hover, .num-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .question-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .question-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .badge-type {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        .question-img {
+            max-width: 480px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            margin: 15px 0;
+            display: block;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .question-body {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .step-container {
+            display: none;
+            margin-top: 18px;
+            border-left: 4px solid var(--primary-color);
+            background: var(--step-bg);
+            padding: 18px 20px;
+            border-radius: 0 8px 8px 0;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .step-container.active {
+            display: block;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .step-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.05rem;
+        }
+
+        .thinking-box {
+            background: #fffbe3;
+            border-left: 3px solid var(--think-color);
+            padding: 10px 14px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #78350f;
+        }
+
+        .derivation-box {
+            margin-top: 8px;
+            font-size: 0.98rem;
+        }
+
+        .final-answer {
+            display: none;
+            margin-top: 25px;
+            background-color: #e8f5e9;
+            border: 2px dashed var(--success-color);
+            border-radius: 8px;
+            padding: 20px;
+            color: #1b5e20;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .final-answer.active {
+            display: block;
+        }
+
+        .final-answer h3 {
+            margin-top: 0;
+            color: var(--success-color);
+            margin-bottom: 10px;
+        }
+
+        .action-area {
+            margin-top: 22px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 11px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-ans {
+            background: linear-gradient(135deg, #2e7d32, #388e3c);
+        }
+
+        .btn-reset {
+            background: #757575;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #selection-tooltip {
+            position: absolute;
+            display: none;
+            background: #1a436d;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .chat-widget-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1a436d, #2c5e8a);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+
+        .chat-box-container {
+            position: fixed;
+            bottom: 95px;
+            right: 25px;
+            width: 360px;
+            height: 520px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+            border: 1px solid #e2e8f0;
+        }
+
+        .chat-box-container.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .chat-msg.user {
+            align-self: flex-end;
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .chat-msg.ai {
+            align-self: flex-start;
+            background: #e2e8f0;
+            color: #333;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 10px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            border: 1px solid #cbd5e1;
+            padding: 8px 12px;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .chat-input-area button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-left: 8px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>高二理科化学历届统考真题完整解析系统</h1>
+        <p>按章节编排 · 同一章节内依次包含选择题与作答题</p>
+    </header>
+
+    <div class="control-panel">
+        <div class="section-title">第一步：选择化学章节</div>
+        <div class="type-tabs">
+            <button class="tab-btn active" onclick="switchChapter('第19章')">第19章 化学反应和能量 (14题)</button>
+            <button class="tab-btn" onclick="switchChapter('第20章')">第20章 化学反应速率 (14题)</button>
+            <button class="tab-btn" onclick="switchChapter('第21章')">第21章 化学平衡的移动 (1题)</button>
+            <button class="tab-btn" onclick="switchChapter('第22章')">第22章 水溶液中的离子平衡 (4题)</button>
+        </div>
+
+        <div class="section-title">第二步：点击题号直接查看</div>
+        <div class="number-selector" id="numberButtons"></div>
+    </div>
+
+    <div id="questionDisplayArea">
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-title" id="qTitle">加载中...</span>
+                <span class="badge-type" id="qBadge">题型</span>
+            </div>
+            <div class="question-body" id="qBody"></div>
+
+            <div id="stepsWrapper"></div>
+
+            <div class="final-answer" id="finalAns">
+                <h3>✨ 参考答案与详解结论：</h3>
+                <div id="ansContent"></div>
+            </div>
+
+            <div class="action-area">
+                <button class="btn" id="nextBtn" onclick="revealNextStep()">💡 思考解题策略 / 关键知识点</button>
+                <button class="btn btn-ans" id="toggleAnsBtn" onclick="toggleAnswer()">👁️ 显示 / 隐藏答案</button>
+                <button class="btn btn-reset" onclick="resetCurrentCard()">🔄 重新思考</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="selection-tooltip" onclick="askSelectedText()">💡 询问 AI 导师</div>
+<div class="chat-widget-toggle" onclick="toggleChatBox()">🤖</div>
+
+<div class="chat-box-container" id="chatBox">
+    <div class="chat-header">
+        <span>化学学习 AI 导师</span>
+        <span style="cursor:pointer;" onclick="toggleChatBox()">✕</span>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg ai">👋 你好！我是高二化学 AI 导师。针对历届考题的任何概念或方程式，随时选中或发给我！</div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="userInput" placeholder="输入你的化学疑问..." onkeydown="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()">发送</button>
+    </div>
+</div>
+
+<script>
+// 安全构建数据库，修复字符串内变量语法问题
+const chapterDatabase = {
+    '第19章': [
+        // 选择题部分
+        {
+            num: 1, type: '选择题', section: '[19.1] 化学反应中的热量变化', year: '[2020 年第 17 题]',
+            body: '不用火、不插电的速食“自热式方便火锅”是应用下列哪个化学反应原理？<br><br>' +
+                  'A. $\\text{Ca(OH)}_2 + \\text{CO}_2 \\rightarrow \\text{CaCO}_3 + \\text{H}_2\\text{O}$<br>' +
+                  'B. $\\text{CaO} + \\text{H}_2\\text{O} \\rightarrow \\text{Ca(OH)}_2$<br>' +
+                  'C. $\\text{Mg} + \\text{Cl}_2 \\rightarrow \\text{MgCl}_2$<br>' +
+                  'D. $2\\text{K} + \\text{O}_2 \\rightarrow \\text{K}_2\\text{O}_2$',
+            steps: [{ title: '原理应用', think: '自热火锅需要安全且能快速剧烈放热的化学反应。', derivation: '生石灰 (CaO) 与水反应放热剧烈且无毒安全，常用于自热食品。' }],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 2, type: '选择题', section: '[19.2] 反应热、焓变', year: '[2020 年第 16 题]',
+            body: '根据下表数据，计算化学反应 $\\text{I}_2(g) + 3\\text{Cl}_2(g) \\rightarrow 2\\text{ICl}_3(g)$ 的 $\\Delta H^\\circ$。<br><br>' +
+                  '<table border="1" cellpadding="6" style="border-collapse:collapse;">' +
+                  '<tr><th>键</th><th>I-I</th><th>Cl-Cl</th><th>I-Cl</th></tr>' +
+                  '<tr><td>平均键能 (kJ mol⁻¹)</td><td>150</td><td>240</td><td>210</td></tr>' +
+                  '</table><br>' +
+                  'A. $-870\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; B. $-390\\text{ kJ mol}^{-1}$<br>' +
+                  'C. $+180\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; D. $+390\\text{ kJ mol}^{-1}$',
+            steps: [{ title: '键能计算公式', think: '$\\Delta H = \\sum(\\text{断键键能}) - \\sum(\\text{成键键能})$', derivation: '断键：$1 \\times 150 + 3 \\times 240 = 870\\text{ kJ}$<br>成键：$2 \\text{ mol ICl}_3$ 共含 $6 \\text{ 个 I-Cl 键} \\rightarrow 6 \\times 210 = 1260\\text{ kJ}$<br>$\\Delta H = 870 - 1260 = -390\\text{ kJ mol}^{-1}$' }],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 3, type: '选择题', section: '[19.2] 反应热、焓变', year: '[2022 年第 9 题]',
+            body: '根据下表，求出下列化学反应之 $\\Delta H$：<br>' +
+                  '$\\text{CH}_4(g) + \\text{I}_2(g) \\rightarrow \\text{CH}_3\\text{I}(g) + \\text{HI}(g)$<br><br>' +
+                  '<table border="1" cellpadding="6" style="border-collapse:collapse;">' +
+                  '<tr><th>键</th><th>H-C</th><th>C-I</th><th>H-I</th><th>I-I</th></tr>' +
+                  '<tr><td>键能 (kJ mol⁻¹)</td><td>413</td><td>230</td><td>299</td><td>151</td></tr>' +
+                  '</table><br>' +
+                  'A. $+35\\text{ kJ}$ &nbsp;&nbsp;&nbsp; B. $+50\\text{ kJ}$ &nbsp;&nbsp;&nbsp; C. $-35\\text{ kJ}$ &nbsp;&nbsp;&nbsp; D. $-50\\text{ kJ}$',
+            steps: [{ title: '对比断键与成键', think: '反应断裂 1 个 C-H 键和 1 个 I-I 键，形成 1 个 C-I 键和 1 个 H-I 键。', derivation: '$\\Delta H = (413 + 151) - (230 + 299) = 564 - 529 = +35\\text{ kJ}$' }],
+            ans: '<b>正确答案：A</b>'
+        },
+        {
+            num: 4, type: '选择题', section: '[19.3] 反应热的种类', year: '[2019 年第 11 题]',
+            body: '石墨转化为金刚石的反应如下：<br>' +
+                  '$\\text{C}_{(\\text{石墨})} \\rightarrow \\text{C}_{(\\text{金刚石})} \\quad \\Delta H = +3\\text{ kJ mol}^{-1}$<br>' +
+                  '下列说法哪些正确？<br>' +
+                  'I 石墨的燃烧热小于金刚石<br>' +
+                  'II 石墨转化为金刚石是吸热反应<br>' +
+                  'III 石墨的 C-C 键的键能小于金刚石<br>' +
+                  'IV 石墨分离成碳原子的焓变化大于金刚石<br><br>' +
+                  'A. I, II, III &nbsp;&nbsp;&nbsp; B. I, II, IV &nbsp;&nbsp;&nbsp; C. I, III, IV &nbsp;&nbsp;&nbsp; D. II, III, IV',
+            steps: [{ title: '能量与稳定性关系', think: '石墨转化为金刚石吸热，说明石墨能量比金刚石低，因而更稳定。', derivation: '石墨能量低，完全燃烧释放热量较少（I正确）；$\\Delta H > 0$ 为吸热反应（II正确）；石墨较稳定说明其化学键强于金刚石，变成气态原子吸热更多（IV正确）。' }],
+            ans: '<b>正确答案：B (I, II, IV)</b>'
+        },
+        {
+            num: 5, type: '选择题', section: '[19.3] 反应热的种类', year: '[2020 年第 9 题]',
+            body: '已知热化学方程式：$\\text{H}_2(g) + \\frac{1}{2}\\text{O}_2(g) \\rightarrow \\text{H}_2\\text{O}(l) \\quad \\Delta H^\\circ = -285.8\\text{ kJ mol}^{-1}$<br>' +
+                  '$\\Delta H^\\circ$ 可被视为：<br>' +
+                  'I 中和热 &nbsp;&nbsp; II 水的生成热 &nbsp;&nbsp; III 氢气的燃烧热 &nbsp;&nbsp; IV 标准条件下 1mol 氢气和 0.5mol 氧气完全反应生成 1mol 水时的反应热<br><br>' +
+                  'A. I &nbsp;&nbsp;&nbsp; B. II, III &nbsp;&nbsp;&nbsp; C. I, III, IV &nbsp;&nbsp;&nbsp; D. II, III, IV',
+            steps: [{ title: '生成热与燃烧热定义', think: '根据定义判断生成热、燃烧热的标准状态与产物。', derivation: '该反应符合 1mol H₂ 完全燃烧生成稳定液态水（燃烧热），也符合最稳定单质生成 1mol H₂O(l)（生成热），因此 II, III, IV 均符合。' }],
+            ans: '<b>正确答案：D</b>'
+        },
+        {
+            num: 6, type: '选择题', section: '[19.3.1] 生成热', year: '[2016 年第 13 题]',
+            body: '下列哪个反应涉及生成热？<br><br>' +
+                  'A. $\\text{CO}(g) + \\frac{1}{2}\\text{O}_2(g) \\rightarrow \\text{CO}_2(g)$<br>' +
+                  'B. $2\\text{N}(g) + 3\\text{H}_2(g) \\rightarrow 2\\text{NH}_3(g)$<br>' +
+                  'C. $2\\text{C}_{(\\text{石墨})} + 3\\text{H}_2(g) \\rightarrow \\text{C}_2\\text{H}_6(g)$<br>' +
+                  'D. $\\text{NaOH}(aq) + \\text{CO}_2(g) \\rightarrow \\text{NaHCO}_3(aq)$',
+            steps: [{ title: '生成热的严格定义', think: '必须由“最稳定单质”生成“1 mol 目标化合物”。', derivation: 'C 选项由稳定单质（石墨与氢气）生成 1mol 乙烷，属于生成热；A 中 CO 不是单质；B 中 N(g) 非最稳定单质且生成 2mol；D 反应物非单质。' }],
+            ans: '<b>正确答案：C</b>'
+        },
+        {
+            num: 7, type: '选择题', section: '[19.3.2] 燃烧热', year: '[2017 年第 15 题]',
+            body: '$2.0\\text{ g}$ 的苯甲酸完全燃烧释放出的热，将 $3.5\\text{ kg}$ 的水的温度提升 $3.8^\\circ\\text{C}$。试计算苯甲酸的燃烧热。[$\\text{C}_6\\text{H}_5\\text{COOH}$ 摩尔质量 $= 122\\text{ g mol}^{-1}$]<br><br>' +
+                  'A. $717.4\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; B. $3407.5\\text{ kJ mol}^{-1}$<br>' +
+                  'C. $6814.9\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; D. $13629.8\\text{ kJ mol}^{-1}$',
+            steps: [{ title: '吸热与摩尔燃烧热换算', think: '$Q = m \\cdot c \\cdot \\Delta T$', derivation: '$Q = 3.5\\text{ kg} \\times 4.2\\text{ kJ kg}^{-1}\\text{K}^{-1} \\times 3.8\\text{ K} = 55.86\\text{ kJ}$<br>$n(\\text{苯甲酸}) = \\frac{2.0}{122} = 0.01639\\text{ mol}$<br>$\\text{燃烧热} = \\frac{55.86}{0.01639} \\approx 3407.5\\text{ kJ mol}^{-1}$' }],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 8, type: '选择题', section: '[19.3.3] 中和热', year: '[2013 年第 13 题]',
+            body: '强酸与强碱稀溶液中和热：$\\text{H}^+(aq) + \\text{OH}^-(aq) \\rightarrow \\text{H}_2\\text{O}(l) \\quad \\Delta H = -57.3\\text{ kJ mol}^{-1}$<br>' +
+                  '若向 $1\\text{ L } 0.5\\text{ mol L}^{-1}$ 的 $\\text{NaOH}$ 溶液中分别加入：<br>' +
+                  '① 稀醋酸 &nbsp;&nbsp; ② 浓 $\\text{H}_2\\text{SO}_4$ &nbsp;&nbsp; ③ 稀 $\\text{HNO}_3$<br>' +
+                  '恰好完全反应放出热量 $\\Delta H_1, \\Delta H_2, \\Delta H_3$ 的放热大小关系：<br><br>' +
+                  'A. $\\Delta H_1 > \\Delta H_2 > \\Delta H_3$ &nbsp;&nbsp;&nbsp; B. $\\Delta H_1 > \\Delta H_3 > \\Delta H_2$<br>' +
+                  'C. $\\Delta H_2 > \\Delta H_3 > \\Delta H_1$ &nbsp;&nbsp;&nbsp; D. $\\Delta H_3 > \\Delta H_2 > \\Delta H_1$',
+            steps: [{ title: '电离吸热与稀释放热效应', think: '弱酸电离需要吸收热量，浓硫酸稀释释放热量。', derivation: '浓硫酸溶于水放热，实际放热最多（$\\Delta H_2$ 最大）；醋酸电离吸热，实际放热最少（$\\Delta H_1$ 最小）。故放热大小顺序为：$\\Delta H_2 > \\Delta H_3 > \\Delta H_1$。' }],
+            ans: '<b>正确答案：C</b>'
+        },
+        {
+            num: 9, type: '选择题', section: '[19.3.3] 中和热', year: '[2015 年第 11 题]',
+            body: '已知含有 $11.2\\text{ g}$ 的 $\\text{KOH}$ 溶液与 $1\\text{ L } 0.1\\text{ mol L}^{-1}\\text{ H}_2\\text{SO}_4$ 反应释放 $11.46\\text{ kJ}$ 热量。下列哪项正确表示该中和反应的标准热化学方程式？<br><br>' +
+                  'A. $\\text{KOH}(aq) + \\frac{1}{2}\\text{H}_2\\text{SO}_4(aq) \\rightarrow \\frac{1}{2}\\text{K}_2\\text{SO}_4(aq) + \\text{H}_2\\text{O}(l) \\quad \\Delta H = -11.46\\text{ kJ mol}^{-1}$<br>' +
+                  'B. $\\text{KOH}(aq) + \\frac{1}{2}\\text{H}_2\\text{SO}_4(aq) \\rightarrow \\frac{1}{2}\\text{K}_2\\text{SO}_4(aq) + \\text{H}_2\\text{O}(l) \\quad \\Delta H = -57.3\\text{ kJ mol}^{-1}$<br>' +
+                  'C. $2\\text{KOH}(aq) + \\text{H}_2\\text{SO}_4(aq) \\rightarrow \\text{K}_2\\text{SO}_4(aq) + 2\\text{H}_2\\text{O}(l) \\quad \\Delta H = -57.3\\text{ kJ mol}^{-1}$<br>' +
+                  'D. $2\\text{KOH}(aq) + \\text{H}_2\\text{SO}_4(aq) \\rightarrow \\text{K}_2\\text{SO}_4(aq) + 2\\text{H}_2\\text{O}(l) \\quad \\Delta H = -114.6\\text{ kJ mol}^{-1}$',
+            steps: [{ title: '中和反应热化学标定', think: '标定 1 mol H₂O(l) 的生成反应。', derivation: '$n(\\text{KOH}) = 11.2 / 56.1 = 0.2\\text{ mol}$，酸提供 $0.2\\text{ mol H}^+$，完全反应生成 $0.2\\text{ mol H}_2\\text{O}$ 放热 $11.46\\text{ kJ}$。<br>生成 $1\\text{ mol H}_2\\text{O}$ 放热 $11.46 / 0.2 = 57.3\\text{ kJ}$，选项 B 表达正确。' }],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 10, type: '选择题', section: '[19.3.4] 盖斯定律', year: '[2014 年第 17 题]',
+            body: '已知：<br>' +
+                  '$\\text{SO}_2(g) + \\frac{1}{2}\\text{O}_2(g) \\rightarrow \\text{SO}_3(g) \\quad \\Delta H = -98.3\\text{ kJ mol}^{-1}$<br>' +
+                  '$\\text{SO}_3(g) + \\text{H}_2\\text{O}(l) \\rightarrow \\text{H}_2\\text{SO}_4(aq) \\quad \\Delta H = -130.3\\text{ kJ mol}^{-1}$<br>' +
+                  '$\\text{SO}_2(g)$ 与 $\\text{H}_2\\text{O}(l)$ 标准生成热为 $-296.9\\text{ kJ mol}^{-1}$ 和 $-285.8\\text{ kJ mol}^{-1}$。求硫酸的标准生成热。<br><br>' +
+                  'A. $-130.3\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; B. $-354.1\\text{ kJ mol}^{-1}$<br>' +
+                  'C. $-614.7\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; D. $-811.3\\text{ kJ mol}^{-1}$',
+            steps: [{ title: '热化学叠加计算', think: '硫酸生成热反应：$\\text{S}(s) + \\frac{3}{2}\\text{O}_2(g) + \\text{H}_2(g) \\rightarrow \\text{H}_2\\text{SO}_4(aq)$', derivation: '$\\Delta H = -296.9 + (-98.3) + (-285.8) + (-130.3) = -811.3\\text{ kJ mol}^{-1}$' }],
+            ans: '<b>正确答案：D</b>'
+        },
+        {
+            num: 11, type: '选择题', section: '[19.3.4] 盖斯定律', year: '[2018 年第 12 题]',
+            body: '已知三个热化学方程式：<br>' +
+                  '① $2\\text{M}(s) + \\frac{3}{2}\\text{O}_2(g) \\rightarrow \\text{M}_2\\text{O}_3(s) \\quad \\Delta H = -822.2\\text{ kJ}$<br>' +
+                  '② $\\text{C}(s) + \\frac{1}{2}\\text{O}_2(g) \\rightarrow \\text{CO}(g) \\quad \\Delta H = -110.5\\text{ kJ}$<br>' +
+                  '③ $\\text{C}(s) + \\text{O}_2(g) \\rightarrow \\text{CO}_2(g) \\quad \\Delta H = -393.5\\text{ kJ}$<br>' +
+                  '求 $\\text{M}_2\\text{O}_3(s) + 3\\text{CO}(g) \\rightarrow 2\\text{M}(s) + 3\\text{CO}_2(g)$ 的反应热 $\\Delta H$。<br><br>' +
+                  'A. $-539.2\\text{ kJ}$ &nbsp;&nbsp;&nbsp; B. $-26.8\\text{ kJ}$ &nbsp;&nbsp;&nbsp; C. $+26.8\\text{ kJ}$ &nbsp;&nbsp;&nbsp; D. $+539.2\\text{ kJ}$',
+            steps: [{ title: '盖斯定律方程式组合', think: '目标反应 = -① - 3×② + 3×③', derivation: '$\\Delta H = -(-822.2) - 3(-110.5) + 3(-393.5) = -26.8\\text{ kJ}$' }],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 12, type: '选择题', section: '[19.3.4] 盖斯定律', year: '[2021 年第 9 题]',
+            body: '已知标准生成热：$\\Delta H_f^\\circ(\\text{P}_4\\text{O}_{10}(s)) = -3012\\text{ kJ mol}^{-1}$，$\\Delta H_f^\\circ(\\text{H}_2\\text{O}(l)) = -286\\text{ kJ mol}^{-1}$，$\\Delta H_f^\\circ(\\text{H}_3\\text{PO}_4(s)) = -1279\\text{ kJ mol}^{-1}$。<br>' +
+                  '求 $\\text{P}_4\\text{O}_{10}(s) + 6\\text{H}_2\\text{O}(l) \\rightarrow 4\\text{H}_3\\text{PO}_4(s)$ 的 $\\Delta H^\\circ$。<br><br>' +
+                  'A. $-9844\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; B. $-2019\\text{ kJ mol}^{-1}$<br>' +
+                  'C. $-388\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; D. $-97\\text{ kJ mol}^{-1}$',
+            steps: [{ title: '生成热求反应热基本公式', think: '$\\Delta H^\\circ = \\sum \\Delta H_f^\\circ(\\text{产物}) - \\sum \\Delta H_f^\\circ(\\text{反应物})$', derivation: '$\\Delta H^\\circ = 4(-1279) - [ -3012 + 6(-286) ] = -5116 - (-4728) = -388\\text{ kJ mol}^{-1}$' }],
+            ans: '<b>正确答案：C</b>'
+        },
+        // 作答题部分
+        {
+            num: 13, type: '作答题', section: '[19.3.2] 燃烧热计算', year: '[2014 年第 2(a) 题]',
+            body: '已知 $\\text{H}_2(g) + \\frac{1}{2}\\text{O}_2(g) \\rightarrow \\text{H}_2\\text{O}(l) \\quad \\Delta H = -285.8\\text{ kJ}$<br>' +
+                  '在标准状态下，试计算 $2240\\text{ L}$ 氢气完全燃烧释放的热量，能使多少 $\\text{kg}$ 的水温度从 $28^\\circ\\text{C}$ 上升至 $78^\\circ\\text{C}$？（水的比热 $= 4200\\text{ J kg}^{-1}\\text{K}^{-1}$）',
+            steps: [
+                { title: '氢气摩尔数与总放热', think: '标况气体摩尔体积 $22.4\\text{ L/mol}$。', derivation: '$n(\\text{H}_2) = 2240 / 22.4 = 100\\text{ mol}$<br>$Q = 100 \\times 285.8\\text{ kJ} = 2.858 \\times 10^7\\text{ J}$' },
+                { title: '水温上升吸收热量换算', think: '$Q = m \\cdot c \\cdot \\Delta T$', derivation: '$\\Delta T = 78 - 28 = 50\\text{ K}$<br>$2.858 \\times 10^7 = m \\times 4200 \\times 50 \\implies m \\approx 136\\text{ kg}$' }
+            ],
+            ans: '<b>参考答案：136 kg</b>'
+        },
+        {
+            num: 14, type: '作答题', section: '[19.3.4] 盖斯定律与热化学', year: '[2018 年第 2(a)(b) 题]',
+            body: '$\\text{NO}_2$ 双分子缔合反应：$2\\text{NO}_2(g) \\rightleftharpoons \\text{N}_2\\text{O}_4(g)$<br>' +
+                  '(a) 已知 $\\text{NO}_2$ 和 $\\text{N}_2\\text{O}_4$ 的标准生成热分别为 $+33.9\\text{ kJ mol}^{-1}$ 和 $+9.2\\text{ kJ mol}^{-1}$，求上述反应的焓变。<br>' +
+                  '(b) 上述双分子缔合适宜在哪两个条件下进行？',
+            steps: [
+                { title: '生成热求反应焓变', think: '$\\Delta H = \\Delta H_f(\\text{N}_2\\text{O}_4) - 2 \\times \\Delta H_f(\\text{NO}_2)$', derivation: '$\\Delta H = 9.2 - (2 \\times 33.9) = -58.6\\text{ kJ mol}^{-1}$' },
+                { title: '条件选择', think: '放热且气体分子数减小的可逆反应。', derivation: '反应放热（$\\Delta H < 0$）且气体体积缩小，宜在<b>低温</b>和<b>高压</b>下进行。' }
+            ],
+            ans: '<b>参考答案：(a) -58.6 kJ/mol &nbsp;&nbsp; (b) 低温、高压</b>'
+        }
+    ],
+
+    '第20章': [
+        // 选择题部分
+        {
+            num: 1, type: '选择题', section: '[20.1] 化学反应速率的意义', year: '[2017 年第 16 题]',
+            body: '已知 $4\\text{NH}_3 + 5\\text{O}_2 \\rightleftharpoons 4\\text{NO} + 6\\text{H}_2\\text{O}$，各速率为 $R_{\\text{NH}_3}, R_{\\text{O}_2}, R_{\\text{NO}}, R_{\\text{H}_2\\text{O}}$，以下关系式正确的是：<br><br>' +
+                  'A. $\\frac{4}{5}R_{\\text{NH}_3} = R_{\\text{O}_2}$ &nbsp;&nbsp;&nbsp; B. $\\frac{5}{6}R_{\\text{O}_2} = R_{\\text{H}_2\\text{O}}$<br>' +
+                  'C. $\\frac{2}{3}R_{\\text{NH}_3} = R_{\\text{H}_2\\text{O}}$ &nbsp;&nbsp;&nbsp; D. $\\frac{4}{5}R_{\\text{O}_2} = R_{\\text{NO}}$',
+            steps: [{ title: '计量数与速率比例', think: '$R_i / n_i$ 恒相等。', derivation: '$R_{\\text{O}_2} / 5 = R_{\\text{NO}} / 4 \\implies R_{\\text{NO}} = (4/5) R_{\\text{O}_2}$，故 D 正确。' }],
+            ans: '<b>正确答案：D</b>'
+        },
+        {
+            num: 2, type: '选择题', section: '[20.2.2] 反应物浓度与化学反应速率', year: '[2014 年第 14 题]',
+            body: '已知反应 $4\\text{AB} + \\text{C}_2 \\rightarrow 2\\text{A}_2\\text{C} + 2\\text{B}_2 + \\text{热}$ 的机理如下：<br>' +
+                  '① $\\text{AB} + \\text{C}_2 \\rightarrow \\text{ABC}_2$ （慢）<br>' +
+                  '② $\\text{ABC}_2 + \\text{AB} \\rightarrow 2\\text{ABC}$ （极快）<br>' +
+                  '③ $2\\text{ABC} + 2\\text{AB} \\rightarrow 2\\text{A}_2\\text{C} + 2\\text{B}_2$ （快）<br>' +
+                  '叙述正确的是：<br>' +
+                  'I $\\text{ABC}_2$ 是中间产物 &nbsp;&nbsp; II 此反应为二级反应 &nbsp;&nbsp; III 此反应为吸热反应 &nbsp;&nbsp; IV $\\text{C}_2$ 的消失速率等于 $\\text{B}_2$ 生成速率<br><br>' +
+                  'A. I, II &nbsp;&nbsp;&nbsp; B. I, II, IV &nbsp;&nbsp;&nbsp; C. I, III, IV &nbsp;&nbsp;&nbsp; D. II, III, IV',
+            steps: [{ title: '决速步与中间产物判定', think: '最慢的第一步决定速率：$R = k[\\text{AB}][\\text{C}_2]$。', derivation: '$\\text{ABC}_2$ 为中间产物（I正确）；速率方程为二级反应（II正确）；总反应放热（III错）；由总反应系数知消失速率与生成速率比为 1:2（IV错）。' }],
+            ans: '<b>正确答案：A (I, II)</b>'
+        },
+        {
+            num: 3, type: '选择题', section: '[20.2.2] 反应物浓度与化学反应速率', year: '[2019 年第 12 题]',
+            body: '下表显示 A 与 B 反应的实验结果：<br>' +
+                  '<table border="1" cellpadding="6" style="border-collapse:collapse;">' +
+                  '<tr><th>实验</th><th>[A] (mol L⁻¹)</th><th>[B] (mol L⁻¹)</th><th>反应速率 R (mol L⁻¹ s⁻¹)</th></tr>' +
+                  '<tr><td>1</td><td>0.0575</td><td>0.0216</td><td>$8.21 \\times 10^{-3}$</td></tr>' +
+                  '<tr><td>2</td><td>0.0713</td><td>0.0216</td><td>$1.26 \\times 10^{-2}$</td></tr>' +
+                  '<tr><td>3</td><td>0.0575</td><td>0.0333</td><td>$1.26 \\times 10^{-2}$</td></tr>' +
+                  '</table><br>' +
+                  '此反应的速率方程式表达为何？<br><br>' +
+                  'A. $R = k[\\text{A}]$ &nbsp;&nbsp;&nbsp; B. $R = k[\\text{A}][\\text{B}]$ &nbsp;&nbsp;&nbsp; C. $R = k[\\text{A}]^2[\\text{B}]$ &nbsp;&nbsp;&nbsp; D. $R = k[\\text{A}][\\text{B}]^2$',
+            steps: [{ title: '控制变量法求反应级数', think: '对比 Exp 1 与 2，以及 Exp 1 与 3。', derivation: 'Exp1与2：[B]不变，[A]增加1.24倍，速率增至1.53倍，对 A 为二级；Exp1与3：[A]不变，[B]增加1.54倍，速率增至1.53倍，对 B 为一级。' }],
+            ans: '<b>正确答案：C</b>'
+        },
+        {
+            num: 4, type: '选择题', section: '[20.2.2] 反应物浓度与速率', year: '[2021 年第 1 题]',
+            body: '已知 $2\\text{XY} + \\text{Y}_3 \\rightarrow \\text{XY}_2 + \\text{XY}_3$ 速率方程式为 $R = k[\\text{XY}][\\text{Y}_3]^2$。<br>' +
+                  '下列哪个反应机理符合上述方程式？<br><br>' +
+                  'A. $\\text{XY} + \\text{Y}_3 \\rightarrow \\text{XY}_2 + \\text{Y}_2$ (快) ; $\\text{XY} + \\text{Y}_2 \\rightarrow \\text{XY}_3$ (慢)<br>' +
+                  'B. $\\text{XY} + \\text{Y}_3 \\rightarrow \\text{XY}_2 + \\text{Y}_2$ (慢) ; $\\text{XY} + \\text{Y}_2 \\rightarrow \\text{XY}_3$ (快)<br>' +
+                  'C. $\\text{XY} + 2\\text{Y}_3 \\rightarrow \\text{XY}_2 + \\text{Y}_5$ (快) ; $\\text{XY} + \\text{Y}_5 \\rightarrow \\text{XY}_3 + \\text{Y}_3$ (慢)<br>' +
+                  'D. $\\text{XY} + 2\\text{Y}_3 \\rightarrow \\text{XY}_2 + \\text{Y}_5$ (慢) ; $\\text{XY} + \\text{Y}_5 \\rightarrow \\text{XY}_3 + \\text{Y}_3$ (快)',
+            steps: [{ title: '慢反应决定速率方程', think: '慢步骤反应物项必须与速率方程一致。', derivation: 'D 选项中慢步骤为 $\\text{XY} + 2\\text{Y}_3 \\rightarrow \\text{XY}_2 + \\text{Y}_5$，其基元反应速率方程对应 $R = k[\\text{XY}][\\text{Y}_3]^2$。' }],
+            ans: '<b>正确答案：D</b>'
+        },
+        {
+            num: 5, type: '选择题', section: '[20.2.2] 反应物浓度与速率', year: '[2022 年第 1 题]',
+            body: '对于反应 $2\\text{XO}_2 + \\text{O}_3 \\rightarrow \\text{X}_2\\text{O}_5 + \\text{O}_2$ 速率方程 $R = k[\\text{XO}_2][\\text{O}_3]$，下列哪项机理符合？<br><br>' +
+                  'A. $\\text{XO}_2 + \\text{O}_3 \\rightarrow \\text{XO}_3 + \\text{O}_2$ (慢) ; $\\text{XO}_2 + \\text{XO}_3 \\rightarrow \\text{X}_2\\text{O}_5$ (快)<br>' +
+                  'B. $\\text{XO}_2 + \\text{XO}_2 \\rightarrow \\text{X}_2\\text{O}_2 + \\text{O}_2$ (慢) ; $\\text{X}_2\\text{O}_2 + \\text{O}_3 \\rightarrow \\text{X}_2\\text{O}_5$ (快)<br>' +
+                  'C. $\\text{XO}_2 + \\text{XO}_2 \\rightarrow \\text{X}_2\\text{O}_4$ (快) ; $\\text{X}_2\\text{O}_4 + \\text{O}_3 \\rightarrow \\text{X}_2\\text{O}_5 + \\text{O}_2$ (慢)<br>' +
+                  'D. $\\text{XO}_2 + \\text{O}_3 \\rightarrow \\text{XO}_5$ (快) ; $\\text{XO}_5 + \\text{XO}_2 \\rightarrow \\text{X}_2\\text{O}_5 + \\text{O}_2$ (慢)',
+            steps: [{ title: '决速步与表达式', think: '慢反应步需符合 $R = k[\\text{XO}_2][\\text{O}_3]$。', derivation: 'A 选项慢反应步为 $\\text{XO}_2 + \\text{O}_3 \\rightarrow \\text{XO}_3 + \\text{O}_2$，决定了总速率方程。' }],
+            ans: '<b>正确答案：A</b>'
+        },
+        {
+            num: 6, type: '选择题', section: '[20.2.3] 反应温度与化学反应速率', year: '[2013 年第 14 题]',
+            body: '有关分子能量分布曲线的叙述，哪项错误？<br>' +
+                  '<img src="image/UEC/Screenshot 2026-08-12 193158.jpg" alt="分子能量分布曲线图" class="question-img"><br>' +
+                  'A. 两条曲线下的面积是一样的<br>' +
+                  'B. 在温度 $T_2$ 时的分子总数比在温度 $T_1$ 时的多<br>' +
+                  'C. ABC 的面积大约是 ADC 面积的一半<br>' +
+                  'D. 在高温时，拥有高于活化能 ($E_a$) 的分子数会增加',
+            steps: [{ title: '分布曲线物理含义', think: '曲线下方总面积代表体系分子总数，不因温度改变。', derivation: '升温只改变能量分布形态，不改变分子总数，B 叙述“T₂ 时分子总数较多”是错误的。' }],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 7, type: '选择题', section: '[20.2.3] 反应温度与速率', year: '[2015 年第 12 题]',
+            body: '已知 $2\\text{Fe}^{3+} + \\text{SO}_3^{2-} + \\text{H}_2\\text{O} \\rightarrow 2\\text{Fe}^{2+} + \\text{H}_2\\text{SO}_4$，加热时棕色转换为绿色的速率提高。原因是：<br>' +
+                  'I $\\text{Fe}^{3+}$ 及 $\\text{SO}_3^{2-}$ 动能增加 &nbsp;&nbsp; II 离子表面积增加<br>' +
+                  'III 单位体积数量增加 &nbsp;&nbsp; IV 有效碰撞频率增加<br><br>' +
+                  'A. I, II &nbsp;&nbsp;&nbsp; B. I, IV &nbsp;&nbsp;&nbsp; C. II, III, IV &nbsp;&nbsp;&nbsp; D. I, II, III, IV',
+            steps: [{ title: '升温微观机理', think: '升温增加分子平均动能，提高有效碰撞频率。', derivation: '加热增加了离子动能（I正确），从而提高了有效碰撞频率（IV正确）。溶液反应不存在固体表面积概念。' }],
+            ans: '<b>正确答案：B (I, IV)</b>'
+        },
+        {
+            num: 8, type: '选择题', section: '[20.2.3] 反应温度与速率', year: '[2016 年第 14 题]',
+            body: '气相反应 $2\\text{X}(g) \\rightarrow \\text{Y}(g) + \\text{Z}(g)$ 速率方程 $R = k[\\text{X}]^2$。在 $t_2 > t_1$ 时，温度 $t_1$ 速率为 $r$，温度 $t_2$ 速率为 $2r$。原因是：<br><br>' +
+                  'A. 反应速率常数 $k$ 随温度提高而增加<br>' +
+                  'B. $\\text{X}$ 的浓度随温度提高而降低<br>' +
+                  'C. 这是个吸热反应<br>' +
+                  'D. 这是个均相反应',
+            steps: [{ title: '速率常数 k 与温度', think: '温度升高，速率常数 k 必增大。', derivation: '反应速率增大的根本原因是温度升高使得速率常数 $k$ 增大。' }],
+            ans: '<b>正确答案：A</b>'
+        },
+        {
+            num: 9, type: '选择题', section: '[20.2.3] 反应温度与速率', year: '[2017 年第 17 题]',
+            body: '化学反应中若温度上升，则下列哪些叙述正确？<br>' +
+                  'I 活化分子数目增多 &nbsp;&nbsp; II 分子平均动能增大<br>' +
+                  'III 有效碰撞增加 &nbsp;&nbsp; IV 活化能增加<br><br>' +
+                  'A. I, II, III &nbsp;&nbsp;&nbsp; B. I, II, IV &nbsp;&nbsp;&nbsp; C. I, III, IV &nbsp;&nbsp;&nbsp; D. II, III, IV',
+            steps: [{ title: '升温对活化能的影响', think: '升高温度不改变反应本身的活化能。', derivation: '升温增加了分子动能、活化分子数及有效碰撞（I, II, III 正确）；活化能 IV 保持不变。' }],
+            ans: '<b>正确答案：A (I, II, III)</b>'
+        },
+        {
+            num: 10, type: '选择题', section: '[20.2.4] 催化剂与反应速率', year: '[2016 年第 15 题]',
+            body: '升温与添加催化剂都可提升反应速率。关键特性叙述哪些正确？<br>' +
+                  'I 两者都会增加活化分子的数量<br>' +
+                  'II 两者都会增加反应颗粒间的碰撞<br>' +
+                  'III 添加催化剂改变原反应机理并降低活化能 ($E_a$)<br>' +
+                  'IV 提供热能将改变反应机理并降低活化能<br><br>' +
+                  'A. I, II &nbsp;&nbsp;&nbsp; B. I, III &nbsp;&nbsp;&nbsp; C. II, III, IV &nbsp;&nbsp;&nbsp; D. I, II, III, IV',
+            steps: [{ title: '升温 vs 催化剂', think: '升温增加活化分子数，催化剂降低活化能。', derivation: '两者都增加了活化分子数量（I正确）；催化剂通过改变反应路径降低活化能（III正确）；提供热能不改变机理与活化能（IV错误）。' }],
+            ans: '<b>正确答案：B (I, III)</b>'
+        },
+        {
+            num: 11, type: '选择题', section: '[20.2.4] 催化剂与反应速率', year: '[2018 年第 13 题]',
+            body: '如图所示为催化及非催化反应性能图。下列哪些叙述为正确？<br>' +
+                  '<img src="image/UEC/Screenshot 2026-08-12 193350.jpg" alt="催化及非催化反应性能图" class="question-img"><br>' +
+                  'I $E_1$ 是催化情况下逆反应的活化能<br>' +
+                  'II $E_2$ 是非催化情况下正反应的活化能<br>' +
+                  'III 催化剂使正反应的活化能降低了 ($E_1 - E_2$)<br>' +
+                  'IV 催化剂使逆反应的活化能降低了 ($E_4 - E_3$)<br><br>' +
+                  'A. I, II &nbsp;&nbsp;&nbsp; B. I, IV &nbsp;&nbsp;&nbsp; C. II, III &nbsp;&nbsp;&nbsp; D. III, IV',
+            steps: [{ title: '势能图活化能读图', think: '准确识别正、逆反应与催化前后的活化能高度。', derivation: '$E_1$ 是催化情况下逆反应活化能（I正确）；$E_4$ 为非催化逆反应活化能，$E_3$ 为催化逆反应活化能，故降低了 ($E_4 - E_3$)（IV正确）。' }],
+            ans: '<b>正确答案：B (I, IV)</b>'
+        },
+        // 作答题部分
+        {
+            num: 12, type: '作答题', section: '[20.2] 影响反应速率的因素', year: '[2020 年第 2 题]',
+            body: '适量锌片放入过量盐酸中产生氯化锌浓度随时间（10分钟）变化。<br>' +
+                  '<img src="image/UEC/Screenshot 2026-08-12 192801.jpg" alt="[ZnCl₂] 浓度-时间曲线图" class="question-img"><br>' +
+                  '已知 1, 2, 3, 4 分钟斜率为：$m_A=0.20, m_B=0.10, m_C=0.05, m_D=0.02\\text{ mol L}^{-1}\\text{ min}^{-1}$。<br>' +
+                  '(a) 何时反应速率最快？<br>' +
+                  '(b) 求前 3 分钟平均反应速率（以氯化锌生成速率表示）。<br>' +
+                  '(c) 求第 3 分钟时盐酸的消耗速率。',
+            steps: [
+                { title: '斜率与瞬时速率', think: '斜率代表切线瞬时速率。', derivation: '(a) 第 1 分钟斜率最大 ($m_A=0.20$)，反应最快。' },
+                { title: '平均速率与系数换算', think: '平均速率等于浓度变化量除以时间。', derivation: '(b) 前 3 分钟 $\\Delta c = 0.54\\text{ M}$，平均速率 $= 0.54 / 3 = 0.180\\text{ mol L}^{-1}\\text{ min}^{-1}$<br>(c) 第 3 分钟 $R(\\text{ZnCl}_2) = 0.05\\text{ M/min}$，由系数比知 $R(\\text{HCl}) = 2 \\times 0.05 = 0.10\\text{ mol L}^{-1}\\text{ min}^{-1}$。' }
+            ],
+            ans: '<b>参考答案：(a) 第1分钟 &nbsp;&nbsp; (b) 0.180 mol L⁻¹ min⁻¹ &nbsp;&nbsp; (c) 0.10 mol L⁻¹ min⁻¹</b>'
+        },
+        {
+            num: 13, type: '作答题', section: '[20.2.3] 反应温度与化学反应速率', year: '[2013 年第 8(a) 题]',
+            body: '铝粉与过氯酸铵(VII)混合物可作为推进剂，反应式如下：<br>' +
+                  '$3\\text{Al}(s) + 3\\text{NH}_4\\text{ClO}_4(s) \\rightarrow \\text{Al}_2\\text{O}_3(s) + \\text{AlCl}_3(s) + 3\\text{NO}(g) + 6\\text{H}_2\\text{O}(g) \\quad \\Delta H = -2677\\text{ kJ}$<br>' +
+                  '将各 $1.0\\text{ mol}$ 放入 $2.0\\text{ L}$、$400\\text{ K}$ 恒温反应槽内反应，槽内总压强如图：<br>' +
+                  '<img src="image/UEC/Screenshot 2026-08-12 193247.jpg" alt="气体总压强随时间变化图" class="question-img"><br>' +
+                  '(i) 计算总气体产生速率 (mol min⁻¹)。',
+            steps: [
+                { title: '状态方程换算气体摩尔数', think: '$n = PV / RT$，代入 8 分钟内压强变化。', derivation: '0~8 min 内，生成气体摩尔数 $n = (0.6 \\times 10^5 \\times 2.0 \\times 10^{-3}) / (8.314 \\times 400) = 3.6 \\times 10^{-2}\\text{ mol}$<br>产生速率 $r_1 = (3.6 \\times 10^{-2}) / 8 = 4.5 \\times 10^{-3}\\text{ mol min}^{-1}$。' }
+            ],
+            ans: '<b>参考答案：4.5 × 10⁻³ mol min⁻¹</b>'
+        },
+        {
+            num: 14, type: '作答题', section: '[20.2.4] 催化剂与化学反应速率', year: '[2013 年第 8(b) 题]',
+            body: '(i) 试说明什么是活化能。<br>' +
+                  '(ii) 下图是某反应过程中能量变化的示意图：<br>' +
+                  '<img src="image/UEC/Screenshot 2026-08-12 193429.jpg" alt="反应能量变化示意图" class="question-img"><br>' +
+                  '① 该反应是放热，还是吸热？<br>' +
+                  '② 标注活化能 $E_a$ 与加催化剂后的新活化能 $E_a\'$。',
+            steps: [
+                { title: '活化能定义与能量图判读', think: '反应物能量低于生成物能量。', derivation: '(i) 活化能是反应物分子变为活化分子所吸收的最低能量。<br>(ii) ① 生成物能量高于反应物，故为<b>吸热反应</b>；② 在高点与反应物水平线间标出 $E_a$ 与降低后的 $E_a\'$。' }
+            ],
+            ans: '<b>参考答案：(i) 碰撞中反应粒子所需的最低能量 &nbsp;&nbsp; (ii) 吸热反应</b>'
+        }
+    ],
+
+    '第21章': [
+        {
+            num: 1, type: '选择题', section: '[21.3] 影响化学平衡移动的因素', year: '[2017 年第 18 题]',
+            body: '如图所示为温度和压强对下列平衡反应的影响：<br>' +
+                  '$\\text{A}(s) + b\\text{B}(g) \\rightleftharpoons c\\text{C}(g) \\quad \\Delta H$<br>' +
+                  '<img src="image/UEC/Screenshot 2026-08-12 193516.jpg" alt="温度和压强对平衡的影响曲线图" class="question-img"><br>' +
+                  '下列哪组正确？<br><br>' +
+                  'A. $c > b \\quad \\Delta H > 0$<br>' +
+                  'B. $c > b \\quad \\Delta H < 0$<br>' +
+                  'C. $c < b \\quad \\Delta H > 0$<br>' +
+                  'D. $c < b \\quad \\Delta H < 0$',
+            steps: [{ title: '平衡曲线读图规律', think: '由“先平者数值大”确定压强大小，再由 B% 变化判断方向。', derivation: '相同温度下 $P_2$ 对应的 B% 较高，即加压使平衡逆移，说明正反应气体分子数增加 ($c > b$)；固定压强下升温 B% 降低，说明升温正移，正反应吸热 ($\\Delta H > 0$)。' }],
+            ans: '<b>正确答案：A</b>'
+        }
+    ],
+
+    '第22章': [
+        // 选择题部分
+        {
+            num: 1, type: '选择题', section: '[22.2] 影响难溶电解质溶解的因素', year: '[2015 年第 16 题]',
+            body: '足量 $\\text{AgCl}$ 固体溶解于下列液体中：<br>' +
+                  'I $50\\text{ mL } 0.05\\text{ mol L}^{-1}\\text{ AgNO}_3$ 溶液<br>' +
+                  'II $30\\text{ mL } 0.02\\text{ mol L}^{-1}\\text{ CaCl}_2$ 溶液<br>' +
+                  'III $20\\text{ mL } 0.01\\text{ mol L}^{-1}\\text{ KCl}$ 溶液<br>' +
+                  'IV $10\\text{ mL}$ 蒸馏水<br>' +
+                  '$\\text{AgCl}$ 在这些液体中溶解度由大到小的排列：<br><br>' +
+                  'A. I > II > III > IV &nbsp;&nbsp;&nbsp; B. II > III > IV > I<br>' +
+                  'C. III > II > I > IV &nbsp;&nbsp;&nbsp; D. IV > III > II > I',
+            steps: [{ title: '同离子效应', think: '同离子（$\\text{Ag}^+$ 或 $\\text{Cl}^-$）浓度越高，溶解度越小。', derivation: '同离子浓度：I $[\\text{Ag}^+]=0.05\\text{M}$；II $[\\text{Cl}^-]=0.04\\text{M}$；III $[\\text{Cl}^-]=0.01\\text{M}$；IV 纯水 $0\\text{M}$。<br>浓度越大溶解度越小，排列为：IV > III > II > I。' }],
+            ans: '<b>正确答案：D</b>'
+        },
+        // 作答题部分
+        {
+            num: 2, type: '作答题', section: '[21.2.2] 平衡常数与三段式', year: '[2018 年第 2(c) 题]',
+            body: '反应 $2\\text{NO}_2(g) \\rightleftharpoons \\text{N}_2\\text{O}_4(g)$ 达到平衡时，$[\\text{NO}_2] = 0.0125\\text{ mol L}^{-1}$，$[\\text{N}_2\\text{O}_4] = 0.0321\\text{ mol L}^{-1}$。求 $\\text{NO}_2$ 的起始浓度。',
+            steps: [
+                { title: '倒推起始浓度', think: '生成 $0.0321\\text{ M}$ 的 $\\text{N}_2\\text{O}_4$ 需要消耗 $2 \\times 0.0321\\text{ M}$ 的 $\\text{NO}_2$。', derivation: '$\\text{消耗的 } [\\text{NO}_2] = 2 \\times 0.0321 = 0.0642\\text{ mol L}^{-1}$<br>$\\text{起始 } [\\text{NO}_2] = 0.0125 + 0.0642 = 0.0767\\text{ mol L}^{-1}$' }
+            ],
+            ans: '<b>参考答案：0.0767 mol L⁻¹</b>'
+        },
+        {
+            num: 3, type: '作答题', section: '[22.2] 溶度积与沉淀溶解', year: '[2013 年第 7(c)(ii) 题]',
+            body: '$298\\text{ K}$ 时，$\\text{AgCl}$ 的 $K_{sp} = 1.56 \\times 10^{-10}$。同温下，在 $0.5\\text{ L } 0.10\\text{ mol L}^{-1}\\text{ NaCl}$ 溶液中可溶解多少摩尔的 $\\text{AgCl}$？',
+            steps: [
+                { title: 'Ag⁺ 浓度计算', think: '$[\\text{Cl}^-] \\approx 0.10\\text{ mol L}^{-1}$', derivation: '$K_{sp} = [\\text{Ag}^+][\\text{Cl}^-] \\implies 1.56 \\times 10^{-10} = [\\text{Ag}^+](0.10)$<br>$[\\text{Ag}^+] = 1.56 \\times 10^{-9}\\text{ mol L}^{-1}$' },
+                { title: '摩尔数换算', think: '$n = c \\cdot V$', derivation: '$n(\\text{AgCl}) = 1.56 \\times 10^{-9} \\times 0.5 = 7.80 \\times 10^{-10}\\text{ mol}$' }
+            ],
+            ans: '<b>参考答案：7.80 × 10⁻¹⁰ mol</b>'
+        },
+        {
+            num: 4, type: '作答题', section: '[22.2] 溶度积与沉淀预测', year: '[2013 年第 7(d) 题]',
+            body: '已知常温下 $K_{sp}(\\text{CaSO}_4) = 2.45 \\times 10^{-5}$，$K_{sp}(\\text{BaSO}_4) = 1.08 \\times 10^{-10}$。<br>' +
+                  '(i) 硫酸钙在纯水中的溶解度。<br>' +
+                  '(ii) 硫酸钙在 $0.10\\text{ mol L}^{-1}\\text{ CaCl}_2$ 中的溶解度。<br>' +
+                  '(iii) 将 $50\\text{ mL } 0.01\\text{ M BaCl}_2$ 与 $50\\text{ mL } 0.01\\text{ M K}_2\\text{SO}_4$ 混合，判断是否有沉淀。',
+            steps: [
+                { title: '溶解度计算 (i) 与 (ii)', think: '纯水 $K_{sp}=s^2$；同离子下 $K_{sp} \\approx c \\cdot s$', derivation: '(i) $s = \\sqrt{2.45 \\times 10^{-5}} = 4.95 \\times 10^{-3}\\text{ mol L}^{-1}$<br>(ii) $2.45 \\times 10^{-5} = 0.10 \\times s \\implies s = 2.45 \\times 10^{-4}\\text{ mol L}^{-1}$' },
+                { title: '浓度商与 Ksp 对比 (iii)', think: '混合后体积倍增，浓度折半！', derivation: '$[\\text{Ba}^{2+}] = 0.005\\text{ M}$，$[\\text{SO}_4^{2-}] = 0.005\\text{ M}$<br>$Q = 0.005 \\times 0.005 = 2.5 \\times 10^{-5} > K_{sp}(\\text{BaSO}_4)$，故<b>有沉淀产生</b>。' }
+            ],
+            ans: '<b>参考答案：(i) 4.95×10⁻³ mol/L &nbsp;&nbsp; (ii) 2.45×10⁻⁴ mol/L &nbsp;&nbsp; (iii) Q > Ksp，有沉淀产生</b>'
+        }
+    ]
+};
+
+let currentChapter = '第19章';
+let currentNum = 1;
+let currentStepIdx = -1;
+
+window.onload = function() {
+    renderButtons('第19章');
+    loadCardData('第19章', 1);
+};
+
+function switchChapter(chap) {
+    currentChapter = chap;
+    currentNum = 1;
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.includes(chap));
+    });
+    renderButtons(chap);
+    loadCardData(chap, 1);
+}
+
+function renderButtons(chap) {
+    const container = document.getElementById('numberButtons');
+    container.innerHTML = '';
+    const list = chapterDatabase[chap] || [];
+
+    list.forEach((item, index) => {
+        const btn = document.createElement('button');
+        btn.className = `num-btn ${item.num === currentNum ? 'active' : ''}`;
+        btn.innerText = `第 ${index + 1} 题 (${item.type})`;
+        btn.onclick = () => {
+            document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            loadCardData(chap, item.num);
+        };
+        container.appendChild(btn);
+    });
+}
+
+function loadCardData(chap, num) {
+    currentNum = num;
+    currentStepIdx = -1;
+
+    const list = chapterDatabase[chap] || [];
+    const item = list.find(q => q.num === num);
+
+    if (!item) return;
+
+    document.getElementById('qTitle').innerText = item.section + ' ' + item.year;
+    document.getElementById('qBadge').innerText = item.type;
+    document.getElementById('qBody').innerHTML = item.body;
+
+    const stepsWrapper = document.getElementById('stepsWrapper');
+    stepsWrapper.innerHTML = '';
+
+    item.steps.forEach((stepObj, idx) => {
+        const div = document.createElement('div');
+        div.className = 'step-container';
+        div.id = 'step_' + idx;
+        div.innerHTML = 
+            '<div class="step-header">' +
+                '<span class="step-tag">思考解析 ' + (idx + 1) + '</span>' +
+                '<span class="step-title">' + stepObj.title + '</span>' +
+            '</div>' +
+            '<div class="thinking-box"><strong>💡 关键突破口：</strong>' + stepObj.think + '</div>' +
+            '<div class="derivation-box">' + stepObj.derivation + '</div>';
+        stepsWrapper.appendChild(div);
+    });
+
+    document.getElementById('ansContent').innerHTML = item.ans;
+    document.getElementById('finalAns').classList.remove('active');
+
+    const nextBtn = document.getElementById('nextBtn');
+    nextBtn.disabled = false;
+    nextBtn.innerText = "💡 思考解题策略 / 关键知识点";
+
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function revealNextStep() {
+    const list = chapterDatabase[currentChapter] || [];
+    const item = list.find(q => q.num === currentNum);
+    if (!item) return;
+
+    if (currentStepIdx < item.steps.length - 1) {
+        currentStepIdx++;
+        const targetStep = document.getElementById('step_' + currentStepIdx);
+        if (targetStep) targetStep.classList.add('active');
+
+        if (currentStepIdx === item.steps.length - 1) {
+            document.getElementById('nextBtn').innerText = "💡 已展示全部解析步骤";
+            document.getElementById('nextBtn').disabled = true;
+        }
+    }
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function toggleAnswer() {
+    document.getElementById('finalAns').classList.toggle('active');
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function resetCurrentCard() {
+    loadCardData(currentChapter, currentNum);
+}
+
+// AI Chatbot
+function toggleChatBox() {
+    document.getElementById('chatBox').classList.toggle('active');
+}
+
+let selectedTextStore = "";
+document.addEventListener('mouseup', function(e) {
+    const tooltip = document.getElementById('selection-tooltip');
+    const selection = window.getSelection();
+    const text = selection.toString().trim();
+    if (e.target.closest('#chatBox') || e.target.closest('.chat-widget-toggle')) return;
+
+    if (text.length > 0) {
+        selectedTextStore = text;
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        tooltip.style.left = (rect.left + window.scrollX + (rect.width / 2) - 40) + 'px';
+        tooltip.style.top = (rect.top + window.scrollY - 40) + 'px';
+        tooltip.style.display = 'block';
+    } else {
+        tooltip.style.display = 'none';
+    }
+});
+
+function askSelectedText() {
+    if (!selectedTextStore) return;
+    toggleChatBox();
+    document.getElementById('selection-tooltip').style.display = 'none';
+    const prompt = '请帮我讲解高二化学概念：“' + selectedTextStore + '”';
+    appendMessage(prompt, 'user');
+    fetchAIResponse(prompt);
+}
+
+function sendMessage() {
+    const input = document.getElementById('userInput');
+    const text = input.value.trim();
+    if (!text) return;
+    appendMessage(text, 'user');
+    input.value = '';
+    fetchAIResponse(text);
+}
+
+function appendMessage(text, sender) {
+    const msgContainer = document.getElementById('chatMessages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'chat-msg ' + sender;
+    msgDiv.innerHTML = text;
+    msgContainer.appendChild(msgDiv);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+}
+
+async function fetchAIResponse(userQuery) {
+    appendMessage("<i>AI 导师思考中...</i>", 'ai');
+    setTimeout(() => {
+        const msgs = document.querySelectorAll('.chat-msg.ai');
+        const lastMsg = msgs[msgs.length - 1];
+        lastMsg.innerHTML = '关于知识点“<b>' + userQuery + '</b>”，建议结合课本对应章节的公式进行推导与理解。';
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
