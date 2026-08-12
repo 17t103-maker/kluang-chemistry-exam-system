@@ -56,14 +56,14 @@
         .system-select {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
         .sys-btn {
-            padding: 10px 20px;
-            font-size: 1.05em;
+            padding: 10px 18px;
+            font-size: 0.98em;
             font-weight: bold;
             border: 2px solid var(--accent);
             background: white;
@@ -82,7 +82,7 @@
             background: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
             padding: 18px;
             text-align: center;
-            font-size: 1.6em;
+            font-size: 1.5em;
             font-weight: bold;
             border-radius: var(--border-radius);
             margin-bottom: 20px;
@@ -318,7 +318,6 @@
             font-size: 1.1em;
         }
 
-        /* 新增：跷跷板图形容器 CSS */
         .seesaw-box {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -372,8 +371,10 @@
     <div class="subtitle">高二化学 21.3节 影响化学平衡移动的因素</div>
 
     <div class="system-select">
-        <button class="sys-btn active" id="btn-sys1" onclick="switchSystem(1)">体系 1: 2 NO₂ (g) ⇌ N₂O₄ (g)</button>
-        <button class="sys-btn" id="btn-sys2" onclick="switchSystem(2)">体系 2: A (g) + B (g) ⇌ C (g) + D (g)</button>
+        <button class="sys-btn active" id="btn-sys1" onclick="switchSystem(1)">体系 1: 2 NO₂ ⇌ N₂O₄</button>
+        <button class="sys-btn" id="btn-sys2" onclick="switchSystem(2)">体系 2: A + B ⇌ C + D</button>
+        <button class="sys-btn" id="btn-sys3" onclick="switchSystem(3)">体系 3: Cr₂O₇²⁻ ⇌ 2 CrO₄²⁻ (酸碱平衡)</button>
+        <button class="sys-btn" id="btn-sys4" onclick="switchSystem(4)">体系 4: BaCrO₄ (沉淀溶解平衡)</button>
     </div>
 
     <div class="equation-bar" id="equation-display">
@@ -403,7 +404,7 @@
             <!-- 浓度控制 -->
             <div class="card-section" id="conc-controls"></div>
 
-            <div class="card-section">
+            <div class="card-section" id="vol-card">
                 <div class="section-header">🎈 容器体积 / 压强</div>
                 <div class="control-row">
                     <div class="label-val">
@@ -416,7 +417,7 @@
                 </div>
             </div>
 
-            <div class="card-section">
+            <div class="card-section" id="temp-card">
                 <div class="section-header">🌡️ 水浴温度 (影响平衡常数 Kc)</div>
                 <div class="control-row">
                     <div class="label-val">
@@ -433,7 +434,7 @@
                 </div>
             </div>
 
-            <div class="card-section">
+            <div class="card-section" id="cat-card">
                 <div class="section-header">💊 催化剂</div>
                 <button class="btn-mini" style="width: 100%; padding: 10px; background: #8e44ad; color: white;" onclick="addCatalyst()">
                     加入正催化剂 (同等加速正逆反应)
@@ -447,7 +448,7 @@
         <div class="visual-panel">
             <div class="simulation-view">
                 <div class="flask-box">
-                    <div style="font-weight: bold; font-size: 1.1em; color: #334155; margin-bottom: 8px;">微观粒子缓速飘动</div>
+                    <div style="font-weight: bold; font-size: 1.1em; color: #334155; margin-bottom: 8px;">微观粒子与溶液状态</div>
                     <canvas id="microCanvas" width="280" height="280"></canvas>
                     <div class="particle-legend" id="particle-legend"></div>
                 </div>
@@ -471,11 +472,11 @@
                         <!-- 动态平衡常数 Kc 与 浓度商 Qc 对比 -->
                         <div class="data-grid" style="margin-top: 8px;">
                             <div class="data-card" style="border-left-color: #2563eb;">
-                                <div class="title">平衡常数 K<sub>c</sub></div>
+                                <div class="title" id="kc-title">平衡常数 K<sub>c</sub></div>
                                 <div class="val" id="kc-display" style="color: #2563eb;">0.250</div>
                             </div>
                             <div class="data-card" style="border-left-color: #8e44ad;">
-                                <div class="title">反应任意态 浓度商 Q<sub>c</sub></div>
+                                <div class="title" id="qc-title">反应任意态 浓度商 Q<sub>c</sub></div>
                                 <div class="val" id="qc-display" style="color: #8e44ad;">0.250</div>
                             </div>
                         </div>
@@ -508,35 +509,39 @@
     let simSpeed = 0.3;
     let chart;
     let particles = [];
-
-    // 平滑动画控制变量（用于跷跷板）
     let currentSeesawAngle = 0; 
 
     let state = {
         cNO2: 2.00, cN2O4: 1.00,
         cA: 2.00, cB: 2.00, cC: 1.00, cD: 1.00,
+        cCr2O7: 0.10, cCrO4: 0.20, cH: 0.20,
+        cBa: 0.10, precipBaCrO4: 0.0,
         volume: 1.0, temperature: 298, catalyst: 1.0, isEquilibrium: true
     };
 
     let timeStep = 0;
 
-    // 计算平衡常数 Kc (吸热 / 放热响应)
     function getKc(T) {
         if (currentSys === 1) {
-            // 放热反应 ΔH < 0，升温 Kc 减小
             return 0.25 * Math.exp(-2.0 * (1/T - 1/298) * 1000);
-        } else {
-            // 吸热反应 ΔH > 0，升温 Kc 增大
+        } else if (currentSys === 2) {
             return 0.25 * Math.exp(1.5 * (1/T - 1/298) * 1000);
+        } else if (currentSys === 3) {
+            return 1.6; 
+        } else {
+            return 0.01; 
         }
     }
 
-    // 计算当前时刻的浓度商 Qc
     function getQc() {
         if (currentSys === 1) {
             return state.cN2O4 / Math.pow(state.cNO2, 2);
-        } else {
+        } else if (currentSys === 2) {
             return (state.cC * state.cD) / (state.cA * state.cB);
+        } else if (currentSys === 3) {
+            return (Math.pow(state.cCrO4, 2) * Math.pow(state.cH, 2)) / state.cCr2O7;
+        } else {
+            return state.cBa * state.cCrO4;
         }
     }
 
@@ -547,14 +552,37 @@
 
     function switchSystem(sysId) {
         currentSys = sysId;
-        document.getElementById('btn-sys1').classList.toggle('active', sysId === 1);
-        document.getElementById('btn-sys2').classList.toggle('active', sysId === 2);
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById(`btn-sys${i}`).classList.toggle('active', sysId === i);
+        }
 
         const eqBar = document.getElementById('equation-display');
+        const volCard = document.getElementById('vol-card');
+        const tempCard = document.getElementById('temp-card');
+        const catCard = document.getElementById('cat-card');
+        const kcTitle = document.getElementById('kc-title');
+        const qcTitle = document.getElementById('qc-title');
+
+        volCard.style.display = (sysId <= 2) ? 'block' : 'none';
+        tempCard.style.display = (sysId <= 2) ? 'block' : 'none';
+        catCard.style.display = (sysId <= 2) ? 'block' : 'none';
+
         if (sysId === 1) {
             eqBar.innerHTML = `2 NO<sub>2</sub> (g) <span style="color: #e74c3c;">⇄</span> N<sub>2</sub>O<sub>4</sub> (g) &nbsp;&nbsp;&nbsp;&nbsp; ΔH = -57.2 kJ/mol`;
-        } else {
+            kcTitle.innerHTML = `平衡常数 K<sub>c</sub>`;
+            qcTitle.innerHTML = `浓度商 Q<sub>c</sub>`;
+        } else if (sysId === 2) {
             eqBar.innerHTML = `A (g) + B (g) <span style="color: #e74c3c;">⇄</span> C (g) + D (g) &nbsp;&nbsp;&nbsp;&nbsp; ΔH > 0`;
+            kcTitle.innerHTML = `平衡常数 K<sub>c</sub>`;
+            qcTitle.innerHTML = `浓度商 Q<sub>c</sub>`;
+        } else if (sysId === 3) {
+            eqBar.innerHTML = `Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup> (aq,橙红) + H<sub>2</sub>O <span style="color: #e74c3c;">⇄</span> 2 CrO<sub>4</sub><sup>2-</sup> (aq,黄) + 2 H<sup>+</sup> (aq)`;
+            kcTitle.innerHTML = `平衡常数 K<sub>c</sub>`;
+            qcTitle.innerHTML = `浓度商 Q<sub>c</sub>`;
+        } else if (sysId === 4) {
+            eqBar.innerHTML = `Ba<sup>2+</sup> (aq) + CrO<sub>4</sub><sup>2-</sup> (aq) <span style="color: #e74c3c;">⇄</span> BaCrO<sub>4</sub> (s,黄沉淀)`;
+            kcTitle.innerHTML = `溶度积 K<sub>sp</sub>`;
+            qcTitle.innerHTML = `离子积 Q<sub>sp</sub>`;
         }
 
         renderConcentrationControls();
@@ -584,7 +612,7 @@
                         <input type="range" id="slider-n2o4" min="0.2" max="3.0" step="0.1" value="${state.cN2O4}" oninput="updateConc('N2O4', this.value)">
                     </div>
                 </div>`;
-        } else {
+        } else if (currentSys === 2) {
             container.innerHTML = `
                 <div class="section-header">🧪 浓度调节与实时监测</div>
                 <div class="control-row">
@@ -603,7 +631,53 @@
                     <div class="label-val"><span style="color:#9b59b6;">[D] 生成物</span><span class="live-tag">实时: <b id="d-live">${state.cD.toFixed(2)}</b> M</span></div>
                     <input type="range" id="slider-d" min="0.2" max="3.0" step="0.1" value="${state.cD}" oninput="updateConc('D', this.value)">
                 </div>`;
+        } else if (currentSys === 3) {
+            container.innerHTML = `
+                <div class="section-header">🧪 酸碱滴加与离子浓度</div>
+                <div class="control-row">
+                    <div class="label-val"><span style="color:#d35400;">[Cr₂O₇²⁻] 橙红</span><span class="live-tag"><b id="cr2o7-live">${state.cCr2O7.toFixed(2)}</b> M</span></div>
+                    <div class="label-val"><span style="color:#f1c40f;">[CrO₄²⁻] 黄色</span><span class="live-tag"><b id="cro4-live">${state.cCrO4.toFixed(2)}</b> M</span></div>
+                    <div class="label-val"><span style="color:#e74c3c;">[H⁺] 酸度</span><span class="live-tag"><b id="h-live">${state.cH.toFixed(2)}</b> M</span></div>
+                </div>
+                <div style="display:flex; gap:8px; margin-top:10px;">
+                    <button class="btn-mini" style="flex:1; background:#e74c3c; color:white;" onclick="addReagent('HNO3')">➕ 滴加 1M HNO₃ (+H⁺)</button>
+                    <button class="btn-mini" style="flex:1; background:#f39c12; color:white;" onclick="addReagent('NaOH')">➕ 滴加 1M NaOH (-H⁺)</button>
+                </div>`;
+        } else if (currentSys === 4) {
+            container.innerHTML = `
+                <div class="section-header">🧪 沉淀与酸碱试剂滴加</div>
+                <div class="control-row">
+                    <div class="label-val"><span style="color:#3498db;">[Ba²⁺] 钡离子</span><span class="live-tag"><b id="ba-live">${state.cBa.toFixed(2)}</b> M</span></div>
+                    <div class="label-val"><span style="color:#f1c40f;">[CrO₄²⁻] 铬酸根</span><span class="live-tag"><b id="cro4-sys4-live">${state.cCrO4.toFixed(2)}</b> M</span></div>
+                    <div class="label-val"><span style="color:#f39c12;">BaCrO₄ 沉淀量</span><span class="live-tag"><b id="precip-live">${state.precipBaCrO4.toFixed(2)}</b> g</span></div>
+                </div>
+                <div style="display:flex; gap:8px; margin-top:10px;">
+                    <button class="btn-mini" style="flex:1; background:#e74c3c; color:white;" onclick="addReagent('HNO3')">➕ 滴加 1M HNO₃ (解沉淀)</button>
+                    <button class="btn-mini" style="flex:1; background:#f39c12; color:white;" onclick="addReagent('NaOH')">➕ 滴加 1M NaOH (生成沉淀)</button>
+                </div>`;
         }
+    }
+
+    function addReagent(type) {
+        if (type === 'HNO3') {
+            state.cH += 0.20;
+            if (currentSys === 4) {
+                state.cCrO4 = Math.max(0.001, state.cCrO4 - 0.15);
+                state.cCr2O7 += 0.075; 
+                document.getElementById('explanation').innerText = "【实验II 现象】加酸：H⁺ 与 CrO₄²⁻ 结合转化为 Cr₂O₇²⁻，降低 CrO₄²⁻ 浓度，促使 BaCrO₄ 沉淀溶解！";
+            } else {
+                document.getElementById('explanation').innerText = "【实验I 现象】加酸：增加 H⁺ 浓度，促使 2CrO₄²⁻ + 2H⁺ ⇌ Cr₂O₇²⁻ 逆向移动，溶液转为橙红色。";
+            }
+        } else if (type === 'NaOH') {
+            state.cH = Math.max(0.001, state.cH - 0.18);
+            if (currentSys === 4) {
+                state.cCrO4 += 0.15;
+                document.getElementById('explanation').innerText = "【实验II 现象】加碱：OH⁻ 消耗 H⁺，驱动 Cr₂O₇²⁻ 转化为 CrO₄²⁻。CrO₄²⁻ 浓度升高与 Ba²⁺ 结合生成黄色 BaCrO₄ 沉淀！";
+            } else {
+                document.getElementById('explanation').innerText = "【实验I 现象】加碱：OH⁻ 消耗 H⁺，驱动平衡正向移动，生成 CrO₄²⁻，溶液变为黄色。";
+            }
+        }
+        syncParticlesTarget();
     }
 
     function initChart() {
@@ -653,7 +727,7 @@
 
             state.cNO2 = Math.max(0.05, state.cNO2);
             state.cN2O4 = Math.max(0.05, state.cN2O4);
-        } else {
+        } else if (currentSys === 2) {
             const k_fwd = 0.4 * state.catalyst;
             const k_rev = (k_fwd / Kc) * state.catalyst;
             v_fwd = k_fwd * state.cA * state.cB;
@@ -668,6 +742,39 @@
 
             state.cA = Math.max(0.05, state.cA); state.cB = Math.max(0.05, state.cB);
             state.cC = Math.max(0.05, state.cC); state.cD = Math.max(0.05, state.cD);
+        } else if (currentSys === 3) {
+            v_fwd = 0.4 * state.cCr2O7;
+            v_rev = 0.4 * Math.pow(state.cCrO4, 2) * Math.pow(state.cH, 2);
+
+            const delta = (v_fwd - v_rev) * dt;
+            if (Math.abs(v_fwd - v_rev) > 0.002) {
+                state.cCr2O7 -= delta;
+                state.cCrO4 += 2 * delta;
+                state.cH += 2 * delta;
+                state.isEquilibrium = false;
+            } else { state.isEquilibrium = true; }
+
+            state.cCr2O7 = Math.max(0.01, state.cCr2O7);
+            state.cCrO4 = Math.max(0.01, state.cCrO4);
+            state.cH = Math.max(0.001, state.cH);
+        } else if (currentSys === 4) {
+            const Qsp = state.cBa * state.cCrO4;
+            v_fwd = 0.5 * Qsp;
+            v_rev = 0.5 * Kc; 
+
+            const delta = (v_fwd - v_rev) * dt;
+            if (Math.abs(v_fwd - v_rev) > 0.002) {
+                if (v_fwd > v_rev) {
+                    state.cBa = Math.max(0.001, state.cBa - delta);
+                    state.cCrO4 = Math.max(0.001, state.cCrO4 - delta);
+                    state.precipBaCrO4 += delta * 5.0;
+                } else if (state.precipBaCrO4 > 0) {
+                    state.cBa += Math.abs(delta);
+                    state.cCrO4 += Math.abs(delta);
+                    state.precipBaCrO4 = Math.max(0, state.precipBaCrO4 - Math.abs(delta) * 5.0);
+                }
+                state.isEquilibrium = false;
+            } else { state.isEquilibrium = true; }
         }
 
         const Qc = getQc();
@@ -704,7 +811,7 @@
         if (currentSys === 1) {
             if (type === 'NO2') state.cNO2 = val;
             else state.cN2O4 = val;
-        } else {
+        } else if (currentSys === 2) {
             if (type === 'A') state.cA = val;
             if (type === 'B') state.cB = val;
             if (type === 'C') state.cC = val;
@@ -721,7 +828,7 @@
 
         if (currentSys === 1) {
             state.cNO2 /= factor; state.cN2O4 /= factor;
-        } else {
+        } else if (currentSys === 2) {
             state.cA /= factor; state.cB /= factor;
             state.cC /= factor; state.cD /= factor;
         }
@@ -759,7 +866,7 @@
             const sN2O4 = document.getElementById('slider-n2o4');
             if (sNO2 && document.activeElement !== sNO2) sNO2.value = state.cNO2.toFixed(1);
             if (sN2O4 && document.activeElement !== sN2O4) sN2O4.value = state.cN2O4.toFixed(1);
-        } else {
+        } else if (currentSys === 2) {
             const aLive = document.getElementById('a-live');
             const bLive = document.getElementById('b-live');
             const cLive = document.getElementById('c-live');
@@ -777,6 +884,20 @@
             if (sB && document.activeElement !== sB) sB.value = state.cB.toFixed(1);
             if (sC && document.activeElement !== sC) sC.value = state.cC.toFixed(1);
             if (sD && document.activeElement !== sD) sD.value = state.cD.toFixed(1);
+        } else if (currentSys === 3) {
+            const cr2o7L = document.getElementById('cr2o7-live');
+            const cro4L = document.getElementById('cro4-live');
+            const hL = document.getElementById('h-live');
+            if (cr2o7L) cr2o7L.innerText = state.cCr2O7.toFixed(2);
+            if (cro4L) cro4L.innerText = state.cCrO4.toFixed(2);
+            if (hL) hL.innerText = state.cH.toFixed(2);
+        } else if (currentSys === 4) {
+            const baL = document.getElementById('ba-live');
+            const cro4L = document.getElementById('cro4-sys4-live');
+            const precipL = document.getElementById('precip-live');
+            if (baL) baL.innerText = state.cBa.toFixed(2);
+            if (cro4L) cro4L.innerText = state.cCrO4.toFixed(2);
+            if (precipL) precipL.innerText = state.precipBaCrO4.toFixed(2);
         }
 
         document.getElementById('rate-fwd').innerText = v_fwd.toFixed(2);
@@ -785,25 +906,27 @@
         document.getElementById('qc-display').innerText = Qc.toFixed(3);
 
         const statusEl = document.getElementById('status-box');
+        const eqText = currentSys === 4 ? "(Qsp = Ksp)" : "(Qc = Kc)";
+        const fwdText = currentSys === 4 ? "(Qsp > Ksp 沉淀生成)" : "(Qc < Kc 正向移动)";
+        const revText = currentSys === 4 ? "(Qsp < Ksp 沉淀溶解)" : "(Qc > Kc 逆向移动)";
+
         if (state.isEquilibrium) {
-            statusEl.innerText = "已达到化学平衡状态 (Qc = Kc)";
+            statusEl.innerText = `已达到平衡状态 ${eqText}`;
             statusEl.style.background = "#dcfce7";
             statusEl.style.color = "#15803d";
         } else if (v_fwd > v_rev) {
-            statusEl.innerText = "平衡正向移动中... (Qc < Kc)";
+            statusEl.innerText = `平衡移动中... ${fwdText}`;
             statusEl.style.background = "#fef9c3";
             statusEl.style.color = "#a16207";
         } else {
-            statusEl.innerText = "平衡逆向移动中... (Qc > Kc)";
+            statusEl.innerText = `平衡移动中... ${revText}`;
             statusEl.style.background = "#fee2e2";
             statusEl.style.color = "#b91c1c";
         }
 
-        // 绘制勒沙特列跷跷板
         drawSeesaw(v_fwd, v_rev);
     }
 
-    // Canvas 绘制跷跷板
     function drawSeesaw(v_fwd, v_rev) {
         const canvas = document.getElementById('seesawCanvas');
         if (!canvas) return;
@@ -813,19 +936,15 @@
 
         ctx.clearRect(0, 0, width, height);
 
-        // 计算目标倾斜角：根据 R正 与 R逆 的相对强弱
-        // 正反应越强，左端下沉（角度负向）；逆反应越强，右端下沉（角度正向）
         let diff = (v_rev - v_fwd) / (Math.max(v_fwd, v_rev) || 1);
         let targetAngle = Math.max(-0.25, Math.min(0.25, diff * 0.25));
 
-        // 平滑过渡
         currentSeesawAngle += (targetAngle - currentSeesawAngle) * 0.1;
 
         const centerX = width / 2;
         const centerY = height - 25;
         const boardLength = 300;
 
-        // 1. 绘制基座 / 支点 (Pivot)
         ctx.beginPath();
         ctx.moveTo(centerX, centerY - 15);
         ctx.lineTo(centerX - 15, centerY + 15);
@@ -839,18 +958,15 @@
         ctx.textAlign = 'center';
         ctx.fillText("平衡支点", centerX, centerY + 24);
 
-        // 2. 旋转画布绘制跷跷板横梁
         ctx.save();
         ctx.translate(centerX, centerY - 15);
         ctx.rotate(currentSeesawAngle);
 
-        // 梁身
         ctx.beginPath();
         ctx.rect(-boardLength / 2, -6, boardLength, 12);
         ctx.fillStyle = '#34495e';
         ctx.fill();
 
-        // 左端盘：正反应倾向（反应物）
         ctx.beginPath();
         ctx.arc(-boardLength / 2 + 15, -12, 14, 0, Math.PI * 2);
         ctx.fillStyle = '#e74c3c';
@@ -859,7 +975,6 @@
         ctx.font = 'bold 11px sans-serif';
         ctx.fillText("正", -boardLength / 2 + 15, -8);
 
-        // 右端盘：逆反应倾向（生成物）
         ctx.beginPath();
         ctx.arc(boardLength / 2 - 15, -12, 14, 0, Math.PI * 2);
         ctx.fillStyle = '#008080';
@@ -879,12 +994,22 @@
             legend.innerHTML = `
                 <div class="legend-item"><span class="dot" style="background:#d35400;"></span>NO₂</div>
                 <div class="legend-item"><span class="dot" style="background:#27ae60;"></span>N₂O₄</div>`;
-        } else {
+        } else if (currentSys === 2) {
             legend.innerHTML = `
                 <div class="legend-item"><span class="dot" style="background:#e74c3c;"></span>A</div>
                 <div class="legend-item"><span class="dot" style="background:#3498db;"></span>B</div>
                 <div class="legend-item"><span class="dot" style="background:#2ecc71;"></span>C</div>
                 <div class="legend-item"><span class="dot" style="background:#9b59b6;"></span>D</div>`;
+        } else if (currentSys === 3) {
+            legend.innerHTML = `
+                <div class="legend-item"><span class="dot" style="background:#d35400;"></span>Cr₂O₇²⁻ (橙)</div>
+                <div class="legend-item"><span class="dot" style="background:#f1c40f;"></span>CrO₄²⁻ (黄)</div>
+                <div class="legend-item"><span class="dot" style="background:#e74c3c;"></span>H⁺</div>`;
+        } else if (currentSys === 4) {
+            legend.innerHTML = `
+                <div class="legend-item"><span class="dot" style="background:#3498db;"></span>Ba²⁺</div>
+                <div class="legend-item"><span class="dot" style="background:#f1c40f;"></span>CrO₄²⁻</div>
+                <div class="legend-item"><span class="dot" style="background:#d35400;"></span>BaCrO₄ 沉淀</div>`;
         }
         syncParticlesTarget();
     }
@@ -894,11 +1019,22 @@
         if (currentSys === 1) {
             targets['NO2'] = Math.round(state.cNO2 * 5);
             targets['N2O4'] = Math.round(state.cN2O4 * 3.5);
-        } else {
+        } else if (currentSys === 2) {
             targets['A'] = Math.round(state.cA * 3.5);
             targets['B'] = Math.round(state.cB * 3.5);
             targets['C'] = Math.round(state.cC * 3.5);
             targets['D'] = Math.round(state.cD * 3.5);
+        } else if (currentSys === 3) {
+            const scale = 20;
+            targets['Cr2O7'] = Math.round(state.cCr2O7 * scale);
+            targets['CrO4'] = Math.round(state.cCrO4 * scale);
+            targets['H'] = Math.round(state.cH * scale);
+        } else if (currentSys === 4) {
+            const scale = 20;
+            targets['Ba'] = Math.round(state.cBa * scale);
+            targets['CrO4'] = Math.round(state.cCrO4 * scale);
+            // 修正：将沉淀量计算并生成 BaCrO4 固体沉淀粒子
+            targets['BaCrO4'] = Math.round(state.precipBaCrO4 * 120);
         }
 
         const config = {
@@ -907,7 +1043,12 @@
             'A': { color: '#e74c3c', r: 7 },
             'B': { color: '#3498db', r: 7 },
             'C': { color: '#2ecc71', r: 7 },
-            'D': { color: '#9b59b6', r: 7 }
+            'D': { color: '#9b59b6', r: 7 },
+            'Cr2O7': { color: '#d35400', r: 9 },
+            'CrO4': { color: '#f1c40f', r: 6.5 },
+            'H': { color: '#e74c3c', r: 4 },
+            'Ba': { color: '#3498db', r: 7 },
+            'BaCrO4': { color: '#d35400', r: 8.5 } // 沉淀粒子特征色 (棕黄/深橙黄色固体)
         };
 
         for (let type in targets) {
@@ -931,11 +1072,19 @@
         const canvas = document.getElementById('microCanvas');
         const baseSpeed = 0.28; 
         const angle = Math.random() * Math.PI * 2;
+
+        // 如果是 BaCrO4 沉淀，初始位置直接堆积在容器底部
+        let px = Math.random() * (canvas.width - 30) + 15;
+        let py = Math.random() * (canvas.height - 60) + 20;
+        if (type === 'BaCrO4') {
+            py = canvas.height - 10 - Math.random() * 25;
+        }
+
         return {
-            x: Math.random() * (canvas.width - 40) + 20,
-            y: Math.random() * (canvas.height - 40) + 20,
-            vx: Math.cos(angle) * baseSpeed,
-            vy: Math.sin(angle) * baseSpeed,
+            x: px,
+            y: py,
+            vx: type === 'BaCrO4' ? 0 : Math.cos(angle) * baseSpeed,
+            vy: type === 'BaCrO4' ? 0 : Math.sin(angle) * baseSpeed,
             color: color,
             radius: radius,
             type: type
@@ -951,22 +1100,50 @@
             const alpha = Math.min(0.8, state.cNO2 / 5.0);
             ctx.fillStyle = `rgba(211, 84, 0, ${alpha * 0.45})`;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+        } else if (currentSys === 3 || currentSys === 4) {
+            const total = state.cCr2O7 + state.cCrO4 || 1;
+            const ratioOrange = state.cCr2O7 / total;
+            const r = Math.round(211 * ratioOrange + 241 * (1 - ratioOrange));
+            const g = Math.round(84 * ratioOrange + 196 * (1 - ratioOrange));
+            const b = Math.round(0 * ratioOrange + 15 * (1 - ratioOrange));
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.35)`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        if (currentSys === 4 && state.precipBaCrO4 > 0) {
+            const precipHeight = Math.min(50, state.precipBaCrO4 * 12 + 10);
+            ctx.fillStyle = 'rgba(243, 156, 18, 0.4)';
+            ctx.fillRect(0, canvas.height - precipHeight, canvas.width, precipHeight);
+            ctx.fillStyle = '#b9770e';
+            ctx.font = 'bold 11px sans-serif';
+            ctx.fillText(`BaCrO₄ 固体沉淀层 (${state.precipBaCrO4.toFixed(2)}g)`, 8, canvas.height - precipHeight + 14);
         }
 
         particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
+            if (p.type === 'BaCrO4') {
+                // 沉淀粒子重力下降与底部限位
+                if (p.y < canvas.height - p.radius - 5) {
+                    p.y += 0.8;
+                } else {
+                    p.y = canvas.height - p.radius - Math.random() * 2;
+                }
+            } else {
+                p.x += p.vx;
+                p.y += p.vy;
 
-            if (p.x - p.radius < 0) { p.x = p.radius; p.vx *= -1; }
-            if (p.x + p.radius > canvas.width) { p.x = canvas.width - p.radius; p.vx *= -1; }
-            if (p.y - p.radius < 0) { p.y = p.radius; p.vy *= -1; }
-            if (p.y + p.radius > canvas.height) { p.y = canvas.height - p.radius; p.vy *= -1; }
+                const maxY = (currentSys === 4 && state.precipBaCrO4 > 0) ? canvas.height - Math.min(50, state.precipBaCrO4 * 12 + 10) : canvas.height;
+
+                if (p.x - p.radius < 0) { p.x = p.radius; p.vx *= -1; }
+                if (p.x + p.radius > canvas.width) { p.x = canvas.width - p.radius; p.vx *= -1; }
+                if (p.y - p.radius < 0) { p.y = p.radius; p.vy *= -1; }
+                if (p.y + p.radius > maxY) { p.y = maxY - p.radius; p.vy *= -1; }
+            }
 
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             ctx.fillStyle = p.color;
             ctx.fill();
-            ctx.strokeStyle = "rgba(0,0,0,0.2)";
+            ctx.strokeStyle = "rgba(0,0,0,0.25)";
             ctx.lineWidth = 1.5;
             ctx.stroke();
         });
@@ -987,10 +1164,15 @@
         state = {
             cNO2: 2.00, cN2O4: 1.00,
             cA: 2.00, cB: 2.00, cC: 1.00, cD: 1.00,
+            cCr2O7: 0.10, cCrO4: 0.20, cH: 0.20,
+            cBa: 0.10, precipBaCrO4: 0.0,
             volume: 1.0, temperature: 298, catalyst: 1.0, isEquilibrium: true
         };
-        document.getElementById('slider-vol').value = 1.0;
-        document.getElementById('slider-temp').value = 298;
+        const sVol = document.getElementById('slider-vol');
+        const sTemp = document.getElementById('slider-temp');
+        if (sVol) sVol.value = 1.0;
+        if (sTemp) sTemp.value = 298;
+        
         document.getElementById('vol-slider-val').innerText = "1.00 V₀";
         document.getElementById('temp-slider-val').innerText = "298 K";
         document.getElementById('explanation').innerText = "系统已初始化恢复至基础平衡状态。";
