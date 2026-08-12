@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高二理科化学 - 小测验完整解析系统（第19~22.2章）</title>
+    <!-- 配置 MathJax 3 渲染引擎 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-color: #1a436d;
+            --accent-color: #2c5e8a;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --step-bg: #f0f4f8;
+            --success-color: #2e7d32;
+            --text-color: #333333;
+            --think-color: #d97706;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 10px 0 20px 0;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.6rem;
+        }
+
+        header p {
+            color: #666;
+            margin: 0;
+        }
+
+        .control-panel {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .type-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: #e0e6ed;
+            color: var(--primary-color);
+            border: none;
+            padding: 9px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .number-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .num-btn {
+            background-color: white;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .num-btn:hover, .num-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .question-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .question-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .badge-type {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        .question-body {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .step-container {
+            display: none;
+            margin-top: 18px;
+            border-left: 4px solid var(--primary-color);
+            background: var(--step-bg);
+            padding: 18px 20px;
+            border-radius: 0 8px 8px 0;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .step-container.active {
+            display: block;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .step-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.05rem;
+        }
+
+        .thinking-box {
+            background: #fffbe3;
+            border-left: 3px solid var(--think-color);
+            padding: 10px 14px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #78350f;
+        }
+
+        .derivation-box {
+            margin-top: 8px;
+            font-size: 0.98rem;
+        }
+
+        .final-answer {
+            display: none;
+            margin-top: 25px;
+            background-color: #e8f5e9;
+            border: 2px dashed var(--success-color);
+            border-radius: 8px;
+            padding: 20px;
+            color: #1b5e20;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .final-answer.active {
+            display: block;
+        }
+
+        .final-answer h3 {
+            margin-top: 0;
+            color: var(--success-color);
+            margin-bottom: 10px;
+        }
+
+        .action-area {
+            margin-top: 22px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 11px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-ans {
+            background: linear-gradient(135deg, #2e7d32, #388e3c);
+        }
+
+        .btn-reset {
+            background: #757575;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>高二理科化学 - 小测验完整解析系统</h1>
+        <p>包含第19章、第20章、第21-22.2章全部小测验 · LaTeX 公式标准排版</p>
+    </header>
+
+    <!-- 交互控制台 -->
+    <div class="control-panel">
+        <div class="section-title">第一步：选择小测验章节</div>
+        <div class="type-tabs">
+            <button class="tab-btn active" onclick="switchSection('Ch19')">第19章 化学反应和能量</button>
+            <button class="tab-btn" onclick="switchSection('Ch20')">第20章 化学反应速率</button>
+            <button class="tab-btn" onclick="switchSection('Ch21')">第21-22.2章 化学平衡与难溶电解质平衡</button>
+        </div>
+
+        <div class="section-title">第二步：选择题目序号</div>
+        <div class="number-selector" id="numberButtons">
+            <!-- 题号按钮动态渲染 -->
+        </div>
+    </div>
+
+    <!-- 动态题目展示卡片 -->
+    <div id="questionDisplayArea">
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-title" id="qTitle">加载中...</span>
+                <span class="badge-type" id="qBadge">小测验</span>
+            </div>
+            <div class="question-body" id="qBody"></div>
+
+            <div id="stepsWrapper"></div>
+
+            <div class="final-answer" id="finalAns">
+                <h3>✨ 标准参考答案与结论：</h3>
+                <div id="ansContent"></div>
+            </div>
+
+            <div class="action-area">
+                <button class="btn" id="nextBtn" onclick="revealNextStep()">💡 思考解题策略 / 关键知识点</button>
+                <button class="btn btn-ans" id="toggleAnsBtn" onclick="toggleAnswer()">👁️ 显示 / 隐藏答案</button>
+                <button class="btn btn-reset" onclick="resetCurrentCard()">🔄 重新思考</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ==================== 3份小测验完整数据库 (包含完整双反斜杠转义) ====================
+const quizDatabase = {
+    'Ch19': [
+        {
+            num: 1, title: '第19章 - 【题目 1】',
+            body: '根据热化学方程式判断下列叙述哪项正确？【20%】<br>已知：<br>(1) $\\text{H}_2(g) + \\frac{1}{2}\\text{O}_2(g) \\rightarrow \\text{H}_2\\text{O}(g) \\quad \\Delta H = -241.8\\,\\text{kJ/mol}$<br>(2) $2\\text{H}_2(g) + \\text{O}_2(g) \\rightarrow 2\\text{H}_2\\text{O}(l) \\quad \\Delta H = -571.6\\,\\text{kJ/mol}$<br><br>A. 电解 $1\\,\\text{mol}$ 的水需吸收 $285.8\\,\\text{kJ}$ 的热量<br>B. 水的生成热为 $-571.6\\,\\text{kJ/mol}$<br>C. 氢气的燃烧热为 $-241.8\\,\\text{kJ}$ 的热量<br>D. $1\\,\\text{mol}$ 水蒸气转化成 $1\\,\\text{mol}$ 水的反应热为 $44\\,\\text{kJ}$',
+            steps: [{
+                title: '思考策略：基本概念辨析与反应热推导',
+                think: '<strong>关键思考方向：</strong>生成热与燃烧热的定义分别是什么？水的物理状态（液态与气态）对反应热有何影响？',
+                derivation: '<b>解析与推导：</b><br>• 由式(2)除以2可得：$\\text{H}_2(g) + \\frac{1}{2}\\text{O}_2(g) \\rightarrow \\text{H}_2\\text{O}(l) \\quad \\Delta H = -285.8\\,\\text{kJ/mol}$。<br>• A项：逆反应（电解 $1\\,\\text{mol}$ 液态水）需吸收 $285.8\\,\\text{kJ}$ 热量，正确。<br>• B项：生成 $1\\,\\text{mol}$ 液态水的生成热应为 $-285.8\\,\\text{kJ/mol}$。<br>• C项：燃烧热要求生成稳定液态水，故氢气燃烧热为 $285.8\\,\\text{kJ/mol}$。<br>• D项：$\\Delta H$ 应标注负号（$-44\\,\\text{kJ/mol}$）。'
+            }],
+            ans: '<b>正确答案：A</b>'
+        },
+        {
+            num: 2, title: '第19章 - 【题目 2】',
+            body: ' $200\\,\\text{mL}\\ 3\\text{M}$ 的 $\\text{KOH}(aq)$ 和 $200\\,\\text{mL}\\ 2\\text{M}$ 的硫酸混合，求反应热。【20%】<br><br>A. $-57.3\\,\\text{kJ} \\times 0.4$ &nbsp;&nbsp;&nbsp; B. $-57.3\\,\\text{kJ} \\times 0.6$<br>C. $-57.3\\,\\text{kJ} \\times 0.8$ &nbsp;&nbsp;&nbsp; D. $-57.3\\,\\text{kJ}$',
+            steps: [{
+                title: '思考策略：限量试剂与中和热计算',
+                think: '<strong>关键思考方向：</strong>强酸与强碱中和热标准值是多少？混合后哪个离子（\\text{H}^+ 或 \\text{OH}^-）是限量试剂？',
+                derivation: '<b>计算过程：</b><br>1. 标准中和热：$\\text{H}^+(aq) + \\text{OH}^-(aq) \\rightarrow \\text{H}_2\\text{O}(l) \\quad \\Delta H = -57.3\\,\\text{kJ/mol}$<br>2. 物质的量：<br>&nbsp;&nbsp; $n(\\text{OH}^-) = 0.200\\,\\text{L} \\times 3\\,\\text{mol/L} = 0.6\\,\\text{mol}$<br>&nbsp;&nbsp; $n(\\text{H}^+) = 2 \\times (0.200\\,\\text{L} \\times 2\\,\\text{mol/L}) = 0.8\\,\\text{mol}$<br>3. $\\text{OH}^-$ 为限量试剂，实际生成 $0.6\\,\\text{mol}\\ \\text{H}_2\\text{O}$，总反应热为 $-57.3\\,\\text{kJ} \\times 0.6$。'
+            }],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 3, title: '第19章 - 【题目 3】',
+            body: '如热焓循环图所示：<br>$\\text{W} \\xrightarrow{\\Delta H_1 = 150\\text{kJ}} \\text{X} \\xrightarrow{\\Delta H_2 = -30\\text{kJ}} \\text{Y}$<br>$\\text{W} \\xrightarrow{\\Delta H_3} \\text{Z} \\xrightarrow{\\Delta H_4 = 100\\text{kJ}} \\text{Y}$<br>回答下列问题：（不需计算过程）【20%】<br><br>I. 关系式：_______<br>II. $\\Delta H_3 = $ _______ $\\text{kJ}$<br>III. $\\text{Z} \\rightarrow \\text{X}$ 的热焓变化为 _______ $\\text{kJ}$',
+            steps: [{
+                title: '思考策略：盖斯定律与路径无关原理',
+                think: '<strong>关键思考方向：</strong>始态和终态相同时，不同路径的总热焓变化关系如何？',
+                derivation: '<b>解析：</b><br>• I. 由始态 W 到终态 Y，路径一等于路径二：$\\Delta H_1 + \\Delta H_2 = \\Delta H_3 + \\Delta H_4$<br>• II. 代入已知数：$150 + (-30) = \\Delta H_3 + 100 \\implies \\Delta H_3 = 20\\,\\text{kJ}$<br>• III. $\\text{Z} \\rightarrow \\text{X}$ 路径为 $\\text{Z} \\rightarrow \\text{W} \\rightarrow \\text{X}$：$(-\\Delta H_3) + \\Delta H_1 = -20 + 150 = 130\\,\\text{kJ}$。'
+            }],
+            ans: '<b>答案：<br>I. $\\Delta H_1 + \\Delta H_2 = \\Delta H_3 + \\Delta H_4$<br>II. $20\\,\\text{kJ}$<br>III. $130\\,\\text{kJ}$</b>'
+        },
+        {
+            num: 4, title: '第19章 - 【题目 4】',
+            body: '已知在热化学标准状况下生成 $1\\,\\text{mol}$ 液态醋酸（$\\text{CH}_3\\text{COOH}$）反应热为 $-483.5\\,\\text{kJ}$，请写出醋酸的生成热的热化学方程式。【10%】',
+            steps: [{
+                title: '思考策略：标准生成热定义与方程式配平',
+                think: '<strong>关键思考方向：</strong>构成醋酸的最稳定单质形态分别是什么？（石墨、氢气、氧气）',
+                derivation: '<b>解析：</b><br>标准生成热要求由最稳定单质生成 $1\\,\\text{mol}$ 目标化合物。<br>反应物为 $\\text{C}(s)$、$\\text{H}_2(g)$ 和 $\\text{O}_2(g)$。<br>配平得：$2\\text{C}(s) + 2\\text{H}_2(g) + \\text{O}_2(g) \\rightarrow \\text{CH}_3\\text{COOH}(l) \\quad \\Delta H = -483.5\\,\\text{kJ/mol}$'
+            }],
+            ans: '<b>标准方程式：<br>$2\\text{C}(s) + 2\\text{H}_2(g) + \\text{O}_2(g) \\rightarrow \\text{CH}_3\\text{COOH}(l) \\quad \\Delta H = -483.5\\,\\text{kJ/mol}$</b>'
+        },
+        {
+            num: 5, title: '第19章 - 【题目 5】',
+            body: '【需列出计算过程】根据下表各化学键键能的值（$\\text{kJ/mol}$），求 $\\text{NF}_3$ 的生成热：【20%】<br>化学键键能：$\\text{N}\\equiv\\text{N}\\ (946\\,\\text{kJ/mol})$，$\\text{F}-\\text{F}\\ (159\\,\\text{kJ/mol})$，$\\text{N}-\\text{F}\\ (272\\,\\text{kJ/mol})$',
+            steps: [{
+                title: '思考策略：基于键能计算反应热',
+                think: '<strong>关键思考方向：</strong>公式 $\\Delta H = \\sum(\\text{断键吸收}) - \\sum(\\text{成键释放})$ 如何运用？',
+                derivation: '<b>计算过程：</b><br>1. 生成方程式：$\\frac{1}{2}\\text{N}_2(g) + \\frac{3}{2}\\text{F}_2(g) \\rightarrow \\text{NF}_3(g)$<br>2. 断键吸收能量：$\\frac{1}{2}(946) + \\frac{3}{2}(159) = 473 + 238.5 = 711.5\\,\\text{kJ}$<br>3. 成键释放能量：$3 \\times 272 = 816\\,\\text{kJ}$<br>4. $\\Delta H = 711.5 - 816 = -131.5\\,\\text{kJ/mol}$'
+            }],
+            ans: '<b>答案：$-131.5\\,\\text{kJ/mol}$</b>'
+        },
+      {
+    num: 6, title: '第19章 - 【题目 6】',
+    body: '【需列出计算过程】已知 $\\text{Fe}_2\\text{O}_3(s)$、$\\text{CO}(g)$、$\\text{CO}_2(g)$ 的标准摩尔生成热分别为 $-836\\,\\text{kJ/mol}$、$-110.5\\,\\text{kJ/mol}$、$-393.5\\,\\text{kJ/mol}$。根据盖斯定律，计算以下反应的反应热：【20%】<br>$$\\text{Fe}_2\\text{O}_3(s) + 3\\text{CO}(g) \\rightarrow 3\\text{CO}_2(g) + 2\\text{Fe}(s)$$',
+    steps: [{
+        title: '思考策略：写出生成热热化学方程式，利用盖斯定律组合叠加',
+        think: '<strong>关键思考方向：</strong>先根据生成热定义写出各物质的标准生成方程式，再观察目标方程式中各物质的系数与位置（反应物或产物），进行方程式的加减乘除与消去。',
+        derivation: '<b>解题过程：</b><br>' +
+            '<b>1. 写出各物质的生成热方程式：</b><br>' +
+            '(1) $2\\text{Fe}(s) + \\frac{3}{2}\\text{O}_2(g) \\rightarrow \\text{Fe}_2\\text{O}_3(s) \\quad \\Delta H_1 = -836\\,\\text{kJ/mol}$<br>' +
+            '(2) $\\text{C}(s) + \\frac{1}{2}\\text{O}_2(g) \\rightarrow \\text{CO}(g) \\quad \\Delta H_2 = -110.5\\,\\text{kJ/mol}$<br>' +
+            '(3) $\\text{C}(s) + \\text{O}_2(g) \\rightarrow \\text{CO}_2(g) \\quad \\Delta H_3 = -393.5\\,\\text{kJ/mol}$<br><br>' +
+            '<b>2. 根据盖斯定律组合方程式：</b><br>' +
+            '目标反应 $= 3 \\times (3) - (1) - 3 \\times (2)$<br>' +
+            '组合式：$3[\\text{C}(s) + \\text{O}_2(g)] + \\text{Fe}_2\\text{O}_3(s) + 3\\text{CO}(g) \\rightarrow 3\\text{CO}_2(g) + [2\\text{Fe}(s) + \\frac{3}{2}\\text{O}_2(g)] + 3[\\text{C}(s) + \\frac{1}{2}\\text{O}_2(g)]$<br><br>' +
+            '<b>3. 消去相同项得到目标反应并计算 $\\Delta H$：</b><br>' +
+            '$\\text{Fe}_2\\text{O}_3(s) + 3\\text{CO}(g) \\rightarrow 3\\text{CO}_2(g) + 2\\text{Fe}(s)$<br>' +
+            '$\\Delta H = 3\\Delta H_3 - \\Delta H_1 - 3\\Delta H_2$<br>' +
+            '$\\Delta H = 3(-393.5) - (-836) - 3(-110.5) = -1180.5 + 836 + 331.5 = -26.0\\,\\text{kJ/mol}$'
+    }],
+    ans: '<b>答案：$\\Delta H = -26.0\\,\\text{kJ/mol}$</b>'
+}
+    ],
+    'Ch20': [
+        {
+            num: 1, title: '第20章 - 【题目 1】',
+            body: '【需列出计算过程】在反应 $2\\text{A} + \\text{B} \\rightarrow 3\\text{C}$ 中，在 $50\\text{ s}$ 内 $\\text{B}$ 的浓度由 $1.0\\text{ mol/L}$ 降至 $0.4\\text{ mol/L}$，则 $\\text{A}$ 的平均反应速率为：【20%】<br><br>A. $0.006\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$ &nbsp;&nbsp;&nbsp; B. $0.012\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$<br>C. $0.018\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$ &nbsp;&nbsp;&nbsp; D. $0.024\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$',
+            steps: [{
+                title: '思考策略：速率计算与系数比公式',
+                think: '<strong>关键思考方向：</strong>先算 B 的消耗速率，再根据化学计量数比换算 A 的速率。',
+                derivation: '<b>计算过程：</b><br>1. $v(\\text{B}) = \\frac{1.0 - 0.4}{50} = 0.012\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$<br>2. 由系数比 $\\frac{v(\\text{A})}{2} = \\frac{v(\\text{B})}{1} \\implies v(\\text{A}) = 2 \\times 0.012 = 0.024\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$'
+            }],
+            ans: '<b>正确答案：D ($0.024\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$)</b>'
+        },
+        {
+            num: 2, title: '第20章 - 【题目 2】',
+            body: '【需列出计算过程】下表所示是 P 和 Q 在常温时反应的实验数据：<br>Exp 1: $[\\text{P}] = 0.5$, $[\\text{Q}] = 0.2$, 速率 $= 0.0006$<br>Exp 2: $[\\text{P}] = 1.0$, $[\\text{Q}] = 0.4$, 速率 $= 0.0024$<br>Exp 3: $[\\text{P}] = 1.0$, $[\\text{Q}] = 0.8$, 速率 $= 0.0096$<br>求此反应的反应速率方程式：【20%】<br><br>A. $R = k[\\text{P}]^2$ &nbsp;&nbsp;&nbsp; B. $R = k[\\text{Q}]^2$ &nbsp;&nbsp;&nbsp; C. $R = k[\\text{P}][\\text{Q}]^2$ &nbsp;&nbsp;&nbsp; D. $R = k[\\text{P}]^2[\\text{Q}]$',
+            steps: [{
+                title: '思考策略：初速率法确定各反应物级数',
+                think: '<strong>关键思考方向：</strong>对比实验 2 与 3 得出 Q 的级数；对比实验 1 与 2 得出 P 的级数。',
+                derivation: '<b>计算过程：</b><br>设 $R = k[\\text{P}]^m[\\text{Q}]^n$<br>1. 对比 2 与 3：$[\\text{P}]$ 不变，$[\\text{Q}]$ 翻倍，速率变为 4 倍 ($2^2$) $\\implies n = 2$。<br>2. 对比 1 与 2：$\\frac{0.0024}{0.0006} = \\left(\\frac{1.0}{0.5}\\right)^m \\times \\left(\\frac{0.4}{0.2}\\right)^2 \\implies 4 = 2^m \\times 4 \\implies 2^m = 1 \\implies m = 0$。<br>故对 P 为 0 级反应，速率方程为 $R = k[\\text{Q}]^2$。'
+            }],
+            ans: '<b>正确答案：B ($R = k[\\text{Q}]^2$)</b>'
+        },
+        {
+            num: 3, title: '第20章 - 【题目 3】',
+            body: '【需列出计算过程】对于一步完成的反应 $\\text{A}(g) + 3\\text{B}(g) \\rightarrow 2\\text{AB}_3(g)$，若使 B 的物质的量变为原来的 3 倍，而容器的体积扩大为原来的 2 倍，求改变条件后的反应速率变为未改变前的多少倍？【15%】',
+            steps: [{
+                title: '思考策略：质量作用定律与体积浓度变化',
+                think: '<strong>关键思考方向：</strong>体积扩大导致各物质浓度如何改变？',
+                derivation: '<b>计算过程：</b><br>1. 原速率 $R_1 = k[\\text{A}]_1[\\text{B}]_1^3$<br>2. 变条件后：$[\\text{A}]_2 = \\frac{1}{2}[\\text{A}]_1$，$[\\text{B}]_2 = \\frac{3}{2}[\\text{B}]_1$<br>3. $R_2 = k \\left(\\frac{1}{2}[\\text{A}]_1\\right) \\left(\\frac{3}{2}[\\text{B}]_1\\right)^3 = k[\\text{A}]_1[\\text{B}]_1^3 \\times \\frac{1}{2} \\times \\frac{27}{8} = \\frac{27}{16} R_1 = 1.6875 R_1$'
+            }],
+            ans: '<b>答案：$\\frac{27}{16}$（或 $1.6875$）倍</b>'
+        },
+        {
+            num: 4, title: '第20章 - 【题目 4】',
+            body: '反应能量变化图分析【15%】<br><br><img src="image/小测验/Picture1.jpg" class="question-img"><br><br>反应物能量：A + B；生成物能量：D + E （逆反应活化能为 $60\\text{ kcal}$，正反应活化能为 $40\\text{ kcal}$）<br><br>I. 正反应的反应热 $\\Delta H = $ _______ $\\text{kcal}$<br>II. 状态 C 代表：_______<br>III. 逆反应的活化能 $E_a(\\text{逆}) = $ _______ $\\text{kcal}$',
+            steps: [{
+                title: '思考策略：能量图图象参数直接读图',
+                think: '<strong>关键思考方向：</strong>$\\Delta H = E_a(\\text{正}) - E_a(\\text{逆})$；顶峰 C 代表什么？',
+                derivation: '<b>解析：</b><br>I. $\\Delta H = 40\\text{ kcal} - 60\\text{ kcal} = -20\\text{ kcal}$（放热反应）<br>II. 状态 C 代表：活化络合物（或过渡态）<br>III. 逆反应活化能为 $60\\text{ kcal}$。'
+            }],
+            ans: '<b>答案：<br>I. $-20$ （或释放 $20\\text{ kcal}$ 热量）<br>II. 活化络合物（或过渡态）<br>III. $60$</b>'
+        },
+        {
+            num: 5, title: '第20章 - 【题目 5】',
+            body: '已知 AB 和 $\\text{C}_2$ 反应的反应机理如下：<br>① $\\text{AB} + \\text{C}_2 \\rightarrow \\text{ABC}_2$ （慢，耗时 10 分钟）<br>② $\\text{ABC}_2 + \\text{AB} \\rightarrow 2\\text{ABC}$ （极快，耗时 2 秒）<br>③ $2\\text{ABC} + 2\\text{AB} \\rightarrow 2\\text{A}_2\\text{C} + 2\\text{B}_2$ （快，耗时 1 秒）<br><br>(a) 总反应方程式：_______【20%】<br>(b) 反应速率方程式：_______<br>(c) 总反应级数：_______',
+            steps: [{
+                title: '思考策略：决速步分析与中间体消去',
+                think: '<strong>关键思考方向：</strong>最慢步骤决定整个反应的速率方程式；三步相加消去中间体。',
+                derivation: '<b>解析：</b><br>(a) 三式相加消去中间产物 $\\text{ABC}_2$ 和 $\\text{ABC}$，得总反应：$4\\text{AB} + \\text{C}_2 \\rightarrow 2\\text{A}_2\\text{C} + 2\\text{B}_2$<br>(b) 决速步为步骤①（慢），故 $R = k[\\text{AB}][\\text{C}_2]$<br>(c) 级数 $= 1 + 1 = 2$ 级。'
+            }],
+            ans: '<b>答案：<br>(a) $4\\text{AB} + \\text{C}_2 \\rightarrow 2\\text{A}_2\\text{C} + 2\\text{B}_2$<br>(b) $R = k[\\text{AB}][\\text{C}_2]$<br>(c) 2 （二级反应）</b>'
+        },
+        {
+            num: 6, title: '第20章 - 【题目 6】',
+            body: '【需列出计算过程】已知反应 $\\text{A} + 2\\text{B} \\rightarrow 3\\text{C} + \\text{D}$ 在 $20^\\circ\\text{C}$ 时，B 的消耗速率 $R_\\text{B} = 0.02\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$。若温度每升高 $10^\\circ\\text{C}$，反应速率增加为原来的 2 倍。问当温度升高至多少 $^\\circ\\text{C}$ 时，生成物 C 的生成速率 $R_\\text{C} = 0.09\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$？（计算保留至小数点后两位）。【20%】',
+            steps: [{
+                title: '思考策略：系数速率换算与范特霍夫方程求解',
+                think: '<strong>关键思考方向：</strong>先求 $20^\\circ\\text{C}$ 时 C 的生成速率，计算倍数后利用对数解出温度 $T$。',
+                derivation: '<b>计算过程：</b><br>1. $20^\\circ\\text{C}$ 时 $R_{\\text{C}, 20^\\circ\\text{C}} = \\frac{3}{2} \\times R_\\text{B} = 1.5 \\times 0.02 = 0.03\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$<br>2. 速率倍数 $n = \\frac{0.09}{0.03} = 3$ 倍<br>3. 由 $2^{\\frac{T - 20}{10}} = 3$ 两边取对数：<br>&nbsp;&nbsp; $\\frac{T - 20}{10} \\times \\lg 2 = \\lg 3 \\implies \\frac{T - 20}{10} = \\frac{0.47712}{0.30103} \\approx 1.58496$<br>&nbsp;&nbsp; $T - 20 = 15.85 \\implies T = 35.85^\\circ\\text{C}$'
+            }],
+            ans: '<b>答案：$35.85^\\circ\\text{C}$</b>'
+        }
+    ],
+    'Ch21': [
+        {
+            num: 1, title: '第21-22.2章 - 一、选择题 - 第 1 题',
+            body: '某温度下，已知可逆反应 $\\text{CO}(g) + \\text{H}_2\\text{O}(g) \\rightleftharpoons \\text{CO}_2(g) + \\text{H}_2(g)$ 的平衡常数 $K_c = 4.0$。若在同一密闭容器中加入浓度均为 $2.0\\text{ mol}\\cdot\\text{L}^{-1}$ 的 CO 与 $\\text{H}_2\\text{O}$ 气体，达到平衡时 $\\text{H}_2$ 的物质的量浓度为：【20%】<br><br>A. $0.75\\text{ mol}\\cdot\\text{L}^{-1}$ &nbsp;&nbsp;&nbsp; B. $1.33\\text{ mol}\\cdot\\text{L}^{-1}$<br>C. $1.50\\text{ mol}\\cdot\\text{L}^{-1}$ &nbsp;&nbsp;&nbsp; D. $1.67\\text{ mol}\\cdot\\text{L}^{-1}$',
+            steps: [{
+                title: '思考策略：一元二次方程求解平衡浓度',
+                think: '<strong>关键思考方向：</strong>设平衡时 $\\text{H}_2$ 的浓度为 $x$，列出三段式代入 $K_c$。',
+                derivation: '<b>计算过程：</b><br>平衡浓度：$[\\text{CO}] = 2.0-x, [\\text{H}_2\\text{O}] = 2.0-x, [\\text{CO}_2] = x, [\\text{H}_2] = x$<br>$K_c = \\frac{x^2}{(2.0-x)^2} = 4.0 \\implies \\frac{x}{2.0-x} = 2.0 \\implies x = 4.0 - 2x \\implies 3x = 4.0 \\implies x = 1.33\\text{ M}$'
+            }],
+            ans: '<b>正确答案：B ($1.33\\text{ mol}\\cdot\\text{L}^{-1}$)</b>'
+        },
+        {
+            num: 2, title: '第21-22.2章 - 一、选择题 - 第 2 题',
+            body: '已知某温度下，氯化银（AgCl）的溶度积常数 $K_{sp} = 1.8 \\times 10^{-10}$。在下列四种等体积的溶液中，AgCl 固体溶解度最小的是：【20%】<br><br>A. $0.1\\text{ mol}\\cdot\\text{L}^{-1}$ 的 $\\text{AgNO}_3$ 溶液<br>B. $0.1\\text{ mol}\\cdot\\text{L}^{-1}$ 的 $\\text{CaCl}_2$ 溶液<br>C. $0.1\\text{ mol}\\cdot\\text{L}^{-1}$ 的 NaCl 溶液<br>D. 纯水',
+            steps: [{
+                title: '思考策略：同离子效应比较',
+                think: '<strong>关键思考方向：</strong>混合体系中同离子（$\\text{Ag}^+$ 或 $\\text{Cl}^-$）浓度越高，溶解度越小。',
+                derivation: '<b>解析：</b><br>• A项：$[\\text{Ag}^+] = 0.1\\text{ M}$<br>• B项：$[\\text{Cl}^-] = 0.1 \\times 2 = 0.2\\text{ M}$（同离子浓度最高）<br>• C项：$[\\text{Cl}^-] = 0.1\\text{ M}$<br>• D项：纯水 $[\\text{Cl}^-] \\approx 1.34 \\times 10^{-5}\\text{ M}$<br>故 B 项同离子浓度最高，AgCl 溶解度最小。'
+            }],
+            ans: '<b>正确答案：B</b>'
+        },
+        {
+            num: 3, title: '第21-22.2章 - 二、作答题 - 第 1 题',
+            body: '在 $990^\\circ\\text{C}$ 时，气相反应：$\\text{H}_2(g) + \\text{CO}_2(g) \\rightleftharpoons \\text{H}_2\\text{O}(g) + \\text{CO}(g)$ 的 $K_c = 1.6$。在此温度下，向 $5\\text{ L}$ 的密闭容器中充入 $1.0\\text{ mol H}_2$、$2.0\\text{ mol CO}_2$、$0.75\\text{ mol H}_2\\text{O}$ 及 $1.0\\text{ mol CO}$。<br>(1) 通过计算反应商 Q，判断此时反应是向正反应方向还是逆反应方向进行？【10%】<br>&nbsp;&nbsp;&nbsp;&nbsp; $Q = $ _______，反应向 _______ 方向进行。<br>(2) 计算达到平衡时，气体 CO 的物质的量浓度 $[\\text{CO}]$。【10%】<br>&nbsp;&nbsp;&nbsp;&nbsp; $[\\text{CO}] = $ _______ $\\text{mol/L}$',
+            steps: [{
+                title: '思考策略：反应商 $Q$ 与平衡浓度计算',
+                think: '<strong>关键思考方向：</strong>算出初始浓度后求 $Q$，与 $K_c = 1.6$ 对比；再用三段式求平衡浓度。',
+                derivation: '<b>计算过程：</b><br>(1) 初始浓度：$[\\text{H}_2]=0.2\\text{M}, [\\text{CO}_2]=0.4\\text{M}, [\\text{H}_2\\text{O}]=0.15\\text{M}, [\\text{CO}]=0.2\\text{M}$<br>&nbsp;&nbsp; $Q = \\frac{0.15 \\times 0.2}{0.2 \\times 0.4} = 0.375 < 1.6 = K_c$，故向<b>正反应</b>方向进行。<br>(2) 设消耗 $\\text{H}_2$ 为 $x\\text{ M}$：$\\frac{(0.15+x)(0.20+x)}{(0.20-x)(0.40-x)} = 1.6 \\implies 0.6x^2 - 1.31x + 0.098 = 0 \\implies x \\approx 0.08\\text{ M}$。<br>&nbsp;&nbsp; 平衡 $[\\text{CO}] = 0.20 + 0.08 = 0.28\\text{ mol/L}$。'
+            }],
+            ans: '<b>答案：<br>(1) $Q = 0.375$，正反应<br>(2) $[\\text{CO}] = 0.28\\text{ mol/L}$</b>'
+        },
+        {
+            num: 4, title: '第21-22.2章 - 二、作答题 - 第 2 题',
+            body: '在 $320\\text{ K}$ 时，将 $3.0\\text{ mol PCl}_5$ 与 $1.0\\text{ mol PCl}_3$ 充入 $1.0\\text{ L}$ 的密闭容器中发生反应：$\\text{PCl}_5(g) \\rightleftharpoons \\text{PCl}_3(g) + \\text{Cl}_2(g)$。已知该温度下反应的平衡常数 $K_c = 0.50$。<br>(1) 求平衡时容器内剩余 $\\text{PCl}_5$ 的物质的量。【10%】 $n(\\text{PCl}_5) = $ _______ $\\text{mol}$<br>(2) 若反应开始时的体系总压强为 $p$，求达到平衡时体系的总压强为开始时的多少倍？【10%】 平衡压强 $= $ _______ $p$',
+            steps: [{
+                title: '思考策略：气体分解平衡与压强比例',
+                think: '<strong>关键思考方向：</strong>恒温恒容下，压强比等于气体总物质的量之比。',
+                derivation: '<b>计算过程：</b><br>(1) 设分解 $\\text{PCl}_5$ 为 $x\\text{ M}$：<br>&nbsp;&nbsp; $K_c = \\frac{(1.0+x)x}{3.0-x} = 0.50 \\implies x^2 + 1.5x - 1.5 = 0 \\implies x \\approx 0.69\\text{ M}$<br>&nbsp;&nbsp; 剩余 $n(\\text{PCl}_5) = 3.0 - 0.69 = 2.31\\text{ mol}$<br>(2) $n_1 = 3.0 + 1.0 = 4.0\\text{ mol}$；$n_2 = 4.0 + x = 4.69\\text{ mol}$<br>&nbsp;&nbsp; $\\frac{p_2}{p_1} = \\frac{4.69}{4.0} = 1.1725 \\approx 1.17$'
+            }],
+            ans: '<b>答案：<br>(1) $n(\\text{PCl}_5) = 2.31\\text{ mol}$<br>(2) 平衡压强 $= 1.17\\ p$</b>'
+        },
+        {
+            num: 5, title: '第21-22.2章 - 二、作答题 - 第 3 题',
+            body: '已知 $25^\\circ\\text{C}$ 时，碳酸银（$\\text{Ag}_2\\text{CO}_3$）的溶度积常数 $K_{sp} = 8.1 \\times 10^{-12}$。<br>(1) 计算 $\\text{Ag}_2\\text{CO}_3$ 在纯水中的摩尔溶解度 $s_1\\ (\\text{mol}\\cdot\\text{L}^{-1})$。【10%】 $s_1 = $ _______ $\\text{mol/L}$<br>(2) 计算 $\\text{Ag}_2\\text{CO}_3$ 在 $0.10\\text{ mol}\\cdot\\text{L}^{-1}$ 的 $\\text{AgNO}_3$ 溶液中的摩尔溶解度 $s_2\\ (\\text{mol}\\cdot\\text{L}^{-1})$。【10%】 $s_2 = $ _______ $\\text{mol/L}$',
+            steps: [{
+                title: '思考策略：溶度积计算与同离子效应',
+                think: '<strong>关键思考方向：</strong>纯水中 $K_{sp} = 4s_1^3$；在硝酸银中，可近似认为 $[\\text{Ag}^+] = 0.10\\text{ M}$。',
+                derivation: '<b>计算过程：</b><br>(1) $K_{sp} = (2s_1)^2 \\cdot s_1 = 4s_1^3 = 8.1 \\times 10^{-12} \\implies s_1 = \\sqrt[3]{2.025 \\times 10^{-12}} \\approx 1.27 \\times 10^{-4}\\text{ mol/L}$<br>(2) 在 $0.10\\text{ M AgNO}_3$ 中：$K_{sp} = (0.10)^2 \\cdot s_2 = 8.1 \\times 10^{-12} \\implies s_2 = 8.1 \\times 10^{-10}\\text{ mol/L}$'
+            }],
+            ans: '<b>答案：<br>(1) $s_1 = 1.27 \\times 10^{-4}\\text{ mol/L}$<br>(2) $s_2 = 8.1 \\times 10^{-10}\\text{ mol/L}$</b>'
+        },
+        {
+            num: 6, title: '第21-22.2章 - 二、作答题 - 第 4 题',
+            body: '已知常温下，硫酸钙（$\\text{CaSO}_4$）在 $0.10\\text{ mol}\\cdot\\text{L}^{-1}$ 的 $\\text{Na}_2\\text{SO}_4$ 溶液中的溶解度为 $6.0 \\times 10^{-3}\\text{ mol}\\cdot\\text{L}^{-1}$。<br>(1) 计算常温下 $\\text{CaSO}_4$ 的溶度积 $K_{sp}$。【10%】 $K_{sp} = $ _______<br>(2) 常温下，将 $50\\text{ mL}$ 的 $0.050\\text{ mol}\\cdot\\text{L}^{-1}\\ \\text{Ca}(\\text{NO}_3)_2$ 溶液与 $150\\text{ mL}$ 的 $0.0080\\text{ mol}\\cdot\\text{L}^{-1}\\ \\text{Na}_2\\text{SO}_4$ 溶液混合，通过计算离子积 $Q_{sp}$ 说明是否会有 $\\text{CaSO}_4$ 沉淀生成。【10%】 $Q_{sp} = $ _______，结论：_______（填“有”或“无”）沉淀生成。',
+            steps: [{
+                title: '思考策略：$K_{sp}$ 反推与混合离子积 $Q_{sp}$ 判据',
+                think: '<strong>关键思考方向：</strong>总硫酸根浓度为初始浓度与溶解之和；混合后计算稀释后的离子浓度。',
+                derivation: '<b>计算过程：</b><br>(1) $[\\text{SO}_4^{2-}] = 0.10 + 0.006 = 0.106\\text{ M}$，$[\\text{Ca}^{2+}] = 6.0 \\times 10^{-3}\\text{ M}$<br>&nbsp;&nbsp; $K_{sp} = (6.0 \\times 10^{-3}) \\times 0.106 = 6.36 \\times 10^{-4}\\ (\\text{标答约记为 } 6.0 \\times 10^{-4})$<br>(2) 混合总体积 $200\\text{ mL}$：<br>&nbsp;&nbsp; $[\\text{Ca}^{2+}] = \\frac{0.050 \\times 50}{200} = 0.0125\\text{ M}$，$[\\text{SO}_4^{2-}] = \\frac{0.0080 \\times 150}{200} = 0.0060\\text{ M}$<br>&nbsp;&nbsp; $Q_{sp} = 0.0125 \\times 0.0060 = 7.5 \\times 10^{-5}$<br>&nbsp;&nbsp; 因 $Q_{sp} (7.5 \\times 10^{-5}) < K_{sp} (6.0 \\times 10^{-4})$，故<b>无</b>沉淀生成。'
+            }],
+            ans: '<b>答案：<br>(1) $K_{sp} = 6.0 \\times 10^{-4}$<br>(2) $Q_{sp} = 7.5 \\times 10^{-5}$，结论：无</b>'
+        }
+    ]
+};
+
+const sectionCounts = { 'Ch19': 6, 'Ch20': 6, 'Ch21': 6 };
+let currentSection = 'Ch19';
+let currentNum = 1;
+let currentStepIndex = -1;
+
+window.onload = function() {
+    renderNumberButtons('Ch19');
+    loadQuestionData('Ch19', 1);
+};
+
+function switchSection(sec) {
+    currentSection = sec;
+    currentNum = 1;
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(sec));
+    });
+    renderNumberButtons(sec);
+    loadQuestionData(sec, 1);
+}
+
+function renderNumberButtons(sec) {
+    const container = document.getElementById('numberButtons');
+    container.innerHTML = '';
+    const total = sectionCounts[sec];
+
+    for (let i = 1; i <= total; i++) {
+        const btn = document.createElement('button');
+        btn.className = `num-btn ${i === currentNum ? 'active' : ''}`;
+        btn.innerText = `第 ${i} 题`;
+        btn.onclick = () => {
+            document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            loadQuestionData(sec, i);
+        };
+        container.appendChild(btn);
+    }
+}
+
+function loadQuestionData(sec, num) {
+    currentNum = num;
+    currentStepIndex = -1;
+
+    const dataList = quizDatabase[sec] || [];
+    const qData = dataList.find(item => item.num === num) || {
+        title: `题目 ${num}`,
+        body: '数据加载中...',
+        steps: [],
+        ans: '暂无答案'
+    };
+
+    document.getElementById('qTitle').innerText = qData.title;
+    document.getElementById('qBadge').innerText = sec === 'Ch19' ? '第19章' : (sec === 'Ch20' ? '第20章' : '第21-22.2章');
+    document.getElementById('qBody').innerHTML = qData.body;
+
+    const stepsWrapper = document.getElementById('stepsWrapper');
+    stepsWrapper.innerHTML = '';
+    
+    qData.steps.forEach((stepObj, idx) => {
+        const stepDiv = document.createElement('div');
+        stepDiv.className = 'step-container';
+        stepDiv.id = `step_${idx}`;
+        stepDiv.innerHTML = `
+            <div class="step-header">
+                <span class="step-tag">策略 ${idx + 1}</span>
+                <span class="step-title">${stepObj.title}</span>
+            </div>
+            <div class="thinking-box">${stepObj.think}</div>
+            <div class="derivation-box">${stepObj.derivation}</div>
+        `;
+        stepsWrapper.appendChild(stepDiv);
+    });
+
+    document.getElementById('ansContent').innerHTML = qData.ans;
+    document.getElementById('finalAns').classList.remove('active');
+
+    const nextBtn = document.getElementById('nextBtn');
+    nextBtn.disabled = false;
+    nextBtn.innerText = "💡 思考解题策略 / 关键知识点";
+
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function revealNextStep() {
+    const dataList = quizDatabase[currentSection] || [];
+    const qData = dataList.find(item => item.num === currentNum);
+    if (!qData || qData.steps.length === 0) return;
+
+    const totalSteps = qData.steps.length;
+
+    if (currentStepIndex < totalSteps - 1) {
+        currentStepIndex++;
+        const currentStepEl = document.getElementById(`step_${currentStepIndex}`);
+        if (currentStepEl) currentStepEl.classList.add('active');
+
+        if (currentStepIndex === totalSteps - 1) {
+            document.getElementById('nextBtn').innerText = "💡 已展示全部思考策略";
+            document.getElementById('nextBtn').disabled = true;
+        }
+    }
+
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function toggleAnswer() {
+    const ansBox = document.getElementById('finalAns');
+    ansBox.classList.toggle('active');
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+    }
+}
+
+function resetCurrentCard() {
+    loadQuestionData(currentSection, currentNum);
+}
+</script>
+
+</body>
+</html>
