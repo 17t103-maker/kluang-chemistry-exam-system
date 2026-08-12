@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>居銮中华中学 - 高二理科化学统测解析系统导航</title>
+    <title>居銮中华中学 - 高二理科化学统测解析与实验模拟系统导航</title>
     <style>
         :root {
             --primary-color: #1a436d;
             --accent-color: #2c5e8a;
             --quiz-color-1: #2e7d32;
             --quiz-color-2: #388e3c;
+            --sim-color-1: #d35400;
+            --sim-color-2: #e67e22;
             --bg-color: #f4f7f6;
             --card-bg: #ffffff;
             --text-color: #333333;
@@ -33,7 +35,7 @@
             padding: 40px;
             border-radius: 16px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            max-width: 500px;
+            max-width: 520px;
             width: 90%;
         }
 
@@ -73,6 +75,11 @@
             box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
         }
 
+        .sim-btn {
+            background: linear-gradient(135deg, var(--sim-color-1), var(--sim-color-2));
+            box-shadow: 0 4px 15px rgba(211, 84, 0, 0.2);
+        }
+
         .year-btn:hover {
             opacity: 0.9;
             transform: translateY(-3px);
@@ -84,11 +91,12 @@
 
 <div class="nav-container">
     <h1>居銮中华中学</h1>
-    <p>高二理科化学统测与小测验解析系统</p>
+    <p>高二理科化学统测解析与互动模拟系统</p>
     <div class="btn-group">
         <a href="2024.html" class="year-btn">📅 进入 2024 下半年统测解析</a>
         <a href="2025.html" class="year-btn">📅 进入 2025 下半年统测解析</a>
         <a href="test.html" class="year-btn quiz-btn">🧪 进入 章节小测验完整解析（第19~22.2章）</a>
+        <a href="equilibrium_simulator.html" class="year-btn sim-btn">⚖️ 进入 化学平衡移动探究模拟实验台</a>
     </div>
 </div>
 
