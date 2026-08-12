@@ -8,6 +8,8 @@
         :root {
             --primary-color: #1a436d;
             --accent-color: #2c5e8a;
+            --quiz-color-1: #2e7d32;
+            --quiz-color-2: #388e3c;
             --bg-color: #f4f7f6;
             --card-bg: #ffffff;
             --text-color: #333333;
@@ -20,8 +22,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px 0;
         }
 
         .nav-container {
@@ -65,10 +68,15 @@
             box-shadow: 0 4px 15px rgba(26, 67, 109, 0.2);
         }
 
+        .quiz-btn {
+            background: linear-gradient(135deg, var(--quiz-color-1), var(--quiz-color-2));
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
+        }
+
         .year-btn:hover {
             opacity: 0.9;
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(26, 67, 109, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
         }
     </style>
 </head>
@@ -76,10 +84,11 @@
 
 <div class="nav-container">
     <h1>居銮中华中学</h1>
-    <p>高二理科化学统测完整解析系统</p>
+    <p>高二理科化学统测与小测验解析系统</p>
     <div class="btn-group">
         <a href="2024.html" class="year-btn">📅 进入 2024 下半年统测解析</a>
         <a href="2025.html" class="year-btn">📅 进入 2025 下半年统测解析</a>
+        <a href="test.html" class="year-btn quiz-btn">🧪 进入 章节小测验完整解析（第19~22.2章）</a>
     </div>
 </div>
 
