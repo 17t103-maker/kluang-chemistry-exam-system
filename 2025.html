@@ -545,7 +545,7 @@ const examDatabase = {
         { num: 8, title: '乙) 填充题 - 第 8 题', body: '外界条件对化学平衡的影响，最终是通过改变 _______ 来实现的。', steps: [{ title: '思考策略：平衡移动的动力学本质', think: '<strong>关键思考方向：</strong>平衡移动的本质是打破了正逆速率的相等关系。', derivation: '<b>核心本质：</b><br>改变正反应速率与逆反应速率的相对大小（即 $v_{\\text{正}} \\neq v_{\\text{逆}}$）。' }], ans: '<b>答案：正、逆反应速率的相对大小</b>' },
         { num: 9, title: '乙) 填充题 - 第 9 题', body: '已知一热化学方程式：$X(g) + Y_2(g) \\rightleftharpoons XY_2(g) + 20\\text{ kJ}$，若此反应的活化能为 $50\\text{ kJ}$，则逆反应 $XY_2(g) \\rightleftharpoons X(g) + Y_2(g)$ 的活化能为 _______ $\\text{kJ}$。', steps: [{ title: '思考策略：正逆反应活化能与反应热关系', think: '<strong>关键思考方向：</strong>$E_{\\text{a(正)}} - E_{\\text{a(逆)}} = \\Delta H$', derivation: '<b>核心推导：</b><br>正反应放热 $20\\text{ kJ}$（$\\Delta H = -20\\text{ kJ}$）。$50 - E_{\\text{a(逆)}} = -20 \\implies E_{\\text{a(逆)}} = 70\\text{ kJ}$。' }], ans: '<b>答案：70</b>' },
         { num: 10, title: '乙) 填充题 - 第 10 题', body: '一密闭容器中发生一可逆反应 $2\\text{SO}_2(g) + \\text{O}_2(g) \\rightleftharpoons 2\\text{SO}_3(g) \\quad \\Delta H < 0$，右图是某一时间段反应速率与反应进程的关系图。$t_2$、$t_3$、$t_5$ 时刻体系中分别是什么条件发生了变化？<br><br><img src="image/2025/Screenshot 2026-08-11 140236.jpg" class="question-img"><br><br>$t_2$: _______ &nbsp;&nbsp;&nbsp; $t_3$: _______ &nbsp;&nbsp;&nbsp; $t_5$: _______', steps: [{ title: '思考策略：v-t 图中突变类型识别', think: '<strong>关键思考方向：</strong>正逆速率突增还是同等增加？', derivation: '<b>核心解析：</b><br>$t_2$ 压强/浓度突增；$t_3$ 使用催化剂；$t_5$ 降低温度。' }], ans: '<b>答案：$t_2$: 增大压强；$t_3$: 使用催化剂；$t_5$: 降低温度</b>' },
-{ 
+        { 
             num: 11, 
             title: '乙) 填充题 - 第 11 题', 
             body: '有关 $2A(g) + B(g) \\rightleftharpoons C(g) \\quad \\Delta H = -50\\text{ kcal}$，其实验资料如下：<br><br>' +
@@ -590,10 +590,260 @@ const examDatabase = {
         { num: 2, title: '丁) 加分题 - 第 2 题', body: '何谓溶度积？ (2%)', steps: [{ title: '思考策略：难溶电解质沉淀溶解平衡常数概念', think: '<strong>关键思考方向：</strong>饱和溶液中难溶电解质离子浓度的幂乘积。', derivation: '<b>标准定义：</b>在一定温度下，难溶电解质饱和溶液中各离子浓度幂乘积为常数。' }], ans: '<b>参考答案：在一定温度下，难溶电解质饱和溶液中各离子浓度以化学计量数为幂的乘积为常数，称为溶度积。</b>' }
     ],
     '戊': [
-        { num: 1, title: '戊) 计算题 - 第 1 题', body: '(a) 反应 $2A + 3B \\rightleftharpoons 2C$ 为一步完成的反应。今某同学于1L容器内放入3mol A, 2mol B。当 $[C] = 1M$ 时，习题正反应速率变为开始时正反应速率的多少倍？ (3%)<br>(b) 在320K时，将 $3\\text{ mol PCl}_5$ 与 $1\\text{ mol PCl}_3$ 置入1L容器中使它们达平衡：$\\text{PCl}_5(g) \\rightleftharpoons \\text{PCl}_3(g) + \\text{Cl}_2(g)$，$K_c = 0.50$。<br>(i) 求 $\\text{PCl}_5$ 剩下的物质的量。(3%) (ii) 求平衡总压强与开始时之比？(2%) (iii) 求 $K_p$。(3%)', steps: [{ title: '思考策略 (a)：基元反应速率之比计算', think: '<strong>关键思考方向：</strong>代入初始与反应后的浓度计算速率比。', derivation: '<b>解析：</b><br>初始：$R_1 = k(3)^2(2)^3 = 72k$。<br>$[C]=1M$ 时：$[A]=2M, [B]=0.5M \implies R_2 = k(2)^2(0.5)^3 = 0.5k$。<br>倍数比 $= 0.5 / 72 = 1 / 144$。' }, { title: '思考策略 (b)：化学平衡三段式与 $K_c$ 解方程', think: '<strong>关键思考方向：</strong>三段式列方程求解。', derivation: '<b>解析：</b><br>设消耗 $x$ mol：$\\frac{(1+x)x}{3-x} = 0.5 \\implies x \\approx 0.67\\text{ mol}$。<br>(i) $\\text{PCl}_5$ 剩余 $= 3 - 0.67 = 2.33\\text{ mol}$。' }], ans: '<b>(a) 详解：</b><br>初始速率 $R_1 = 72k$；新速率 $R_2 = 0.5k$；倍数比为 $\\frac{1}{144}$。<br><br><b>(b) 详解：</b><br>(i) $\\text{PCl}_5$ 剩下 $2.33\\text{ mol}$。' },
-        { num: 2, title: '戊) 计算题 - 第 2 题', body: '(a) 已知反应 $2X(g) + Y(g) \\rightleftharpoons Z(g)$ 在 $25^\\circ\\text{C}$ 时的实验数据：<br>Exp 1: $[X]=0.5M, [Y]=0.2M, \\Delta Z/\\Delta t = 5 \\times 10^{-6}\\text{ M/s}$<br>Exp 2: $[X]=1M, [Y]=0.4M, \\Delta Z/\\Delta t = 4 \\times 10^{-5}\\text{ M/s}$<br>Exp 3: $[X]=1M, [Y]=0.2M, \\Delta Z/\\Delta t = 1 \\times 10^{-5}\\text{ M/s}$<br>(i) 写速率方程 (ii) 总级数 (iii) 求 $k$。<br>(b) 已知常温下 $\\text{CaSO}_4$ 在 $0.1M$ 硫酸钠溶液中的溶解度为 $6 \\times 10^{-3}M$，求 $K_{sp}$。<br>(c) 判断 $50\\text{ mL}$ $0.05M$ $\\text{Ca(NO}_3)_2$ 与 $150\\text{ mL}$ $0.008M$ $\\text{Na}_2\\text{SO}_4$ 混合是否产生沉淀？', steps: [{ title: '思考策略 (a)：初速率法定级数', think: '<strong>关键思考方向：</strong>控制变量求 X 和 Y 的级数。', derivation: '<b>解析：</b><br>对 Y 为 2 级，对 X 为 1 级。$R = k[X][Y]^2$，级数 $= 3$ 级。' }, { title: '思考策略 (b) & (c)：溶度积与 $Q_{sp}$ 比较', think: '<strong>关键思考方向：</strong>计算离子积 $Q_{sp}$ 与 $K_{sp}$ 比较。', derivation: '<b>解析：</b><br>混合后 $[\\text{Ca}^{2+}]=0.0125M, [\\text{SO}_4^{2-}]=0.006M \\implies Q_{sp} = 7.5 \\times 10^{-5} < K_{sp}$，故不产生沉淀。' }], ans: '<b>(a) 详解：</b><br>(i) $R = k[X][Y]^2$ (ii) 总级数 = 3 级。<br><br><b>(b)(c) 详解：</b><br>离子积 $Q_{sp} < K_{sp}$，<b>不会产生沉淀</b>。' },
-        { num: 3, title: '戊) 计算题 - 第 3 题', body: '(a) 反应机理：<br>① $\\text{H}_2\\text{O}_2 + \\text{I}^- \\rightarrow \\text{H}_2\\text{O} + \\text{IO}^-$ （慢）<br>② $\\text{H}^+ + \\text{IO}^- \\rightarrow \\text{HIO}$ （快）<br>③ $\\text{HIO} + \\text{H}^+ + \\text{I}^- \\rightarrow \\text{H}_2\\text{O} + \\text{I}_2$ （快）<br>(i) 总反应 (ii) 速率方程 (iii) 总级数。<br>(b) 已知 $25^\\circ\\text{C}$ 时 $K_{sp}(\\text{Ag}_2\\text{CrO}_4) = 9 \\times 10^{-12}, K_{sp}(\\text{AgCl}) = 1.56 \\times 10^{-10}$：<br>(i) 混合溶液中逐滴加入 $\\text{AgNO}_3$，哪个先沉淀？', steps: [{ title: '思考策略：决速步与分步沉淀', think: '<strong>关键思考方向：</strong>慢反应决定速率方程；计算析出沉淀所需银离子浓度。', derivation: '<b>解析：</b><br>(a) 总反应：$\\text{H}_2\\text{O}_2 + 2\\text{I}^- + 2\\text{H}^+ \\rightarrow 2\\text{H}_2\\text{O} + \\text{I}_2$；$R = k[\\text{H}_2\\text{O}_2][\\text{I}^-]$。<br>(b) $\\text{AgCl}$ 所需银离子浓度更小，故 <b>AgCl 先沉淀</b>。' }], ans: '<b>(a) 详解：</b><br>$R = k[\\text{H}_2\\text{O}_2][\\text{I}^-]$，2 级反应。<br><br><b>(b) 详解：</b><br><b>AgCl 先沉淀</b>。' },
-        { num: 4, title: '戊) 计算题 - 第 4 题', body: '(a) $25^\\circ\\text{C}$ 时 $K_{sp}(\\text{Ag}_2\\text{CO}_3) = 8.1 \\times 10^{-12}$，计算在 $0.1M$ $\\text{AgNO}_3$ 溶液中的溶解度。<br>(b) $990^\\circ\\text{C}$ 气相反应：$\\text{H}_2(g) + \\text{CO}_2(g) \\rightleftharpoons \\text{H}_2\\text{O}(g) + \\text{CO}(g) \\quad K_c = 1.6$。在 5L 容器内含 $1\\text{ mol H}_2, 2\\text{ mol CO}_2, 0.75\\text{ mol H}_2\\text{O}, 1\\text{ mol CO}$。<br>(i) 说明正逆反应速率哪个较快？', steps: [{ title: '思考策略：同离子效应与浓度商判断', think: '<strong>关键思考方向：</strong>代入 $K_{sp}$ 解溶解度；计算 $Q_c$ 与 $K_c$ 比较。', derivation: '<b>解析：</b><br>(a) $s = 8.1 \\times 10^{-12} / (0.1)^2 = 8.1 \\times 10^{-10}\\text{ M}$。<br>(b) $Q_c = 0.375 < K_c = 1.6$，故<b>正反应速率较快</b>。' }], ans: '<b>(a) 详解：</b><br>溶解度 $s = 8.1 \\times 10^{-10}\\text{ M}$。<br><br><b>(b) 详解：</b><br>$Q_c < K_c$，<b>正反应速率较快</b>。' }
+        { 
+            num: 1, 
+            title: '戊) 计算题 - 第 1 题', 
+            body: '1. (a) 反应 $2A + 3B \\rightleftharpoons 2C$ 为一步完成的反应。今某同学于 $1\\text{L}$ 容器内放入 $3\\text{ mol } A, 2\\text{ mol } B$。当 $[C] = 1\\text{ M}$ 时，此时正反应速率变为开始时正反应速率的多少倍？ 3%<br><br>' +
+                  '(b) 在 $320\\text{ K}$ 时，将 $3\\text{ mol } \\text{PCl}_5$ 与 $1\\text{ mol } \\text{PCl}_3$ 置入 $1\\text{ L}$ 的容器中使它们达至平衡：<br>' +
+                  '$$\\text{PCl}_5(g) \\rightleftharpoons \\text{PCl}_3(g) + \\text{Cl}_2(g)$$<br>' +
+                  '如果在 $320\\text{ K}$ 时上述反应的 $K_c = 0.50$。<br>' +
+                  '(i) 求 $\\text{PCl}_5$ 剩下的物质的量。3%<br>' +
+                  '(ii) 若一開始的压强为 $p$，则平衡时的压强是开始时的多少倍？ 2%<br>' +
+                  '(iii) 求此温度下的压强平衡常数 $K_p$。（答案以 $p$ 表示） 3%', 
+            steps: [
+                { 
+                    title: '思考策略：(a) 基元反应速率方程与浓度变化推导', 
+                    think: '<strong>关键思考方向：</strong>“一步完成的反应”说明反应级数等于其化学计量数，写出 $R = k[A]^2[B]^3$；通过 $[C] = 1\text{ M}$ 求出消耗的 $A$ 和 $B$ 的物质的量，计算反应后的浓度与速率比。', 
+                    derivation: '<b>详细计算推导：</b><br>' +
+                                '1. 容器体积为 $1\text{ L}$，故起始 $[A]_0 = 3\text{ M}$, $[B]_0 = 2\text{ M}$。<br>' +
+                                '起始速率为：$$R_1 = k [A]_0^2 [B]_0^3 = k (3)^2 (2)^3 = 72k$$<br>' +
+                                '2. 当生成 $[C] = 1\text{ M}$ 时，消耗的 $A$ 为 $1\text{ M}$，消耗的 $B$ 为 $\frac{3}{2} \times 1 = 1.5\text{ M}$。<br>' +
+                                '此时各物质浓度为：$$[A] = 3 - 1 = 2\text{ M}, \quad [B] = 2 - 1.5 = 0.5\text{ M}$$<br>' +
+                                '3. 此时的正反应速率为：$$R_2 = k [A]^2 [B]^3 = k (2)^2 (0.5)^3 = 0.5k$$<br>' +
+                                '4. 速率倍数：$$\frac{R_2}{R_1} = \frac{0.5k}{72k} = \frac{1}{144} \approx 0.00694 \text{ 倍}$$' 
+                },
+                { 
+                    title: '思考策略：(b) 气相平衡“三段式”列式求解与压强关系', 
+                    think: '<strong>关键思考方向：</strong>设分解的 $\text{PCl}_5$ 为 $x \text{ mol}$，列三段式代入 $K_c = 0.50$ 解一元二次方程；利用总物质的量之比等于压强之比求压强倍数及 $K_p$。', 
+                    derivation: '<b>详细计算推导：</b><br>' +
+                                '<b>(i) 求解平衡时 $\text{PCl}_5$ 物质的量：</b><br>' +
+                                '设分解的 $\text{PCl}_5$ 浓度为 $x \text{ mol/L}$（体积 $1\text{ L}$，即 $x \text{ mol}$）：<br>' +
+                                '$$\\begin{array}{lcccc}' +
+                                '\\text{Molar Ratio} & \\text{PCl}_5(g) & \\rightleftharpoons & \\text{PCl}_3(g) & + & \\text{Cl}_2(g) \\\\' +
+                                '\\text{Initial (M)} & 3 & & 1 & & 0 \\\\' +
+                                '\\text{Change (M)} & -x & & +x & & +x \\\\' +
+                                '\\text{Equilibrium (M)} & 3-x & & 1+x & & x' +
+                                '\\end{array}$$<br>' +
+                                '代入 $K_c$ 表达式：$$K_c = \\frac{[\\text{PCl}_3][\\text{Cl}_2]}{[\\text{PCl}_5]} = \\frac{(1+x)x}{3-x} = 0.50$$<br>' +
+                                '$$x^2 + x = 1.5 - 0.5x \\implies x^2 + 1.5x - 1.5 = 0$$<br>' +
+                                '利用求根公式：$$x = \\frac{-1.5 + \\sqrt{1.5^2 - 4(1)(-1.5)}}{2} = \\frac{-1.5 + \\sqrt{2.25 + 6}}{2} = \\frac{-1.5 + \\sqrt{8.25}}{2} \\approx 0.686 \\text{ mol}$$<br>' +
+                                '所以，$\text{PCl}_5$ 剩下的物质的量为：$$n(\\text{PCl}_5) = 3 - 0.686 = 2.314 \\text{ mol} \\quad (\\text{取 } x \\approx 0.67 \\text{ 则为 } 2.33 \\text{ mol})$$<br><br>' +
+                                '<b>(ii) 求解平衡压强是起始压强的倍数：</b><br>' +
+                                '起始总摩尔数：$$n_{\\text{初}} = 3 + 1 = 4 \\text{ mol}$$<br>' +
+                                '平衡总摩尔数：$$n_{\\text{平}} = (3-x) + (1+x) + x = 4 + x = 4 + 0.686 = 4.686 \\text{ mol}$$<br>' +
+                                '恒温恒容下压强比等于摩尔数之比：$$\\frac{P_{\\text{平}}}{P_{\\text{初}}} = \\frac{n_{\\text{平}}}{n_{\\text{初}}} = \\frac{4.686}{4} = 1.1715 \\text{ 倍}$$<br>' +
+                                '即平衡时的压强为 $1.172p$（或 $1.17p$）。<br><br>' +
+                                '<b>(iii) 求解压强平衡常数 $K_p$：</b><br>' +
+                                '平衡时各组分分压：$$P(\\text{PCl}_5) = \\frac{3-x}{4+x} P_{\\text{平}} = \\frac{2.314}{4.686} (1.1715p) = 0.5785p$$<br>' +
+                                '$$P(\\text{PCl}_3) = \\frac{1+x}{4+x} P_{\\text{平}} = \\frac{1.686}{4.686} (1.1715p) = 0.4215p$$<br>' +
+                                '$$P(\\text{Cl}_2) = \\frac{x}{4+x} P_{\\text{平}} = \\frac{0.686}{4.686} (1.1715p) = 0.1715p$$<br>' +
+                                '$$K_p = \\frac{P(\\text{PCl}_3) \\cdot P(\\text{Cl}_2)}{P(\\text{PCl}_5)} = \\frac{(0.4215p)(0.1715p)}{0.5785p} \\approx 0.125p$$' 
+                }
+            ], 
+            ans: '<b>✨ 参考答案与解析结论：</b><br>' +
+                 '(a) 此时正反应速率变为开始时的 <b>$\\frac{1}{144}$ 倍</b>（约 $0.00694$ 倍）。<br><br>' +
+                 '(b)<br>' +
+                 '(i) $\\text{PCl}_5$ 剩下的物质的量为 <b>$2.314\\text{ mol}$</b>（或约 $2.33\\text{ mol}$）。<br>' +
+                 '(ii) 平衡时的压强是开始时的 <b>$1.172$ 倍</b>（即 $1.172p$）。<br>' +
+                 '(iii) $K_p = \\mathbf{0.125p}$。' 
+        },
+        { 
+            num: 2, 
+            title: '戊) 计算题 - 第 2 题', 
+            body: '2. (a) 已知反应 $2X(g) + Y(g) \\rightleftharpoons Z(g)$ 在 $25^\\circ\\text{C}$ 时的实验资料如下：<br><br>' +
+                  '<table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; text-align: center; margin: 10px 0; width: 100%; max-width: 450px;">' +
+                  '<tr style="background-color: #f0f4f8;"><th>实验</th><th>$[X]$</th><th>$[Y]$</th><th>$\\Delta Z / \\Delta t\\,(\\text{M}\\cdot\\text{s}^{-1})$</th></tr>' +
+                  '<tr><td>1</td><td>0.5M</td><td>0.2M</td><td>$4.5 \\times 10^{-6}$</td></tr>' +
+                  '<tr><td>2</td><td>1M</td><td>0.4M</td><td>$36.0 \\times 10^{-6}$</td></tr>' +
+                  '<tr><td>3</td><td>1M</td><td>0.2M</td><td>$9.0 \\times 10^{-6}$</td></tr>' +
+                  '</table><br>' +
+                  '(i) 写出该反应的反应速率方程式。2%<br>' +
+                  '(ii) 求总反应的级数。0.5%<br>' +
+                  '(iii) 求速率常数 $k$ 的值。1.5%<br>' +
+                  '(iv) 若将反应体系体积加倍，同时令反应温度上升至 $45^\\circ\\text{C}$，则反应速率变为原来的多少倍？ 2%<br><br>' +
+                  '(b) 已知常温下硫酸钙在 $0.1\\text{M}$ 的硫酸钠溶液中的溶解度为 $2.6 \\times 10^{-3}\\text{M}$，计算硫酸钙的溶度积。2%<br>' +
+                  '(c) 利用 (b) 题数据判断：常温下将 $50\\text{ mL}$ 的 $0.05\\text{M } \\text{Ca(NO}_3)_2$ 溶液与 $150\\text{ mL}$ 的 $0.008\\text{M } \\text{Na}_2\\text{SO}_4$ 溶液混合，能否产生硫酸钙沉淀？ 3%', 
+            steps: [
+                { 
+                    title: '思考策略：(a) 初速率控制变量法求反应动力学参数与温度/体积叠加效应', 
+                    think: '<strong>关键思考方向：</strong>对比实验 1 与 3，求 X 的级数；对比实验 2 与 3，求 Y 的级数。再根据温度升高 20°C 速率增至 4 倍以及体积加倍使浓度减半计算复合倍数。', 
+                    derivation: '<b>详细计算推导：</b><br>' +
+                                '<b>(i) 求反应速率方程式：</b><br>' +
+                                '设 $R = k[X]^m[Y]^n$。<br>' +
+                                '对比 Exp 1 与 Exp 3：$[Y]$ 保持 $0.2\text{M}$ 不变，$[X]$ 由 $0.5\text{M}$ 变为 $1\text{M}$（扩大 $2$ 倍），速率由 $4.5 \\times 10^{-6}$ 变为 $9.0 \\times 10^{-6}$（扩大 $2$ 倍）：<br>' +
+                                '$$2^m = 2 \\implies m = 1$$<br>' +
+                                '对比 Exp 3 与 Exp 2：$[X]$ 保持 $1\text{M}$ 不变，$[Y]$ 由 $0.2\text{M}$ 变为 $0.4\text{M}$（扩大 $2$ 倍），速率由 $9.0 \\times 10^{-6}$ 变为 $36.0 \\times 10^{-6}$（扩大 $4$ 倍）：<br>' +
+                                '$$2^n = 4 \\implies n = 2$$<br>' +
+                                '速率方程式为：$$R = k[X][Y]^2$$<br><br>' +
+                                '<b>(ii) 求总级数：</b><br>' +
+                                '$$\\text{总级数} = m + n = 1 + 2 = 3 \\text{ 级}$$<br><br>' +
+                                '<b>(iii) 求速率常数 $k$ 的值：</b><br>' +
+                                '将 Exp 3 数据代入：$$9.0 \\times 10^{-6} = k(1.0)(0.2)^2 = 0.04 k$$<br>' +
+                                '$$k = \\frac{9.0 \\times 10^{-6}}{0.04} = 2.25 \\times 10^{-4} \\text{ M}^{-2}\\cdot\\text{s}^{-1}$$<br><br>' +
+                                '<b>(iv) 综合倍数推导：</b><br>' +
+                                '1. 体积加倍：$[X]$ 与 $[Y]$ 均变为原来的 $\\frac{1}{2}$。<br>' +
+                                '由 $R \\propto [X][Y]^2$，浓度效应使速率变为：$$\\left(\\frac{1}{2}\\right) \\times \\left(\\frac{1}{2}\\right)^2 = \\frac{1}{8} \\text{ 倍}$$<br>' +
+                                '2. 温度由 $25^\\circ\\text{C}$ 上升至 $45^\\circ\\text{C}$（升高了两个 $10^\\circ\\text{C}$）：<br>' +
+                                '温度效应使速率常数 $k$ 变为原来的 $2^2 = 4$ 倍。<br>' +
+                                '3. 复合影响倍数：$$\\text{最终倍数} = \\frac{1}{8} \\times 4 = 0.5 \\text{ 倍}$$' 
+                },
+                { 
+                    title: '思考策略：(b) & (c) 溶度积计算与沉淀生成的 $Q_{sp}$ 判据', 
+                    think: '<strong>关键思考方向：</strong>(b) 在 $0.1\text{M } \text{Na}_2\text{SO}_4$ 中，$[\text{SO}_4^{2-}] = 0.1\text{ M}$，结合溶解度求解 $K_{sp}$；(c) 混合后考虑稀释效应计算离子积 $Q_{sp}$，并与 $K_{sp}$ 对比。', 
+                    derivation: '<b>详细计算推导：</b><br>' +
+                                '<b>(b) 求 $\\text{CaSO}_4$ 的 $K_{sp}$：</b><br>' +
+                                '在 $0.1\text{M } \text{Na}_2\text{SO}_4$ 溶液中，$[\text{SO}_4^{2-}]_0 = 0.1\text{ M}$。<br>' +
+                                '$\\text{CaSO}_4$ 溶解度 $s = 2.6 \\times 10^{-3}\text{ M}$，则：<br>' +
+                                '$$[\\text{Ca}^{2+}] = s = 2.6 \\times 10^{-3} \\text{ M}$$<br>' +
+                                '$$[\\text{SO}_4^{2-}] = 0.1 + s = 0.1 + 0.0026 = 0.1026 \\text{ M} \\approx 0.1 \\text{ M}$$<br>' +
+                                '$$K_{sp}(\\text{CaSO}_4) = [\\text{Ca}^{2+}][\\text{SO}_4^{2-}] = (2.6 \\times 10^{-3})(0.1026) \\approx 2.67 \\times 10^{-4} \\quad (\\text{若取 } 0.1 \\text{ 则为 } 2.6 \\times 10^{-4})$$<br><br>' +
+                                '<b>(c) 判断混合后是否产生沉淀：</b><br>' +
+                                '混合总体积：$$V_{\\text{总}} = 50\\text{ mL} + 150\\text{ mL} = 200\\text{ mL}$$<br>' +
+                                '计算混合后各离子浓度：<br>' +
+                                '$$[\\text{Ca}^{2+}] = 0.05\\text{ M} \\times \\frac{50}{200} = 0.0125\\text{ M}$$<br>' +
+                                '$$[\\text{SO}_4^{2-}] = 0.008\\text{ M} \\times \\frac{150}{200} = 0.006\\text{ M}$$<br>' +
+                                '计算离子积 $Q_{sp}$：<br>' +
+                                '$$Q_{sp} = [\\text{Ca}^{2+}][\\text{SO}_4^{2-}] = (0.0125)(0.006) = 7.5 \\times 10^{-5}$$<br>' +
+                                '对比 $Q_{sp}$ 与 $K_{sp}$：<br>' +
+                                '由于 $Q_{sp} = 7.5 \\times 10^{-5} < K_{sp} = 2.67 \\times 10^{-4}$，体系处于未饱和状态。<br>' +
+                                '故<b>不能产生 $\\text{CaSO}_4$ 沉淀</b>。' 
+                }
+            ], 
+            ans: '<b>✨ 参考答案与解析结论：</b><br>' +
+                 '(a)<br>' +
+                 '(i) 速率方程式：<b>$R = k[X][Y]^2$</b><br>' +
+                 '(ii) 总反应级数：<b>3 级</b><br>' +
+                 '(iii) $k = \\mathbf{2.25 \\times 10^{-4}\\text{ M}^{-2}\\cdot\\text{s}^{-1}}$<br>' +
+                 '(iv) 反应速率变为原来的 <b>$0.5$ 倍</b>（或 $\\frac{1}{2}$）。<br><br>' +
+                 '(b) $K_{sp}(\\text{CaSO}_4) = \\mathbf{2.67 \\times 10^{-4}}$（或 $2.6 \\times 10^{-4}$）。<br>' +
+                 '(c) $Q_{sp} = 7.5 \\times 10^{-5} < K_{sp}$，<b>不能产生硫酸钙沉淀</b>。' 
+        },
+        { 
+            num: 3, 
+            title: '戊) 计算题 - 第 3 题', 
+            body: '3. (a) 在酸液中，碘离子被过氧化氢氧化的反应机理如下：<br>' +
+                  '$$\\text{H}_2\\text{O}_2(aq) + \\text{I}^-(aq) \\rightarrow \\text{H}_2\\text{O}(l) + \\text{IO}^-(aq) \\quad (\\text{慢})$$<br>' +
+                  '$$\\text{H}^+(aq) + \\text{IO}^-(aq) \\rightarrow \\text{HIO}(aq) \\quad (\\text{快})$$<br>' +
+                  '$$\\text{HIO}(aq) + \\text{H}^+(aq) + \\text{I}^- \\rightarrow \\text{H}_2\\text{O}(l) + \\text{I}_2(s) \\quad (\\text{快})$$<br>' +
+                  '(i) 写出以上反应的总反应式。2%<br>' +
+                  '(ii) 写出以上反应的反应速率方程式。1%<br>' +
+                  '(iii) 写出以上反应的总级数。1%<br>' +
+                  '(iv) 当开始浓度 $[\\text{H}_2\\text{O}_2] = [\\text{I}^-] = [\\text{H}^+] = 0.2\\text{ mol}\\cdot\\text{L}^{-1}$，起始速率为 $4 \\times 10^{-4}\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$，计算速率常数 $k$。1%<br><br>' +
+                  '(b) 已知 $25^\\circ\\text{C}$ 时 $K_{sp}(\\text{Ag}_2\\text{CrO}_4) = 9 \\times 10^{-12}, K_{sp}(\\text{AgCl}) = 1.56 \\times 10^{-10}$<br>' +
+                  '(i) $25^\\circ\\text{C}$ 时，在含有 $0.1\\text{M } \\text{Na}_2\\text{CrO}_4$ 和 $0.1\\text{M } \\text{CaCl}_2$ 的混合溶液中，逐滴滴入 $0.1\\text{M } \\text{AgNO}_3$ 溶液。$\\text{Ag}_2\\text{CrO}_4$ 和 $\\text{AgCl}$ 哪个先沉淀？ 4%<br>' +
+                  '(ii) 当第二种沉淀物开始析出时，第一种沉淀物的阴离子还剩下多少百分率？ 2%', 
+            steps: [
+                { 
+                    title: '思考策略：(a) 决速步理论与动力学常数求解', 
+                    hint: '<strong>关键思考方向：</strong>总反应式通过累加三步反应并消去中间产物得到；最慢一步为决定速率步骤，写出速率方程；代入已知数据计算 $k$。', 
+                    derivation: '<b>详细计算推导：</b><br>' +
+                                '<b>(i) 总反应式：</b><br>' +
+                                '将三步机理相加：<br>' +
+                                '$$\\text{H}_2\\text{O}_2 + \\text{I}^- + \\text{H}^+ + \\text{IO}^- + \\text{HIO} + \\text{H}^+ + \\text{I}^- \\rightarrow \\text{H}_2\\text{O} + \\text{IO}^- + \\text{HIO} + \\text{H}_2\\text{O} + \\text{I}_2$$<br>' +
+                                '消去两边的中间产物 $\\text{IO}^-$ 和 $\\text{HIO}$：<br>' +
+                                '$$\\text{H}_2\\text{O}_2(aq) + 2\\text{I}^-(aq) + 2\\text{H}^+(aq) \\rightarrow 2\\text{H}_2\\text{O}(l) + \\text{I}_2(s)$$<br><br>' +
+                                '<b>(ii) 反应速率方程式：</b><br>' +
+                                '决速步（最慢一步）为第一步：$\\text{H}_2\\text{O}_2 + \\text{I}^- \\rightarrow \\text{H}_2\\text{O} + \\text{IO}^-$。<br>' +
+                                '故速率方程式为：$$R = k[\\text{H}_2\\text{O}_2][\\text{I}^-]$$<br><br>' +
+                                '<b>(iii) 总级数：</b><br>' +
+                                '$$\\text{总级数} = 1 + 1 = 2 \\text{ 级}$$<br><br>' +
+                                '<b>(iv) 计算速率常数 $k$：</b><br>' +
+                                '代入数值：$$4 \\times 10^{-4} = k (0.2)(0.2) = 0.04 k$$<br>' +
+                                '$$k = \\frac{4 \\times 10^{-4}}{0.04} = 0.01 \\text{ L}\\cdot\\text{mol}^{-1}\\cdot\\text{s}^{-1} \\quad (\\text{或 } 10^{-2} \\text{ M}^{-1}\\cdot\\text{s}^{-1})$$' 
+                },
+                { 
+                    title: '思考策略：(b) 分步沉淀的先后顺序与沉淀残余率计算', 
+                    think: '<strong>关键思考方向：</strong>注意混合液中 $[\text{Cl}^-] = 2 \times 0.1 = 0.2\text{ M}$，分别求出析出沉淀所需最低 $[\text{Ag}^+]$，需小者先沉淀；当第二种沉淀开始析出时，$[\text{Ag}^+]$ 达到第二种沉淀要求的临界值，求此时第一种阴离子的浓度。', 
+                    derivation: '<b>详细计算推导：</b><br>' +
+                                '<b>(i) 判断沉淀先后顺序：</b><br>' +
+                                '• 混合液中 $[\text{CrO}_4^{2-}] = 0.1\text{ M}$。<br>' +
+                                '析出 $\text{Ag}_2\text{CrO}_4$ 所需最低 $[\text{Ag}^+]$：<br>' +
+                                '$$[\text{Ag}^+] = \\sqrt{\\frac{K_{sp}(\\text{Ag}_2\\text{CrO}_4)}{[\\text{CrO}_4^{2-}]}} = \\sqrt{\\frac{9 \\times 10^{-12}}{0.1}} = \\sqrt{9 \\times 10^{-11}} \\approx 9.49 \\times 10^{-6} \\text{ M}$$<br>' +
+                                '• 混合液由 $0.1\text{M } \text{CaCl}_2$ 构成，故 $[\text{Cl}^-] = 2 \\times 0.1 = 0.2\text{ M}$。<br>' +
+                                '析出 $\text{AgCl}$ 所需最低 $[\text{Ag}^+]$：<br>' +
+                                '$$[\text{Ag}^+] = \\frac{K_{sp}(\\text{AgCl})}{[\\text{Cl}^-]} = \\frac{1.56 \\times 10^{-10}}{0.2} = 7.8 \\times 10^{-10} \\text{ M}$$<br>' +
+                                '因为 $7.8 \\times 10^{-10}\\text{ M} < 9.49 \\times 10^{-6}\\text{ M}$，故 <b>$\\text{AgCl}$ 先沉淀</b>。<br><br>' +
+                                '<b>(ii) 计算第一种阴离子残余百分率：</b><br>' +
+                                '当第二种沉淀（$\\text{Ag}_2\\text{CrO}_4$）开始析出时，溶液中 $[\text{Ag}^+] = 9.49 \\times 10^{-6}\text{ M}$。<br>' +
+                                '此时溶液中残余的 $[\text{Cl}^-]$ 浓度为：<br>' +
+                                '$$[\\text{Cl}^-]_{\\text{残}} = \\frac{K_{sp}(\\text{AgCl})}{[\\text{Ag}^+]} = \\frac{1.56 \\times 10^{-10}}{9.49 \\times 10^{-6}} \\approx 1.644 \\times 10^{-5} \\text{ M}$$<br>' +
+                                '阴离子残余百分率：<br>' +
+                                '$$\\text{残余率} = \\frac{[\\text{Cl}^-]_{\\text{残}}}{[\\text{Cl}^-]_{\\text{初}}} \\times 100\\% = \\frac{1.644 \\times 10^{-5}}{0.2} \\times 100\\% \\approx 0.00822\\% \\quad (\\text{或 } 8.22 \\times 10^{-3}\\%)$$' 
+                }
+            ], 
+            ans: '<b>✨ 参考答案与解析结论：</b><br>' +
+                 '(a)<br>' +
+                 '(i) 总反应式：<b>$\\text{H}_2\\text{O}_2(aq) + 2\\text{I}^-(aq) + 2\\text{H}^+(aq) \\rightarrow 2\\text{H}_2\\text{O}(l) + \\text{I}_2(s)$</b><br>' +
+                 '(ii) 速率方程式：<b>$R = k[\\text{H}_2\\text{O}_2][\\text{I}^-]$</b><br>' +
+                 '(iii) 总级数：<b>2 级</b><br>' +
+                 '(iv) $k = \\mathbf{0.01 \\text{ L}\\cdot\\text{mol}^{-1}\\cdot\\text{s}^{-1}}$（或 $10^{-2} \\text{ M}^{-1}\\cdot\\text{s}^{-1}$）。<br><br>' +
+                 '(b)<br>' +
+                 '(i) <b>$\\text{AgCl}$ 先沉淀</b>（所需银离子浓度更低）。<br>' +
+                 '(ii) 沉淀残余百分率约为 <b>$0.00822\\%$</b>（或 $8.22 \\times 10^{-3}\\%$）。' 
+        },
+        { 
+            num: 4, 
+            title: '戊) 计算题 - 第 4 题', 
+            body: '4. (a) 已知 $25^\\circ\\text{C}$ 时 $K_{sp}(\\text{Ag}_2\\text{CO}_3) = 8.1 \\times 10^{-12}$，计算在 $0.1\\text{M}$ 的 $\\text{AgNO}_3$ 溶液中的溶解度。3%<br><br>' +
+                  '(b) $990^\\circ\\text{C}$ 气相反应：$\\text{H}_2(g) + \\text{CO}_2(g) \\rightleftharpoons \\text{H}_2\\text{O}(g) + \\text{CO}(g) \\quad K_c = 1.6$。<br>' +
+                  '今在该温 $5\\text{L}$ 容器内含 $1\\text{ mol } \\text{H}_2, 2\\text{ mol } \\text{CO}_2, 0.75\\text{ mol } \\text{H}_2\\text{O}$ 及 $1\\text{ mol } \\text{CO}$。<br>' +
+                  '(i) 通过计算说明此时的正反应速率较快还是逆反应速率较快？ 2.5%<br>' +
+                  '(ii) 达平衡时各物质的浓度分别是多少？ 5.5%', 
+            steps: [
+                { 
+                    title: '思考策略：(a) 同离子效应下弱溶盐溶解度推导', 
+                    think: '<strong>关键思考方向：</strong>在 $0.1\text{M } \text{AgNO}_3$ 中，$[\text{Ag}^+] \approx 0.1\text{ M}$，设溶解度为 $s$，则 $[\text{CO}_3^{2-}] = s$，利用 $K_{sp} = [\text{Ag}^+]^2[\text{CO}_3^{2-}]$ 直接计算。', 
+                    derivation: '<b>详细计算推导：</b><br>' +
+                                '设 $\\text{Ag}_2\\text{CO}_3$ 在 $0.1\\text{M } \\text{AgNO}_3$ 中的溶解度为 $s \\text{ mol/L}$。<br>' +
+                                '$$[\\text{Ag}^+] = 0.1 + 2s \\approx 0.1 \\text{ M}, \\quad [\\text{CO}_3^{2-}] = s \\text{ M}$$<br>' +
+                                '代入 $K_{sp}$ 表达式：<br>' +
+                                '$$K_{sp} = [\\text{Ag}^+]^2 [\\text{CO}_3^{2-}] = (0.1)^2 \\cdot s = 8.1 \\times 10^{-12}$$<br>' +
+                                '$$0.01 s = 8.1 \\times 10^{-12} \\implies s = 8.1 \\times 10^{-10} \\text{ M}$$' 
+                },
+                { 
+                    title: '思考策略：(b) 浓度商 $Q_c$ 判据与平衡三段式求解', 
+                    think: '<strong>关键思考方向：</strong>(i) 计算初始各物质浓度并求出 $Q_c$，对比 $Q_c$ 与 $K_c$ 判断反应方向；(ii) 设正向反应消耗浓度为 $x \text{ M}$，利用三段式求解方程。', 
+                    derivation: '<b>详细计算推导：</b><br>' +
+                                '<b>(i) 速率快慢判断（浓度商 $Q_c$）：</b><br>' +
+                                '容器体积为 $5\text{ L}$，初始浓度分别为：<br>' +
+                                '$$[\\text{H}_2]_0 = \\frac{1}{5} = 0.2\\text{ M}, \\quad [\\text{CO}_2]_0 = \\frac{2}{5} = 0.4\\text{ M}$$<br>' +
+                                '$$[\\text{H}_2\\text{O}]_0 = \\frac{0.75}{5} = 0.15\\text{ M}, \\quad [\\text{CO}]_0 = \\frac{1}{5} = 0.2\\text{ M}$$<br>' +
+                                '计算浓度商 $Q_c$：<br>' +
+                                '$$Q_c = \\frac{[\\text{H}_2\\text{O}]_0 [\\text{CO}]_0}{[\\text{H}_2]_0 [\\text{CO}_2]_0} = \\frac{(0.15)(0.2)}{(0.2)(0.4)} = \\frac{0.03}{0.08} = 0.375$$<br>' +
+                                '由于 $Q_c = 0.375 < K_c = 1.6$，反应将向正反应方向进行，故<b>正反应速率较快</b>（$v_{\\text{正}} > v_{\\text{逆}}$）。<br><br>' +
+                                '<b>(ii) 求解平衡时各物质浓度：</b><br>' +
+                                '设反应向正方向移动消耗的 $\\text{H}_2$ 浓度为 $x \\text{ mol/L}$：<br>' +
+                                '$$\\begin{array}{lcccc}' +
+                                '\\text{Molar Ratio} & \\text{H}_2(g) & + & \\text{CO}_2(g) & \\rightleftharpoons & \\text{H}_2\\text{O}(g) & + & \\text{CO}(g) \\\\' +
+                                '\\text{Initial (M)} & 0.2 & & 0.4 & & 0.15 & & 0.2 \\\\' +
+                                '\\text{Change (M)} & -x & & -x & & +x & & +x \\\\' +
+                                '\\text{Equilibrium (M)} & 0.2-x & & 0.4-x & & 0.15+x & & 0.2+x' +
+                                '\\end{array}$$<br>' +
+                                '代入 $K_c = 1.6$：<br>' +
+                                '$$\\frac{(0.15+x)(0.2+x)}{(0.2-x)(0.4-x)} = 1.6$$<br>' +
+                                '$$x^2 + 0.35x + 0.03 = 1.6 (x^2 - 0.6x + 0.08)$$<br>' +
+                                '$$x^2 + 0.35x + 0.03 = 1.6x^2 - 0.96x + 0.128$$<br>' +
+                                '$$0.6x^2 - 1.31x + 0.098 = 0$$<br>' +
+                                '解一元二次方程：<br>' +
+                                '$$x = \\frac{1.31 - \\sqrt{(-1.31)^2 - 4(0.6)(0.098)}}{2(0.6)} = \\frac{1.31 - \\sqrt{1.7161 - 0.2352}}{1.2} = \\frac{1.31 - \\sqrt{1.4809}}{1.2}$$<br>' +
+                                '$$x = \\frac{1.31 - 1.2169}{1.2} = \\frac{0.0931}{1.2} \\approx 0.0776 \\text{ M}$$<br>' +
+                                '计算平衡浓度：<br>' +
+                                '$$[\\text{H}_2] = 0.2 - 0.0776 = 0.1224 \\text{ M} \\quad (\\text{约 } 0.122\\text{ M})$$<br>' +
+                                '$$[\\text{CO}_2] = 0.4 - 0.0776 = 0.3224 \\text{ M} \\quad (\\text{约 } 0.322\\text{ M})$$<br>' +
+                                '$$[\\text{H}_2\\text{O}] = 0.15 + 0.0776 = 0.2276 \\text{ M} \\quad (\\text{约 } 0.228\\text{ M})$$<br>' +
+                                '$$[\\text{CO}] = 0.2 + 0.0776 = 0.2776 \\text{ M} \\quad (\\text{约 } 0.278\\text{ M})$$' 
+                }
+            ], 
+            ans: '<b>✨ 参考答案与解析结论：</b><br>' +
+                 '(a) 溶解度 $s = \\mathbf{8.1 \\times 10^{-10}\\text{ M}}$。<br><br>' +
+                 '(b)<br>' +
+                 '(i) $Q_c = 0.375 < K_c = 1.6$，<b>正反应速率较快</b>（$v_{\\text{正}} > v_{\\text{逆}}$）。<br>' +
+                 '(ii) 平衡时各物质浓度：<br>' +
+                 '• $[\\text{H}_2] = \\mathbf{0.122\\text{ M}}$（或 $0.1224\\text{ M}$）<br>' +
+                 '• $[\\text{CO}_2] = \\mathbf{0.322\\text{ M}}$（或 $0.3224\\text{ M}$）<br>' +
+                 '• $[\\text{H}_2\\text{O}] = \\mathbf{0.228\\text{ M}}$（或 $0.2276\\text{ M}$）<br>' +
+                 '• $[\\text{CO}] = \\mathbf{0.278\\text{ M}}$（或 $0.2776\\text{ M}$）' 
+        }
     ]
 };
 
