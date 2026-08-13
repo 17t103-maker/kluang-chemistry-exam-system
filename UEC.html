@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高二理科化学历届统考真题完整解析系统 (第19章-第22.2章)</title>
+    <title>高二理科化学历届统考真题完整解析系统 (第19章-第22章)</title>
     <!-- 配置 MathJax 3 渲染引擎 -->
     <script>
         window.MathJax = {
@@ -43,7 +43,6 @@
             margin: 0 auto;
         }
 
-        /* 跨平台快捷导航栏 */
         .site-nav {
             display: flex;
             justify-content: center;
@@ -102,7 +101,6 @@
             margin: 5px 0 0 0;
         }
 
-        /* 交互控制台 */
         .control-panel {
             background-color: var(--card-bg);
             padding: 20px;
@@ -168,7 +166,6 @@
             border-color: var(--accent-color);
         }
 
-        /* 全卷查看功能按钮组 */
         .global-tools {
             display: flex;
             gap: 10px;
@@ -196,7 +193,6 @@
             border-color: var(--primary-color);
         }
 
-        /* 题目展示卡片 */
         .question-card {
             background-color: var(--card-bg);
             border-radius: 12px;
@@ -245,7 +241,6 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
-        /* 引导解析步骤 */
         .step-container {
             display: none;
             margin-top: 18px;
@@ -301,7 +296,6 @@
             font-size: 0.98rem;
         }
 
-        /* 最终答案 */
         .final-answer {
             display: none;
             margin-top: 25px;
@@ -323,7 +317,6 @@
             margin-bottom: 10px;
         }
 
-        /* 按钮组 */
         .action-area {
             margin-top: 22px;
             display: flex;
@@ -362,7 +355,6 @@
             background: #757575;
         }
 
-        /* 全卷视图容器样式 */
         .all-questions-view {
             display: none;
             background: white;
@@ -426,7 +418,6 @@
 <body>
 
 <div class="container">
-    <!-- 跨平台导航 -->
     <nav class="site-nav">
         <a href="index.html" class="nav-link">🏠 平台首页</a>
         <a href="2024.html" class="nav-link">📅 2024统测</a>
@@ -445,7 +436,6 @@
         <p>按章节编排 · 同一章节内依次包含选择题与作答题</p>
     </header>
 
-    <!-- 交互控制台 -->
     <div class="control-panel">
         <div class="section-title">第一步：选择化学章节</div>
         <div class="type-tabs">
@@ -458,7 +448,6 @@
         <div class="section-title">第二步：点击题号直接查看</div>
         <div class="number-selector" id="numberButtons"></div>
 
-        <!-- 列表列出与全卷清览扩展功能 -->
         <div class="global-tools">
             <button class="tool-btn" onclick="showAllQuestions(false)">📄 列出全卷题目（用于打印/清览）</button>
             <button class="tool-btn" onclick="showAllQuestions(true)">📝 列出全卷题目与答案</button>
@@ -466,7 +455,6 @@
         </div>
     </div>
 
-    <!-- 动态题目展示卡片（单题模式） -->
     <div id="questionDisplayArea">
         <div class="question-card">
             <div class="question-header">
@@ -490,7 +478,6 @@
         </div>
     </div>
 
-    <!-- 全卷清览列表视图容器（全卷模式） -->
     <div class="all-questions-view" id="allQuestionsView">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:2px solid var(--primary-color); padding-bottom:10px;">
             <h2 id="viewListTitle" style="margin:0; color:var(--primary-color);">全卷题目清览</h2>
@@ -501,10 +488,8 @@
 </div>
 
 <script>
-// 按章节编排的试题数据库
 const chapterDatabase = {
     '第19章': [
-        // 选择题部分
         {
             num: 1, type: '选择题', section: '[19.1] 化学反应中的热量变化', year: '[2020 年第 17 题]',
             body: '不用火、不插电的速食“自热式方便火锅”是应用下列哪个化学反应原理？<br><br>' +
@@ -512,7 +497,7 @@ const chapterDatabase = {
                   'B. $\\text{CaO} + \\text{H}_2\\text{O} \\rightarrow \\text{Ca(OH)}_2$<br>' +
                   'C. $\\text{Mg} + \\text{Cl}_2 \\rightarrow \\text{MgCl}_2$<br>' +
                   'D. $2\\text{K} + \\text{O}_2 \\rightarrow \\text{K}_2\\text{O}_2$',
-            steps: [{ title: '原理应用', think: '自热火锅需要安全且能快速剧烈放热的化学反应。', derivation: '生石灰 (CaO) 与水反应放热剧烈且无毒安全，常用于自热食品。' }],
+            steps: [{ title: '原理应用与安全性判断', think: '自热火锅发热包需要寻找放热剧烈、原料廉价且产物无毒无害的反应。', derivation: '生石灰 (CaO) 与水反应生成熟石灰 $\\text{Ca(OH)}_2$，放热迅速且安全无毒，是目前自热食品包最核心的化学原理。' }],
             ans: '<b>正确答案：B</b>'
         },
         {
@@ -524,7 +509,7 @@ const chapterDatabase = {
                   '</table><br>' +
                   'A. $-870\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; B. $-390\\text{ kJ mol}^{-1}$<br>' +
                   'C. $+180\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; D. $+390\\text{ kJ mol}^{-1}$',
-            steps: [{ title: '键能计算公式', think: '$\\Delta H = \\sum(\\text{断键键能}) - \\sum(\\text{成键键能})$', derivation: '断键：$1 \\times 150 + 3 \\times 240 = 870\\text{ kJ}$<br>成键：$2 \\text{ mol ICl}_3$ 共含 $6 \\text{ 个 I-Cl 键} \\rightarrow 6 \\times 210 = 1260\\text{ kJ}$<br>$\\Delta H = 870 - 1260 = -390\\text{ kJ mol}^{-1}$' }],
+            steps: [{ title: '键能计算公式应用', think: '$\\Delta H = \\sum(\\text{断键吸收总能量}) - \\sum(\\text{成键释放总能量})$', derivation: '断键能量：$1 \\times 150 + 3 \\times 240 = 870\\text{ kJ}$<br>成键能量：$2 \\text{ mol ICl}_3$ 分子中共含有 $2 \\times 3 = 6 \\text{ mol I-Cl 键} \\rightarrow 6 \\times 210 = 1260\\text{ kJ}$<br>$\\Delta H = 870 - 1260 = -390\\text{ kJ mol}^{-1}$' }],
             ans: '<b>正确答案：B</b>'
         },
         {
@@ -536,7 +521,7 @@ const chapterDatabase = {
                   '<tr><td>键能 (kJ mol⁻¹)</td><td>413</td><td>230</td><td>299</td><td>151</td></tr>' +
                   '</table><br>' +
                   'A. $+35\\text{ kJ}$ &nbsp;&nbsp;&nbsp; B. $+50\\text{ kJ}$ &nbsp;&nbsp;&nbsp; C. $-35\\text{ kJ}$ &nbsp;&nbsp;&nbsp; D. $-50\\text{ kJ}$',
-            steps: [{ title: '对比断键与成键', think: '反应断裂 1 个 C-H 键和 1 个 I-I 键，形成 1 个 C-I 键和 1 个 H-I 键。', derivation: '$\\Delta H = (413 + 151) - (230 + 299) = 564 - 529 = +35\\text{ kJ}$' }],
+            steps: [{ title: '对比拆键与新键形成', think: '净变化本质上断裂了 1 个 C-H 键和 1 个 I-I 键，生成了 1 个 C-I 键和 1 个 H-I 键。', derivation: '断键：$413 + 151 = 564\\text{ kJ}$<br>成键：$230 + 299 = 529\\text{ kJ}$<br>$\\Delta H = 564 - 529 = +35\\text{ kJ}$' }],
             ans: '<b>正确答案：A</b>'
         },
         {
@@ -549,7 +534,7 @@ const chapterDatabase = {
                   'III 石墨的 C-C 键的键能小于金刚石<br>' +
                   'IV 石墨分离成碳原子的焓变化大于金刚石<br><br>' +
                   'A. I, II, III &nbsp;&nbsp;&nbsp; B. I, II, IV &nbsp;&nbsp;&nbsp; C. I, III, IV &nbsp;&nbsp;&nbsp; D. II, III, IV',
-            steps: [{ title: '能量与稳定性关系', think: '石墨转化为金刚石吸热，说明石墨能量比金刚石低，因而更稳定。', derivation: '石墨能量低，完全燃烧释放热量较少（I正确）；$\\Delta H > 0$ 为吸热反应（II正确）；石墨较稳定说明其化学键强于金刚石，变成气态原子吸热更多（IV正确）。' }],
+            steps: [{ title: '能量高低与稳定性关系分析', think: '转化吸热说明石墨的能量低于金刚石，即石墨更稳定，破坏石墨化学键需要更多能量。', derivation: '石墨能量较低，完全燃烧释放的热量少于金刚石（I正确）；$\\Delta H > 0$ 为吸热（II正确）；石墨比金刚石稳定，其平均键能更大，断键所需吸收热量更大（III错，IV正确）。故选 I, II, IV。' }],
             ans: '<b>正确答案：B (I, II, IV)</b>'
         },
         {
@@ -558,7 +543,7 @@ const chapterDatabase = {
                   '$\\Delta H^\\circ$ 可被视为：<br>' +
                   'I 中和热 &nbsp;&nbsp; II 水的生成热 &nbsp;&nbsp; III 氢气的燃烧热 &nbsp;&nbsp; IV 标准条件下 1mol 氢气和 0.5mol 氧气完全反应生成 1mol 水时的反应热<br><br>' +
                   'A. I &nbsp;&nbsp;&nbsp; B. II, III &nbsp;&nbsp;&nbsp; C. I, III, IV &nbsp;&nbsp;&nbsp; D. II, III, IV',
-            steps: [{ title: '生成热与燃烧热定义', think: '根据定义判断生成热、燃烧热的标准状态与产物。', derivation: '该反应符合 1mol H₂ 完全燃烧生成稳定液态水（燃烧热），也符合最稳定单质生成 1mol H₂O(l)（生成热），因此 II, III, IV 均符合。' }],
+            steps: [{ title: '概念定义界定', think: '分别根据标准生成热、燃烧热和中和热的定义逐项比对。', derivation: '生成 1mol 液态水符合标准生成热（II）；1mol 氢气完全燃烧生成液态水符合燃烧热（III）；方程式数值直接代表了 1mol 氢气反应的热变（IV）。中和热必须由酸碱反应产生 1mol 水，故 I 错误。' }],
             ans: '<b>正确答案：D</b>'
         },
         {
@@ -568,7 +553,7 @@ const chapterDatabase = {
                   'B. $2\\text{N}(g) + 3\\text{H}_2(g) \\rightarrow 2\\text{NH}_3(g)$<br>' +
                   'C. $2\\text{C}_{(\\text{石墨})} + 3\\text{H}_2(g) \\rightarrow \\text{C}_2\\text{H}_6(g)$<br>' +
                   'D. $\\text{NaOH}(aq) + \\text{CO}_2(g) \\rightarrow \\text{NaHCO}_3(aq)$',
-            steps: [{ title: '生成热的严格定义', think: '必须由“最稳定单质”生成“1 mol 目标化合物”。', derivation: 'C 选项由稳定单质（石墨与氢气）生成 1mol 乙烷，属于生成热；A 中 CO 不是单质；B 中 N(g) 非最稳定单质且生成 2mol；D 反应物非单质。' }],
+            steps: [{ title: '生成热定义判定', think: '标准生成热必须是由“最稳定单质”生成“1 mol 化合物”的反应。', derivation: 'A 中 CO 为化合物；B 中氮原子不是最稳定单质且生成了 2mol；D 中反应物均为化合物；只有 C 是由最稳定单质（石墨、氢气）生成 1mol 乙烷。' }],
             ans: '<b>正确答案：C</b>'
         },
         {
@@ -576,7 +561,7 @@ const chapterDatabase = {
             body: '$2.0\\text{ g}$ 的苯甲酸完全燃烧释放出的热，将 $3.5\\text{ kg}$ 的水的温度提升 $3.8^\\circ\\text{C}$。试计算苯甲酸的燃烧热。[$\\text{C}_6\\text{H}_5\\text{COOH}$ 摩尔质量 $= 122\\text{ g mol}^{-1}$]<br><br>' +
                   'A. $717.4\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; B. $3407.5\\text{ kJ mol}^{-1}$<br>' +
                   'C. $6814.9\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; D. $13629.8\\text{ kJ mol}^{-1}$',
-            steps: [{ title: '吸热与摩尔燃烧热换算', think: '$Q = m \\cdot c \\cdot \\Delta T$', derivation: '$Q = 3.5\\text{ kg} \\times 4.2\\text{ kJ kg}^{-1}\\text{K}^{-1} \\times 3.8\\text{ K} = 55.86\\text{ kJ}$<br>$n(\\text{苯甲酸}) = 2.0 / 122 = 0.01639\\text{ mol}$<br>$\\text{燃烧热} = 55.86 / 0.01639 \\approx 3407.5\\text{ kJ mol}^{-1}$' }],
+            steps: [{ title: '吸热公式与摩尔换算', think: '$Q = m \\cdot c \\cdot \\Delta T$，再除以消耗的苯甲酸摩尔数。', derivation: '$Q = 3.5\\text{ kg} \\times 4.2\\text{ kJ kg}^{-1}\\text{K}^{-1} \\times 3.8\\text{ K} = 55.86\\text{ kJ}$<br>$n = 2.0 / 122 = 0.016393\\text{ mol}$<br>$\\text{燃烧热} = 55.86 / 0.016393 \\approx 3407.5\\text{ kJ mol}^{-1}$' }],
             ans: '<b>正确答案：B</b>'
         },
         {
@@ -587,7 +572,7 @@ const chapterDatabase = {
                   '恰好完全反应放出热量 $\\Delta H_1, \\Delta H_2, \\Delta H_3$ 的放热大小关系：<br><br>' +
                   'A. $\\Delta H_1 > \\Delta H_2 > \\Delta H_3$ &nbsp;&nbsp;&nbsp; B. $\\Delta H_1 > \\Delta H_3 > \\Delta H_2$<br>' +
                   'C. $\\Delta H_2 > \\Delta H_3 > \\Delta H_1$ &nbsp;&nbsp;&nbsp; D. $\\Delta H_3 > \\Delta H_2 > \\Delta H_1$',
-            steps: [{ title: '电离吸热与稀释放热效应', think: '弱酸电离需要吸收热量，浓硫酸稀释释放热量。', derivation: '浓硫酸溶于水放热，实际放热最多（$\\Delta H_2$ 最大）；醋酸电离吸热，实际放热最少（$\\Delta H_1$ 最小）。故放热大小顺序为：$\\Delta H_2 > \\Delta H_3 > \\Delta H_1$。' }],
+            steps: [{ title: '电离与稀释热效应判别', think: '醋酸弱电离吸热，浓硫酸稀释放热。', derivation: '浓硫酸溶于水放热，叠加中和放热，总量最大（$\\Delta H_2$ 最大）；醋酸电离吸收部分热量，放热总量最少（$\\Delta H_1$ 最小）。放热大小顺序：$\\Delta H_2 > \\Delta H_3 > \\Delta H_1$。' }],
             ans: '<b>正确答案：C</b>'
         },
         {
@@ -597,7 +582,7 @@ const chapterDatabase = {
                   'B. $\\text{KOH}(aq) + \\frac{1}{2}\\text{H}_2\\text{SO}_4(aq) \\rightarrow \\frac{1}{2}\\text{K}_2\\text{SO}_4(aq) + \\text{H}_2\\text{O}(l) \\quad \\Delta H = -57.3\\text{ kJ mol}^{-1}$<br>' +
                   'C. $2\\text{KOH}(aq) + \\text{H}_2\\text{SO}_4(aq) \\rightarrow \\text{K}_2\\text{SO}_4(aq) + 2\\text{H}_2\\text{O}(l) \\quad \\Delta H = -57.3\\text{ kJ mol}^{-1}$<br>' +
                   'D. $2\\text{KOH}(aq) + \\text{H}_2\\text{SO}_4(aq) \\rightarrow \\text{K}_2\\text{SO}_4(aq) + 2\\text{H}_2\\text{O}(l) \\quad \\Delta H = -114.6\\text{ kJ mol}^{-1}$',
-            steps: [{ title: '中和反应热化学标定', think: '标定 1 mol H₂O(l) 的生成反应。', derivation: '$n(\\text{KOH}) = 11.2 / 56.1 = 0.2\\text{ mol}$，酸提供 $0.2\\text{ mol H}^+$，完全反应生成 $0.2\\text{ mol H}_2\\text{O}$ 放热 $11.46\\text{ kJ}$。<br>生成 $1\\text{ mol H}_2\\text{O}$ 放热 $11.46 / 0.2 = 57.3\\text{ kJ}$，选项 B 表达正确。' }],
+            steps: [{ title: '中和反应热化学方程式标定', think: '中和热习惯以生成 1 mol 水为基准。', derivation: '$n(\\text{KOH}) = 11.2 / 56.1 = 0.2\\text{ mol}$；硫酸提供 $0.2\\text{ mol H}^+$。实际生成 $0.2\\text{ mol H}_2\\text{O}$ 放热 $11.46\\text{ kJ}$。<br>则生成 $1\\text{ mol H}_2\\text{O}$ 时放热 $= 11.46 / 0.2 = 57.3\\text{ kJ mol}^{-1}$，对应 B。' }],
             ans: '<b>正确答案：B</b>'
         },
         {
@@ -608,7 +593,7 @@ const chapterDatabase = {
                   '$\\text{SO}_2(g)$ 与 $\\text{H}_2\\text{O}(l)$ 标准生成热为 $-296.9\\text{ kJ mol}^{-1}$ 和 $-285.8\\text{ kJ mol}^{-1}$。求硫酸的标准生成热。<br><br>' +
                   'A. $-130.3\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; B. $-354.1\\text{ kJ mol}^{-1}$<br>' +
                   'C. $-614.7\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; D. $-811.3\\text{ kJ mol}^{-1}$',
-            steps: [{ title: '热化学叠加计算', think: '硫酸生成热反应：$\\text{S}(s) + \\frac{3}{2}\\text{O}_2(g) + \\text{H}_2(g) \\rightarrow \\text{H}_2\\text{SO}_4(aq)$', derivation: '$\\Delta H = -296.9 + (-98.3) + (-285.8) + (-130.3) = -811.3\\text{ kJ mol}^{-1}$' }],
+            steps: [{ title: '盖斯定律路径相加', think: '目标反应为 $\\text{S}(s) + \\text{H}_2(g) + 2\\text{O}_2(g) \\rightarrow \\text{H}_2\\text{SO}_4(aq)$。', derivation: '目标反应等于以上四个过程直接叠加：<br>$\\Delta H = (-296.9) + (-98.3) + (-285.8) + (-130.3) = -811.3\\text{ kJ mol}^{-1}$' }],
             ans: '<b>正确答案：D</b>'
         },
         {
@@ -619,7 +604,7 @@ const chapterDatabase = {
                   '③ $\\text{C}(s) + \\text{O}_2(g) \\rightarrow \\text{CO}_2(g) \\quad \\Delta H = -393.5\\text{ kJ}$<br>' +
                   '求 $\\text{M}_2\\text{O}_3(s) + 3\\text{CO}(g) \\rightarrow 2\\text{M}(s) + 3\\text{CO}_2(g)$ 的反应热 $\\Delta H$。<br><br>' +
                   'A. $-539.2\\text{ kJ}$ &nbsp;&nbsp;&nbsp; B. $-26.8\\text{ kJ}$ &nbsp;&nbsp;&nbsp; C. $+26.8\\text{ kJ}$ &nbsp;&nbsp;&nbsp; D. $+539.2\\text{ kJ}$',
-            steps: [{ title: '盖斯定律方程式组合', think: '目标反应 = -① - 3×② + 3×③', derivation: '$\\Delta H = -(-822.2) - 3(-110.5) + 3(-393.5) = -26.8\\text{ kJ}$' }],
+            steps: [{ title: '方程式代数运算', think: '目标方程式 = -① - 3×② + 3×③', derivation: '$\\Delta H = -(-822.2) - 3(-110.5) + 3(-393.5) = 822.2 + 331.5 - 1180.5 = -26.8\\text{ kJ}$' }],
             ans: '<b>正确答案：B</b>'
         },
         {
@@ -628,17 +613,16 @@ const chapterDatabase = {
                   '求 $\\text{P}_4\\text{O}_{10}(s) + 6\\text{H}_2\\text{O}(l) \\rightarrow 4\\text{H}_3\\text{PO}_4(s)$ 的 $\\Delta H^\\circ$。<br><br>' +
                   'A. $-9844\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; B. $-2019\\text{ kJ mol}^{-1}$<br>' +
                   'C. $-388\\text{ kJ mol}^{-1}$ &nbsp;&nbsp;&nbsp; D. $-97\\text{ kJ mol}^{-1}$',
-            steps: [{ title: '生成热求反应热基本公式', think: '$\\Delta H^\\circ = \\sum \\Delta H_f^\\circ(\\text{产物}) - \\sum \\Delta H_f^\\circ(\\text{反应物})$', derivation: '$\\Delta H^\\circ = 4(-1279) - [ -3012 + 6(-286) ] = -5116 - (-4728) = -388\\text{ kJ mol}^{-1}$' }],
+            steps: [{ title: '利用生成热直接计算', think: '$\\Delta H^\\circ = \\sum \\Delta H_f^\\circ(\\text{生成物}) - \\sum \\Delta H_f^\\circ(\\text{反应物})$', derivation: '$\\Delta H^\\circ = 4(-1279) - [ -3012 + 6(-286) ] = -5116 - [ -3012 - 1716 ] = -5116 - (-4728) = -388\\text{ kJ mol}^{-1}$' }],
             ans: '<b>正确答案：C</b>'
         },
-        // 作答题部分
         {
             num: 13, type: '作答题', section: '[19.3.2] 燃烧热计算', year: '[2014 年第 2(a) 题]',
             body: '已知 $\\text{H}_2(g) + \\frac{1}{2}\\text{O}_2(g) \\rightarrow \\text{H}_2\\text{O}(l) \\quad \\Delta H = -285.8\\text{ kJ}$<br>' +
                   '在标准状态下，试计算 $2240\\text{ L}$ 氢气完全燃烧释放的热量，能使多少 $\\text{kg}$ 的水温度从 $28^\\circ\\text{C}$ 上升至 $78^\\circ\\text{C}$？（水的比热 $= 4200\\text{ J kg}^{-1}\\text{K}^{-1}$）',
             steps: [
-                { title: '氢气摩尔数与总放热', think: '标况气体摩尔体积 $22.4\\text{ L/mol}$。', derivation: '$n(\\text{H}_2) = 2240 / 22.4 = 100\\text{ mol}$<br>$Q = 100 \\times 285.8\\text{ kJ} = 2.858 \\times 10^7\\text{ J}$' },
-                { title: '水温上升吸收热量换算', think: '$Q = m \\cdot c \\cdot \\Delta T$', derivation: '$\\Delta T = 78 - 28 = 50\\text{ K}$<br>$2.858 \\times 10^7 = m \\times 4200 \\times 50 \\implies m \\approx 136\\text{ kg}$' }
+                { title: '计算放热总量', think: '先求标准状态下氢气的摩尔数 $n = V / V_m$。', derivation: '$n(\\text{H}_2) = 2240 / 22.4 = 100\\text{ mol}$<br>总放热 $Q = 100 \\times 285.8\\text{ kJ} = 2.858 \\times 10^7\\text{ J}$' },
+                { title: '比热吸热公式计算质量', think: '设水的质量为 $m$，满足 $Q = m \\cdot c \\cdot \\Delta T$。', derivation: '$\\Delta T = 78 - 28 = 50\\text{ K}$<br>$2.858 \\times 10^7 = m \\times 4200 \\times 50 \\implies m \\approx 136.1\\text{ kg} \\approx 136\\text{ kg}$' }
             ],
             ans: '<b>参考答案：136 kg</b>'
         },
@@ -648,21 +632,20 @@ const chapterDatabase = {
                   '(a) 已知 $\\text{NO}_2$ 和 $\\text{N}_2\\text{O}_4$ 的标准生成热分别为 $+33.9\\text{ kJ mol}^{-1}$ 和 $+9.2\\text{ kJ mol}^{-1}$，求上述反应的焓变。<br>' +
                   '(b) 上述双分子缔合适宜在哪两个条件下进行？',
             steps: [
-                { title: '生成热求反应焓变', think: '$\\Delta H = \\Delta H_f(\\text{N}_2\\text{O}_4) - 2 \\times \\Delta H_f(\\text{NO}_2)$', derivation: '$\\Delta H = 9.2 - (2 \\times 33.9) = -58.6\\text{ kJ mol}^{-1}$' },
-                { title: '条件选择', think: '放热且气体分子数减小的可逆反应。', derivation: '反应放热（$\\Delta H < 0$）且气体体积缩小，宜在<b>低温</b>和<b>高压</b>下进行。' }
+                { title: '计算反应焓变', think: '$\Delta H = \Delta H_f(\text{N}_2\text{O}_4) - 2 \cdot \Delta H_f(\text{NO}_2)$', derivation: '$\\Delta H = 9.2 - (2 \\times 33.9) = -58.6\\text{ kJ mol}^{-1}$' },
+                { title: '分析平衡移动方向与最佳条件', think: '正反应为放热、且气体分子数减小。', derivation: '由于正反应放热且分子数减少，根据勒夏特列原理，宜在<b>低温</b>和<b>高压</b>下进行。' }
             ],
             ans: '<b>参考答案：(a) -58.6 kJ/mol &nbsp;&nbsp; (b) 低温、高压</b>'
         }
     ],
 
     '第20章': [
-        // 选择题部分
         {
             num: 1, type: '选择题', section: '[20.1] 化学反应速率的意义', year: '[2017 年第 16 题]',
             body: '已知 $4\\text{NH}_3 + 5\\text{O}_2 \\rightleftharpoons 4\\text{NO} + 6\\text{H}_2\\text{O}$，各速率为 $R_{\\text{NH}_3}, R_{\\text{O}_2}, R_{\\text{NO}}, R_{\\text{H}_2\\text{O}}$，以下关系式正确的是：<br><br>' +
                   'A. $\\frac{4}{5}R_{\\text{NH}_3} = R_{\\text{O}_2}$ &nbsp;&nbsp;&nbsp; B. $\\frac{5}{6}R_{\\text{O}_2} = R_{\\text{H}_2\\text{O}}$<br>' +
                   'C. $\\frac{2}{3}R_{\\text{NH}_3} = R_{\\text{H}_2\\text{O}}$ &nbsp;&nbsp;&nbsp; D. $\\frac{4}{5}R_{\\text{O}_2} = R_{\\text{NO}}$',
-            steps: [{ title: '计量数与速率比例', think: '$R_i / n_i$ 恒相等。', derivation: '$R_{\\text{O}_2} / 5 = R_{\\text{NO}} / 4 \\implies R_{\\text{NO}} = (4/5) R_{\\text{O}_2}$，故 D 正确。' }],
+            steps: [{ title: '速率与系数比例对应', think: '各物质反应速率与其化学计量系数成正比：$R_i / n_i = \\text{常数}$', derivation: '$\\frac{R_{\\text{O}_2}}{5} = \\frac{R_{\\text{NO}}}{4} \\implies R_{\\text{NO}} = \\frac{4}{5} R_{\\text{O}_2}$，因此选项 D 正确。' }],
             ans: '<b>正确答案：D</b>'
         },
         {
@@ -674,7 +657,7 @@ const chapterDatabase = {
                   '叙述正确的是：<br>' +
                   'I $\\text{ABC}_2$ 是中间产物 &nbsp;&nbsp; II 此反应为二级反应 &nbsp;&nbsp; III 此反应为吸热反应 &nbsp;&nbsp; IV $\\text{C}_2$ 的消失速率等于 $\\text{B}_2$ 生成速率<br><br>' +
                   'A. I, II &nbsp;&nbsp;&nbsp; B. I, II, IV &nbsp;&nbsp;&nbsp; C. I, III, IV &nbsp;&nbsp;&nbsp; D. II, III, IV',
-            steps: [{ title: '决速步与中间产物判定', think: '最慢的第一步决定速率：$R = k[\\text{AB}][\\text{C}_2]$。', derivation: '$\\text{ABC}_2$ 为中间产物（I正确）；速率方程为二级反应（II正确）；总反应放热（III错）；由总反应系数知消失速率与生成速率比为 1:2（IV错）。' }],
+            steps: [{ title: '决速步与反应级数分析', think: '最慢的第一步决定总反应速率，其速率方程为 $R = k[\\text{AB}][\\text{C}_2]$。', derivation: '$\\text{ABC}_2$ 在反应中生成又被后续消耗，是中间产物（I正确）；由慢步骤可知速率为二级（II正确）；题干显示反应放热（III错）；由化学计量数知 $R(\\text{C}_2) : R(\\text{B}_2) = 1 : 2$（IV错）。故选 A。' }],
             ans: '<b>正确答案：A (I, II)</b>'
         },
         {
@@ -688,7 +671,7 @@ const chapterDatabase = {
                   '</table><br>' +
                   '此反应的速率方程式表达为何？<br><br>' +
                   'A. $R = k[\\text{A}]$ &nbsp;&nbsp;&nbsp; B. $R = k[\\text{A}][\\text{B}]$ &nbsp;&nbsp;&nbsp; C. $R = k[\\text{A}]^2[\\text{B}]$ &nbsp;&nbsp;&nbsp; D. $R = k[\\text{A}][\\text{B}]^2$',
-            steps: [{ title: '控制变量法求反应级数', think: '对比 Exp 1 与 2，以及 Exp 1 与 3。', derivation: 'Exp1与2：[B]不变，[A]增加1.24倍，速率增至1.53倍，对 A 为二级；Exp1与3：[A]不变，[B]增加1.54倍，速率增至1.53倍，对 B 为一级。' }],
+            steps: [{ title: '控制变量求反应级数', think: '比较 Exp 1、2 及 Exp 1、3。', derivation: 'Exp1与2：[B]不变，[A]由 0.0575 增至 0.0713（增 $1.24$ 倍），速率变为 $1.53$ 倍 ($1.24^2 \approx 1.54$)，故对 A 为 2 级；<br>Exp1与3：[A]不变，[B]由 0.0216 增至 0.0333（增 $1.54$ 倍），速率变为 $1.53$ 倍 ($1.54^1 \approx 1.54$)，故对 B 为 1 级。<br>综上：$R = k[\\text{A}]^2[\\text{B}]$，选 C。' }],
             ans: '<b>正确答案：C</b>'
         },
         {
@@ -699,7 +682,7 @@ const chapterDatabase = {
                   'B. $\\text{XY} + \\text{Y}_3 \\rightarrow \\text{XY}_2 + \\text{Y}_2$ (慢) ; $\\text{XY} + \\text{Y}_2 \\rightarrow \\text{XY}_3$ (快)<br>' +
                   'C. $\\text{XY} + 2\\text{Y}_3 \\rightarrow \\text{XY}_2 + \\text{Y}_5$ (快) ; $\\text{XY} + \\text{Y}_5 \\rightarrow \\text{XY}_3 + \\text{Y}_3$ (慢)<br>' +
                   'D. $\\text{XY} + 2\\text{Y}_3 \\rightarrow \\text{XY}_2 + \\text{Y}_5$ (慢) ; $\\text{XY} + \\text{Y}_5 \\rightarrow \\text{XY}_3 + \\text{Y}_3$ (快)',
-            steps: [{ title: '慢反应决定速率方程', think: '慢步骤反应物项必须与速率方程一致。', derivation: 'D 选项中慢步骤为 $\\text{XY} + 2\\text{Y}_3 \\rightarrow \\text{XY}_2 + \\text{Y}_5$，其基元反应速率方程对应 $R = k[\\text{XY}][\\text{Y}_3]^2$。' }],
+            steps: [{ title: '慢步骤与速率方程匹配', think: '慢步骤基元反应的分子数即对应速率方程中各反应物的指数。', derivation: '速率方程中 XY 的次数为 1，$\text{Y}_3$ 的次数为 2，这说明慢反应（决速步）的反应物必须是由 1 个 XY 和 2 个 $\text{Y}_3$ 碰撞，即选项 D。' }],
             ans: '<b>正确答案：D</b>'
         },
         {
@@ -709,7 +692,7 @@ const chapterDatabase = {
                   'B. $\\text{XO}_2 + \\text{XO}_2 \\rightarrow \\text{X}_2\\text{O}_2 + \\text{O}_2$ (慢) ; $\\text{X}_2\\text{O}_2 + \\text{O}_3 \\rightarrow \\text{X}_2\\text{O}_5$ (快)<br>' +
                   'C. $\\text{XO}_2 + \\text{XO}_2 \\rightarrow \\text{X}_2\\text{O}_4$ (快) ; $\\text{X}_2\\text{O}_4 + \\text{O}_3 \\rightarrow \\text{X}_2\\text{O}_5 + \\text{O}_2$ (慢)<br>' +
                   'D. $\\text{XO}_2 + \\text{O}_3 \\rightarrow \\text{XO}_5$ (快) ; $\\text{XO}_5 + \\text{XO}_2 \\rightarrow \\text{X}_2\\text{O}_5 + \\text{O}_2$ (慢)',
-            steps: [{ title: '决速步与表达式', think: '慢反应步需符合 $R = k[\\text{XO}_2][\\text{O}_3]$。', derivation: 'A 选项慢反应步为 $\\text{XO}_2 + \\text{O}_3 \\rightarrow \\text{XO}_3 + \\text{O}_2$，决定了总速率方程。' }],
+            steps: [{ title: '校验决速步反应物', think: '慢步骤的反应物必须恰好是 1 个 $\\text{XO}_2$ 和 1 个 $\\text{O}_3$。', derivation: '对比各个选项，A 中的慢步骤为 $\\text{XO}_2 + \\text{O}_3 \\rightarrow \\text{XO}_3 + \\text{O}_2$，直接导出速率方程 $R = k[\\text{XO}_2][\\text{O}_3]$。' }],
             ans: '<b>正确答案：A</b>'
         },
         {
@@ -720,7 +703,7 @@ const chapterDatabase = {
                   'B. 在温度 $T_2$ 时的分子总数比在温度 $T_1$ 时的多<br>' +
                   'C. ABC 的面积大约是 ADC 面积的一半<br>' +
                   'D. 在高温时，拥有高于活化能 ($E_a$) 的分子数会增加',
-            steps: [{ title: '分布曲线物理含义', think: '曲线下方总面积代表体系分子总数，不因温度改变。', derivation: '升温只改变能量分布形态，不改变分子总数，B 叙述“T₂ 时分子总数较多”是错误的。' }],
+            steps: [{ title: '分布曲线物理意义理解', think: '曲线下方与横轴围成的总面积代表体系内的分子总数。', derivation: '同一体系在温度变化时，分子总数保持不变，因此两曲线下的总面积相等。选项 B 认为 $T_2$ 分子总数较多是错误的。' }],
             ans: '<b>正确答案：B</b>'
         },
         {
@@ -729,7 +712,7 @@ const chapterDatabase = {
                   'I $\\text{Fe}^{3+}$ 及 $\\text{SO}_3^{2-}$ 动能增加 &nbsp;&nbsp; II 离子表面积增加<br>' +
                   'III 单位体积数量增加 &nbsp;&nbsp; IV 有效碰撞频率增加<br><br>' +
                   'A. I, II &nbsp;&nbsp;&nbsp; B. I, IV &nbsp;&nbsp;&nbsp; C. II, III, IV &nbsp;&nbsp;&nbsp; D. I, II, III, IV',
-            steps: [{ title: '升温微观机理', think: '升温增加分子平均动能，提高有效碰撞频率。', derivation: '加热增加了离子动能（I正确），从而提高了有效碰撞频率（IV正确）。溶液反应不存在固体表面积概念。' }],
+            steps: [{ title: '升温微观解释', think: '加热升温使粒子平均动能提高，活化分子百分数增加，有效碰撞频率增大。', derivation: '升温使反应离子动能增加（I正确），增加了单位时间内的有效碰撞频率（IV正确）。溶液中的离子没有“表面积”概念，升温也并未改变单位体积内的粒子总数。故选 B。' }],
             ans: '<b>正确答案：B (I, IV)</b>'
         },
         {
@@ -739,7 +722,7 @@ const chapterDatabase = {
                   'B. $\\text{X}$ 的浓度随温度提高而降低<br>' +
                   'C. 这是个吸热反应<br>' +
                   'D. 这是个均相反应',
-            steps: [{ title: '速率常数 k 与温度', think: '温度升高，速率常数 k 必增大。', derivation: '反应速率增大的根本原因是温度升高使得速率常数 $k$ 增大。' }],
+            steps: [{ title: '温度对速率常数 k 的作用', think: '阿伦尼乌斯公式：温度升高，速率常数 $k$ 指数级增大。', derivation: '在反应物浓度不变的前提下，升高温度导致速率增大的本质原因是速率常数 $k$ 增大。' }],
             ans: '<b>正确答案：A</b>'
         },
         {
@@ -748,7 +731,7 @@ const chapterDatabase = {
                   'I 活化分子数目增多 &nbsp;&nbsp; II 分子平均动能增大<br>' +
                   'III 有效碰撞增加 &nbsp;&nbsp; IV 活化能增加<br><br>' +
                   'A. I, II, III &nbsp;&nbsp;&nbsp; B. I, II, IV &nbsp;&nbsp;&nbsp; C. I, III, IV &nbsp;&nbsp;&nbsp; D. II, III, IV',
-            steps: [{ title: '升温对活化能的影响', think: '升高温度不改变反应本身的活化能。', derivation: '升温增加了分子动能、活化分子数及有效碰撞（I, II, III 正确）；活化能 IV 保持不变。' }],
+            steps: [{ title: '辨析活化能与活化分子数', think: '活化能由反应本身特性及催化剂决定，温度升高不改变活化能。', derivation: '温度升高使分子平均动能增大，吸收能量后活化分子数目增多，有效碰撞频率增加（I, II, III 正确）；活化能 IV 保持不变。选 A。' }],
             ans: '<b>正确答案：A (I, II, III)</b>'
         },
         {
@@ -759,7 +742,7 @@ const chapterDatabase = {
                   'III 添加催化剂改变原反应机理并降低活化能 ($E_a$)<br>' +
                   'IV 提供热能将改变反应机理并降低活化能<br><br>' +
                   'A. I, II &nbsp;&nbsp;&nbsp; B. I, III &nbsp;&nbsp;&nbsp; C. II, III, IV &nbsp;&nbsp;&nbsp; D. I, II, III, IV',
-            steps: [{ title: '升温 vs 催化剂', think: '升温增加活化分子数，催化剂降低活化能。', derivation: '两者都增加了活化分子数量（I正确）；催化剂通过改变反应路径降低活化能（III正确）；提供热能不改变机理与活化能（IV错误）。' }],
+            steps: [{ title: '对比升温与催化剂机理', think: '升温是“给分子加能”，催化剂是“降低门槛”。', derivation: '两者结果都增加了体系内的活化分子数量（I正确）；催化剂降低活化能但并不增加碰撞次数（II错）；催化剂改变机理降低活化能（III正确）；升温不改变机理（IV错）。故选 B。' }],
             ans: '<b>正确答案：B (I, III)</b>'
         },
         {
@@ -771,10 +754,9 @@ const chapterDatabase = {
                   'III 催化剂使正反应的活化能降低了 ($E_1 - E_2$)<br>' +
                   'IV 催化剂使逆反应的活化能降低了 ($E_4 - E_3$)<br><br>' +
                   'A. I, II &nbsp;&nbsp;&nbsp; B. I, IV &nbsp;&nbsp;&nbsp; C. II, III &nbsp;&nbsp;&nbsp; D. III, IV',
-            steps: [{ title: '势能图活化能读图', think: '准确识别正、逆反应与催化前后的活化能高度。', derivation: '$E_1$ 是催化情况下逆反应活化能（I正确）；$E_4$ 为非催化逆反应活化能，$E_3$ 为催化逆反应活化能，故降低了 ($E_4 - E_3$)（IV正确）。' }],
+            steps: [{ title: '识图判断活化能高度', think: '区分正/逆反应，以及催化前后的能垒差。', derivation: '$E_1$ 代表有催化剂时逆反应的能垒（I正确）；$E_4$ 为无催化剂时逆反应能垒，$E_3$ 为有催化剂时逆反应能垒，故降低值为 $E_4 - E_3$（IV正确）。选 B。' }],
             ans: '<b>正确答案：B (I, IV)</b>'
         },
-        // 作答题部分
         {
             num: 12, type: '作答题', section: '[20.2] 影响反应速率的因素', year: '[2020 年第 2 题]',
             body: '适量锌片放入过量盐酸中产生氯化锌浓度随时间（10分钟）变化。<br>' +
@@ -784,8 +766,9 @@ const chapterDatabase = {
                   '(b) 求前 3 分钟平均反应速率（以氯化锌生成速率表示）。<br>' +
                   '(c) 求第 3 分钟时盐酸的消耗速率。',
             steps: [
-                { title: '斜率与瞬时速率', think: '斜率代表切线瞬时速率。', derivation: '(a) 第 1 分钟斜率最大 ($m_A=0.20$)，反应最快。' },
-                { title: '平均速率与系数换算', think: '平均速率等于浓度变化量除以时间。', derivation: '(b) 前 3 分钟 $\\Delta c = 0.54\\text{ M}$，平均速率 $= 0.54 / 3 = 0.180\\text{ mol L}^{-1}\\text{ min}^{-1}$<br>(c) 第 3 分钟 $R(\\text{ZnCl}_2) = 0.05\\text{ M/min}$，由系数比知 $R(\\text{HCl}) = 2 \\times 0.05 = 0.10\\text{ mol L}^{-1}\\text{ min}^{-1}$。' }
+                { title: '(a) 判断最快时刻', think: '切线斜率越大，瞬时速率越快。', derivation: '第 1 分钟时斜率 $m_A = 0.20$ 为最大值，因此第 1 分钟反应最快。' },
+                { title: '(b) 计算前 3 分钟平均速率', think: '$\bar{v} = \Delta c / \Delta t$', derivation: '查图得 3 min 时 $[\\text{ZnCl}_2] = 0.54\\text{ mol L}^{-1}$，平均速率 $= 0.54 / 3 = 0.180\\text{ mol L}^{-1}\\text{ min}^{-1}$。' },
+                { title: '(c) 换算盐酸消耗速率', think: '反应为 $\\text{Zn} + 2\\text{HCl} \\rightarrow \\text{ZnCl}_2 + \\text{H}_2$，计量数比为 2:1。', derivation: '第 3 分钟 $R(\\text{ZnCl}_2) = m_C = 0.05\\text{ M min}^{-1}$，故 $R(\\text{HCl}) = 2 \\times 0.05 = 0.10\\text{ mol L}^{-1}\\text{ min}^{-1}$。' }
             ],
             ans: '<b>参考答案：(a) 第1分钟 &nbsp;&nbsp; (b) 0.180 mol L⁻¹ min⁻¹ &nbsp;&nbsp; (c) 0.10 mol L⁻¹ min⁻¹</b>'
         },
@@ -797,7 +780,7 @@ const chapterDatabase = {
                   '<img src="image/UEC/Screenshot 2026-08-12 193247.jpg" alt="气体总压强随时间变化图" class="question-img"><br>' +
                   '(i) 计算总气体产生速率 (mol min⁻¹)。',
             steps: [
-                { title: '状态方程换算气体摩尔数', think: '$n = PV / RT$，代入 8 分钟内压强变化。', derivation: '0~8 min 内，生成气体摩尔数 $n = (0.6 \\times 10^5 \\times 2.0 \\times 10^{-3}) / (8.314 \\times 400) = 3.6 \\times 10^{-2}\\text{ mol}$<br>产生速率 $r_1 = (3.6 \\times 10^{-2}) / 8 = 4.5 \\times 10^{-3}\\text{ mol min}^{-1}$。' }
+                { title: '利用状态方程求解气体摩尔数', think: '$PV = nRT \implies n = PV / RT$，读取 0~8 min 的压强差。', derivation: '$\\Delta P = 0.6 \\times 10^5\\text{ Pa}$，$V = 2.0 \\times 10^{-3}\\text{ m}^3$。<br>$\\Delta n = (0.6 \\times 10^5 \\times 2.0 \\times 10^{-3}) / (8.314 \\times 400) = 0.03608\\text{ mol}$<br>产生速率 $= 0.03608 / 8 \\approx 4.5 \\times 10^{-3}\\text{ mol min}^{-1}$。' }
             ],
             ans: '<b>参考答案：4.5 × 10⁻³ mol min⁻¹</b>'
         },
@@ -809,9 +792,9 @@ const chapterDatabase = {
                   '① 该反应是放热，还是吸热？<br>' +
                   '② 标注活化能 $E_a$ 与加催化剂后的新活化能 $E_a\'$。',
             steps: [
-                { title: '活化能定义与能量图判读', think: '反应物能量低于生成物能量。', derivation: '(i) 活化能是反应物分子变为活化分子所吸收的最低能量。<br>(ii) ① 生成物能量高于反应物，故为<b>吸热反应</b>；② 在高点与反应物水平线间标出 $E_a$ 与降低后的 $E_a\'$。' }
+                { title: '解答活化能定义与吸放热', think: '分子发生有效碰撞必须超越的最低能量差；生成物能量高于反应物为吸热。', derivation: '(i) 活化能是指反应物分子转换为活化分子所需的最低能量。<br>(ii) ① 由于生成物的总能量高于反应物，因此属于<b>吸热反应</b>；<br>② 图上从反应物能量水平线拉至最高峰的距离即为 $E_a$，拉至降低后虚线高峰的距离为 $E_a\'$。' }
             ],
-            ans: '<b>参考答案：(i) 碰撞中反应粒子所需的最低能量 &nbsp;&nbsp; (ii) 吸热反应</b>'
+            ans: '<b>参考答案：(i) 反应物转化为活化分子所需的最低能量 &nbsp;&nbsp; (ii) ① 吸热反应</b>'
         }
     ],
 
@@ -826,13 +809,12 @@ const chapterDatabase = {
                   'B. $c > b \\quad \\Delta H < 0$<br>' +
                   'C. $c < b \\quad \\Delta H > 0$<br>' +
                   'D. $c < b \\quad \\Delta H < 0$',
-            steps: [{ title: '平衡曲线读图规律', think: '由“先平者数值大”确定压强大小，再由 B% 变化判断方向。', derivation: '相同温度下 $P_2$ 对应的 B% 较高，即加压使平衡逆移，说明正反应气体分子数增加 ($c > b$)；固定压强下升温 B% 降低，说明升温正移，正反应吸热 ($\\Delta H > 0$)。' }],
+            steps: [{ title: '控制变量法分析压强与温度', think: '根据“先平者数值大”及平衡移动方向规律分析。', derivation: '保持温度不变，高压 $P_2$ 达到平衡时 B% 较高，说明加压使平衡向逆方向移动（气体分子数减小的方向），因 A 是固体，故 $c > b$；<br>保持压强不变，升温至 $T_2$，B% 降低，说明升温使平衡正向移动，正反应为吸热反应（$\\Delta H > 0$）。选 A。' }],
             ans: '<b>正确答案：A</b>'
         }
     ],
 
     '第22章': [
-        // 选择题部分
         {
             num: 1, type: '选择题', section: '[22.2] 影响难溶电解质溶解的因素', year: '[2015 年第 16 题]',
             body: '足量 $\\text{AgCl}$ 固体溶解于下列液体中：<br>' +
@@ -843,15 +825,14 @@ const chapterDatabase = {
                   '$\\text{AgCl}$ 在这些液体中溶解度由大到小的排列：<br><br>' +
                   'A. I > II > III > IV &nbsp;&nbsp;&nbsp; B. II > III > IV > I<br>' +
                   'C. III > II > I > IV &nbsp;&nbsp;&nbsp; D. IV > III > II > I',
-            steps: [{ title: '同离子效应', think: '同离子（$\\text{Ag}^+$ 或 $\\text{Cl}^-$）浓度越高，溶解度越小。', derivation: '同离子浓度：I $[\\text{Ag}^+]=0.05\\text{M}$；II $[\\text{Cl}^-]=0.04\\text{M}$；III $[\\text{Cl}^-]=0.01\\text{M}$；IV 纯水 $0\\text{M}$。<br>浓度越大溶解度越小，排列为：IV > III > II > I。' }],
+            steps: [{ title: '同离子效应浓度比较', think: '溶液中同离子（$\\text{Ag}^+$ 或 $\\text{Cl}^-$）浓度越高，对沉淀溶解的抑制作用越强。', derivation: '计算各溶液中的同离子浓度：<br>I: $[\\text{Ag}^+] = 0.05\\text{ M}$<br>II: $[\\text{Cl}^-] = 0.02 \\times 2 = 0.04\\text{ M}$<br>III: $[\\text{Cl}^-] = 0.01\\text{ M}$<br>IV: 纯水 $0\\text{ M}$<br>同离子浓度：I > II > III > IV，故溶解度由大到小依次为 IV > III > II > I。选 D。' }],
             ans: '<b>正确答案：D</b>'
         },
-        // 作答题部分
         {
             num: 2, type: '作答题', section: '[21.2.2] 平衡常数与三段式', year: '[2018 年第 2(c) 题]',
             body: '反应 $2\\text{NO}_2(g) \\rightleftharpoons \\text{N}_2\\text{O}_4(g)$ 达到平衡时，$[\\text{NO}_2] = 0.0125\\text{ mol L}^{-1}$，$[\\text{N}_2\\text{O}_4] = 0.0321\\text{ mol L}^{-1}$。求 $\\text{NO}_2$ 的起始浓度。',
             steps: [
-                { title: '倒推起始浓度', think: '生成 $0.0321\\text{ M}$ 的 $\\text{N}_2\\text{O}_4$ 需要消耗 $2 \\times 0.0321\\text{ M}$ 的 $\\text{NO}_2$。', derivation: '$\\text{消耗的 } [\\text{NO}_2] = 2 \\times 0.0321 = 0.0642\\text{ mol L}^{-1}$<br>$\\text{起始 } [\\text{NO}_2] = 0.0125 + 0.0642 = 0.0767\\text{ mol L}^{-1}$' }
+                { title: '逆向推导消耗量', think: '生成 1 mol $\text{N}_2\text{O}_4$ 必然需要消耗 2 mol $\text{NO}_2$。', derivation: '$\\Delta c(\\text{NO}_2) = 2 \\times 0.0321 = 0.0642\\text{ mol L}^{-1}$<br>$c_0(\\text{NO}_2) = 0.0125 + 0.0642 = 0.0767\\text{ mol L}^{-1}$' }
             ],
             ans: '<b>参考答案：0.0767 mol L⁻¹</b>'
         },
@@ -859,8 +840,8 @@ const chapterDatabase = {
             num: 3, type: '作答题', section: '[22.2] 溶度积与沉淀溶解', year: '[2013 年第 7(c)(ii) 题]',
             body: '$298\\text{ K}$ 时，$\\text{AgCl}$ 的 $K_{sp} = 1.56 \\times 10^{-10}$。同温下，在 $0.5\\text{ L } 0.10\\text{ mol L}^{-1}\\text{ NaCl}$ 溶液中可溶解多少摩尔的 $\\text{AgCl}$？',
             steps: [
-                { title: 'Ag⁺ 浓度计算', think: '$[\\text{Cl}^-] \\approx 0.10\\text{ mol L}^{-1}$', derivation: '$K_{sp} = [\\text{Ag}^+][\\text{Cl}^-] \\implies 1.56 \\times 10^{-10} = [\\text{Ag}^+](0.10)$<br>$[\\text{Ag}^+] = 1.56 \\times 10^{-9}\\text{ mol L}^{-1}$' },
-                { title: '摩尔数换算', think: '$n = c \\cdot V$', derivation: '$n(\\text{AgCl}) = 1.56 \\times 10^{-9} \\times 0.5 = 7.80 \\times 10^{-10}\\text{ mol}$' }
+                { title: '求解 Ag⁺ 平衡浓度', think: '因溶度积较小，$[\text{Cl}^-] \approx 0.10\text{ mol L}^{-1}$。', derivation: '$K_{sp} = [\\text{Ag}^+][\\text{Cl}^-] \implies 1.56 \\times 10^{-10} = [\\text{Ag}^+](0.10)$<br>$[\\text{Ag}^+] = 1.56 \\times 10^{-9}\\text{ mol L}^{-1}$' },
+                { title: '计算溶解的摩尔数', think: '$n = c \cdot V$', derivation: '$n(\\text{AgCl}) = 1.56 \\times 10^{-9}\\text{ M} \\times 0.5\\text{ L} = 7.80 \\times 10^{-10}\\text{ mol}$' }
             ],
             ans: '<b>参考答案：7.80 × 10⁻¹⁰ mol</b>'
         },
@@ -871,10 +852,10 @@ const chapterDatabase = {
                   '(ii) 硫酸钙在 $0.10\\text{ mol L}^{-1}\\text{ CaCl}_2$ 中的溶解度。<br>' +
                   '(iii) 将 $50\\text{ mL } 0.01\\text{ M BaCl}_2$ 与 $50\\text{ mL } 0.01\\text{ M K}_2\\text{SO}_4$ 混合，判断是否有沉淀。',
             steps: [
-                { title: '溶解度计算 (i) 与 (ii)', think: '纯水 $K_{sp}=s^2$；同离子下 $K_{sp} \\approx c \\cdot s$', derivation: '(i) $s = \\sqrt{2.45 \\times 10^{-5}} = 4.95 \\times 10^{-3}\\text{ mol L}^{-1}$<br>(ii) $2.45 \\times 10^{-5} = 0.10 \\times s \\implies s = 2.45 \\times 10^{-4}\\text{ mol L}^{-1}$' },
-                { title: '浓度商与 Ksp 对比 (iii)', think: '混合后体积倍增，浓度折半！', derivation: '$[\\text{Ba}^{2+}] = 0.005\\text{ M}$，$[\\text{SO}_4^{2-}] = 0.005\\text{ M}$<br>$Q = 0.005 \\times 0.005 = 2.5 \\times 10^{-5} > K_{sp}(\\text{BaSO}_4)$，故<b>有沉淀产生</b>。' }
+                { title: '求解溶解度 (i) 与 (ii)', think: '纯水 $s = \sqrt{K_{sp}}$；有同离子时 $s \approx K_{sp} / c(\text{Ca}^{2+})$。', derivation: '(i) $s = \\sqrt{2.45 \\times 10^{-5}} = 4.95 \\times 10^{-3}\\text{ mol L}^{-1}$<br>(ii) $s = (2.45 \\times 10^{-5}) / 0.10 = 2.45 \\times 10^{-4}\\text{ mol L}^{-1}$' },
+                { title: '计算浓度商 Q 并判断沉淀 (iii)', think: '注意：两溶液等体积混合，离子浓度均减半！', derivation: '混合后：$[\\text{Ba}^{2+}] = 0.005\\text{ M}$，$[\\text{SO}_4^{2-}] = 0.005\\text{ M}$<br>浓度商 $Q = 0.005 \\times 0.005 = 2.5 \\times 10^{-5}$<br>因 $Q > K_{sp}(\\text{BaSO}_4) = 1.08 \\times 10^{-10}$，故<b>有 $\\text{BaSO}_4$ 沉淀生成</b>。' }
             ],
-            ans: '<b>参考答案：(i) 4.95×10⁻³ mol/L &nbsp;&nbsp; (ii) 2.45×10⁻⁴ mol/L &nbsp;&nbsp; (iii) Q > Ksp，有沉淀产生</b>'
+            ans: '<b>参考答案：(i) 4.95×10⁻³ mol/L &nbsp;&nbsp; (ii) 2.45×10⁻⁴ mol/L &nbsp;&nbsp; (iii) Q > Ksp，有沉淀生成</b>'
         }
     ]
 };
@@ -955,9 +936,7 @@ function loadCardData(chap, num) {
     nextBtn.disabled = false;
     nextBtn.innerText = "💡 思考解题策略 / 关键知识点";
 
-    if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-    }
+    triggerMathJax();
 }
 
 function revealNextStep() {
@@ -975,23 +954,18 @@ function revealNextStep() {
             document.getElementById('nextBtn').disabled = true;
         }
     }
-    if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-    }
+    triggerMathJax();
 }
 
 function toggleAnswer() {
     document.getElementById('finalAns').classList.toggle('active');
-    if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-    }
+    triggerMathJax();
 }
 
 function resetCurrentCard() {
     loadCardData(currentChapter, currentNum);
 }
 
-/* 全卷查看功能实现 */
 function showAllQuestions(withAnswers) {
     document.getElementById('questionDisplayArea').style.display = 'none';
     const viewContainer = document.getElementById('allQuestionsView');
@@ -1027,17 +1001,20 @@ function showAllQuestions(withAnswers) {
     });
 
     viewContainer.classList.add('active');
-
-    if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-    }
+    triggerMathJax();
 }
 
 function hideAllQuestions() {
     document.getElementById('allQuestionsView').classList.remove('active');
     document.getElementById('questionDisplayArea').style.display = 'block';
+    triggerMathJax();
+}
+
+function triggerMathJax() {
     if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
+        MathJax.typesetPromise().catch(function (err) {
+            console.log('MathJax error: ' + err.message);
+        });
     }
 }
 </script>
