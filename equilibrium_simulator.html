@@ -592,9 +592,9 @@
         } else if (currentSys === 2) {
             return 0.25 * Math.exp(1.5 * (1/T - 1/298) * 1000);
         } else if (currentSys === 3) {
-            return 0.016; // 修正后的真实对齐 Kc = [CrO4]^2 * [H]^2 / [Cr2O7] = 0.2^2 * 0.2^2 / 0.1 = 0.016
+            return 0.016; 
         } else {
-            return 0.02;  // 体系 4 Ksp = [Ba2+] * [CrO42-] = 0.10 * 0.20 = 0.020
+            return 0.02;  // Ksp = [Ba2+] * [CrO42-] = 0.10 * 0.20 = 0.020
         }
     }
 
@@ -725,18 +725,19 @@
 
     function addReagent(type) {
         if (type === 'HNO3') {
-            state.cH += 0.20;
+            state.cH += 0.35; // 增加 H+ 浓度，形成持续缓冲
             if (currentSys === 4) {
-                state.cCrO4 = Math.max(0.001, state.cCrO4 - 0.12);
-                state.cCr2O7 += 0.06; 
-                document.getElementById('explanation').innerText = "【实验II 现象】加酸：H⁺ 与 CrO₄²⁻ 结合转化为 Cr₂O₇²⁻，降低 CrO₄²⁻ 浓度，促使 BaCrO₄ 沉淀溶解！";
+                // 瞬间大幅压低 CrO42- 浓度，拉大 Qsp 与 Ksp 的差距，产生明显的解沉淀驱动力
+                state.cCrO4 = Math.max(0.001, state.cCrO4 * 0.25);
+                state.cCr2O7 += 0.10; 
+                document.getElementById('explanation').innerText = "【实验II 现象】加酸：H⁺ 与 CrO₄²⁻ 结合转化为 Cr₂O₇²⁻，大幅拉低 CrO₄²⁻ 浓度，驱动 BaCrO₄ 沉淀显著溶解！";
             } else {
                 document.getElementById('explanation').innerText = "【实验I 现象】加酸：增加 H⁺ 浓度，促使 2CrO₄²⁻ + 2H⁺ ⇌ Cr₂O₇²⁻ 逆向移动，溶液转为橙红色。";
             }
         } else if (type === 'NaOH') {
-            state.cH = Math.max(0.001, state.cH - 0.15);
+            state.cH = 0; // 碱中和掉酸
             if (currentSys === 4) {
-                state.cCrO4 += 0.12;
+                state.cCrO4 += 0.25;
                 document.getElementById('explanation').innerText = "【实验II 现象】加碱：OH⁻ 消耗 H⁺，驱动 Cr₂O₇²⁻ 转化为 CrO₄²⁻。CrO₄²⁻ 浓度升高与 Ba²⁺ 结合生成黄色 BaCrO₄ 沉淀！";
             } else {
                 document.getElementById('explanation').innerText = "【实验I 现象】加碱：OH⁻ 消耗 H⁺，驱动平衡正向移动，生成 CrO₄²⁻，溶液变为黄色。";
@@ -775,7 +776,7 @@
         timeStep++;
         const Kc = getKc(state.temperature);
         let v_fwd = 0, v_rev = 0;
-        const dt = 0.08 * simSpeed; // 提高步长以加速演化响应，方便教学演示
+        const dt = 0.08 * simSpeed;
 
         if (currentSys === 1) {
             const k_fwd = 0.5 * state.catalyst;
@@ -808,9 +809,8 @@
             state.cA = Math.max(0.05, state.cA); state.cB = Math.max(0.05, state.cB);
             state.cC = Math.max(0.05, state.cC); state.cD = Math.max(0.05, state.cD);
         } else if (currentSys === 3) {
-            // 优化体系 3 动力学方程
             const k_fwd = 10.0;
-            const k_rev = k_fwd / Kc; // 确保平衡时 v_fwd === v_rev
+            const k_rev = k_fwd / Kc; 
             v_fwd = k_fwd * state.cCr2O7;
             v_rev = k_rev * Math.pow(state.cCrO4, 2) * Math.pow(state.cH, 2);
 
@@ -826,25 +826,33 @@
             state.cCrO4 = Math.max(0.001, state.cCrO4);
             state.cH = Math.max(0.0001, state.cH);
         } else if (currentSys === 4) {
-            // 修正体系 4 沉淀溶解平衡动力学模型
+            // 体系 4: 模拟 H+ 连续消耗 CrO42- 的反应，避免 Qsp 回升过快
+            if (state.cH > 0.01 && state.cCrO4 > 0.005) {
+                let hConsume = Math.min(state.cH, 0.08 * dt);
+                state.cH -= hConsume;
+                state.cCrO4 = Math.max(0.001, state.cCrO4 - hConsume * 0.8);
+            }
+
             const Qsp = state.cBa * state.cCrO4;
-            const k_precip = 10.0; 
-            const k_dissolve = 10.0 * Kc; // 固体溶度积动力学
+            const k_precip = 15.0; 
+            const k_dissolve = 15.0 * Kc; 
 
-            v_fwd = k_precip * Qsp; // 沉淀生成速率 (正向)
-            v_rev = (state.precipBaCrO4 > 0 || Qsp < Kc) ? k_dissolve : 0; // 沉淀溶解速率 (逆向)
+            v_fwd = k_precip * Qsp; 
+            v_rev = (state.precipBaCrO4 > 0 || Qsp < Kc) ? k_dissolve : 0; 
 
-            const delta = (v_fwd - v_rev) * dt * 0.1;
+            const delta = (v_fwd - v_rev) * dt * 0.15;
             if (Math.abs(v_fwd - v_rev) > 0.005) {
                 if (v_fwd > v_rev) {
+                    // 沉淀生成
                     state.cBa = Math.max(0.001, state.cBa - delta);
                     state.cCrO4 = Math.max(0.001, state.cCrO4 - delta);
-                    state.precipBaCrO4 += delta * 2.0;
+                    state.precipBaCrO4 += delta * 6.0; 
                 } else if (state.precipBaCrO4 > 0) {
+                    // 沉淀溶解 (增大质量变化率，使其视觉效果非常显著)
                     const absDelta = Math.abs(delta);
                     state.cBa += absDelta;
                     state.cCrO4 += absDelta;
-                    state.precipBaCrO4 = Math.max(0, state.precipBaCrO4 - absDelta * 2.0);
+                    state.precipBaCrO4 = Math.max(0, state.precipBaCrO4 - absDelta * 6.0);
                 }
                 state.isEquilibrium = false;
             } else { state.isEquilibrium = true; }
@@ -1106,7 +1114,8 @@
             const scale = 20;
             targets['Ba'] = Math.round(state.cBa * scale);
             targets['CrO4'] = Math.round(state.cCrO4 * scale);
-            targets['BaCrO4'] = Math.round(state.precipBaCrO4 * 60);
+            // 绑定 BaCrO4 沉淀质量，让沉淀颗粒数量与质量直接成正比
+            targets['BaCrO4'] = Math.round(state.precipBaCrO4 * 80);
         }
 
         const config = {
@@ -1181,9 +1190,10 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
 
+        // 优化沉淀层高度：直接按沉淀质量线性渲染，质量减半，层高减半，直观度极佳！
         if (currentSys === 4 && state.precipBaCrO4 > 0) {
-            const precipHeight = Math.min(50, state.precipBaCrO4 * 12 + 10);
-            ctx.fillStyle = 'rgba(243, 156, 18, 0.4)';
+            const precipHeight = Math.min(70, state.precipBaCrO4 * 80); 
+            ctx.fillStyle = 'rgba(243, 156, 18, 0.45)';
             ctx.fillRect(0, canvas.height - precipHeight, canvas.width, precipHeight);
             ctx.fillStyle = '#b9770e';
             ctx.font = 'bold 11px sans-serif';
@@ -1192,16 +1202,19 @@
 
         particles.forEach(p => {
             if (p.type === 'BaCrO4') {
-                if (p.y < canvas.height - p.radius - 5) {
+                const currentPrecipHeight = Math.min(70, state.precipBaCrO4 * 80);
+                const minY = canvas.height - currentPrecipHeight;
+                if (p.y < minY) {
                     p.y += 0.8;
                 } else {
-                    p.y = canvas.height - p.radius - Math.random() * 2;
+                    p.y = canvas.height - p.radius - Math.random() * (currentPrecipHeight * 0.8);
                 }
             } else {
                 p.x += p.vx;
                 p.y += p.vy;
 
-                const maxY = (currentSys === 4 && state.precipBaCrO4 > 0) ? canvas.height - Math.min(50, state.precipBaCrO4 * 12 + 10) : canvas.height;
+                const currentPrecipHeight = (currentSys === 4 && state.precipBaCrO4 > 0) ? Math.min(70, state.precipBaCrO4 * 80) : 0;
+                const maxY = canvas.height - currentPrecipHeight;
 
                 if (p.x - p.radius < 0) { p.x = p.radius; p.vx *= -1; }
                 if (p.x + p.radius > canvas.width) { p.x = canvas.width - p.radius; p.vx *= -1; }
