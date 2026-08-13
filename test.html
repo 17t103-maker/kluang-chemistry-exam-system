@@ -684,7 +684,7 @@ const quizDatabase = {
             body: '【需列出计算过程】已知反应 $\\text{A} + 2\\text{B} \\rightarrow 3\\text{C} + \\text{D}$ 在 $20^\\circ\\text{C}$ 时，B 的消耗速率 $R_\\text{B} = 0.02\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$。若温度每升高 $10^\\circ\\text{C}$，反应速率增加为原来的 2 倍。问当温度升高至多少 $^\\circ\\text{C}$ 时，生成物 C 的生成速率 $R_\\text{C} = 0.09\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$？（计算保留至小数点后两位）。【20%】',
             steps: [{
                 title: '思考策略：化学计量数速率换算与范特霍夫规则对数求解',
-                think: '<strong>关键思考方向：</strong>先求出 $20^\circ\text{C}$ 时 C 的生成速率，计算目标速率翻倍倍数，再利用 $2^{\frac{T-20}{10}} = \text{倍数}$ 求解 $T$。',
+                think: '<strong>关键思考方向：</strong>先求出 $20^\circ\text{C}$ 时 C 的生成速率，计算目标速率翻倍倍数，再利用 $2^{\\frac{T-20}{10}} = \\text{倍数}$ 求解 $T$。',
                 derivation: '<b>详细计算过程：</b><br>1. 计算 $20^\\circ\\text{C}$ 时 C 的生成速率：<br>&nbsp;&nbsp; $\\frac{R_\\text{C}}{3} = \\frac{R_\\text{B}}{2} \\implies R_{\\text{C}, 20^\\circ\\text{C}} = 1.5 \\times 0.02 = 0.03\\text{ mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$<br>2. 计算速率增加的倍数：<br>&nbsp;&nbsp; $n = \\frac{R_{\\text{C}, T}}{R_{\\text{C}, 20^\\circ\\text{C}}} = \\frac{0.09}{0.03} = 3 \\text{ 倍}$<br>3. 根据范特霍夫经验规则列式：<br>&nbsp;&nbsp; $2^{\\frac{T - 20}{10}} = 3$<br>4. 两边取常用对数求解：<br>&nbsp;&nbsp; $\\frac{T - 20}{10} \\times \\lg 2 = \\lg 3 \\implies \\frac{T - 20}{10} = \\frac{0.47712}{0.30103} \\approx 1.58496$<br>&nbsp;&nbsp; $T - 20 = 15.85 \\implies T = 35.85^\\circ\\text{C}$'
             }],
             ans: '<b>答案：$35.85^\\circ\\text{C}$</b>'
@@ -766,7 +766,7 @@ const quizDatabase = {
                   '(2) 计算 $\\text{Ag}_2\\text{CO}_3$ 在 $0.10\\text{ mol}\\cdot\\text{L}^{-1}$ 的 $\\text{AgNO}_3$ 溶液中的摩尔溶解度 $s_2\\ (\\text{mol}\\cdot\\text{L}^{-1})$。【10%】<br>&nbsp;&nbsp;&nbsp;&nbsp; $s_2 = $ _______ $\\text{mol/L}$',
             steps: [{
                 title: '思考策略：难溶盐溶度积关系式与同离子效应近似计算',
-                think: '<strong>关键思考方向：</strong>纯水中 $K_{sp} = [Ag^+]^2[CO_3^{2-}] = (2s_1)^2(s_1) = 4s_1^3$；在硝酸银中近似认为 $[Ag^+] = 0.10\text{ M}$。',
+                think: '<strong>关键思考方向：</strong>纯水中 $K_{sp} = [Ag^+]^2[CO_3^{2-}] = (2s_1)^2(s_1) = 4s_1^3$；在硝酸银中近似认为 $[Ag^+] = 0.10\\text{ M}$。',
                 derivation: '<b>详细计算推导：</b><br>' +
                             '<b>(1) 在纯水中的溶解度 $s_1$：</b><br>' +
                             '$\\text{Ag}_2\\text{CO}_3(s) \\rightleftharpoons 2\\text{Ag}^+(aq) + \\text{CO}_3^{2-}(aq)$<br>' +
@@ -788,8 +788,8 @@ const quizDatabase = {
                 think: '<strong>关键思考方向：</strong>由已知条件计算 $K_{sp}$；混合后先算稀释离子浓度，求 $Q_{sp}$ 并与 $K_{sp}$ 对比。',
                 derivation: '<b>详细计算推导：</b><br>' +
                             '<b>(1) 求解 $K_{sp}$：</b><br>' +
-                            '在 $0.10\\text{ M Na}_2\\text{SO}_4$ 中，$[\text{SO}_4^{2-}]_0 = 0.10\\text{ M}$，$[\text{Ca}^{2+}] = 6.0 \\times 10^{-3}\\text{ M}$。<br>' +
-                            '考虑沉淀溶解产生的 $[\text{SO}_4^{2-}]$ 贡献，总 $[\text{SO}_4^{2-}] = 0.10 + 0.006 = 0.106\\text{ M}$。<br>' +
+                            '在 $0.10\\text{ M Na}_2\\text{SO}_4$ 中，$[\\text{SO}_4^{2-}]_0 = 0.10\\text{ M}$，$[\\text{Ca}^{2+}] = 6.0 \\times 10^{-3}\\text{ M}$。<br>' +
+                            '考虑沉淀溶解产生的 $[\\text{SO}_4^{2-}]$ 贡献，总 $[\\text{SO}_4^{2-}] = 0.10 + 0.006 = 0.106\\text{ M}$。<br>' +
                             '$K_{sp} = [\\text{Ca}^{2+}][\\text{SO}_4^{2-}] = (6.0 \\times 10^{-3}) \\times 0.106 = 6.36 \\times 10^{-4}$。<br><br>' +
                             '<b>(2) 混合后计算 $Q_{sp}$ 并判断沉淀：</b><br>' +
                             '混合总体积 $V = 50 + 150 = 200\\text{ mL}$<br>' +
