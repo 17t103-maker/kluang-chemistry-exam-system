@@ -545,7 +545,10 @@ const examDatabase = {
         { num: 8, title: '乙) 填充题 - 第 8 题', body: '外界条件对化学平衡的影响，最终是通过改变 _______ 来实现的。', steps: [{ title: '思考策略：平衡移动的动力学本质', think: '<strong>关键思考方向：</strong>平衡移动的本质是打破了正逆速率的相等关系。', derivation: '<b>核心本质：</b><br>改变正反应速率与逆反应速率的相对大小（即 $v_{\\text{正}} \\neq v_{\\text{逆}}$）。' }], ans: '<b>答案：正、逆反应速率的相对大小</b>' },
         { num: 9, title: '乙) 填充题 - 第 9 题', body: '已知一热化学方程式：$X(g) + Y_2(g) \\rightleftharpoons XY_2(g) + 20\\text{ kJ}$，若此反应的活化能为 $50\\text{ kJ}$，则逆反应 $XY_2(g) \\rightleftharpoons X(g) + Y_2(g)$ 的活化能为 _______ $\\text{kJ}$。', steps: [{ title: '思考策略：正逆反应活化能与反应热关系', think: '<strong>关键思考方向：</strong>$E_{\\text{a(正)}} - E_{\\text{a(逆)}} = \\Delta H$', derivation: '<b>核心推导：</b><br>正反应放热 $20\\text{ kJ}$（$\\Delta H = -20\\text{ kJ}$）。$50 - E_{\\text{a(逆)}} = -20 \\implies E_{\\text{a(逆)}} = 70\\text{ kJ}$。' }], ans: '<b>答案：70</b>' },
         { num: 10, title: '乙) 填充题 - 第 10 题', body: '一密闭容器中发生一可逆反应 $2\\text{SO}_2(g) + \\text{O}_2(g) \\rightleftharpoons 2\\text{SO}_3(g) \\quad \\Delta H < 0$，右图是某一时间段反应速率与反应进程的关系图。$t_2$、$t_3$、$t_5$ 时刻体系中分别是什么条件发生了变化？<br><br><img src="image/2025/Screenshot 2026-08-11 140236.jpg" class="question-img"><br><br>$t_2$: _______ &nbsp;&nbsp;&nbsp; $t_3$: _______ &nbsp;&nbsp;&nbsp; $t_5$: _______', steps: [{ title: '思考策略：v-t 图中突变类型识别', think: '<strong>关键思考方向：</strong>正逆速率突增还是同等增加？', derivation: '<b>核心解析：</b><br>$t_2$ 压强/浓度突增；$t_3$ 使用催化剂；$t_5$ 降低温度。' }], ans: '<b>答案：$t_2$: 增大压强；$t_3$: 使用催化剂；$t_5$: 降低温度</b>' },
-        { num: 11, title: '乙) 填充题 - 第 11 题', body: '有关 $2A(g) + B(g) \\rightleftharpoons C(g) \\quad \\Delta H = -50\\text{ kcal}$，其实验资料如下：<br><br>' +
+{ 
+            num: 11, 
+            title: '乙) 填充题 - 第 11 题', 
+            body: '有关 $2A(g) + B(g) \\rightleftharpoons C(g) \\quad \\Delta H = -50\\text{ kcal}$，其实验资料如下：<br><br>' +
                   '<table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; text-align: center; margin: 10px 0; width: 100%; max-width: 450px;">' +
                   '<tr style="background-color: #f0f4f8;"><th>实验</th><th>$[A]\\text{ mol/L}$</th><th>$[B]\\text{ mol/L}$</th><th>温度 $^\\circ\\text{C}$</th><th>催化剂</th></tr>' +
                   '<tr><td>1</td><td>1</td><td>1</td><td>500</td><td>无</td></tr>' +
@@ -558,7 +561,24 @@ const examDatabase = {
                   'b. 向右反应速率最快的是实验：_______<br>' +
                   'c. C的平衡浓度最小的是实验：_______<br>' +
                   'd. C的平衡浓度最大的是实验：_______<br>' +
-                  'e. 平衡常数从大到小排列是实验：_______', steps: [{ title: '思考策略：多因素综合影响分析', think: '<strong>关键思考方向：</strong>浓度高、催化剂、温度高速率最快；放热反应降温有利生成 C。', derivation: '<b>核心解析：</b><br>• 速率最慢：无催化剂、低温、低浓度的实验 4。<br>• 速率最快：有催化剂、高温、高浓度的实验 2。<br>• 平衡常数仅与温度有关，放热反应低温（400°C）平衡常数大。' }], ans: '<b>答案：<br>a. 4<br>b. 2<br>c. 1（或5）<br>d. 3<br>e. 3、4大，1、2、5小</b>' },
+                  'e. 平衡常数从大到小排列是实验：_______', 
+            steps: [{ 
+                title: '思考策略：多因素综合影响与化学平衡移动分析', 
+                think: '<strong>关键思考方向：</strong>速率由“温度、浓度、催化剂”共同决定；平衡位置与平衡常数由“温度、起始浓度”决定（与催化剂无关）。', 
+                derivation: '<b>核心逻辑解析：</b><br>' +
+                            '• <b>a. 速率最慢：</b>无催化剂、低温（400°C）、低浓度（B=1M），对应<b>实验 4</b>。<br>' +
+                            '• <b>b. 速率最快：</b>有催化剂、高温（500°C）、高浓度（B=2M），对应<b>实验 2</b>。<br>' +
+                            '• <b>c. C 的平衡浓度最小：</b>对比实验 1 与实验 5，温度同为 500°C，但实验 5 中反应物 B 的起始浓度（2M）大于实验 1（1M）。根据勒沙特列原理，增大 B 的浓度使平衡正向移动，实验 5 平衡时 C 的浓度必大于实验 1；催化剂不影响平衡（实验 2 与 5 平衡状态完全相同）。故 C 的平衡浓度最小的<b>仅有实验 1</b>。<br>' +
+                            '• <b>d. C 的平衡浓度最大：</b>正反应放热（$\Delta H < 0$），低温（400°C）有利于正向移动，再配合高浓度（B=2M），对应<b>实验 3</b>。<br>' +
+                            '• <b>e. 平衡常数：</b>平衡常数 $K$ 仅与温度有关。放热反应低温下 $K$ 大，故 400°C（实验 3、4）的 $K$ 大于 500°C（实验 1、2、5）。' 
+            }], 
+            ans: '<b>参考答案：<br>' +
+                 'a. 4<br>' +
+                 'b. 2<br>' +
+                 'c. 1<br>' +
+                 'd. 3<br>' +
+                 'e. 3、4大，1、2、5小（或 3 = 4 > 1 = 2 = 5）</b>' 
+        },
         { num: 12, title: '乙) 填充题 - 第 12 题', body: '如右的反应能量图，请回答：<br><br><img src="image/2025/Screenshot 2026-08-11 140149.jpg" class="question-img"><br><br>a. 正反应的 $\\Delta H = $ _______ $\\text{kcal}$<br>b. C代表的是：_______', steps: [{ title: '思考策略：能量势能图参数直接读取', think: '<strong>关键思考方向：</strong>计算产物与反应物能量差；顶点代表活化复合物。', derivation: '<b>核心解析：</b><br>正反应放热 $-60\\text{ kcal}$；顶点 C 代表活化复合物（或过渡态）。' }], ans: '<b>答案：-60；活化复合物（或过渡态）</b>' }
     ],
     '丙': [
